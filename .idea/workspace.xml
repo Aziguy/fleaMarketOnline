@@ -4,6 +4,7 @@
     <list default="true" id="aa5aa04c-2f4a-4f8a-9712-06e9dec6219f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/brocanteOnline/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/brocanteOnline/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brocanteOnline/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/brocanteOnline/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/brocanteOnline/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/brocanteOnline/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +65,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1671532367892</updated>
-      <workItem from="1671532369003" duration="13768000" />
+      <workItem from="1671532369003" duration="25414000" />
     </task>
     <servers />
   </component>
