@@ -5,11 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa5aa04c-2f4a-4f8a-9712-06e9dec6219f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.env-sample" beforeDir="false" afterPath="$PROJECT_DIR$/.env-sample" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/accounts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/includes/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/includes/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brocanteOnline/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/brocanteOnline/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/accounts/forgot-password.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/accounts/forgot-password.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/accounts/reset-password.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/accounts/reset-password.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +82,7 @@
       <updated>1671532367892</updated>
       <workItem from="1671532369003" duration="26182000" />
       <workItem from="1671613840865" duration="19907000" />
-      <workItem from="1671700257143" duration="19621000" />
+      <workItem from="1671700257143" duration="29900000" />
     </task>
     <servers />
   </component>
