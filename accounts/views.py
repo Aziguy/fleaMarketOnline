@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
+from django.utils.text import slugify
 
+from vendor.forms import VendorForm
 from .forms import UserForm
-from .models import User
+from .models import User, UserProfile
 from django.contrib import messages
 
 
@@ -47,4 +49,44 @@ def registerUser(request):
 
 
 def registerVendor(request):
-    pass
+    if request.method == 'POST':
+        # store the data and create the user
+        form = UserForm(request.POST)
+        v_form = VendorForm(request.POST, request.FILES)
+        if form.is_valid() and v_form.is_valid:
+            firstname = form.cleaned_data['firstname']
+            lastname = form.cleaned_data['lastname']
+            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            user = User.objects.create_user(firstname=firstname, lastname=lastname, username=username, email=email, password=password)
+            user.role = User.VENDOR
+            user.save()
+            vendor = v_form.save(commit=False)
+            vendor.user = user
+            vendor_name = v_form.cleaned_data['vendor_name']
+            vendor.vendor_slug = slugify(vendor_name)+'-'+str(user.id)
+            user_profile = UserProfile.objects.get(user=user)
+            vendor.user_profile = user_profile
+            vendor.save()
+
+            # # Send verification email
+            # mail_subject = 'Please activate your account'
+            # email_template = 'accounts/emails/account_verification_email.html'
+            # send_verification_email(request, user, mail_subject, email_template)
+
+            messages.success(request, 'Your account has been registered sucessfully! Please wait for the approval.')
+            return redirect('register-vendor')
+        else:
+            print('invalid form')
+            print(form.errors)
+    else:
+        form = UserForm()
+        v_form = VendorForm()
+
+    context = {
+        'form': form,
+        'v_form': v_form,
+    }
+
+    return render(request, 'accounts/register-vendor.html', context)
