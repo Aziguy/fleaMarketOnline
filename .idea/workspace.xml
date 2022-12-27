@@ -5,9 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa5aa04c-2f4a-4f8a-9712-06e9dec6219f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env-sample" beforeDir="false" afterPath="$PROJECT_DIR$/.env-sample" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/context_processors.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/context_processors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brocanteOnline/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/brocanteOnline/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brocanteOnline/static/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/brocanteOnline/static/js/custom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +92,7 @@
       <workItem from="1671700257143" duration="31132000" />
       <workItem from="1671792952063" duration="18622000" />
       <workItem from="1672051771588" duration="4076000" />
-      <workItem from="1672132592772" duration="3629000" />
+      <workItem from="1672132592772" duration="9662000" />
     </task>
     <servers />
   </component>
