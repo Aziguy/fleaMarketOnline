@@ -5,14 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa5aa04c-2f4a-4f8a-9712-06e9dec6219f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/broncante_market.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/broncante_market.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brocanteOnline/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/brocanteOnline/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/includes/v-sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/includes/v-sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/vendor/add-item.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/vendor/add-item.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/vendor/edit-item.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/vendor/edit-item.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/vendor/items-by-category.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/vendor/items-by-category.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +108,7 @@
       <workItem from="1675436451013" duration="755000" />
       <workItem from="1675584123541" duration="79000" />
       <workItem from="1675584991621" duration="650000" />
-      <workItem from="1680955767036" duration="13089000" />
+      <workItem from="1680955767036" duration="17230000" />
     </task>
     <servers />
   </component>

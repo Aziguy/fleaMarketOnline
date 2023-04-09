@@ -53,31 +53,50 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="field-holder">
-                                                <label >Image 1 *</label>
-                                                {{form.image_1}}
-                                                <img src="{{ item.image_1.url }}" alt="Item Image" width="100" class="mt-2">
-                                                <label >Image 2 *</label>
-                                                {{form.image_2}}
-                                                <img src="{{ item.image_2.url }}" alt="Item Image" width="100" class="mt-2">
-                                                <label >Image 3 *</label>
-                                                {{form.image_3}}
-                                                <img src="{{ item.image_3.url }}" alt="Item Image" width="100" class="mt-2">
-                                                <label >Image 4 *</label>
-                                                {{form.image_4}}
-                                                <img src="{{ item.image_4.url }}" alt="Item Image" width="100" class="mt-2">
-                                                <label >Image 5 *</label>
-                                                {{form.image_5}}
-                                                <img src="{{ item.image_5.url }}" alt="Item Image" width="100" class="mt-2">
-                                                <label >Image 6 *</label>
-                                                {{form.image_6}}
-                                                <img src="{{ item.image_6.url }}" alt="Item Image" width="100" class="mt-2">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                            <div class="field-holder">
                                                 <label >Is Available?</label>
                                                 {{form.is_available}}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="field-holder">
+                                                <label >Image 1 *</label>
+                                                {{form.image_1}}
+                                                <img src="{{ item.image_1.url }}" title="{{ item.image_1.name }}" alt="Item Image 1" width="100" class="mt-2">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="field-holder">
+                                                <label >Image 2 *</label>
+                                                {{form.image_2}}
+                                                <img src="{{ item.image_2.url }}" title="{{ item.image_2.name }}" alt="Item Image 2" width="100" class="mt-2">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="field-holder">
+                                                <label >Image 3 *</label>
+                                                {{form.image_3}}
+                                                <img src="{{ item.image_3.url }}" title="{{ item.image_3.name }}" alt="Item Image 3" width="100" class="mt-2">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="field-holder">
+                                                <label >Image 4 *</label>
+                                                {{form.image_4}}
+                                                <img src="{{ item.image_4.url }}" title="{{ item.image_4.name }}" alt="Item Image 4" width="100" class="mt-2">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="field-holder">
+                                                <label >Image 5 *</label>
+                                                {{form.image_5}}
+                                                <img src="{{ item.image_5.url }}" title="{{ item.image_5.name }}" alt="Item Image 5" width="100" class="mt-2">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="field-holder">
+                                                <label >Image 6 *</label>
+                                                {{form.image_6}}
+                                                <img src="{{ item.image_6.url }}" title="{{ item.image_6.name }}" alt="Item Image 6" width="100" class="mt-2">
                                             </div>
                                         </div>
                                     </div>
