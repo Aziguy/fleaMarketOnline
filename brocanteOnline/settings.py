@@ -38,9 +38,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.gis",
     "accounts",
     "vendor",
     "menu",
+    "marketplace",
+    "orders",
 ]
 
 MIDDLEWARE = [
@@ -69,7 +72,9 @@ TEMPLATES = [
                 "accounts.context_processors.get_vendor",
                 "accounts.context_processors.get_google_api",
                 "accounts.context_processors.get_user_profile",
-                # 'accounts.context_processors.get_paypal_client_id',
+                "marketplace.context_processors.get_cart_counter",
+                "marketplace.context_processors.get_cart_amounts",
+                # "accounts.context_processors.get_paypal_client_id",
             ],
         },
     },
@@ -83,8 +88,8 @@ WSGI_APPLICATION = "brocanteOnline.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        # 'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        # "ENGINE": "django.db.backends.postgresql",
+        "ENGINE": "django.contrib.gis.db.backends.postgis",
         "NAME": config("DB_NAME"),
         "USER": config("DB_USER"),
         "PASSWORD": config("DB_PASSWORD"),
