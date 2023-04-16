@@ -25,10 +25,10 @@ def get_cart_amounts(request):
     if request.user.is_authenticated:
         cart_items = Cart.objects.filter(user=request.user)
         for item in cart_items:
-            item = Items.objects.get(pk=item.fooditem.id)
+            select_item = Items.objects.get(pk=item.select_item.id)
             subtotal += (
-                item.price * item.quantity
-            )  # subtotal = subtotal + (fooditem.price * item.quantity)
+                select_item.price * item.quantity
+            )  # subtotal = subtotal + (select_item.price * item.quantity)
 
         get_tax = Tax.objects.filter(is_active=True)
         for i in get_tax:

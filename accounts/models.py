@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django.db.models.fields.related import ForeignKey, OneToOneField
+from django.db.models.fields.related import OneToOneField
 
 from django.contrib.gis.db import models as gismodels
 from django.contrib.gis.geos import Point
@@ -84,7 +84,7 @@ class User(AbstractBaseUser):
         choices=ROLE_CHOICE,
         blank=True,
         null=True,
-        help_text="Select the role of the user (Customer or Vendor.",
+        help_text="Select the role of the user (Customer or Vendor).",
     )
 
     # required fields
@@ -129,16 +129,15 @@ class UserProfile(models.Model):
         upload_to="users/cover_photos", blank=True, null=True
     )
     address = models.CharField(max_length=250, blank=True, null=True)
-    country = models.CharField(max_length=15, blank=True, null=True)
-    state = models.CharField(max_length=15, blank=True, null=True)
-    city = models.CharField(max_length=15, blank=True, null=True)
-    po_box = models.CharField(max_length=6, blank=True, null=True)
+    country = models.CharField(max_length=100, blank=True, null=True)
+    state = models.CharField(max_length=100, blank=True, null=True)
+    city = models.CharField(max_length=100, blank=True, null=True)
+    po_box = models.CharField(max_length=10, blank=True, null=True)
     latitude = models.CharField(max_length=20, blank=True, null=True)
     longitude = models.CharField(max_length=20, blank=True, null=True)
     location = gismodels.PointField(blank=True, null=True, srid=4326)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
-
     # def full_address(self):
     #     return f'{self.address_line_1}, {self.address_line_2}'
 

@@ -146,8 +146,8 @@
 												<a href="{% url 'vendor-detail' vendor.vendor_slug %}">{{ vendor }}</a>
 											</h5>
 										</div>
-										{% if vendor.user_profile.city and vendor.user_profile.state and vendor.user_profile.pin_code %}
-										<span>{{ vendor.user_profile.city }}, {{ vendor.user_profile.state }}, {{ vendor.user_profile.pin_code }}</span>
+										{% if vendor.user_profile.city and vendor.user_profile.state and vendor.user_profile.po_box %}
+										<span>{{ vendor.user_profile.city }}, {{ vendor.user_profile.state }}, {{ vendor.user_profile.po_box }}</span>
 										{% endif %}
 
 										{% if vendor.kms %}

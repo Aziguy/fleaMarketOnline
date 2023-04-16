@@ -16,7 +16,7 @@ from django.contrib.gis.geos import GEOSGeometry
 from django.contrib.gis.measure import D  # ``D`` is a shortcut for ``Distance``
 from django.contrib.gis.db.models.functions import Distance
 
-from datetime import date, datetime
+from datetime import date
 from orders.forms import OrderForm
 
 
@@ -68,7 +68,7 @@ def add_to_cart(request, item_id):
                 item = Items.objects.get(id=item_id)
                 # Check if the user has already added that item to the cart
                 try:
-                    chkCart = Cart.objects.get(user=request.user, item=item)
+                    chkCart = Cart.objects.get(user=request.user, select_item=item)
                     # Increase the cart quantity
                     chkCart.quantity += 1
                     chkCart.save()
@@ -83,7 +83,7 @@ def add_to_cart(request, item_id):
                     )
                 except:
                     chkCart = Cart.objects.create(
-                        user=request.user, item=item, quantity=1
+                        user=request.user, select_item=item, quantity=1
                     )
                     return JsonResponse(
                         {
@@ -115,7 +115,7 @@ def decrease_cart(request, item_id):
                 item = Items.objects.get(id=item_id)
                 # Check if the user has already added that item to the cart
                 try:
-                    chkCart = Cart.objects.get(user=request.user, item=item)
+                    chkCart = Cart.objects.get(user=request.user, select_item=item)
                     if chkCart.quantity > 1:
                         # decrease the cart quantity
                         chkCart.quantity -= 1
@@ -249,7 +249,7 @@ def checkout(request):
         "country": user_profile.country,
         "state": user_profile.state,
         "city": user_profile.city,
-        "pin_code": user_profile.pin_code,
+        "po_box": user_profile.po_box,
     }
     form = OrderForm(initial=default_values)
     context = {

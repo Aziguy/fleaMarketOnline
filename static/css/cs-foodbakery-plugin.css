@@ -749,7 +749,7 @@ ul.sub-nav li a { line-height: 20px; }
 .menu-itam-holder .menu-itam-list .image-holder a:after { opacity: 0; font-size: 20px; -webkit-transition: all 0.3s ease-in-out; -moz-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out; content: '\ea0b'; font-family: 'icomoon'; position: absolute; left: 20px; top: 20px; -webkit-transform: scale(0); -moz-transform: scale(0); -ms-transform: scale(0); transform: scale(0); color: #fff; }
 .menu-itam-holder .menu-itam-list .image-holder:hover a:after { -webkit-transform: scale(1); -moz-transform: scale(1); -ms-transform: scale(1); transform: scale(1); opacity: 1; }
 .menu-itam-holder .menu-itam-list .image-holder img { max-width: 100%; }
-.menu-itam-holder .menu-itam-list .image-holder + .text-holder { padding-left: 10px; width: -webkit-calc(100% - 170px); width: -moz-calc(100% - 170px); width: calc(100% - 170px); }
+.menu-itam-holder .menu-itam-list .image-holder + .text-holder { padding-left: 10px; width: -webkit-calc(100% - 50px); width: -moz-calc(100% - 50px); width: calc(100% - 50px); }
 .menu-itam-holder .menu-itam-list .nutri-icons li { width: auto; max-width: 16px; margin-right: 5px; margin-bottom: 0; padding-bottom: 0; border-bottom: 0; margin-bottom: 5px; }
 .menu-itam-holder .menu-itam-list .nutri-icons li img { height: 16px; }
 .tooltip { white-space: nowrap; }

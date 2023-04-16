@@ -1,19 +1,21 @@
-from django.contrib.auth.decorators import login_required, user_passes_test
+from datetime import datetime
 from django.contrib.auth.tokens import default_token_generator
-from django.core.exceptions import PermissionDenied
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from django.utils.http import urlsafe_base64_decode
-from django.utils.text import slugify
 
 from vendor.forms import VendorForm
 from .forms import UserForm
 from .models import User, UserProfile
 from django.contrib import messages, auth
+from .utils import detect_user, send_verification_email
+from django.contrib.auth.decorators import login_required, user_passes_test
 
-from .utils import detectUser, send_verification_email
+from django.core.exceptions import PermissionDenied
+from vendor.models import Vendor
+from django.template.defaultfilters import slugify
+from orders.models import Order
+import datetime
 
-
-# Create your views here.
 
 # Restrict the vendor from accessing the customer page
 def check_role_vendor(user):
@@ -33,10 +35,9 @@ def check_role_customer(user):
 
 def register_user(request):
     if request.user.is_authenticated:
-        messages.warning(request, 'You are already logged in!')
-        return redirect('my-account')
-    elif request.method == 'POST':
-        # print(request.POST)
+        messages.warning(request, "You are already logged in!")
+        return redirect("dashboard")
+    elif request.method == "POST":
         form = UserForm(request.POST)
         if form.is_valid():
             # Create the user using the form
@@ -46,85 +47,93 @@ def register_user(request):
             # user.role = User.CUSTOMER
             # user.save()
 
-            # Create user using create_user() method
-            firstname = form.cleaned_data['firstname']
-            lastname = form.cleaned_data['lastname']
-            username = form.cleaned_data['username']
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
+            # Create the user using create_user method
+            firstname = form.cleaned_data["firstname"]
+            lastname = form.cleaned_data["lastname"]
+            username = form.cleaned_data["username"]
+            email = form.cleaned_data["email"]
+            password = form.cleaned_data["password"]
             user = User.objects.create_user(
                 firstname=firstname,
                 lastname=lastname,
                 username=username,
                 email=email,
-                password=password
+                password=password,
             )
             user.role = User.CUSTOMER
             user.save()
 
             # Send verification email
-            mail_subject = 'Please activate your account'
-            email_template = 'accounts/emails/account-verification-email.html'
+            mail_subject = "Please activate your account"
+            email_template = "accounts/emails/account-verification-email.html"
             send_verification_email(request, user, mail_subject, email_template)
-            messages.success(request, 'Your account has been registered sucessfully!')
-            return redirect('register-user')
+            messages.success(request, "Your account has been registered sucessfully!")
+            return redirect("register-user")
         else:
-            print('Invalid form!!!')
+            print("invalid form")
             print(form.errors)
     else:
         form = UserForm()
     context = {
-        'form': form,
+        "form": form,
     }
-    return render(request, 'accounts/register-user.html', context)
+    return render(request, "accounts/register-user.html", context)
 
 
 def register_vendor(request):
     if request.user.is_authenticated:
-        messages.warning(request, 'You are already logged in!')
-        return redirect('my-account')
-    elif request.method == 'POST':
+        messages.warning(request, "You are already logged in!")
+        return redirect("my-account")
+    elif request.method == "POST":
         # store the data and create the user
         form = UserForm(request.POST)
         v_form = VendorForm(request.POST, request.FILES)
         if form.is_valid() and v_form.is_valid:
-            firstname = form.cleaned_data['firstname']
-            lastname = form.cleaned_data['lastname']
-            username = form.cleaned_data['username']
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
-            user = User.objects.create_user(firstname=firstname, lastname=lastname, username=username, email=email,
-                                            password=password)
+            firstname = form.cleaned_data["firstname"]
+            lastname = form.cleaned_data["lastname"]
+            username = form.cleaned_data["username"]
+            email = form.cleaned_data["email"]
+            password = form.cleaned_data["password"]
+            user = User.objects.create_user(
+                firstname=firstname,
+                lastname=lastname,
+                username=username,
+                email=email,
+                password=password,
+            )
             user.role = User.VENDOR
             user.save()
             vendor = v_form.save(commit=False)
             vendor.user = user
-            vendor_name = v_form.cleaned_data['vendor_name']
-            vendor.vendor_slug = slugify(vendor_name) + '-' + str(user.id)
+            vendor_name = v_form.cleaned_data["vendor_name"]
+            vendor.vendor_slug = slugify(vendor_name) + "-" + str(user.id)
             user_profile = UserProfile.objects.get(user=user)
             vendor.user_profile = user_profile
             vendor.save()
 
             # Send verification email
-            mail_subject = 'Please activate your account'
-            email_template = 'accounts/emails/account-verification-email.html'
+            mail_subject = "Please activate your account"
+            email_template = "accounts/emails/account-verification-email.html"
             send_verification_email(request, user, mail_subject, email_template)
 
-            messages.success(request, 'Your account has been registered sucessfully! Please wait for the approval.')
-            return redirect('register-vendor')
+            messages.success(
+                request,
+                "Your account has been registered sucessfully! Please wait for the approval.",
+            )
+            return redirect("register-vendor")
         else:
-            print('invalid form')
+            print("invalid form")
             print(form.errors)
     else:
         form = UserForm()
         v_form = VendorForm()
 
     context = {
-        'form': form,
-        'v_form': v_form,
+        "form": form,
+        "v_form": v_form,
     }
 
-    return render(request, 'accounts/register-vendor.html', context)
+    return render(request, "accounts/register-vendor.html", context)
 
 
 def activate(request, uidb64, token):
@@ -132,82 +141,117 @@ def activate(request, uidb64, token):
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
         user = User._default_manager.get(pk=uid)
-    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
 
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
-        messages.success(request, 'Congratulation! Your account is activated.')
-        return redirect('my-account')
+        messages.success(request, "Congratulation! Your account is activated.")
+        return redirect("my-account")
     else:
-        messages.error(request, 'Invalid activation link')
-        return redirect('my-account')
+        messages.error(request, "Invalid activation link")
+        return redirect("my-account")
 
 
 def login(request):
     if request.user.is_authenticated:
-        messages.warning(request, 'You are already logged in!')
-        return redirect('my-account')
-    elif request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
+        messages.warning(request, "You are already logged in!")
+        return redirect("my-account")
+    elif request.method == "POST":
+        email = request.POST["email"]
+        password = request.POST["password"]
 
         user = auth.authenticate(email=email, password=password)
 
         if user is not None:
             auth.login(request, user)
-            messages.success(request, 'You are now logged in.')
-            return redirect('my-account')
+            messages.success(request, "You are now logged in.")
+            return redirect("my-account")
         else:
-            messages.error(request, 'Invalid login credentials')
-            return redirect('login')
-    return render(request, 'accounts/login.html')
+            messages.error(request, "Invalid login credentials")
+            return redirect("login")
+    return render(request, "accounts/login.html")
 
 
 def logout(request):
     auth.logout(request)
-    messages.info(request, 'You are logged out.')
-    return redirect('login')
+    messages.info(request, "You are logged out.")
+    return redirect("login")
 
 
-@login_required(login_url='login')
+@login_required(login_url="login")
 def my_account(request):
     user = request.user
-    redirectUrl = detectUser(user)
+    redirectUrl = detect_user(user)
     return redirect(redirectUrl)
 
 
-@login_required(login_url='login')
+@login_required(login_url="login")
 @user_passes_test(check_role_customer)
 def cust_dashboard(request):
-    return render(request, 'accounts/cust-dashboard.html')
+    orders = Order.objects.filter(user=request.user, is_ordered=True)
+    recent_orders = orders[:5]
+    context = {
+        "orders": orders,
+        "orders_count": orders.count(),
+        "recent_orders": recent_orders,
+    }
+    return render(request, "accounts/cust-dashboard.html", context)
 
 
-@login_required(login_url='login')
+@login_required(login_url="login")
 @user_passes_test(check_role_vendor)
 def vendor_dashboard(request):
-    return render(request, 'accounts/vendor-dashboard.html')
+    vendor = Vendor.objects.get(user=request.user)
+    orders = Order.objects.filter(vendors__in=[vendor.id], is_ordered=True).order_by(
+        "created_at"
+    )
+    recent_orders = orders[:10]
+
+    # current month's revenue
+    current_month = datetime.datetime.now().month
+    current_month_orders = orders.filter(
+        vendors__in=[vendor.id], created_at__month=current_month
+    )
+    current_month_revenue = 0
+    for i in current_month_orders:
+        current_month_revenue += i.get_total_by_vendor()["grand_total"]
+
+    # total revenue
+    total_revenue = 0
+    for i in orders:
+        total_revenue += i.get_total_by_vendor()["grand_total"]
+    context = {
+        "orders": orders,
+        "orders_count": orders.count(),
+        "recent_orders": recent_orders,
+        "total_revenue": total_revenue,
+        "current_month_revenue": current_month_revenue,
+    }
+    return render(request, "accounts/vendor-dashboard.html", context)
 
 
 def forgot_password(request):
-    if request.method == 'POST':
-        email = request.POST['email']
+    if request.method == "POST":
+        email = request.POST["email"]
 
         if User.objects.filter(email=email).exists():
             user = User.objects.get(email__exact=email)
 
             # send reset password email
-            mail_subject = 'Reset Your Password'
-            email_template = 'accounts/emails/reset-password-email.html'
+            mail_subject = "Reset Your Password"
+            email_template = "accounts/emails/reset-password-email.html"
             send_verification_email(request, user, mail_subject, email_template)
 
-            messages.success(request, 'Password reset link has been sent to your email address.')
-            return redirect('login')
+            messages.success(
+                request, "Password reset link has been sent to your email address."
+            )
+            return redirect("login")
         else:
-            messages.error(request, 'Account does not exist')
-            return redirect('forgot-password')
-    return render(request, 'accounts/forgot-password.html')
+            messages.error(request, "Account does not exist")
+            return redirect("forgot-password")
+    return render(request, "accounts/forgot-password.html")
 
 
 def reset_password_validate(request, uidb64, token):
@@ -215,32 +259,32 @@ def reset_password_validate(request, uidb64, token):
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
         user = User._default_manager.get(pk=uid)
-    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
 
     if user is not None and default_token_generator.check_token(user, token):
-        request.session['uid'] = uid
-        messages.info(request, 'Please reset your password')
-        return redirect('reset-password')
+        request.session["uid"] = uid
+        messages.info(request, "Please reset your password")
+        return redirect("reset-password")
     else:
-        messages.error(request, 'This link has been expired!')
-        return redirect('myAccount')
+        messages.error(request, "This link has been expired!")
+        return redirect("my-account")
 
 
 def reset_password(request):
-    if request.method == 'POST':
-        password = request.POST['password']
-        confirm_password = request.POST['confirm_password']
+    if request.method == "POST":
+        password = request.POST["password"]
+        confirm_password = request.POST["confirm_password"]
 
         if password == confirm_password:
-            pk = request.session.get('uid')
+            pk = request.session.get("uid")
             user = User.objects.get(pk=pk)
             user.set_password(password)
             user.is_active = True
             user.save()
-            messages.success(request, 'Password reset successful')
-            return redirect('login')
+            messages.success(request, "Password reset successful")
+            return redirect("login")
         else:
-            messages.error(request, 'Password do not match!')
-            return redirect('reset-password')
-    return render(request, 'accounts/reset-password.html')
+            messages.error(request, "Password do not match!")
+            return redirect("reset_password")
+    return render(request, "accounts/reset-password.html")

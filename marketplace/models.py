@@ -7,7 +7,7 @@ from menu.models import Items
 
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    item = models.ForeignKey(Items, on_delete=models.CASCADE)
+    select_item = models.ForeignKey(Items, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -5,7 +5,7 @@ from .models import Cart, Tax
 
 
 class CartAdmin(admin.ModelAdmin):
-    list_display = ("user", "item", "quantity", "updated_at")
+    list_display = ("user", "select_item", "quantity", "updated_at")
 
 
 class TaxAdmin(admin.ModelAdmin):
