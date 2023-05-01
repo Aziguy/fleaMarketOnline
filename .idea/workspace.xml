@@ -6,10 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="aa5aa04c-2f4a-4f8a-9712-06e9dec6219f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brocanteOnline/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/brocanteOnline/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brocanteOnline/static/css/cs-foodbakery-plugin.css" beforeDir="false" afterPath="$PROJECT_DIR$/brocanteOnline/static/css/cs-foodbakery-plugin.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/brocanteOnline/static/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/brocanteOnline/static/js/custom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/marketplace/context_processors.py" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace/context_processors.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/includes/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/includes/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brocanteOnline/static/js/functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/brocanteOnline/static/js/functions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brocanteOnline/static/js/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/brocanteOnline/static/js/scripts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/cs-foodbakery-plugin.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/cs-foodbakery-plugin.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/custom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/functions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/scripts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/includes/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/includes/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/marketplace/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/marketplace/cart.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/marketplace/vendor-detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/marketplace/vendor-detail.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -120,7 +127,7 @@
       <workItem from="1682434372863" duration="48000" />
       <workItem from="1682678930785" duration="27000" />
       <workItem from="1682685598610" duration="961000" />
-      <workItem from="1682922760755" duration="9191000" />
+      <workItem from="1682922760755" duration="21029000" />
     </task>
     <servers />
   </component>

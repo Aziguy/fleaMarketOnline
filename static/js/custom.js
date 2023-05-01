@@ -6,7 +6,7 @@ autocomplete = new google.maps.places.Autocomplete(
     {
         types: ['geocode', 'establishment'],
         //default in this app is "CM" - add your country code
-        componentRestrictions: {'country': ['cm', 'fr', 'za', 'us']},
+        componentRestrictions: {'country': ['cm', 'za', 'fr', 'us', 'be']},
     })
 // function to specify what should happen when the prediction is clicked
 autocomplete.addListener('place_changed', onPlaceChanged);
@@ -88,7 +88,7 @@ $(document).ready(function(){
                 console.log(response)
                 if(response.status == 'login_required'){
                     swal(response.message, '', 'info').then(function(){
-                        window.location = '/login';
+                        window.location = '/accounts/login';
                     })
                 }else if(response.status == 'Failed'){
                     swal(response.message, '', 'error')
@@ -131,7 +131,7 @@ $(document).ready(function(){
                 console.log(response)
                 if(response.status == 'login_required'){
                     swal(response.message, '', 'info').then(function(){
-                        window.location = '/login';
+                        window.location = '/accounts/login';
                     })
                 }else if(response.status == 'Failed'){
                     swal(response.message, '', 'error')

@@ -6,7 +6,7 @@ autocomplete = new google.maps.places.Autocomplete(
     {
         types: ['geocode', 'establishment'],
         //default in this app is "CM" - add your country code
-        componentRestrictions: {'country': ['cm', 'fr', 'za', 'us']},
+        componentRestrictions: {'country': ['cm', 'za', 'fr', 'us', 'be']},
     })
 // function to specify what should happen when the prediction is clicked
 autocomplete.addListener('place_changed', onPlaceChanged);
@@ -77,7 +77,7 @@ $(document).ready(function(){
     $('.add_to_cart').on('click', function(e){
         e.preventDefault();
 
-        item_id = $(this).attr('data-id');
+        food_id = $(this).attr('data-id');
         url = $(this).attr('data-url');
 
 
@@ -85,7 +85,7 @@ $(document).ready(function(){
             type: 'GET',
             url: url,
             success: function(response){
-                //console.log(response)
+                console.log(response)
                 if(response.status == 'login_required'){
                     swal(response.message, '', 'info').then(function(){
                         window.location = '/accounts/login';
@@ -94,7 +94,7 @@ $(document).ready(function(){
                     swal(response.message, '', 'error')
                 }else{
                     $('#cart_counter').html(response.cart_counter['cart_count']);
-                    $('#qty-'+item_id).html(response.qty);
+                    $('#qty-'+food_id).html(response.qty);
 
                     // subtotal, tax and grand total
                     applyCartAmounts(
@@ -119,7 +119,7 @@ $(document).ready(function(){
     $('.decrease_cart').on('click', function(e){
         e.preventDefault();
 
-        item_id = $(this).attr('data-id');
+        food_id = $(this).attr('data-id');
         url = $(this).attr('data-url');
         cart_id = $(this).attr('id');
 
@@ -128,7 +128,7 @@ $(document).ready(function(){
             type: 'GET',
             url: url,
             success: function(response){
-                //console.log(response)
+                console.log(response)
                 if(response.status == 'login_required'){
                     swal(response.message, '', 'info').then(function(){
                         window.location = '/accounts/login';
@@ -137,7 +137,7 @@ $(document).ready(function(){
                     swal(response.message, '', 'error')
                 }else{
                     $('#cart_counter').html(response.cart_counter['cart_count']);
-                    $('#qty-'+item_id).html(response.qty);
+                    $('#qty-'+food_id).html(response.qty);
 
                     applyCartAmounts(
                         response.cart_amount['subtotal'],
@@ -168,8 +168,8 @@ $(document).ready(function(){
             type: 'GET',
             url: url,
             success: function(response){
-                //console.log(response)
-                if(response.status === 'Failed'){
+                console.log(response)
+                if(response.status == 'Failed'){
                     swal(response.message, '', 'error')
                 }else{
                     $('#cart_counter').html(response.cart_counter['cart_count']);
@@ -213,9 +213,9 @@ $(document).ready(function(){
             $('#subtotal').html(subtotal)
             $('#total').html(grand_total)
 
-            //console.log(tax_dict)
+            console.log(tax_dict)
             for(key1 in tax_dict){
-                //console.log(tax_dict[key1])
+                console.log(tax_dict[key1])
                 for(key2 in tax_dict[key1]){
                     // console.log(tax_dict[key1][key2])
                     $('#tax-'+key1).html(tax_dict[key1][key2])
@@ -234,7 +234,7 @@ $(document).ready(function(){
         var csrf_token = $('input[name=csrfmiddlewaretoken]').val()
         var url = document.getElementById('add_hour_url').value
 
-        //console.log(day, from_hour, to_hour, is_closed, csrf_token)
+        console.log(day, from_hour, to_hour, is_closed, csrf_token)
 
         if(is_closed){
             is_closed = 'True'

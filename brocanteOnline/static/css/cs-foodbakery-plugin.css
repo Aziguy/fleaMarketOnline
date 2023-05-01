@@ -66,7 +66,7 @@
 #main .login-form .social-media ul, #main .signup-form .social-media ul { text-align: left; margin-left: -10px; }
 #main .login-form .social-media li, #main .signup-form .social-media li { width: auto; min-width: 230px; margin-left: 10px; }
 #main .login-form .social-media li a, #main .signup-form .social-media li a { padding-right: 10px; }
-/* Header Style End 
+/* Header Style End
 /* Alerts Style */
 .login-form .alert-danger, .login-form .alert-info { background-color: inherit; background-image: none; border: none; -webkit-box-shadow: none; box-shadow: none; color: #b63a2b; display: block; margin: 0 0 10px; padding: 0; position: relative; }
 .login-form .alert-info { color: #b3b6c0; letter-spacing: 1px; line-height: 24px; margin: 0 0 20px; }
@@ -171,7 +171,7 @@
 .main-search.fancy .field-holder { width: 100%; }
 .main-search.fancy .field-holder ul { margin-bottom: 0; }
 .main-search.fancy .field-holder .chosen-container-single .chosen-single { padding: 10px 15px; border-radius: inherit; height: 50px; line-height: 50px; background-color: #fff; }
-.main-search.fancy .field-holder input[type="text"] { text-transform: uppercase; margin: 0; padding: 0 15px; border-radius: inherit; height: 50px; line-height: 50px; color: #000000; font-size: 12px; }
+.main-search.fancy .field-holder input[type="text"] { text-transform: uppercase; margin: 0; padding: 0 15px; border-radius: inherit; height: 50px; line-height: 50px; color: #d1d1d1; font-size: 12px; }
 .main-search.fancy .field-holder input[type="submit"] { margin: 0; padding: 10px 15px; border-radius: inherit; border: none; -webkit-box-shadow: none; box-shadow: none; width: 100%; height: 50px; line-height: 30px; font-size: 18px; letter-spacing: 1px; text-transform: uppercase; background-color: #4cce4a; color: #fff; }
 .main-search.fancy .field-holder .chosen-container-single .chosen-single:before { position: absolute; color: #d1d1d1; font-size: 18px; top: 25px; right: 13px; content: '\e95a'; font-family: icomoon; }
 .main-search.fancy .chosen-container-single .chosen-single span { left: 0; line-height: 30px; color: #d1d1d1; font-size: 12px; }
@@ -749,7 +749,7 @@ ul.sub-nav li a { line-height: 20px; }
 .menu-itam-holder .menu-itam-list .image-holder a:after { opacity: 0; font-size: 20px; -webkit-transition: all 0.3s ease-in-out; -moz-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out; content: '\ea0b'; font-family: 'icomoon'; position: absolute; left: 20px; top: 20px; -webkit-transform: scale(0); -moz-transform: scale(0); -ms-transform: scale(0); transform: scale(0); color: #fff; }
 .menu-itam-holder .menu-itam-list .image-holder:hover a:after { -webkit-transform: scale(1); -moz-transform: scale(1); -ms-transform: scale(1); transform: scale(1); opacity: 1; }
 .menu-itam-holder .menu-itam-list .image-holder img { max-width: 100%; }
-.menu-itam-holder .menu-itam-list .image-holder + .text-holder { padding-left: 10px; width: -webkit-calc(100% - 50px); width: -moz-calc(100% - 50px); width: calc(100% - 50px); }
+.menu-itam-holder .menu-itam-list .image-holder + .text-holder { padding-left: 10px; width: -webkit-calc(100% - 170px); width: -moz-calc(100% - 170px); width: calc(100% - 170px); }
 .menu-itam-holder .menu-itam-list .nutri-icons li { width: auto; max-width: 16px; margin-right: 5px; margin-bottom: 0; padding-bottom: 0; border-bottom: 0; margin-bottom: 5px; }
 .menu-itam-holder .menu-itam-list .nutri-icons li img { height: 16px; }
 .tooltip { white-space: nowrap; }
@@ -1986,12 +1986,12 @@ div.daterangepicker { border: 1px solid #eceef4; -webkit-box-shadow: none; box-s
 
 .text-color, .listing .post-title:hover h5 a, .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus,
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus, .pagination > .active > span > a,
-.order-sort-results ul li:hover a, .tabs-holder .nav li a:hover, .nav li  a:focus, .tabs-holder .nav-tabs li.active a, .nav-tabs li.active a:hover, .nav-tabs li.active a:focus, 
+.order-sort-results ul li:hover a, .tabs-holder .nav li a:hover, .nav li  a:focus, .tabs-holder .nav-tabs li.active a, .nav-tabs li.active a:hover, .nav-tabs li.active a:focus,
 .sub-header .breadcrumbs ul li:hover a, .sub-header .breadcrumbs ul li:hover:before, .widget-popular-cities ul li a:hover, .widget-popular-cuisines ul li a:hover, .widget-menu ul li a:hover, .widget-connect ul li p a:hover,
 .news-letter .news-letter-form form .btn-holder input[type="submit"]:hover, .widget-recent-blog-post li:hover .post-title h6 a, .widget-categories ul li a:hover, .widget-categories ul li a:hover:before, .widget-cloud ul li a:hover,
 .panel-group .panel-heading a , .categories-menu li a:hover, .user-order .error-message, .delivery-timing > ul > li > a span, .delivery-timing ul li ul.delivery-dropdown li a:hover, .blog-detail .blockquote-hloder::before, .blog-detail .tags-list li a:hover,
 .blog-detail .swiper-button-prev:hover, .blog-detail .swiper-button-next:hover, .blog .post-title h3 a:hover, .blog .post-title h4 a:hover, .blog-large .author-info p a, .delivery-list .button a:hover, .user-nav-list ul li a:hover, .user-nav-list ul li a:hover i,
-.company-holder .swiper-button-next:hover i, .company-holder .swiper-button-prev:hover i, .user-holder .add-btn a, .user-holder .order-list .author-info .text-holder span.price, .user-holder .order-list .order-btn a, .main-header.transparent .main-location ul li ul li a:hover, 
+.company-holder .swiper-button-next:hover i, .company-holder .swiper-button-prev:hover i, .user-holder .add-btn a, .user-holder .order-list .author-info .text-holder span.price, .user-holder .order-list .order-btn a, .main-header.transparent .main-location ul li ul li a:hover,
 .main-header.transparent .main-location ul li ul li .has-child li a:hover, .order-sort-results ul li.active a, .listing-filter .expand, #footer .footer-widget .widget a:hover, .order-sort-results ul li.active a, ul.dashboard-nav li a:hover, .upload-file button[type='button'], .user-dashboard-menu > ul > li > ul li.user-add-restaurant > a, .widget_tag_cloud .tagcloud a:hover, .page-not-found .cs-text span.cs-error, .widget.widget_nav_menu ul li a:hover, .widget.widget-categories li a:hover, .widget.widget_categories li a:hover, .widget.widget_pages ul li a:hover, .widget.widget_archive li a:hover,
 .widget.widget_meta li a:hover, .widget.widget_nav_menu ul li a:hover:before, .widget.widget-categories li a:hover:before, .widget.widget-archives ul li a:hover,
 .widget.widget_categories li:hover:before, .widget.widget_pages ul li:hover:before, .widget.widget_archive li:hover:before,.site-maps-links ul li:hover a, .widget.widget-archives ul li:hover a:before, .widget.twitter-post li p a, .widget.widget_recent_comments li a:hover, .widget.widget_rss li .rsswidget:hover, .cs-construction .time-box h4, .listing .list-option .viewmenu-btn, .restaurant-menu-nav.nav-tabs > li.active a, .user-nav-list ul li.active a, .user-nav-list ul li.active i, .categories-order li li:after, .listing.fancy-simple .delivery-potions i, .listing.grid-listing .min-order, .listing.grid-listing .listing-footer .text-holder p.deliver-time span, .listing.grid-listing .listing-footer .text-holder p.pickup-time span, .transparent-header .main-header .login-option a.login-popup, .copy-right p a, .blog-medium .read-more i, .related-post .read-more, .user-suggest-list > .element-title > h5 + span em, .listing.grid-listing h4 a:hover, .listing.grid-listing .listing-footer a.ordernow-btn:hover, .transparent-header .main-header .login-option a.get-start-btn:hover, .categories-menu li.active a,
@@ -2001,8 +2001,8 @@ div.daterangepicker { border: 1px solid #eceef4; -webkit-box-shadow: none; box-s
 {
 color:#c33332 !important;
 }
-.bgcolor, .chosen-container .chosen-results li.highlighted, .order-sort-results ul li:hover:before, .bootstrap-datetimepicker-widget .btn-primary, 
-.booking-info-sec .contact-info .field-holder .submit-btn input[type="submit"], .user-order input[type="submit"], .main-post .column-text form .field-holder .field-btn, 
+.bgcolor, .chosen-container .chosen-results li.highlighted, .order-sort-results ul li:hover:before, .bootstrap-datetimepicker-widget .btn-primary,
+.booking-info-sec .contact-info .field-holder .submit-btn input[type="submit"], .user-order input[type="submit"], .main-post .column-text form .field-holder .field-btn,
 .main-search.fancy.bg-holder, .load-more-btn:hover, .order-sort-results ul li.active:before, .order-sort-results ul li.active:before, .listing.simple.slide-loader:before, .main-header .login-option a.get-start-btn, .field-holder .btn-submit:hover, .no-results .suggestions ul li:before, .widget.widget_search form .btn-default, .textwidget span.button-med a, .cs-seprater:after, .slicknav_btn, .user-order .select-option input[type="radio"]:checked + label:after, #add_payment_method #payment ul.payment_methods li.wc_payment_method input[type="radio"]:checked + label:after, .woocommerce-checkout #payment ul.payment_methods li.wc_payment_method input[type="radio"]:checked + label:after, .woocommerce form .woocommerce-checkout-payment .form-row input.button, .pricetable-holder .cs-price, .foodbakery-button-loader, .invite-member .btn-send, .menu-order-detail .btn-print, .radio-holder .input-radio label:after, .footer-style-1 .social-media li a:hover, #footer.footer-style-1 .widget-title h5:after, .pricetable-holder .foodbakery-subscribe-pkg-btn, .pricetable-holder .foodbakery-subscribe-pkg, .login-form .input-filed input[type="submit"], .login-form .input-filed input[type="button"], .user-dashboard .foodbakery_loader, .user-order input[type="submit"], .user-order .menu-order-confirm, .modal-dialog .menu-selection-container button, .modal-dialog .menu-selection-container .reset-menu-fields, .suggestion-search .btn-default, .main-search.classic .field-holder input[type="submit"],
 .wp-foodbakery .listing.grid-slider .list-post:hover:before, #footer.footer-style-4 .social-media > li > a:hover, #header.transparent-header.court.pinned .main-header,
 .main-location > ul > li.choose-location ul ul::-webkit-scrollbar-thumb, .icon-boxes.fancy:hover .img-holder figure i
@@ -2012,7 +2012,7 @@ background-color:#c33332 !important;
 .max-location-height::-webkit-scrollbar-thumb, .slicknav_nav::-webkit-scrollbar-thumb
 {
 background-color:#c33332 !important;
-}        
+}
 .br-color, .listing .list-option .viewmenu-btn, .widget-text .content-btn, .load-more-btn, .blog-detail .blockquote-hloder, .blog-large .read-more, .delivery-list .button a:hover, .upload-file button[type='button'], .widget_tag_cloud .tagcloud a:hover, .icon-boxes.modern figure:before, .icon-boxes.modern figure, .listing.grid-listing .listing-footer a.ordernow-btn:hover, .transparent-header .main-header .login-option a.get-start-btn:hover, #footer.footer-style-4 .social-media > li > a:hover, .location-holder.modern a.more-btn
 {
 border-color:#c33332 !important;
@@ -2020,7 +2020,7 @@ border-color:#c33332 !important;
 .restaurant-menu-nav.nav-tabs > li a:hover, .restaurant-menu-nav.nav-tabs > li a:focus, .restaurant-menu-nav.nav-tabs > li.active a
 {
 border-top-color:#c33332 !important;
-}   
+}
 body{
 background:#ebedf3 !important;	    }
 .cs-main-nav {
@@ -2045,7 +2045,7 @@ h1, h1 a{
 font:700 Normal  30px/36px "Montserrat", sans-serif !important;letter-spacing: 1px !important;text-transform: capitalize !important;color: #000000 !important;}
 h2, h2 a{
 font:700 Normal  24px/30px "Montserrat", sans-serif !important;letter-spacing: 1px !important;text-transform: capitalize !important;color: #000000 !important;	    }
-h3, h3 a{ 
+h3, h3 a{
 font:700 Normal  20px/26px "Montserrat", sans-serif !important;letter-spacing: 1px !important;text-transform: capitalize !important;color: #000000 !important;	    }
 h4, h4 a{
 font:700 Normal  18px/24px "Montserrat", sans-serif !important;letter-spacing: 1px !important;text-transform: capitalize !important;color: #000000 !important;	    }
@@ -2559,7 +2559,7 @@ color:#cdcdcd !important;
 #header.court .slicknav_btn .slicknav_icon:before {top: -6px;}
 #header.court .slicknav_menu .slicknav_icon:after {bottom: -6px;}
 #header.court .slicknav_btn .slicknav_icon,
-#header.court .slicknav_menu .slicknav_icon:before, 
+#header.court .slicknav_menu .slicknav_icon:before,
 #header.court .slicknav_menu .slicknav_icon:after {height: 2px;}
 #header.court .main-header .login-option {padding-right: 60px;}
 #header.court .main-header .logo {padding-top:10px;}
@@ -3186,12 +3186,12 @@ ul.user-controls li:first-child i { color: #0f0851; }
 .woocommerce p.stars.selected a.active:before, .woocommerce p.stars:hover a:before {content: "\e838" ;font-family: "icomoon";}
 .woocommerce p.stars.selected a.active~a:before {content: "\e838"; font-family: "icomoon";}
 .woocommerce p.stars.selected a:not(.active):before {content: "\e838"; font-family: "icomoon";}
-.woocommerce p.stars.selected a.active:before, 
-.woocommerce p.stars:hover a:before, 
-.woocommerce p.stars.selected a:not(.active):before, 
+.woocommerce p.stars.selected a.active:before,
+.woocommerce p.stars:hover a:before,
+.woocommerce p.stars.selected a:not(.active):before,
 .woocommerce p.stars.selected a.active:before { color: #ff871b; }
-.woocommerce p.stars a:before, 
-.woocommerce p.stars a:hover ~ a:before, 
+.woocommerce p.stars a:before,
+.woocommerce p.stars a:hover ~ a:before,
 .woocommerce p.stars.selected a.active ~ a:before { color: #e5e5e5; }
 .woocommerce.single-product .select2.select2-container { float: left; margin: 0 30px 0 0; width: auto !important; }
 .woocommerce.single-product #review_form #respond p input[type="text"], .woocommerce.single-product #review_form #respond p input[type="email"], .woocommerce.single-product #review_form #respond textarea { font: 400 14px/24px 'Lato', sans-serif !important; text-transform: capitalize; border-radius: 3px; }
@@ -3343,7 +3343,7 @@ ul.user-controls li:first-child i { color: #0f0851; }
 .woocommerce .cart-collaterals .cart_totals h2 { font-size: 22px !important; }
 .woocommerce-Message .woocommerce-Button.button { position: absolute; right: 5px; top: 4px; color: #fff !important; }
 .widget.woocommerce.widget_rating_filter ul li { list-style: none; }
-/*User Dashboard*/ 
+/*User Dashboard*/
 .woocommerce .woocommerce-MyAccount-navigation li.woocommerce-MyAccount-navigation-link { display: inline-block; float: none; }
 .woocommerce .woocommerce-MyAccount-navigation { text-align: center; width: 100%; display: block; margin-bottom: 30px; }
 .woocommerce .woocommerce-MyAccount-navigation li a { background-color: transparent; border: 0; border-radius: 0; outline: none; padding: 12px 15px 18px 15px; margin: 0; text-transform: capitalize; border-right: none; font: 800 Normal 14px/20px 'Montserrat', sans-serif; }
@@ -3400,12 +3400,12 @@ ul.user-controls li:first-child i { color: #0f0851; }
 .wp-foodbakery.woocommerce.single-product div.product form.cart div.quantity label { margin: 0 10px 0 0; }
 .wp-foodbakery.woocommerce.single-product div.product form.cart .button {border: 0; border-radius: 0; font-size: 12px; font-weight: 600; height: 35px; margin-top: 0; display: inline-block;vertical-align: middle;}
 .wp-foodbakery.woocommerce.single-product div.product .stock {border-radius:0;}
-.wp-foodbakery.woocommerce div.product p.price del, 
+.wp-foodbakery.woocommerce div.product p.price del,
 .wp-foodbakery.woocommerce div.product span.price del {color: #77a464; text-decoration: line-through;}
 .wp-foodbakery.woocommerce .woocommerce-tabs .nav-tabs.wc-tabs {text-align:left;}
 .wp-foodbakery.woocommerce .woocommerce-tabs .nav-tabs.wc-tabs li a {box-shadow:none; margin-right: 20px; padding: 0 0 15px 0;}
 .wp-foodbakery.woocommerce table.shop_attributes th {width: 150px; font-weight: 700; padding: 10px; vertical-align: middle;}
-.wp-foodbakery.woocommerce table.shop_attributes td, 
+.wp-foodbakery.woocommerce table.shop_attributes td,
 .wp-foodbakery.woocommerce table.shop_attributes th {border: 1px solid #d2d2d2; line-height: 1.5; margin: 0; padding: 12px 16px; text-align: left;}
 .wp-foodbakery.woocommerce #respond input[type="submit"] {left: auto; right: auto; bottom: auto; height: auto; padding: 8px 25px; font-weight: 600; width: auto;}
 .wp-foodbakery.woocommerce .field-holder label {margin-bottom:0;}
@@ -3414,7 +3414,7 @@ ul.user-controls li:first-child i { color: #0f0851; }
 .wp-foodbakery.single-product div.product .woocommerce-product-gallery .flex-control-thumbs {padding: 0; margin: 0;}
 .wp-foodbakery.single-product div.product .woocommerce-product-gallery .flex-control-thumbs li {display: inline-block; list-style: none; margin: 5px 5px 5px 0; cursor: pointer; width: auto;}
 .wp-foodbakery.woocommerce .woocommerce-message a.button {border-radius: 0; padding: 5px 12px; margin-top: -5px; font-weight: 600;}
-.wp-foodbakery .woocommerce .product-quantity .quantity .qtyminus, 
+.wp-foodbakery .woocommerce .product-quantity .quantity .qtyminus,
 .wp-foodbakery .woocommerce .product-quantity .quantity .qtyplus {border:0;}
 .wp-foodbakery .woocommerce .coupon input[type="text"] {border-color: #d2d2d2;}
 .wp-foodbakery .woocommerce .cart_totals .wc-proceed-to-checkout a.button.alt:hover {color:#333;}

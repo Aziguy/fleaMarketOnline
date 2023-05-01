@@ -93,7 +93,7 @@
                                     <div id="menu-item-list-6272" class="menu-itam-list">
 
                                         {% for category in categories %}
-                                        <div class="element-title" id="menu-category-2">
+                                        <div class="element-title" id="category-{{ category.id }}">
                                             <h5 class="text-color">{{ category }}</h5>
                                             <span>{{ category.description }}</span>
                                         </div>
@@ -103,7 +103,7 @@
                                                 <div class="image-holder"> <img src="{{ item.image_1.url }}" alt=""></div>
                                                 <div class="text-holder">
                                                     <h6>{{ item }}</h6>
-                                                    <span>{{ item.description }}</span>
+                                                    {#<span>{{ item.description }}</span>#}
                                                 </div>
                                                 <div class="price-holder">
                                                     <span class="price">{{ item.price }} <strong>FCFA</strong></span>
@@ -122,9 +122,7 @@
                                     </div>
 
                                     {% for item in cart_items %}
-
-                                        <span id="qty-{{item.item.id}}" class="item_qty d-none" data-qty="{{ item.quantity }}">{{ item.quantity }}</span>
-
+                                        <span id="qty-{{item.select_item.id}}" class="item_qty d-none" data-qty="{{ item.quantity }}">{{ item.quantity }}</span>
                                     {% endfor %}
                                 </div>
                             </div>
