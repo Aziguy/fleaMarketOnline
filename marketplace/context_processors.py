@@ -1,5 +1,14 @@
 from .models import Cart, Tax
-from menu.models import Items
+from vendor.models import Vendor
+from menu.models import Category, Items
+from django.db.models import Prefetch
+from django.shortcuts import get_object_or_404
+
+
+def menu_links(request):
+    vendor = get_object_or_404(Vendor)
+    links = Category.objects.filter(vendor=vendor).all()
+    return dict(links=links)
 
 
 def get_cart_counter(request):
