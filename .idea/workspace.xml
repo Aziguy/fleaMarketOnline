@@ -6,10 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="aa5aa04c-2f4a-4f8a-9712-06e9dec6219f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brocanteOnline/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/brocanteOnline/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brocanteOnline/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/brocanteOnline/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brocanteOnline/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/brocanteOnline/wsgi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +117,7 @@
       <workItem from="1682685598610" duration="961000" />
       <workItem from="1682922760755" duration="22011000" />
       <workItem from="1683118840435" duration="3471000" />
-      <workItem from="1683552771619" duration="4013000" />
+      <workItem from="1683552771619" duration="5271000" />
     </task>
     <servers />
   </component>
