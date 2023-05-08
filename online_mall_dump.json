@@ -1,0 +1,384 @@
+[
+{
+    "model": "sessions.session",
+    "pk": "lq8dqo7bhwgy7tvs8prr70n81q1mb8y0",
+    "fields": {
+        "session_data": ".eJxVjEEOwiAQRe_C2pDOgB106d4zEGAGqRpISrsy3l2bdKHb_977L-XDuhS_dpn9xOqsUB1-txjSQ-oG-B7qrenU6jJPUW-K3mnX18byvOzu30EJvXxrl8zJ2cBAR2YRJKAckcmmARwhWQAwQ3Y5oNiRErM1DDmNJJkAUb0_2xk3pg:1ptYA5:T0fLtclWvV8aDRhAavShVc_JS1r_hv2DJEq5uAGSY1E",
+        "expire_date": "2023-05-15T18:22:09.408Z"
+    }
+},
+{
+    "model": "accounts.user",
+    "fields": {
+        "password": "pbkdf2_sha256$260000$LThQxX8VsUqect9Tdt5gDL$05c8Fg6XPJlqHABKXZxkB33cVbPGnkDAgjMOzNAjfWk=",
+        "firstname": "Hippolyte",
+        "lastname": "KENGNI",
+        "username": "Aziguy",
+        "email": "mandatairessm@gmail.com",
+        "phone_number": "",
+        "role": null,
+        "date_joined": "2023-04-16T11:59:18.221Z",
+        "last_login": "2023-05-03T14:02:33.095Z",
+        "created_date": "2023-04-16T11:59:18.221Z",
+        "modified_date": "2023-04-16T11:59:18.242Z",
+        "is_admin": true,
+        "is_staff": true,
+        "is_active": true,
+        "is_superadmin": true
+    }
+},
+{
+    "model": "accounts.user",
+    "fields": {
+        "password": "pbkdf2_sha256$260000$qIWkbPxSUqYjPoHOro8oV2$wk8E6UyMPq5xO1NSn81GfR4zCeznDYPbVeCEwzX/zXw=",
+        "firstname": "Gilles Arnaud",
+        "lastname": "NJATCHE",
+        "username": "leguideinformatique",
+        "email": "contact@leguideinformatique.cm",
+        "phone_number": "",
+        "role": 1,
+        "date_joined": "2023-04-16T12:05:29.607Z",
+        "last_login": "2023-05-01T18:22:09.395Z",
+        "created_date": "2023-04-16T12:05:29.607Z",
+        "modified_date": "2023-04-16T12:06:08.953Z",
+        "is_admin": false,
+        "is_staff": false,
+        "is_active": true,
+        "is_superadmin": false
+    }
+},
+{
+    "model": "accounts.user",
+    "fields": {
+        "password": "pbkdf2_sha256$260000$1DIL61YqrJ2GOUsIyg3qlq$McerUDkCTv75uCBasgFp2KbAvuWp1AInP0LrzlaVnKI=",
+        "firstname": "Lucy",
+        "lastname": "MALIKA",
+        "username": "Lucy",
+        "email": "pharmaphone19ingemedia@gmail.com",
+        "phone_number": "",
+        "role": 2,
+        "date_joined": "2023-05-01T21:26:26.973Z",
+        "last_login": "2023-05-01T21:27:07.931Z",
+        "created_date": "2023-05-01T21:26:26.973Z",
+        "modified_date": "2023-05-01T21:26:52.175Z",
+        "is_admin": false,
+        "is_staff": false,
+        "is_active": true,
+        "is_superadmin": false
+    }
+},
+{
+    "model": "accounts.userprofile",
+    "pk": 1,
+    "fields": {
+        "user": [
+            "mandatairessm@gmail.com"
+        ],
+        "profile_picture": "",
+        "cover_photo": "",
+        "address": null,
+        "country": null,
+        "state": null,
+        "city": null,
+        "po_box": null,
+        "latitude": null,
+        "longitude": null,
+        "location": null,
+        "created_at": "2023-04-16T11:59:18.235Z",
+        "modified_at": "2023-05-03T14:02:33.103Z"
+    }
+},
+{
+    "model": "accounts.userprofile",
+    "pk": 2,
+    "fields": {
+        "user": [
+            "contact@leguideinformatique.cm"
+        ],
+        "profile_picture": "users/profile_pictures/LeGuide_Ai4rJ72.jpg",
+        "cover_photo": "users/cover_photos/leguideinformatique_VkbKVje.jpg",
+        "address": "Nsam, Route à Yaoundé, Yaoundé, Cameroun",
+        "country": "Cameroun",
+        "state": "Région du Centre",
+        "city": "Yaoundé",
+        "po_box": "00237",
+        "latitude": "3.7314036",
+        "longitude": "11.5417292",
+        "location": "SRID=4326;POINT (11.5417292 3.7314036)",
+        "created_at": "2023-04-16T12:05:29.610Z",
+        "modified_at": "2023-05-01T18:22:09.403Z"
+    }
+},
+{
+    "model": "accounts.userprofile",
+    "pk": 3,
+    "fields": {
+        "user": [
+            "pharmaphone19ingemedia@gmail.com"
+        ],
+        "profile_picture": "",
+        "cover_photo": "",
+        "address": null,
+        "country": null,
+        "state": null,
+        "city": null,
+        "po_box": null,
+        "latitude": null,
+        "longitude": null,
+        "location": null,
+        "created_at": "2023-05-01T21:26:26.976Z",
+        "modified_at": "2023-05-01T21:27:07.939Z"
+    }
+},
+{
+    "model": "vendor.vendor",
+    "pk": 1,
+    "fields": {
+        "user": [
+            "contact@leguideinformatique.cm"
+        ],
+        "user_profile": 2,
+        "vendor_name": "Le Guide Informatique",
+        "vendor_slug": "le-guide-informatique-2",
+        "vendor_license": "vendor/license/leguideinformatique_gHQlQpZ.jpg",
+        "is_approved": true,
+        "created_at": "2023-04-16T12:05:29.634Z",
+        "modified_at": "2023-04-16T12:11:22.469Z"
+    }
+},
+{
+    "model": "menu.category",
+    "pk": 1,
+    "fields": {
+        "vendor": 1,
+        "category_name": "Smartphone",
+        "slug": "smartphone-1",
+        "description": "Android, IOS & others phones",
+        "created_at": "2023-04-16T12:16:19.842Z",
+        "updated_at": "2023-04-16T12:16:19.845Z"
+    }
+},
+{
+    "model": "menu.category",
+    "pk": 2,
+    "fields": {
+        "vendor": 1,
+        "category_name": "Pc",
+        "slug": "pc-2",
+        "description": "Any personal computers brand",
+        "created_at": "2023-04-16T12:16:49.277Z",
+        "updated_at": "2023-04-16T12:16:49.280Z"
+    }
+},
+{
+    "model": "menu.category",
+    "pk": 3,
+    "fields": {
+        "vendor": 1,
+        "category_name": "Computer components",
+        "slug": "computer-components-3",
+        "description": "Any components for personal computers (RAM, HDD, Keyboards, ...)",
+        "created_at": "2023-04-16T12:26:34.999Z",
+        "updated_at": "2023-04-16T12:26:35.001Z"
+    }
+},
+{
+    "model": "menu.items",
+    "pk": 1,
+    "fields": {
+        "vendor": 1,
+        "category": 1,
+        "item_title": "Iphone 14 Pro max",
+        "slug": "iphone-14-pro-max",
+        "description": "Tested for battery health and guaranteed to come with a battery that exceeds 90% of original capacity.\r\nInspected and guaranteed to have minimal cosmetic damage, which is not noticeable when the device is held at arm’s length. Successfully passed a full diagnostic test which ensures like-new functionality and removal of any prior-user personal information.\r\nIncludes a brand new, generic charging cable that is certified Mfi (Made for iPhone) and a brand new, generic wall plug that is UL ce",
+        "price": "1200000.00",
+        "image_1": "items_images/iphone_14_pro_max_black_00_lrejzow.jpg",
+        "image_2": "items_images/iphone-14-pro-max_HvHRZh6.png",
+        "image_3": "items_images/fonds-iphone-14-and-iphone-14-pro_ZdDzu27.jpg",
+        "image_4": "items_images/il_fullxfull.3535120768_a3ok_5TEmFFv.png",
+        "image_5": "items_images/cover-with-silicone-frame-black-136030_13_ruhWSKU.png",
+        "image_6": "items_images/apple-iphone-14-pro-max-5g-dual-esim-128gb-6gb-ram-black_UAINbJO.jpg",
+        "is_available": true,
+        "created_at": "2023-04-16T12:31:34.528Z",
+        "updated_at": "2023-04-16T12:31:34.528Z"
+    }
+},
+{
+    "model": "menu.items",
+    "pk": 2,
+    "fields": {
+        "vendor": 1,
+        "category": 1,
+        "item_title": "Xiaomi 13",
+        "slug": "xiaomi-13",
+        "description": "Snapdragon 8+ Gen 14nm power-efficient manufacturing processUp to 3.2GHz, with Armv9 Cortex-X2 technology CPU: 1x Prime core (X2-based), 3.2GHz 3x Gold cores (A710-based), 2.75GHz 4x Sliver cores (A510-based), 2.0GHzGPU: Qualcomm Adreno GPU7th Gen Qualcomm AI Engine",
+        "price": "655000.00",
+        "image_1": "items_images/Xiaomi-13-Pro_Ceramic-Black_600x.png",
+        "image_2": "items_images/xiaomi-13-pro_04_1iaZVjd.jpg",
+        "image_3": "items_images/xiaomi-13-green-color--600x600_QJ7DjjG.png",
+        "image_4": "items_images/xiaomi-13-collector--600x600_VdZpo4V.png",
+        "image_5": "items_images/m3-black-right_45_-front_with_wallpaper_medium__l7dipyz.png",
+        "image_6": "items_images/m2-black-right_45_-front_with_wallpaper_medium__iny6VOF.png",
+        "is_available": true,
+        "created_at": "2023-04-16T12:34:01.147Z",
+        "updated_at": "2023-04-16T12:34:01.147Z"
+    }
+},
+{
+    "model": "marketplace.cart",
+    "pk": 13,
+    "fields": {
+        "user": [
+            "contact@leguideinformatique.cm"
+        ],
+        "select_item": 1,
+        "quantity": 1,
+        "created_at": "2023-05-01T21:21:33.022Z",
+        "updated_at": "2023-05-01T21:21:33.022Z"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+        "action_time": "2023-04-16T12:09:20.470Z",
+        "user": [
+            "mandatairessm@gmail.com"
+        ],
+        "content_type": [
+            "vendor",
+            "vendor"
+        ],
+        "object_id": "1",
+        "object_repr": "Le Guide Informatique",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is approved\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2023-05-03T13:18:17.999Z",
+        "user": [
+            "mandatairessm@gmail.com"
+        ],
+        "content_type": [
+            "accounts",
+            "user"
+        ],
+        "object_id": "6",
+        "object_repr": "particulierssm@gmail.com",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+        "action_time": "2023-05-03T13:18:18.003Z",
+        "user": [
+            "mandatairessm@gmail.com"
+        ],
+        "content_type": [
+            "accounts",
+            "user"
+        ],
+        "object_id": "5",
+        "object_repr": "pharmaphone19ingemedia+1@gmail.com",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+        "action_time": "2023-05-03T13:18:18.005Z",
+        "user": [
+            "mandatairessm@gmail.com"
+        ],
+        "content_type": [
+            "accounts",
+            "user"
+        ],
+        "object_id": "4",
+        "object_repr": "pharmaphone19+1ingemedia@gmail.com",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+        "action_time": "2023-05-03T13:49:41.691Z",
+        "user": [
+            "mandatairessm@gmail.com"
+        ],
+        "content_type": [
+            "accounts",
+            "user"
+        ],
+        "object_id": "8",
+        "object_repr": "particulierssm@gmail.com",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+        "action_time": "2023-05-03T13:49:41.694Z",
+        "user": [
+            "mandatairessm@gmail.com"
+        ],
+        "content_type": [
+            "accounts",
+            "user"
+        ],
+        "object_id": "7",
+        "object_repr": "pharmaphone19ingemedia+1@gmail.com",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+        "action_time": "2023-05-03T13:58:14.808Z",
+        "user": [
+            "mandatairessm@gmail.com"
+        ],
+        "content_type": [
+            "accounts",
+            "user"
+        ],
+        "object_id": "9",
+        "object_repr": "mandatairessm+1@gmail.com",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+        "action_time": "2023-05-03T14:02:45.807Z",
+        "user": [
+            "mandatairessm@gmail.com"
+        ],
+        "content_type": [
+            "accounts",
+            "user"
+        ],
+        "object_id": "10",
+        "object_repr": "pharmaphone19ingemedia+1@gmail.com",
+        "action_flag": 3,
+        "change_message": ""
+    }
+}
+]

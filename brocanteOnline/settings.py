@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+import dj_database_url
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,7 +28,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", ".vercel.app"]
 
 
 # Application definition
@@ -100,6 +102,8 @@ DATABASES = {
     }
 }
 
+DATABASES["default"] = dj_database_url.config()
+
 AUTH_USER_MODEL = "accounts.User"
 
 
@@ -140,9 +144,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 # Static files configuration
-STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "static"
+# STATIC_ROOT = BASE_DIR / "static"
 STATICFILES_DIRS = ("brocanteOnline/static",)
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles_build" / "static"
 
 # Media files configuration
 MEDIA_URL = "/media/"
