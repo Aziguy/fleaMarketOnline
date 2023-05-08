@@ -10,7 +10,6 @@ pathspec==0.10.3
 Pillow==9.3.0
 platformdirs==2.6.0
 psycopg2-binary==2.9.6
-pygraphviz==1.10
 python-decouple==3.6
 pytz==2022.7
 simplejson==3.19.1
