@@ -6,7 +6,7 @@
             "use": "@vercel/python",
             "config": {
                 "maxLambdaSize": "15mb",
-                "runtime": "python3.9"
+                "runtime": "vercel-python-gis@1.0.0"
             }
         },
         {
@@ -26,11 +26,5 @@
             "src": "/(.*)",
             "dest": "brocanteOnline/wsgi.py"
         }
-    ],
-    "functions": {
-        "brocanteOnline/wsgi.py": {
-            "runtime": "vercel-python-gis@1.0.0"
-        }
-    }
-
+    ]
 }
