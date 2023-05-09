@@ -177,3 +177,7 @@ DEFAULT_FROM_EMAIL = "fleaMarketOnline <mandatairess@gmail.com>"
 
 # Google config
 GOOGLE_API_KEY = config("GOOGLE_API_KEY")
+
+# IMPORTANT FOR VERCEL
+GDAL_LIBRARY_PATH = "libgdal.so"
+GEOS_LIBRARY_PATH = "libgeos_c.so.1"
