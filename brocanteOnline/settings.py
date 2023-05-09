@@ -102,6 +102,7 @@ DATABASES = {
         "HOST": config("DB_HOST"),
     }
 }
+
 DATABASES["default"] = dj_database_url.config()
 DATABASES["ENGINE"] = "django.contrib.gis.db.backends.postgis"
 
