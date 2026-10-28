@@ -1,0 +1,52 @@
+{% extends "base.html" %}{% load i18n static mall %}
+{% block title %}{{ product.name }}{% endblock %}
+{% block description %}{{ product.description|truncatechars:150 }}{% endblock %}
+{% block content %}
+<div class="container-page py-8">
+  <nav class="text-sm text-stone-500"><a href="{{ product.shop.get_absolute_url }}" class="hover:text-brand-700">{{ product.shop.name }}</a>{% if product.category %} / <a href="{{ product.shop.get_absolute_url }}?rayon={{ product.category.slug }}" class="hover:text-brand-700">{{ product.category.name }}</a>{% endif %}</nav>
+  <div class="mt-4 grid gap-8 lg:grid-cols-2">
+    <div>
+      <div class="card overflow-hidden"><img id="main-image" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/placeholder.svg' %}{% endif %}" alt="{{ product.name }}" class="aspect-square w-full object-cover"></div>
+      {% if product.images.all %}
+      <div class="mt-3 grid grid-cols-5 gap-2">
+        {% if product.image %}<button type="button" onclick="document.getElementById('main-image').src='{{ product.image.url }}'" class="card overflow-hidden"><img src="{{ product.image.url }}" class="aspect-square w-full object-cover" alt=""></button>{% endif %}
+        {% for img in product.images.all %}<button type="button" onclick="document.getElementById('main-image').src='{{ img.image.url }}'" class="card overflow-hidden"><img src="{{ img.image.url }}" class="aspect-square w-full object-cover" alt="" loading="lazy"></button>{% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    <div>
+      <h1 class="text-2xl sm:text-3xl">{{ product.name }}</h1>
+      <div class="mt-4 flex items-baseline gap-3">
+        <p class="text-3xl font-bold text-brand-700">{{ product.price|fcfa }}</p>
+        {% if product.compare_at_price %}<p class="text-lg text-stone-400 line-through">{{ product.compare_at_price|fcfa }}</p><span class="badge bg-sun-500 text-brand-950">-{{ product.discount_percent }}%</span>{% endif %}
+      </div>
+      <p class="mt-2 text-sm">
+        {% if not product.in_stock %}<span class="badge-red">{% translate "Épuisé" %}</span>
+        {% elif product.stock is not None and product.stock <= 5 %}<span class="badge-yellow">{% blocktranslate with n=product.stock %}Plus que {{ n }} en stock{% endblocktranslate %}</span>
+        {% else %}<span class="badge-green">{% translate "Disponible" %}</span>{% endif %}
+      </p>
+      {% if product.in_stock and product.is_available %}
+      <form method="post" action="{% url 'cart:add' product.pk %}" class="mt-6 flex gap-3" hx-post="{% url 'cart:add' product.pk %}" hx-target="#cart-counter" hx-swap="outerHTML">
+        {% csrf_token %}
+        <input type="number" name="quantity" value="1" min="1" max="{{ product.max_quantity }}" class="input w-24" aria-label="{% translate 'Quantité' %}">
+        <button class="btn-primary flex-1 sm:flex-none">{% include "icons/bag.html" %} {% translate "Ajouter au panier" %}</button>
+      </form>
+      {% if in_cart %}<p class="mt-2 text-sm text-stone-500">{% blocktranslate with n=in_cart %}Déjà {{ n }} dans votre panier.{% endblocktranslate %} <a href="{% url 'cart:detail' %}" class="text-brand-700 hover:underline">{% translate "Voir le panier" %}</a></p>{% endif %}
+      {% endif %}
+      <a href="{% whatsapp product.shop.contact_whatsapp product.name %}" target="_blank" rel="noopener" class="btn-whatsapp mt-3 w-full sm:w-auto">{% include "icons/whatsapp.html" %} {% translate "Poser une question" %}</a>
+      {% if product.description %}<div class="mt-8"><h2 class="font-semibold">{% translate "Description" %}</h2><p class="mt-2 whitespace-pre-line text-sm text-stone-600">{{ product.description }}</p></div>{% endif %}
+      <a href="{{ product.shop.get_absolute_url }}" class="card mt-8 flex items-center gap-3 p-4 hover:border-brand-300">
+        <span class="text-2xl">{{ product.shop.shop_type.icon }}</span>
+        <span class="flex-1"><span class="block font-semibold">{{ product.shop.name }}</span><span class="block text-xs text-stone-500">{{ product.shop.location_label }}</span></span>
+        <span class="text-sm font-semibold text-brand-700">{% translate "Voir la boutique" %} →</span>
+      </a>
+    </div>
+  </div>
+  {% if related %}
+  <section class="mt-14">
+    <h2 class="section-title">{% translate "Dans la même boutique" %}</h2>
+    <div class="mt-4 grid grid-cols-2 gap-4 md:grid-cols-4">{% for product in related %}{% include "includes/product_card.html" with show_shop=False %}{% endfor %}</div>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}
