@@ -1,0 +1,36 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% translate "Comment ça marche" %}{% endblock %}
+{% block content %}
+<div class="container-page max-w-3xl py-10">
+  <h1 class="text-3xl">{% translate "Comment ça marche" %}</h1>
+  <p class="mt-3 text-stone-600">{% translate "Mfoundi Mall en ligne vous permet de voir les produits et services des boutiques du mall, de commander ou réserver, puis de payer sur place." %}</p>
+
+  <div class="mt-8 space-y-4">
+    <div class="card card-body">
+      <h2 class="text-lg">🛒 {% translate "Commander des produits" %}</h2>
+      <ol class="mt-3 list-decimal space-y-1 pl-5 text-sm text-stone-600">
+        <li>{% translate "Ajoutez des articles au panier. Le panier est séparé par boutique." %}</li>
+        <li>{% translate "Validez la commande d'une boutique : retrait en boutique ou livraison, et moyen de paiement prévu." %}</li>
+        <li>{% translate "La boutique confirme puis prépare votre commande. Suivez son statut dans « Mes commandes »." %}</li>
+        <li>{% translate "Au retrait, donnez votre code de retrait à 6 chiffres et payez sur place." %}</li>
+      </ol>
+    </div>
+    <div class="card card-body">
+      <h2 class="text-lg">💵 {% translate "Payer" %}</h2>
+      <p class="mt-2 text-sm text-stone-600">{% translate "Aucun paiement n'est demandé en ligne. Vous payez devant le commerçant ou le livreur :" %}</p>
+      <ul class="mt-2 list-disc space-y-1 pl-5 text-sm text-stone-600">
+        <li>{% translate "en espèces ;" %}</li>
+        <li>{% translate "par MTN Mobile Money ou Orange Money, en transférant au numéro affiché par la boutique, devant le commerçant." %}</li>
+      </ul>
+    </div>
+    <div class="card card-body">
+      <h2 class="text-lg">📅 {% translate "Réserver un service" %}</h2>
+      <p class="mt-2 text-sm text-stone-600">{% translate "Salons de coiffure : prenez rendez-vous pour une prestation. Restaurants et bars : réservez une table. La boutique confirme ou propose un autre créneau." %}</p>
+    </div>
+    <div class="card card-body">
+      <h2 class="text-lg">💬 WhatsApp</h2>
+      <p class="mt-2 text-sm text-stone-600">{% translate "Chaque boutique peut être contactée sur WhatsApp. Depuis le panier, envoyez votre liste d'articles pré-remplie en un clic." %}</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

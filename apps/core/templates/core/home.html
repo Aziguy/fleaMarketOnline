@@ -1,0 +1,78 @@
+{% extends "base.html" %}{% load i18n static %}
+{% block title %}{% translate "Le mall en ligne" %}{% endblock %}
+{% block content %}
+<section class="relative overflow-hidden bg-gradient-to-br from-brand-700 via-brand-600 to-brand-800 text-white">
+  <div class="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-brand-500/40 blur-3xl"></div>
+  <div class="absolute -bottom-32 left-10 h-72 w-72 rounded-full bg-sun-500/20 blur-3xl"></div>
+  <div class="container-page relative py-14 sm:py-20">
+    <p class="badge bg-white/15 text-brand-50">📍 {% translate "Mfoundi Mall, Yaoundé" %}</p>
+    <h1 class="mt-4 max-w-2xl text-3xl font-bold leading-tight text-white sm:text-5xl">{% translate "Toutes les boutiques du mall, en ligne." %}</h1>
+    <p class="mt-4 max-w-xl text-brand-50/90 sm:text-lg">{% translate "Commandez, réservez, puis payez sur place en espèces, MTN MoMo ou Orange Money. Retrait en boutique ou livraison." %}</p>
+    <form action="{% url 'core:search' %}" class="mt-8 flex max-w-xl gap-2 rounded-2xl bg-white p-2 shadow-lg">
+      <input type="search" name="q" required minlength="2" placeholder="{% translate 'Riz, téléphone, parfum, coiffure...' %}" class="flex-1 rounded-xl border-0 text-stone-800 focus:ring-0">
+      <button class="btn-primary">{% include "icons/search.html" %}<span class="hidden sm:inline">{% translate "Rechercher" %}</span></button>
+    </form>
+  </div>
+</section>
+
+<section class="container-page mt-10">
+  <h2 class="section-title">{% translate "Parcourir par type de boutique" %}</h2>
+  <div class="mt-5 grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-8">
+    {% for type in shop_types %}
+      <a href="{% url 'shops:list' %}?type={{ type.slug }}" class="card flex flex-col items-center gap-2 p-3 text-center hover:border-brand-300 hover:bg-brand-50">
+        <span class="text-3xl">{{ type.icon }}</span>
+        <span class="text-xs font-medium leading-tight">{{ type.label }}</span>
+        {% if type.n %}<span class="text-[11px] text-stone-400">{{ type.n }}</span>{% endif %}
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+{% if featured_shops %}
+<section class="container-page mt-12">
+  <div class="flex items-end justify-between">
+    <h2 class="section-title">{% translate "Boutiques du mall" %}</h2>
+    <a href="{% url 'shops:list' %}" class="text-sm font-semibold text-brand-700 hover:underline">{% translate "Tout voir" %}</a>
+  </div>
+  <div class="mt-5 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+    {% for shop in featured_shops %}{% include "includes/shop_card.html" %}{% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if deals %}
+<section class="container-page mt-12">
+  <h2 class="section-title">{% translate "Promotions" %}</h2>
+  <div class="mt-5 grid grid-cols-2 gap-4 md:grid-cols-4">
+    {% for product in deals %}{% include "includes/product_card.html" %}{% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if latest_products %}
+<section class="container-page mt-12">
+  <h2 class="section-title">{% translate "Nouveautés" %}</h2>
+  <div class="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+    {% for product in latest_products %}{% include "includes/product_card.html" %}{% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<section class="container-page mt-16">
+  <div class="grid gap-4 md:grid-cols-3">
+    <div class="card card-body"><p class="text-3xl">🛍️</p><h3 class="mt-3 font-semibold">{% translate "1. Choisissez" %}</h3><p class="mt-1 text-sm text-stone-500">{% translate "Ajoutez au panier les articles de une ou plusieurs boutiques, ou réservez un service." %}</p></div>
+    <div class="card card-body"><p class="text-3xl">✅</p><h3 class="mt-3 font-semibold">{% translate "2. La boutique confirme" %}</h3><p class="mt-1 text-sm text-stone-500">{% translate "Vous recevez une référence et un code de retrait. Vous pouvez aussi écrire à la boutique sur WhatsApp." %}</p></div>
+    <div class="card card-body"><p class="text-3xl">💵</p><h3 class="mt-3 font-semibold">{% translate "3. Payez sur place" %}</h3><p class="mt-1 text-sm text-stone-500">{% translate "En espèces, MTN MoMo ou Orange Money, au retrait en boutique ou à la livraison." %}</p></div>
+  </div>
+</section>
+
+<section class="container-page mt-16">
+  <div class="flex flex-col items-start gap-6 rounded-3xl bg-brand-950 p-8 text-white sm:flex-row sm:items-center sm:justify-between sm:p-10">
+    <div>
+      <h2 class="text-2xl font-bold text-white">{% translate "Vous avez une boutique au Mfoundi Mall ?" %}</h2>
+      <p class="mt-2 text-brand-200">{% translate "Créez votre vitrine en ligne gratuitement et recevez des commandes." %}</p>
+    </div>
+    <a href="{% url 'core:merchants' %}" class="btn bg-sun-500 text-brand-950 hover:bg-sun-400">{% translate "Ouvrir ma boutique" %}</a>
+  </div>
+</section>
+{% endblock %}

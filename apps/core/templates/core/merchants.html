@@ -1,0 +1,35 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% translate "Vendre au mall" %}{% endblock %}
+{% block content %}
+<section class="bg-brand-50">
+  <div class="container-page grid gap-10 py-14 lg:grid-cols-2 lg:items-center">
+    <div>
+      <h1 class="text-3xl sm:text-4xl">{% translate "Votre boutique du Mfoundi Mall, visible en ligne." %}</h1>
+      <p class="mt-4 text-stone-600">{% translate "Épicerie, téléphonie, coiffure, restaurant, bar, parfumerie, électroménager... Créez votre vitrine, publiez vos produits et services, recevez commandes et réservations." %}</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        {% if user.is_authenticated %}
+          <a href="{% url 'shops:open' %}" class="btn-primary">{% translate "Créer ma boutique" %}</a>
+        {% else %}
+          <a href="{% url 'accounts:signup' %}?next={% url 'shops:open' %}" class="btn-primary">{% translate "Créer mon compte commerçant" %}</a>
+          <a href="{% url 'accounts:login' %}?next={% url 'shops:open' %}" class="btn-secondary">{% translate "J'ai déjà un compte" %}</a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="grid gap-3 sm:grid-cols-2">
+      <div class="card card-body"><p class="text-2xl">🏪</p><h3 class="mt-2 font-semibold">{% translate "Vitrine en ligne" %}</h3><p class="mt-1 text-sm text-stone-500">{% translate "Logo, photos, emplacement dans le mall, horaires, contacts." %}</p></div>
+      <div class="card card-body"><p class="text-2xl">📦</p><h3 class="mt-2 font-semibold">{% translate "Catalogue" %}</h3><p class="mt-1 text-sm text-stone-500">{% translate "Produits en FCFA, rayons, stock, promotions." %}</p></div>
+      <div class="card card-body"><p class="text-2xl">🧾</p><h3 class="mt-2 font-semibold">{% translate "Commandes" %}</h3><p class="mt-1 text-sm text-stone-500">{% translate "Retrait avec code ou livraison, paiement sur place." %}</p></div>
+      <div class="card card-body"><p class="text-2xl">📅</p><h3 class="mt-2 font-semibold">{% translate "Réservations" %}</h3><p class="mt-1 text-sm text-stone-500">{% translate "Rendez-vous et tables pour salons, restaurants et bars." %}</p></div>
+    </div>
+  </div>
+</section>
+<section class="container-page max-w-3xl py-12">
+  <h2 class="section-title">{% translate "Les étapes" %}</h2>
+  <ol class="mt-4 space-y-3 text-sm text-stone-600">
+    <li class="card card-body">1. {% translate "Créez votre compte avec votre numéro de téléphone." %}</li>
+    <li class="card card-body">2. {% translate "Renseignez votre boutique : type, niveau et numéro de local dans le mall." %}</li>
+    <li class="card card-body">3. {% translate "L'administration du mall vérifie et valide votre boutique." %}</li>
+    <li class="card card-body">4. {% translate "Ajoutez vos produits et services, indiquez vos numéros MoMo / Orange Money, et c'est parti." %}</li>
+  </ol>
+</section>
+{% endblock %}
