@@ -45,3 +45,9 @@ def test_search_hides_pending_shops(client, product):
     product.shop.save()
     response = client.get("/recherche/", {"q": "riz"})
     assert list(response.context["products"]) == []
+
+
+def test_english_translation(client, db):
+    client.cookies["django_language"] = "en"
+    content = client.get("/").content.decode()
+    assert "Every shop in the mall, online." in content

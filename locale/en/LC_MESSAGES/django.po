@@ -1,0 +1,1612 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-28 14:54+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Identité"
+msgstr "Identity"
+
+msgid "Droits"
+msgstr "Permissions"
+
+msgid "Dates"
+msgstr "Dates"
+
+msgid "Comptes"
+msgstr "Accounts"
+
+msgid "Téléphone"
+msgstr "Phone"
+
+msgid "Facultatif. Utile pour récupérer votre mot de passe."
+msgstr "Optional. Useful to recover your password."
+
+msgid "Ce numéro est déjà utilisé."
+msgstr "This number is already in use."
+
+msgid "Cet e-mail est déjà utilisé."
+msgstr "This email is already in use."
+
+msgid "Téléphone ou e-mail"
+msgstr "Phone or email"
+
+msgid "Identifiants incorrects."
+msgstr "Incorrect credentials."
+
+msgid "Ce compte est désactivé."
+msgstr "This account is disabled."
+
+msgid "Client"
+msgstr "Customer"
+
+msgid "Commerçant"
+msgstr "Merchant"
+
+msgid "Administrateur du mall"
+msgstr "Mall administrator"
+
+msgid "prénom"
+msgstr "first name"
+
+msgid "nom"
+msgstr "name"
+
+msgid "téléphone"
+msgstr "phone"
+
+msgid "e-mail"
+msgstr "email"
+
+msgid "rôle"
+msgstr "role"
+
+msgid "actif"
+msgstr "active"
+
+msgid "accès administration"
+msgstr "admin access"
+
+msgid "inscrit le"
+msgstr "joined on"
+
+msgid "utilisateur"
+msgstr "user"
+
+msgid "utilisateurs"
+msgstr "users"
+
+msgid "Mes commandes"
+msgstr "My orders"
+
+msgid "Mes réservations"
+msgstr "My bookings"
+
+msgid "Mon profil"
+msgstr "My profile"
+
+msgid "Mot de passe"
+msgstr "Password"
+
+msgid "Espace boutique"
+msgstr "Shop dashboard"
+
+msgid "Ouvrir ma boutique"
+msgstr "Open my shop"
+
+msgid "Bonjour,"
+msgstr "Hello,"
+
+msgid "Pour choisir un nouveau mot de passe, ouvrez ce lien :"
+msgstr "To choose a new password, open this link:"
+
+msgid "Si vous n'êtes pas à l'origine de cette demande, ignorez ce message."
+msgstr "If you did not make this request, please ignore this message."
+
+msgid "Réinitialisation de votre mot de passe Mfoundi Mall"
+msgstr "Reset your Mfoundi Mall password"
+
+msgid "Connexion"
+msgstr "Log in"
+
+msgid "Mot de passe oublié ?"
+msgstr "Forgot password?"
+
+msgid "Se connecter"
+msgstr "Log in"
+
+msgid "Pas encore de compte ?"
+msgstr "No account yet?"
+
+msgid "Créer un compte"
+msgstr "Create an account"
+
+msgid "Changer de mot de passe"
+msgstr "Change password"
+
+msgid "Changer le mot de passe"
+msgstr "Change password"
+
+msgid "Mot de passe oublié"
+msgstr "Forgot password"
+
+msgid ""
+"Saisissez l'e-mail de votre compte pour recevoir un lien. Sans e-mail "
+"enregistré, contactez l'administration du mall."
+msgstr ""
+"Enter your account email to receive a link. Without a registered email, "
+"contact the mall administration."
+
+msgid "Envoyer le lien"
+msgstr "Send link"
+
+msgid "Nouveau mot de passe"
+msgstr "New password"
+
+msgid "Enregistrer"
+msgstr "Save"
+
+msgid "Ce lien n'est plus valide. Faites une nouvelle demande."
+msgstr "This link is no longer valid. Please make a new request."
+
+msgid "Nouvelle demande"
+msgstr "New request"
+
+msgid "E-mail envoyé"
+msgstr "Email sent"
+
+msgid "Vérifiez vos e-mails"
+msgstr "Check your email"
+
+msgid ""
+"Si un compte correspond à cet e-mail, un lien de réinitialisation vient "
+"d'être envoyé."
+msgstr "If an account matches this email, a reset link has been sent."
+
+msgid "Un seul compte pour acheter et pour gérer votre boutique."
+msgstr "One account to shop and to manage your store."
+
+msgid "Créer mon compte"
+msgstr "Create my account"
+
+msgid "Déjà inscrit ?"
+msgstr "Already registered?"
+
+#, python-format
+msgid "Bienvenue %(name)s, votre compte est créé."
+msgstr "Welcome %(name)s, your account has been created."
+
+msgid "Profil mis à jour."
+msgstr "Profile updated."
+
+msgid "Mot de passe modifié."
+msgstr "Password changed."
+
+msgid "Mot de passe réinitialisé. Vous pouvez vous connecter."
+msgstr "Password reset. You can now log in."
+
+msgid "Réservations"
+msgstr "Bookings"
+
+msgid "Choisissez une prestation."
+msgstr "Choose a service."
+
+#, python-format
+msgid "Entre 1 et %(max)s personnes."
+msgstr "Between 1 and %(max)s people."
+
+msgid "Choisissez un créneau au moins 30 minutes à l'avance."
+msgstr "Choose a slot at least 30 minutes in advance."
+
+#, python-format
+msgid "Réservation possible jusqu'à %(n)s jours."
+msgstr "Bookings are possible up to %(n)s days ahead."
+
+msgid "La boutique est fermée à ce moment."
+msgstr "The shop is closed at that time."
+
+msgid "Message au client"
+msgstr "Message to the customer"
+
+msgid "Rendez-vous"
+msgstr "Appointment"
+
+msgid "Réservation de table"
+msgstr "Table booking"
+
+msgid "En attente"
+msgstr "Pending"
+
+msgid "Confirmée"
+msgstr "Confirmed"
+
+msgid "Refusée"
+msgstr "Declined"
+
+msgid "Annulée"
+msgstr "Cancelled"
+
+msgid "Honorée"
+msgstr "Completed"
+
+msgid "Absent"
+msgstr "No-show"
+
+msgid "référence"
+msgstr "reference"
+
+msgid "client"
+msgstr "customer"
+
+msgid "type"
+msgstr "type"
+
+msgid "prestation"
+msgstr "service"
+
+msgid "date"
+msgstr "date"
+
+msgid "heure"
+msgstr "time"
+
+msgid "nombre de personnes"
+msgstr "number of people"
+
+msgid "message"
+msgstr "message"
+
+msgid "statut"
+msgstr "status"
+
+msgid "réponse de la boutique"
+msgstr "shop reply"
+
+msgid "créée le"
+msgstr "created on"
+
+msgid "réservation"
+msgstr "booking"
+
+msgid "réservations"
+msgstr "bookings"
+
+msgid "Réserver"
+msgstr "Book"
+
+msgid "Réservation"
+msgstr "Booking"
+
+msgid ""
+"Votre demande est envoyée à la boutique, qui la confirme. Le paiement se "
+"fait sur place."
+msgstr ""
+"Your request is sent to the shop, which confirms it. Payment is made on "
+"site."
+
+msgid "Envoyer la demande"
+msgstr "Send request"
+
+msgid "Boutique"
+msgstr "Shop"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Prestation"
+msgstr "Service"
+
+msgid "Personnes"
+msgstr "People"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Votre message"
+msgstr "Your message"
+
+msgid "Réponse de la boutique"
+msgstr "Shop reply"
+
+msgid "Annuler cette réservation ?"
+msgstr "Cancel this booking?"
+
+msgid "Annuler"
+msgstr "Cancel"
+
+msgid "Aucune réservation"
+msgstr "No bookings"
+
+msgid ""
+"Réservez un rendez-vous dans un salon ou une table dans un restaurant du "
+"mall."
+msgstr ""
+"Book an appointment at a salon or a table at a restaurant in the mall."
+
+msgid "Demande de réservation envoyée. La boutique va la confirmer."
+msgstr "Booking request sent. The shop will confirm it."
+
+msgid "Réservation annulée."
+msgstr "Booking cancelled."
+
+msgid "Cette réservation ne peut plus être annulée."
+msgstr "This booking can no longer be cancelled."
+
+msgid "Panier"
+msgstr "Cart"
+
+#, python-format
+msgid "Bonjour %(shop)s, je souhaite commander :"
+msgstr "Hello %(shop)s, I would like to order:"
+
+#, python-format
+msgid "Total : %(total)s"
+msgstr "Total: %(total)s"
+
+msgid "Quantité"
+msgstr "Quantity"
+
+msgid "Retirer"
+msgstr "Remove"
+
+msgid "Sous-total"
+msgstr "Subtotal"
+
+msgid "Commander sur WhatsApp"
+msgstr "Order on WhatsApp"
+
+msgid "Valider cette commande"
+msgstr "Check out this order"
+
+msgid "Votre panier est vide"
+msgstr "Your cart is empty"
+
+msgid "Parcourez les boutiques du mall et ajoutez vos articles."
+msgstr "Browse the mall's shops and add your items."
+
+msgid "Voir les boutiques"
+msgstr "See the shops"
+
+msgid "Mon panier"
+msgstr "My cart"
+
+msgid ""
+"Chaque boutique traite sa commande séparément. Validez boutique par "
+"boutique."
+msgstr "Each shop handles its own order. Check out shop by shop."
+
+msgid "Ajouté au panier"
+msgstr "Added to cart"
+
+msgid "Produit épuisé"
+msgstr "Out of stock"
+
+msgid "Catalogue"
+msgstr "Catalog"
+
+msgid "ordre"
+msgstr "order"
+
+msgid "rayon"
+msgstr "aisle"
+
+msgid "rayons"
+msgstr "aisles"
+
+msgid "description"
+msgstr "description"
+
+msgid "prix (FCFA)"
+msgstr "price (FCFA)"
+
+msgid "ancien prix (FCFA)"
+msgstr "former price (FCFA)"
+
+msgid "Affiché barré pour une promotion."
+msgstr "Shown struck through for a promotion."
+
+msgid "stock"
+msgstr "stock"
+
+msgid "Laisser vide si le stock n'est pas suivi."
+msgstr "Leave empty if stock is not tracked."
+
+msgid "photo principale"
+msgstr "main photo"
+
+msgid "en ligne"
+msgstr "online"
+
+msgid "produit"
+msgstr "product"
+
+msgid "produits"
+msgstr "products"
+
+msgid "photo"
+msgstr "photo"
+
+msgid "photos"
+msgstr "photos"
+
+msgid "Vide = sur devis."
+msgstr "Empty = on quote."
+
+msgid "durée (minutes)"
+msgstr "duration (minutes)"
+
+msgid "prestations"
+msgstr "services"
+
+msgid "Épuisé"
+msgstr "Sold out"
+
+#, python-format
+msgid "Plus que %(n)s en stock"
+msgstr "Only %(n)s left in stock"
+
+msgid "Disponible"
+msgstr "Available"
+
+msgid "Ajouter au panier"
+msgstr "Add to cart"
+
+#, python-format
+msgid "Déjà %(n)s dans votre panier."
+msgstr "Already %(n)s in your cart."
+
+msgid "Voir le panier"
+msgstr "View cart"
+
+msgid "Poser une question"
+msgstr "Ask a question"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Voir la boutique"
+msgstr "Visit shop"
+
+msgid "Dans la même boutique"
+msgstr "From the same shop"
+
+msgid "Général"
+msgstr "General"
+
+msgid "Numéro invalide. Exemple : 6 77 12 34 56."
+msgstr "Invalid number. Example: 6 77 12 34 56."
+
+msgid "Aucun résultat"
+msgstr "No results"
+
+msgid "Voir tous les résultats"
+msgstr "See all results"
+
+msgid "Le mall en ligne"
+msgstr "The mall online"
+
+msgid "Mfoundi Mall, Yaoundé"
+msgstr "Mfoundi Mall, Yaoundé"
+
+msgid "Toutes les boutiques du mall, en ligne."
+msgstr "Every shop in the mall, online."
+
+msgid ""
+"Commandez, réservez, puis payez sur place en espèces, MTN MoMo ou Orange "
+"Money. Retrait en boutique ou livraison."
+msgstr ""
+"Order, book, then pay on site in cash, MTN MoMo or Orange Money. In-store "
+"pickup or delivery."
+
+msgid "Riz, téléphone, parfum, coiffure..."
+msgstr "Rice, phone, perfume, hairdresser..."
+
+msgid "Rechercher"
+msgstr "Search"
+
+msgid "Parcourir par type de boutique"
+msgstr "Browse by shop type"
+
+msgid "Boutiques du mall"
+msgstr "Mall shops"
+
+msgid "Tout voir"
+msgstr "See all"
+
+msgid "Promotions"
+msgstr "Deals"
+
+msgid "Nouveautés"
+msgstr "New arrivals"
+
+msgid "1. Choisissez"
+msgstr "1. Choose"
+
+msgid ""
+"Ajoutez au panier les articles de une ou plusieurs boutiques, ou réservez un"
+" service."
+msgstr "Add items from one or more shops to your cart, or book a service."
+
+msgid "2. La boutique confirme"
+msgstr "2. The shop confirms"
+
+msgid ""
+"Vous recevez une référence et un code de retrait. Vous pouvez aussi écrire à"
+" la boutique sur WhatsApp."
+msgstr ""
+"You get a reference and a pickup code. You can also message the shop on "
+"WhatsApp."
+
+msgid "3. Payez sur place"
+msgstr "3. Pay on site"
+
+msgid ""
+"En espèces, MTN MoMo ou Orange Money, au retrait en boutique ou à la "
+"livraison."
+msgstr "In cash, MTN MoMo or Orange Money, at in-store pickup or on delivery."
+
+msgid "Vous avez une boutique au Mfoundi Mall ?"
+msgstr "Do you have a shop at Mfoundi Mall?"
+
+msgid "Créez votre vitrine en ligne gratuitement et recevez des commandes."
+msgstr "Create your online storefront for free and receive orders."
+
+msgid "Comment ça marche"
+msgstr "How it works"
+
+msgid ""
+"Mfoundi Mall en ligne vous permet de voir les produits et services des "
+"boutiques du mall, de commander ou réserver, puis de payer sur place."
+msgstr ""
+"Mfoundi Mall online lets you see the products and services of the mall's "
+"shops, order or book, then pay on site."
+
+msgid "Commander des produits"
+msgstr "Ordering products"
+
+msgid "Ajoutez des articles au panier. Le panier est séparé par boutique."
+msgstr "Add items to your cart. The cart is split by shop."
+
+msgid ""
+"Validez la commande d'une boutique : retrait en boutique ou livraison, et "
+"moyen de paiement prévu."
+msgstr ""
+"Check out a shop's order: in-store pickup or delivery, and planned payment "
+"method."
+
+msgid ""
+"La boutique confirme puis prépare votre commande. Suivez son statut dans « "
+"Mes commandes »."
+msgstr ""
+"The shop confirms then prepares your order. Track its status in “My orders”."
+
+msgid ""
+"Au retrait, donnez votre code de retrait à 6 chiffres et payez sur place."
+msgstr "At pickup, give your 6-digit pickup code and pay on site."
+
+msgid "Payer"
+msgstr "Paying"
+
+msgid ""
+"Aucun paiement n'est demandé en ligne. Vous payez devant le commerçant ou le"
+" livreur :"
+msgstr ""
+"No online payment is required. You pay in front of the merchant or the "
+"delivery person:"
+
+msgid "en espèces ;"
+msgstr "in cash;"
+
+msgid ""
+"par MTN Mobile Money ou Orange Money, en transférant au numéro affiché par "
+"la boutique, devant le commerçant."
+msgstr ""
+"by MTN Mobile Money or Orange Money, transferring to the number shown by the"
+" shop, in front of the merchant."
+
+msgid "Réserver un service"
+msgstr "Booking a service"
+
+msgid ""
+"Salons de coiffure : prenez rendez-vous pour une prestation. Restaurants et "
+"bars : réservez une table. La boutique confirme ou propose un autre créneau."
+msgstr ""
+"Hair salons: book an appointment for a service. Restaurants and bars: book a"
+" table. The shop confirms or suggests another slot."
+
+msgid ""
+"Chaque boutique peut être contactée sur WhatsApp. Depuis le panier, envoyez "
+"votre liste d'articles pré-remplie en un clic."
+msgstr ""
+"Every shop can be contacted on WhatsApp. From the cart, send your pre-filled"
+" item list in one click."
+
+msgid "Vendre au mall"
+msgstr "Sell at the mall"
+
+msgid "Votre boutique du Mfoundi Mall, visible en ligne."
+msgstr "Your Mfoundi Mall shop, visible online."
+
+msgid ""
+"Épicerie, téléphonie, coiffure, restaurant, bar, parfumerie, "
+"électroménager... Créez votre vitrine, publiez vos produits et services, "
+"recevez commandes et réservations."
+msgstr ""
+"Grocery, phones, hairdressing, restaurant, bar, perfumery, appliances... "
+"Create your storefront, publish your products and services, receive orders "
+"and bookings."
+
+msgid "Créer ma boutique"
+msgstr "Create my shop"
+
+msgid "Créer mon compte commerçant"
+msgstr "Create my merchant account"
+
+msgid "J'ai déjà un compte"
+msgstr "I already have an account"
+
+msgid "Vitrine en ligne"
+msgstr "Online storefront"
+
+msgid "Logo, photos, emplacement dans le mall, horaires, contacts."
+msgstr "Logo, photos, location in the mall, opening hours, contacts."
+
+msgid "Produits en FCFA, rayons, stock, promotions."
+msgstr "Products in FCFA, aisles, stock, deals."
+
+msgid "Commandes"
+msgstr "Orders"
+
+msgid "Retrait avec code ou livraison, paiement sur place."
+msgstr "Pickup with code or delivery, payment on site."
+
+msgid "Rendez-vous et tables pour salons, restaurants et bars."
+msgstr "Appointments and tables for salons, restaurants and bars."
+
+msgid "Les étapes"
+msgstr "The steps"
+
+msgid "Créez votre compte avec votre numéro de téléphone."
+msgstr "Create your account with your phone number."
+
+msgid ""
+"Renseignez votre boutique : type, niveau et numéro de local dans le mall."
+msgstr "Fill in your shop details: type, floor and unit number in the mall."
+
+msgid "L'administration du mall vérifie et valide votre boutique."
+msgstr "The mall administration checks and approves your shop."
+
+msgid ""
+"Ajoutez vos produits et services, indiquez vos numéros MoMo / Orange Money, "
+"et c'est parti."
+msgstr ""
+"Add your products and services, enter your MoMo / Orange Money numbers, and "
+"you are live."
+
+msgid "Recherche"
+msgstr "Search"
+
+msgid "Rechercher un produit, une boutique..."
+msgstr "Search for a product, a shop..."
+
+msgid "Boutiques"
+msgstr "Shops"
+
+#, python-format
+msgid "%(n)s produit pour « %(q)s »"
+msgid_plural "%(n)s produits pour « %(q)s »"
+msgstr[0] "%(n)s product for “%(q)s”"
+msgstr[1] "%(n)s products for “%(q)s”"
+
+msgid "Aucun produit trouvé"
+msgstr "No products found"
+
+msgid "Essayez un autre mot ou parcourez les boutiques."
+msgstr "Try another word or browse the shops."
+
+msgid "L'ancien prix doit être supérieur au prix."
+msgstr "The former price must be higher than the price."
+
+msgid "Message au client (facultatif)"
+msgstr "Message to the customer (optional)"
+
+msgid "Confirmer"
+msgstr "Confirm"
+
+msgid "Refuser"
+msgstr "Decline"
+
+msgid ""
+"Votre boutique est en attente de validation par l'administration du mall. "
+"Préparez votre catalogue en attendant."
+msgstr ""
+"Your shop is awaiting approval by the mall administration. Prepare your "
+"catalog in the meantime."
+
+msgid ""
+"Votre boutique est suspendue et n'est plus visible. Contactez "
+"l'administration du mall."
+msgstr ""
+"Your shop is suspended and no longer visible. Contact the mall "
+"administration."
+
+msgid "Voir ma vitrine"
+msgstr "View my storefront"
+
+msgid "Tableau de bord"
+msgstr "Dashboard"
+
+msgid "Produits"
+msgstr "Products"
+
+msgid "Rayons"
+msgstr "Aisles"
+
+msgid "Prestations"
+msgstr "Services"
+
+msgid "Informations & paiement"
+msgstr "Details & payment"
+
+msgid "Horaires"
+msgstr "Opening hours"
+
+msgid "Statut"
+msgstr "Status"
+
+#, python-format
+msgid "Payée par %(method)s le %(date)s"
+msgstr "Paid by %(method)s on %(date)s"
+
+msgid "Remise et encaissement"
+msgstr "Handover and payment"
+
+msgid "Marquer remise et payée"
+msgstr "Mark as handed over and paid"
+
+msgid "Annuler cette commande ?"
+msgstr "Cancel this order?"
+
+msgid "Annuler la commande"
+msgstr "Cancel order"
+
+msgid "Confirmer la commande"
+msgstr "Confirm order"
+
+msgid "Prête : prévenir le client"
+msgstr "Ready: notify the customer"
+
+msgid "Partie en livraison"
+msgstr "Out for delivery"
+
+msgid "Commande clôturée."
+msgstr "Order closed."
+
+msgid "En ligne"
+msgstr "Online"
+
+msgid "Hors ligne"
+msgstr "Offline"
+
+msgid "Modifier"
+msgstr "Edit"
+
+msgid "À venir"
+msgstr "Upcoming"
+
+msgid "Passées"
+msgstr "Past"
+
+msgid "Tous les statuts"
+msgstr "All statuses"
+
+msgid "Organisez vos produits : Boissons, Smartphones, Soins visage..."
+msgstr "Organise your products: Drinks, Smartphones, Skincare..."
+
+msgid "Supprimer ce rayon ?"
+msgstr "Delete this aisle?"
+
+msgid "Supprimer"
+msgstr "Delete"
+
+msgid "Aucun rayon."
+msgstr "No aisles."
+
+msgid "Nouveau rayon"
+msgstr "New aisle"
+
+msgid "Ajouter"
+msgstr "Add"
+
+msgid "Modifier le rayon"
+msgstr "Edit aisle"
+
+#, python-format
+msgid "Bonjour %(name)s"
+msgstr "Hello %(name)s"
+
+msgid "À confirmer"
+msgstr "To confirm"
+
+msgid "Commandes en cours"
+msgstr "Open orders"
+
+msgid "Encaissé ce mois"
+msgstr "Collected this month"
+
+msgid "Pour bien démarrer"
+msgstr "Getting started"
+
+msgid "Complétez vos informations et vos numéros Mobile Money"
+msgstr "Complete your details and Mobile Money numbers"
+
+msgid "Vérifiez vos horaires"
+msgstr "Check your opening hours"
+
+msgid "Créez vos rayons"
+msgstr "Create your aisles"
+
+msgid "Ajoutez vos premiers produits"
+msgstr "Add your first products"
+
+msgid "Dernières commandes"
+msgstr "Latest orders"
+
+msgid "Aucune commande pour l'instant."
+msgstr "No orders yet."
+
+msgid "Réservations à venir (7 jours)"
+msgstr "Upcoming bookings (7 days)"
+
+msgid "Stock faible"
+msgstr "Low stock"
+
+msgid "Horaires d'ouverture"
+msgstr "Opening hours"
+
+msgid "Utilisés pour afficher « Ouvert / Fermé » et valider les réservations."
+msgstr "Used to show “Open / Closed” and to validate bookings."
+
+msgid "Fermé"
+msgstr "Closed"
+
+msgid "Commande"
+msgstr "Order"
+
+msgid "Livraison"
+msgstr "Delivery"
+
+msgid "À encaisser"
+msgstr "To collect"
+
+msgid "Le client vient en boutique"
+msgstr "The customer comes to the shop"
+
+msgid "Paiement prévu"
+msgstr "Planned payment"
+
+msgid "Note du client"
+msgstr "Customer note"
+
+msgid "En cours"
+msgstr "Open"
+
+msgid "Toutes"
+msgstr "All"
+
+msgid "Référence, nom, téléphone"
+msgstr "Reference, name, phone"
+
+msgid "Réf."
+msgstr "Ref."
+
+msgid "Remise"
+msgstr "Handover"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "Aucune commande."
+msgstr "No orders."
+
+msgid "Nouveau produit"
+msgstr "New product"
+
+msgid "Modifier le produit"
+msgstr "Edit product"
+
+msgid "Photos supplémentaires"
+msgstr "Additional photos"
+
+msgid "Supprimer définitivement ce produit ?"
+msgstr "Permanently delete this product?"
+
+msgid "Supprimer ce produit"
+msgstr "Delete this product"
+
+msgid "Tous"
+msgstr "All"
+
+msgid "Produit"
+msgstr "Product"
+
+msgid "Prix"
+msgstr "Price"
+
+msgid "Stock"
+msgstr "Stock"
+
+msgid "Aucun produit."
+msgstr "No products."
+
+msgid "Modifier la prestation"
+msgstr "Edit service"
+
+msgid "Nouvelle prestation"
+msgstr "New service"
+
+msgid "Supprimer cette prestation ?"
+msgstr "Delete this service?"
+
+msgid "Coupe, tresses, soin, menu, formule... affichés sur votre vitrine."
+msgstr ""
+"Haircut, braids, treatment, menu, set meal... shown on your storefront."
+
+msgid "Sur devis"
+msgstr "On quote"
+
+msgid "Aucune prestation."
+msgstr "No services."
+
+msgid "Vitrine"
+msgstr "Storefront"
+
+msgid "Emplacement et contacts"
+msgstr "Location and contacts"
+
+msgid "Paiement sur place"
+msgstr "Payment on site"
+
+msgid "Retrait et livraison"
+msgstr "Pickup and delivery"
+
+msgid "Informations enregistrées."
+msgstr "Details saved."
+
+msgid "Horaires enregistrés."
+msgstr "Opening hours saved."
+
+msgid "Enregistré."
+msgstr "Saved."
+
+msgid "Rayon supprimé. Ses produits restent en ligne sans rayon."
+msgstr "Aisle deleted. Its products stay online without an aisle."
+
+msgid "Produit enregistré."
+msgstr "Product saved."
+
+msgid "Produit supprimé."
+msgstr "Product deleted."
+
+msgid "Prestation supprimée."
+msgstr "Service deleted."
+
+msgid "Formulaire incomplet."
+msgstr "Incomplete form."
+
+#, python-format
+msgid "Commande : %(status)s."
+msgstr "Order: %(status)s."
+
+#, python-format
+msgid "Réservation : %(s)s."
+msgstr "Booking: %(s)s."
+
+msgid "Changement de statut impossible."
+msgstr "Status change not allowed."
+
+msgid "Mode de remise"
+msgstr "Handover method"
+
+msgid "Je paierai sur place par"
+msgstr "I will pay on site by"
+
+msgid "Nom complet"
+msgstr "Full name"
+
+msgid "Adresse de livraison"
+msgstr "Delivery address"
+
+msgid "Quartier, rue"
+msgstr "Neighbourhood, street"
+
+msgid "Point de repère"
+msgstr "Landmark"
+
+msgid "Ex. : face pharmacie du Soleil"
+msgstr "E.g. opposite Soleil pharmacy"
+
+msgid "Note pour la boutique"
+msgstr "Note for the shop"
+
+msgid "Indiquez l'adresse de livraison."
+msgstr "Enter the delivery address."
+
+msgid "Motif"
+msgstr "Reason"
+
+msgid "Code de retrait du client"
+msgstr "Customer pickup code"
+
+msgid "Paiement reçu par"
+msgstr "Payment received by"
+
+msgid "Espèces"
+msgstr "Cash"
+
+msgid "MTN Mobile Money"
+msgstr "MTN Mobile Money"
+
+msgid "Orange Money"
+msgstr "Orange Money"
+
+msgid "Retrait en boutique"
+msgstr "In-store pickup"
+
+msgid "Prête au retrait"
+msgstr "Ready for pickup"
+
+msgid "En livraison"
+msgstr "Out for delivery"
+
+msgid "Remise et payée"
+msgstr "Handed over and paid"
+
+msgid "mode de remise"
+msgstr "handover method"
+
+msgid "paiement prévu"
+msgstr "planned payment"
+
+msgid "nom du contact"
+msgstr "contact name"
+
+msgid "téléphone du contact"
+msgstr "contact phone"
+
+msgid "adresse de livraison"
+msgstr "delivery address"
+
+msgid "point de repère"
+msgstr "landmark"
+
+msgid "note pour la boutique"
+msgstr "note for the shop"
+
+msgid "sous-total"
+msgstr "subtotal"
+
+msgid "frais de livraison"
+msgstr "delivery fee"
+
+msgid "total"
+msgstr "total"
+
+msgid "code de retrait"
+msgstr "pickup code"
+
+msgid "payé par"
+msgstr "paid by"
+
+msgid "payée le"
+msgstr "paid on"
+
+msgid "motif d'annulation"
+msgstr "cancellation reason"
+
+msgid "mise à jour le"
+msgstr "updated on"
+
+msgid "commande"
+msgstr "order"
+
+msgid "commandes"
+msgstr "orders"
+
+msgid "prix unitaire"
+msgstr "unit price"
+
+msgid "quantité"
+msgstr "quantity"
+
+msgid "article"
+msgstr "item"
+
+msgid "articles"
+msgstr "items"
+
+msgid "Votre panier est vide pour cette boutique."
+msgstr "Your cart is empty for this shop."
+
+#, python-format
+msgid "« %(name)s » n'est plus disponible."
+msgstr "“%(name)s” is no longer available."
+
+#, python-format
+msgid "Stock insuffisant pour « %(name)s » (%(stock)s restant(s))."
+msgstr "Not enough stock for “%(name)s” (%(stock)s left)."
+
+msgid "Code de retrait incorrect."
+msgstr "Incorrect pickup code."
+
+msgid "Cette commande ne peut plus être annulée."
+msgstr "This order can no longer be cancelled."
+
+msgid "Annulée par le client"
+msgstr "Cancelled by the customer"
+
+#, python-format
+msgid "Nouvelle commande %(ref)s"
+msgstr "New order %(ref)s"
+
+msgid "Valider la commande"
+msgstr "Check out"
+
+#, python-format
+msgid "Commande chez %(shop)s"
+msgstr "Order at %(shop)s"
+
+msgid "Zone de livraison"
+msgstr "Delivery area"
+
+msgid "Aucun paiement en ligne."
+msgstr "No online payment."
+
+msgid ""
+"Vous payez au moment du retrait ou de la livraison, devant le commerçant ou "
+"le livreur."
+msgstr ""
+"You pay at pickup or delivery, in front of the merchant or the delivery "
+"person."
+
+msgid "Envoyer la commande"
+msgstr "Send order"
+
+msgid "Récapitulatif"
+msgstr "Summary"
+
+msgid "Livraison (si choisie)"
+msgstr "Delivery (if chosen)"
+
+msgid "gratuite"
+msgstr "free"
+
+msgid "Votre code de retrait"
+msgstr "Your pickup code"
+
+msgid "Donnez ce code au commerçant au moment du retrait."
+msgstr "Give this code to the merchant at pickup."
+
+msgid "Numéro MTN MoMo de la boutique"
+msgstr "Shop's MTN MoMo number"
+
+msgid "Numéro Orange Money de la boutique"
+msgstr "Shop's Orange Money number"
+
+msgid ""
+"Le transfert se fait devant le commerçant ou le livreur, au moment de la "
+"remise."
+msgstr ""
+"The transfer is made in front of the merchant or the delivery person, at "
+"handover."
+
+msgid "Montant à payer"
+msgstr "Amount to pay"
+
+msgid "Motif d'annulation"
+msgstr "Cancellation reason"
+
+msgid "Contacter la boutique"
+msgstr "Contact the shop"
+
+msgid "Adresse"
+msgstr "Address"
+
+msgid "Note"
+msgstr "Note"
+
+msgid "Confirmez-la depuis votre espace boutique."
+msgstr "Confirm it from your shop dashboard."
+
+#, python-format
+msgid "%(n)s article"
+msgid_plural "%(n)s articles"
+msgstr[0] "%(n)s item"
+msgstr[1] "%(n)s items"
+
+msgid "Aucune commande pour l'instant"
+msgstr "No orders yet"
+
+msgid "Découvrir les boutiques"
+msgstr "Discover the shops"
+
+msgid "Cette boutique ne prend pas encore de commandes en ligne."
+msgstr "This shop does not take online orders yet."
+
+#, python-format
+msgid "Commande %(ref)s envoyée à la boutique."
+msgstr "Order %(ref)s sent to the shop."
+
+msgid "Commande annulée."
+msgstr "Order cancelled."
+
+#, python-format
+msgid "Bonjour %(shop)s, à propos de ma commande %(ref)s."
+msgstr "Hello %(shop)s, about my order %(ref)s."
+
+msgid "Valider les boutiques sélectionnées"
+msgstr "Approve selected shops"
+
+msgid "Suspendre les boutiques sélectionnées"
+msgstr "Suspend selected shops"
+
+msgid "Affiché au client pour payer sur place. Vide = non accepté."
+msgstr "Shown to the customer to pay on site. Empty = not accepted."
+
+msgid "Proposez au moins le retrait ou la livraison."
+msgstr "Offer at least pickup or delivery."
+
+msgid "Acceptez au moins un moyen de paiement."
+msgstr "Accept at least one payment method."
+
+msgid "nom (anglais)"
+msgstr "name (English)"
+
+msgid "icône"
+msgstr "icon"
+
+msgid "Emoji"
+msgstr "Emoji"
+
+msgid "vend des produits"
+msgstr "sells products"
+
+msgid "prend des rendez-vous"
+msgstr "takes appointments"
+
+msgid "réserve des tables"
+msgstr "takes table bookings"
+
+msgid "type de boutique"
+msgstr "shop type"
+
+msgid "types de boutique"
+msgstr "shop types"
+
+msgid "En attente de validation"
+msgstr "Awaiting approval"
+
+msgid "Validée"
+msgstr "Approved"
+
+msgid "Suspendue"
+msgstr "Suspended"
+
+msgid "Sous-sol"
+msgstr "Basement"
+
+msgid "Rez-de-chaussée"
+msgstr "Ground floor"
+
+msgid "1er étage"
+msgstr "1st floor"
+
+msgid "2e étage"
+msgstr "2nd floor"
+
+msgid "3e étage"
+msgstr "3rd floor"
+
+msgid "Extérieur"
+msgstr "Outside"
+
+msgid "propriétaire"
+msgstr "owner"
+
+msgid "nom de la boutique"
+msgstr "shop name"
+
+msgid "slogan"
+msgstr "tagline"
+
+msgid "logo"
+msgstr "logo"
+
+msgid "image de couverture"
+msgstr "cover image"
+
+msgid "niveau"
+msgstr "floor"
+
+msgid "numéro de local"
+msgstr "unit number"
+
+msgid "Ex. : B12"
+msgstr "E.g. B12"
+
+msgid "WhatsApp"
+msgstr "WhatsApp"
+
+msgid "espèces"
+msgstr "cash"
+
+msgid "numéro MTN Mobile Money"
+msgstr "MTN Mobile Money number"
+
+msgid "numéro Orange Money"
+msgstr "Orange Money number"
+
+msgid "retrait en boutique"
+msgstr "in-store pickup"
+
+msgid "livraison"
+msgstr "delivery"
+
+msgid "frais de livraison (FCFA)"
+msgstr "delivery fee (FCFA)"
+
+msgid "zone de livraison"
+msgstr "delivery area"
+
+msgid "Ex. : Yaoundé centre"
+msgstr "E.g. Yaoundé centre"
+
+msgid "mise en avant"
+msgstr "featured"
+
+msgid "modifiée le"
+msgstr "updated on"
+
+msgid "boutique"
+msgstr "shop"
+
+msgid "boutiques"
+msgstr "shops"
+
+#, python-format
+msgid "local %(unit)s"
+msgstr "unit %(unit)s"
+
+msgid "Lundi"
+msgstr "Monday"
+
+msgid "Mardi"
+msgstr "Tuesday"
+
+msgid "Mercredi"
+msgstr "Wednesday"
+
+msgid "Jeudi"
+msgstr "Thursday"
+
+msgid "Vendredi"
+msgstr "Friday"
+
+msgid "Samedi"
+msgstr "Saturday"
+
+msgid "Dimanche"
+msgstr "Sunday"
+
+msgid "jour"
+msgstr "day"
+
+msgid "ouverture"
+msgstr "opening"
+
+msgid "fermeture"
+msgstr "closing"
+
+msgid "fermé"
+msgstr "closed"
+
+msgid "horaire"
+msgstr "opening hour"
+
+msgid "horaires"
+msgstr "opening hours"
+
+msgid "Indiquez les heures d'ouverture et de fermeture."
+msgstr "Enter opening and closing times."
+
+msgid "La fermeture doit être après l'ouverture."
+msgstr "Closing time must be after opening time."
+
+#, python-format
+msgid "Nouvelle boutique à valider : %(name)s"
+msgstr "New shop to approve: %(name)s"
+
+#, python-format
+msgid "Boutique créée par %(owner)s (%(phone)s)."
+msgstr "Shop created by %(owner)s (%(phone)s)."
+
+#, python-format
+msgid "Votre boutique %(name)s est en ligne"
+msgstr "Your shop %(name)s is online"
+
+#, python-format
+msgid "Votre boutique %(name)s est suspendue"
+msgstr "Your shop %(name)s is suspended"
+
+#, python-format
+msgid "Bonjour, le statut de votre boutique sur %(site)s est : %(status)s."
+msgstr "Hello, the status of your shop on %(site)s is: %(status)s."
+
+msgid "Aucun produit pour le moment"
+msgstr "No products yet"
+
+msgid "Aucune boutique trouvée"
+msgstr "No shops found"
+
+msgid ""
+"Modifiez les filtres ou revenez bientôt : de nouvelles boutiques arrivent."
+msgstr "Change the filters or come back soon: new shops are on the way."
+
+msgid "Aperçu : cette boutique n'est pas encore visible du public."
+msgstr "Preview: this shop is not visible to the public yet."
+
+msgid "Appeler"
+msgstr "Call"
+
+msgid "Réserver une table"
+msgstr "Book a table"
+
+msgid "Prendre rendez-vous"
+msgstr "Book an appointment"
+
+msgid "Gérer"
+msgstr "Manage"
+
+msgid "Chercher dans la boutique"
+msgstr "Search this shop"
+
+msgid "Tout"
+msgstr "All"
+
+msgid "Infos pratiques"
+msgstr "Practical info"
+
+msgid "Ouvert maintenant"
+msgstr "Open now"
+
+msgid "Fermé maintenant"
+msgstr "Closed now"
+
+msgid "À propos"
+msgstr "About"
+
+msgid "Les boutiques du mall"
+msgstr "The mall's shops"
+
+msgid "Nom de la boutique..."
+msgstr "Shop name..."
+
+msgid "Tous les types"
+msgstr "All types"
+
+msgid "Tous les niveaux"
+msgstr "All floors"
+
+msgid "Ouvrir ma boutique en ligne"
+msgstr "Open my shop online"
+
+msgid ""
+"Renseignez les informations de votre boutique du Mfoundi Mall. Elle sera "
+"publiée après validation par l'administration."
+msgstr ""
+"Fill in your Mfoundi Mall shop details. It will be published after approval "
+"by the administration."
+
+msgid ""
+"Boutique créée. Elle sera visible dès sa validation par l'administration du "
+"mall."
+msgstr ""
+"Shop created. It will be visible once approved by the mall administration."
+
+msgid "Français"
+msgstr "Français"
+
+msgid "English"
+msgstr "English"
+
+msgid "Administration Mfoundi Mall"
+msgstr "Mfoundi Mall administration"
+
+msgid "Mfoundi Mall"
+msgstr "Mfoundi Mall"
+
+msgid "Gestion du mall"
+msgstr "Mall management"
+
+msgid "Page introuvable"
+msgstr "Page not found"
+
+msgid "Cette page n'existe pas ou n'est plus disponible."
+msgstr "This page does not exist or is no longer available."
+
+msgid "Retour à l'accueil"
+msgstr "Back to home"
+
+msgid ""
+"Toutes les boutiques du Mfoundi Mall en ligne : commandez, réservez et payez"
+" sur place en espèces ou Mobile Money."
+msgstr ""
+"Every Mfoundi Mall shop online: order, book and pay on site in cash or "
+"Mobile Money."
+
+msgid "facultatif"
+msgstr "optional"
+
+msgid "Toutes les boutiques du mall, à portée de main."
+msgstr "Every shop in the mall, at your fingertips."
+
+msgid "Acheter"
+msgstr "Shop"
+
+msgid "Toutes les boutiques"
+msgstr "All shops"
+
+msgid "Suivre ma commande"
+msgstr "Track my order"
+
+msgid "Vendre"
+msgstr "Sell"
+
+msgid "Nous trouver"
+msgstr "Find us"
+
+msgid "Prix en Franc CFA (FCFA). Paiement sur place uniquement."
+msgstr "Prices in CFA franc (FCFA). Payment on site only."
+
+msgid ""
+"Commandez en ligne, payez sur place : espèces, MTN MoMo ou Orange Money"
+msgstr "Order online, pay on site: cash, MTN MoMo or Orange Money"
+
+msgid "Menu"
+msgstr "Menu"
+
+msgid "Mon espace boutique"
+msgstr "My shop dashboard"
+
+msgid "Administration"
+msgstr "Administration"
+
+msgid "Déconnexion"
+msgstr "Log out"
+
+msgid "Précédent"
+msgstr "Previous"
+
+#, python-format
+msgid "Page %(n)s sur %(total)s"
+msgstr "Page %(n)s of %(total)s"
+
+msgid "Suivant"
+msgstr "Next"
+
+msgid "À la une"
+msgstr "Featured"
