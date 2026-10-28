@@ -1,4 +1,9 @@
-# Installation
+---
+title: "Installation"
+description: "Installer le projet en local, avec ou sans Docker."
+sidebar:
+  order: 1
+---
 
 ## Prérequis
 
@@ -34,11 +39,13 @@ python manage.py createsuperuser
 make run
 ```
 
-Le site est disponible sur http://127.0.0.1:8000 et l'administration sur http://127.0.0.1:8000/admin/.
+Le site est disponible sur `http://127.0.0.1:8000` et l'administration sur `http://127.0.0.1:8000/admin/`.
 
-Sans fichier `.env`, le projet utilise `config.settings.dev` et une base SQLite (`db.sqlite3`). Pour utiliser PostgreSQL, définir `DATABASE_URL` (voir [Configuration](configuration.md)).
+Sans fichier `.env`, le projet utilise `config.settings.dev` et une base SQLite (`db.sqlite3`). Pour utiliser PostgreSQL, définir `DATABASE_URL` (voir [Configuration](/fleaMarketOnline/developpeur/configuration/)).
 
-> `createsuperuser` demande un **numéro de téléphone** (identifiant de connexion) et un prénom.
+:::note
+`createsuperuser` demande un **numéro de téléphone** (identifiant de connexion) et un prénom.
+:::
 
 ## Installation avec Docker
 

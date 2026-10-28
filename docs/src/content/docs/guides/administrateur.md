@@ -1,6 +1,12 @@
-# Guide administrateur du mall
+---
+title: "Guide administrateur du mall"
+description: "Valider les boutiques et administrer la plateforme."
+sidebar:
+  label: Administration du mall
+  order: 3
+---
 
-L'administration se fait depuis **/admin/** avec un compte disposant de l'accès administration (créé par `createsuperuser`, voir la documentation de déploiement).
+L'administration se fait depuis **/admin/** avec un compte disposant de l'accès administration (créé par `createsuperuser`, voir le [guide de déploiement](/fleaMarketOnline/developpeur/deploiement/)).
 
 ## 1. Valider les boutiques
 

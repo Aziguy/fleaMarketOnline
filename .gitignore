@@ -18,3 +18,7 @@ htmlcov/
 .DS_Store
 .test-media/
 node_modules/
+docs/dist/
+docs/.astro/
+coverage.json
+junit.xml

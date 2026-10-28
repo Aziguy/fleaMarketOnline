@@ -1,4 +1,9 @@
-# Configuration
+---
+title: "Configuration"
+description: "Variables d'environnement et réglages."
+sidebar:
+  order: 4
+---
 
 Les réglages sont lus depuis les variables d'environnement, ou depuis un fichier `.env` à la racine (modèle : `.env.example`).
 

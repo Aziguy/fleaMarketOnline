@@ -1,4 +1,9 @@
-# Développement
+---
+title: "Développement"
+description: "Commandes, conventions, tests, traductions et interface."
+sidebar:
+  order: 2
+---
 
 ## Commandes courantes
 
@@ -23,7 +28,7 @@ static/css/      CSS compilé (généré, non versionné)
 static/js/       htmx.min.js et app.js
 locale/en/       Traduction anglaise
 docker/          Entrypoint et configuration Nginx
-docs/            Documentation
+docs/            Site de documentation (Astro Starlight, publié sur GitHub Pages)
 ```
 
 ## Conventions
@@ -48,7 +53,7 @@ docs/            Documentation
 
 Hériter de `apps.core.forms.StyledFormMixin` pour appliquer les classes Tailwind. Dans les gabarits :
 
-```django
+```jinja
 {% include "includes/form.html" %}
 {% include "includes/field.html" with field=form.name wrapper="sm:col-span-2" %}
 ```
