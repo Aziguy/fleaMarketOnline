@@ -1,0 +1,36 @@
+name: Signaler un bug
+description: Quelque chose ne fonctionne pas comme prévu.
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Ce qui se passe et ce qui était attendu.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Étapes pour reproduire
+      placeholder: |
+        1. Se connecter en tant que commerçant
+        2. Ouvrir une commande
+        3. ...
+    validations:
+      required: true
+  - type: dropdown
+    id: role
+    attributes:
+      label: Profil concerné
+      options: [Client, Commerçant, Administration du mall, Développeur]
+  - type: input
+    id: env
+    attributes:
+      label: Appareil et navigateur
+      placeholder: Android, Chrome 130
+  - type: textarea
+    id: logs
+    attributes:
+      label: Captures ou journaux
+      render: text
