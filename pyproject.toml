@@ -3,6 +3,8 @@ name = "mfoundi-mall"
 version = "1.0.0"
 description = "Plateforme en ligne des boutiques du Mfoundi Mall, Yaoundé"
 requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE"]
 
 [tool.ruff]
 line-length = 100
