@@ -1,0 +1,26 @@
+/* Charte Mfoundi Mall : vert principal, jaune d'accent. */
+:root {
+  --sl-color-accent-low: #052816;
+  --sl-color-accent: #1fab5b;
+  --sl-color-accent-high: #b4eec8;
+  --sl-font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+:root[data-theme="light"] {
+  --sl-color-accent-low: #d9f7e3;
+  --sl-color-accent: #138a43;
+  --sl-color-accent-high: #10472a;
+}
+
+.hero .tagline {
+  max-width: 38rem;
+}
+
+.sl-markdown-content img {
+  border-radius: 0.75rem;
+  border: 1px solid var(--sl-color-gray-5);
+}
+
+.card-grid .card {
+  border-radius: 1rem;
+}

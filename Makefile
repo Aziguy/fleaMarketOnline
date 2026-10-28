@@ -1,4 +1,4 @@
-.PHONY: install css css-watch run migrate seed test lint format messages up down prod
+.PHONY: install css css-watch run migrate seed test cov lint format messages docs docs-build up down prod
 
 PY ?= python
 
@@ -24,6 +24,9 @@ seed:             ## Données de démonstration
 test:
 	pytest
 
+cov:              ## Tests avec couverture
+	pytest --cov=apps --cov-report=term-missing
+
 lint:
 	ruff check .
 	ruff format --check .
@@ -35,6 +38,12 @@ format:
 messages:         ## Met à jour et compile les traductions
 	$(PY) manage.py makemessages -l en --ignore=node_modules --no-location --no-obsolete
 	$(PY) manage.py compilemessages --ignore=node_modules
+
+docs:             ## Site de documentation en local
+	cd docs && npm install && npm run dev
+
+docs-build:
+	cd docs && npm ci && npm run build
 
 up:               ## Docker (dev)
 	docker compose up --build

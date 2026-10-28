@@ -1,4 +1,10 @@
-# Guide commerçant : gérer ma boutique en ligne
+---
+title: "Guide commerçant : gérer ma boutique en ligne"
+description: "Ouvrir et gérer sa boutique : catalogue, commandes, réservations."
+sidebar:
+  label: Commerçants
+  order: 2
+---
 
 ## 1. Ouvrir sa boutique
 

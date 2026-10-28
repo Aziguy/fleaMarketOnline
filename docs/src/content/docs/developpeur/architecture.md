@@ -1,4 +1,9 @@
-# Architecture
+---
+title: "Architecture"
+description: "Applications Django, modèle de données et règles métier."
+sidebar:
+  order: 3
+---
 
 Monolithe Django 5 rendu côté serveur, enrichi par HTMX. Pas d'API ni de framework JavaScript : pages légères, adaptées aux connexions mobiles.
 

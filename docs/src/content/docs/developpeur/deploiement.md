@@ -1,4 +1,9 @@
-# Déploiement
+---
+title: "Déploiement"
+description: "Mise en production sur un VPS avec Docker Compose."
+sidebar:
+  order: 5
+---
 
 Cible : un VPS Linux (Ubuntu 22.04 ou plus) avec Docker. Architecture :
 
@@ -25,7 +30,7 @@ cd /opt/mfoundi
 cp .env.example .env
 ```
 
-Éditer `.env` : `SECRET_KEY`, `ALLOWED_HOSTS`, `CSRF_TRUSTED_ORIGINS`, mots de passe PostgreSQL (identiques dans `POSTGRES_PASSWORD` et `DATABASE_URL`), SMTP, `ADMINS`. Voir [Configuration](configuration.md).
+Éditer `.env` : `SECRET_KEY`, `ALLOWED_HOSTS`, `CSRF_TRUSTED_ORIGINS`, mots de passe PostgreSQL (identiques dans `POSTGRES_PASSWORD` et `DATABASE_URL`), SMTP, `ADMINS`. Voir [Configuration](/fleaMarketOnline/developpeur/configuration/).
 
 ## 3. Lancer
 

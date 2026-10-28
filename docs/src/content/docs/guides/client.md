@@ -1,4 +1,10 @@
-# Guide client : acheter et réserver
+---
+title: "Guide client : acheter et réserver"
+description: "Créer un compte, commander, payer sur place et réserver."
+sidebar:
+  label: Clients
+  order: 1
+---
 
 ## 1. Créer un compte
 
@@ -8,7 +14,9 @@
 
 Vous pouvez ensuite vous connecter avec votre numéro **ou** votre e-mail.
 
-> Vous pouvez parcourir le site et remplir votre panier sans compte. Le compte est demandé au moment de valider une commande ou une réservation.
+:::note
+Vous pouvez parcourir le site et remplir votre panier sans compte. Le compte est demandé au moment de valider une commande ou une réservation.
+:::
 
 ## 2. Trouver un produit ou une boutique
 

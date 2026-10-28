@@ -1,0 +1,57 @@
+---
+title: Mfoundi Mall en ligne
+description: Toutes les boutiques du Mfoundi Mall, Yaoundé, en ligne. Commandez, réservez, payez sur place.
+template: splash
+hero:
+  tagline: La plateforme qui met en ligne les boutiques du Mfoundi Mall, Yaoundé. Commande et réservation en ligne, paiement sur place en espèces ou Mobile Money.
+  image:
+    file: ../../assets/logo.svg
+  actions:
+    - text: Découvrir la plateforme
+      link: /fleaMarketOnline/presentation/
+      icon: right-arrow
+    - text: Installer le projet
+      link: /fleaMarketOnline/developpeur/installation/
+      icon: laptop
+      variant: minimal
+    - text: Voir sur GitHub
+      link: https://github.com/Aziguy/fleaMarketOnline
+      icon: github
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard } from "@astrojs/starlight/components";
+
+![Accueil de la plateforme](/fleaMarketOnline/images/accueil.png)
+
+## Pensée pour le mall et pour Yaoundé
+
+<CardGrid stagger>
+  <Card title="Paiement sur place" icon="seti:pipeline">
+    Aucun paiement en ligne. Espèces, MTN Mobile Money ou Orange Money, devant le commerçant ou le livreur.
+  </Card>
+  <Card title="Prix en FCFA" icon="document">
+    Montants entiers en Franc CFA, promotions avec ancien prix barré.
+  </Card>
+  <Card title="Retrait ou livraison" icon="rocket">
+    Code de retrait à 6 chiffres en boutique, ou livraison payée à la réception.
+  </Card>
+  <Card title="WhatsApp" icon="comment">
+    Chaque boutique joignable en un clic, panier envoyé pré-rempli.
+  </Card>
+  <Card title="Réservations" icon="information">
+    Rendez-vous pour les salons, tables pour les restaurants et les bars.
+  </Card>
+  <Card title="Mobile d'abord, FR / EN" icon="translate">
+    Pages légères pour les réseaux mobiles, en français et en anglais.
+  </Card>
+</CardGrid>
+
+## Par où commencer ?
+
+<CardGrid>
+  <LinkCard title="Je suis client" description="Commander, payer sur place, réserver." href="/fleaMarketOnline/guides/client/" />
+  <LinkCard title="Je suis commerçant" description="Ouvrir et gérer ma boutique en ligne." href="/fleaMarketOnline/guides/commercant/" />
+  <LinkCard title="J'administre le mall" description="Valider les boutiques, gérer la plateforme." href="/fleaMarketOnline/guides/administrateur/" />
+  <LinkCard title="Je développe" description="Installer, comprendre l'architecture, déployer." href="/fleaMarketOnline/developpeur/installation/" />
+</CardGrid>
