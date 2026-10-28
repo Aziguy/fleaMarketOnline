@@ -1,0 +1,15 @@
+{% extends "accounts/_auth_layout.html" %}{% load i18n %}
+{% block title %}{% translate "Connexion" %}{% endblock %}
+{% block heading %}{% translate "Connexion" %}{% endblock %}
+{% block card %}
+<form method="post" class="space-y-4">
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{{ next }}">
+  {% include "includes/form.html" %}
+  <div class="text-right text-sm"><a href="{% url 'accounts:password_reset' %}" class="text-brand-700 hover:underline">{% translate "Mot de passe oublié ?" %}</a></div>
+  <button class="btn-primary w-full">{% translate "Se connecter" %}</button>
+</form>
+{% endblock %}
+{% block below %}
+<p class="mt-6 text-center text-sm text-stone-600">{% translate "Pas encore de compte ?" %} <a href="{% url 'accounts:signup' %}{% if next %}?next={{ next|urlencode }}{% endif %}" class="font-semibold text-brand-700 hover:underline">{% translate "Créer un compte" %}</a></p>
+{% endblock %}
