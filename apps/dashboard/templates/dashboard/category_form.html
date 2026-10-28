@@ -1,0 +1,9 @@
+{% extends "dashboard/_layout.html" %}{% load i18n %}
+{% block title %}{{ category.name }}{% endblock %}
+{% block dashboard %}
+<h1 class="text-2xl">{% translate "Modifier le rayon" %}</h1>
+<form method="post" class="card card-body mt-6 max-w-md space-y-4">
+  {% csrf_token %}{% include "includes/form.html" %}
+  <div class="flex gap-2"><button class="btn-primary">{% translate "Enregistrer" %}</button><a href="{% url 'dashboard:categories' %}" class="btn-ghost">{% translate "Annuler" %}</a></div>
+</form>
+{% endblock %}

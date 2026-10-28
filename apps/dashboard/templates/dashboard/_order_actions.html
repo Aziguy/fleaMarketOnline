@@ -1,0 +1,32 @@
+{% load i18n mall %}
+<div id="order-actions" class="card card-body h-fit space-y-4">
+  {% if request.htmx %}{% include "includes/messages.html" %}{% endif %}
+  <div class="flex items-center justify-between"><h2 class="font-semibold">{% translate "Statut" %}</h2><span class="{{ order.status_badge }}">{{ order.get_status_display }}</span></div>
+  {% if order.paid_at %}<p class="text-sm text-brand-800">{% blocktranslate with method=order.get_paid_with_display date=order.paid_at|date:"d/m/Y H:i" %}Payée par {{ method }} le {{ date }}{% endblocktranslate %}</p>{% endif %}
+  {% if order.cancel_reason %}<p class="text-sm text-red-700">{{ order.cancel_reason }}</p>{% endif %}
+  {% for next in order.next_statuses %}
+    {% if next == "completed" %}
+      <form method="post" action="{% url 'dashboard:order_action' order.reference %}" hx-post="{% url 'dashboard:order_action' order.reference %}" hx-target="#order-actions" hx-swap="outerHTML" class="space-y-3 rounded-xl border border-brand-200 bg-brand-50 p-4">
+        {% csrf_token %}<input type="hidden" name="status" value="completed">
+        <p class="text-sm font-semibold text-brand-900">{% translate "Remise et encaissement" %}</p>
+        {% if order.is_pickup %}{% include "includes/field.html" with field=complete_form.pickup_code %}{% endif %}
+        {% include "includes/field.html" with field=complete_form.paid_with %}
+        <button class="btn-primary w-full">{% translate "Marquer remise et payée" %}</button>
+      </form>
+    {% elif next == "cancelled" %}
+      <form method="post" action="{% url 'dashboard:order_action' order.reference %}" hx-post="{% url 'dashboard:order_action' order.reference %}" hx-target="#order-actions" hx-swap="outerHTML" hx-confirm="{% translate 'Annuler cette commande ?' %}" class="space-y-2">
+        {% csrf_token %}<input type="hidden" name="status" value="cancelled">
+        {% include "includes/field.html" with field=cancel_form.reason %}
+        <button class="btn-ghost w-full text-red-600">{% translate "Annuler la commande" %}</button>
+      </form>
+    {% else %}
+      <form method="post" action="{% url 'dashboard:order_action' order.reference %}" hx-post="{% url 'dashboard:order_action' order.reference %}" hx-target="#order-actions" hx-swap="outerHTML">
+        {% csrf_token %}<input type="hidden" name="status" value="{{ next }}">
+        <button class="btn-primary w-full">
+          {% if next == "confirmed" %}{% translate "Confirmer la commande" %}{% elif next == "ready" %}{% translate "Prête : prévenir le client" %}{% elif next == "shipped" %}{% translate "Partie en livraison" %}{% endif %}
+        </button>
+      </form>
+    {% endif %}
+  {% endfor %}
+  {% if not order.next_statuses %}<p class="text-sm text-stone-500">{% translate "Commande clôturée." %}</p>{% endif %}
+</div>

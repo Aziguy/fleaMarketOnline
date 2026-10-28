@@ -1,0 +1,18 @@
+{% extends "dashboard/_layout.html" %}{% load i18n mall %}
+{% block title %}{% translate "Réservations" %}{% endblock %}
+{% block dashboard %}
+<h1 class="text-2xl">{% translate "Réservations" %}</h1>
+<div class="mt-4 flex flex-wrap gap-2 text-sm">
+  <a href="{% query periode='a-venir' page=None %}" class="badge px-3 py-1.5 {% if period != 'passees' %}bg-brand-600 text-white{% else %}bg-white ring-1 ring-stone-200{% endif %}">{% translate "À venir" %}</a>
+  <a href="{% query periode='passees' page=None %}" class="badge px-3 py-1.5 {% if period == 'passees' %}bg-brand-600 text-white{% else %}bg-white ring-1 ring-stone-200{% endif %}">{% translate "Passées" %}</a>
+  <form><input type="hidden" name="periode" value="{{ period }}">
+    <select name="statut" class="input py-1 text-sm" onchange="this.form.submit()"><option value="">{% translate "Tous les statuts" %}</option>{% for v, l in statuses %}<option value="{{ v }}" {% if request.GET.statut == v %}selected{% endif %}>{{ l }}</option>{% endfor %}</select>
+  </form>
+</div>
+<div class="mt-4 space-y-3">
+  {% for booking in page %}{% include "dashboard/_booking_row.html" %}{% empty %}
+    {% translate "Aucune réservation" as t %}{% include "includes/empty.html" with title=t icon="📅" %}
+  {% endfor %}
+</div>
+{% include "includes/pagination.html" %}
+{% endblock %}

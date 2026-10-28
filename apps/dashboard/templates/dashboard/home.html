@@ -1,0 +1,55 @@
+{% extends "dashboard/_layout.html" %}{% load i18n mall %}
+{% block title %}{% translate "Tableau de bord" %}{% endblock %}
+{% block dashboard %}
+<h1 class="text-2xl">{% blocktranslate with name=user.first_name %}Bonjour {{ name }}{% endblocktranslate %}</h1>
+<div class="mt-6 grid grid-cols-2 gap-4 xl:grid-cols-4">
+  <a href="{% url 'dashboard:orders' %}?statut=pending" class="card card-body hover:border-brand-300"><p class="text-sm text-stone-500">{% translate "À confirmer" %}</p><p class="mt-1 text-3xl font-bold {% if pending_orders %}text-amber-600{% endif %}">{{ pending_orders }}</p></a>
+  <a href="{% url 'dashboard:orders' %}" class="card card-body hover:border-brand-300"><p class="text-sm text-stone-500">{% translate "Commandes en cours" %}</p><p class="mt-1 text-3xl font-bold">{{ open_orders }}</p></a>
+  <div class="card card-body"><p class="text-sm text-stone-500">{% translate "Encaissé ce mois" %}</p><p class="mt-1 text-2xl font-bold text-brand-700">{{ month_revenue|fcfa }}</p></div>
+  <a href="{% url 'dashboard:products' %}" class="card card-body hover:border-brand-300"><p class="text-sm text-stone-500">{% translate "Produits" %}</p><p class="mt-1 text-3xl font-bold">{{ product_count }}</p></a>
+</div>
+
+{% if not product_count %}
+<div class="card card-body mt-6 border-brand-200 bg-brand-50">
+  <h2 class="font-semibold">{% translate "Pour bien démarrer" %}</h2>
+  <ol class="mt-2 list-decimal space-y-1 pl-5 text-sm">
+    <li><a href="{% url 'dashboard:settings' %}" class="text-brand-700 hover:underline">{% translate "Complétez vos informations et vos numéros Mobile Money" %}</a></li>
+    <li><a href="{% url 'dashboard:hours' %}" class="text-brand-700 hover:underline">{% translate "Vérifiez vos horaires" %}</a></li>
+    <li><a href="{% url 'dashboard:categories' %}" class="text-brand-700 hover:underline">{% translate "Créez vos rayons" %}</a></li>
+    <li><a href="{% url 'dashboard:product_create' %}" class="text-brand-700 hover:underline">{% translate "Ajoutez vos premiers produits" %}</a></li>
+  </ol>
+</div>
+{% endif %}
+
+<div class="mt-6 grid gap-6 xl:grid-cols-2">
+  <div class="card">
+    <div class="flex items-center justify-between border-b border-stone-100 px-5 py-3"><h2 class="font-semibold">{% translate "Dernières commandes" %}</h2><a href="{% url 'dashboard:orders' %}" class="text-sm text-brand-700">{% translate "Tout voir" %}</a></div>
+    <ul class="divide-y divide-stone-100 text-sm">
+      {% for order in recent_orders %}
+      <li><a href="{% url 'dashboard:order_detail' order.reference %}" class="flex items-center gap-3 px-5 py-3 hover:bg-stone-50">
+        <span class="font-mono text-xs">{{ order.reference }}</span><span class="flex-1 truncate">{{ order.contact_name }}</span>
+        <span class="{{ order.status_badge }}">{{ order.get_status_display }}</span><span class="w-24 text-right font-semibold">{{ order.total|fcfa }}</span>
+      </a></li>
+      {% empty %}<li class="px-5 py-6 text-center text-stone-500">{% translate "Aucune commande pour l'instant." %}</li>{% endfor %}
+    </ul>
+  </div>
+  <div class="space-y-6">
+    {% if upcoming_bookings %}
+    <div class="card">
+      <div class="flex items-center justify-between border-b border-stone-100 px-5 py-3"><h2 class="font-semibold">{% translate "Réservations à venir (7 jours)" %}</h2><a href="{% url 'dashboard:bookings' %}" class="text-sm text-brand-700">{% translate "Tout voir" %}</a></div>
+      <ul class="divide-y divide-stone-100 text-sm">
+        {% for b in upcoming_bookings %}<li class="flex items-center gap-3 px-5 py-3"><span class="w-28 font-medium">{{ b.date|date:"D d/m" }} {{ b.time|time:"H:i" }}</span><span class="flex-1 truncate">{{ b.customer }}{% if b.service %} · {{ b.service.name }}{% endif %}</span><span class="{{ b.status_badge }}">{{ b.get_status_display }}</span></li>{% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    {% if low_stock %}
+    <div class="card">
+      <div class="border-b border-stone-100 px-5 py-3"><h2 class="font-semibold">{% translate "Stock faible" %}</h2></div>
+      <ul class="divide-y divide-stone-100 text-sm">
+        {% for p in low_stock %}<li><a href="{% url 'dashboard:product_edit' p.pk %}" class="flex justify-between px-5 py-3 hover:bg-stone-50"><span>{{ p.name }}</span><span class="{% if p.stock == 0 %}badge-red{% else %}badge-yellow{% endif %}">{{ p.stock }}</span></a></li>{% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

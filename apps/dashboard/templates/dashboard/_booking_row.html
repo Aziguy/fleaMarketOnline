@@ -1,0 +1,20 @@
+{% load i18n mall %}
+<div id="booking-{{ booking.pk }}" class="card p-4">
+  <div class="flex flex-wrap items-center gap-3">
+    <span class="w-32 font-semibold">{{ booking.date|date:"D d/m" }} · {{ booking.time|time:"H:i" }}</span>
+    <span class="flex-1 text-sm">{{ booking.customer }} · <a href="tel:{{ booking.contact_phone }}" class="text-brand-700">{{ booking.contact_phone|phone }}</a><span class="block text-xs text-stone-500">{{ booking.get_kind_display }}{% if booking.service %} · {{ booking.service.name }}{% endif %}{% if booking.kind == "table" %} · {{ booking.party_size }} pers.{% endif %} · <span class="font-mono">{{ booking.reference }}</span></span></span>
+    <span class="{{ booking.status_badge }}">{{ booking.get_status_display }}</span>
+  </div>
+  {% if booking.note %}<p class="mt-2 rounded-lg bg-stone-50 px-3 py-2 text-sm text-stone-600">{{ booking.note }}</p>{% endif %}
+  {% if booking.next_statuses %}
+  <form method="post" action="{% url 'dashboard:booking_action' booking.reference %}" hx-post="{% url 'dashboard:booking_action' booking.reference %}" hx-target="#booking-{{ booking.pk }}" hx-swap="outerHTML" class="mt-3 flex flex-wrap items-center gap-2">
+    {% csrf_token %}
+    <input type="text" name="merchant_note" maxlength="255" placeholder="{% translate 'Message au client (facultatif)' %}" class="input max-w-xs py-1.5">
+    {% for next in booking.next_statuses %}
+      <button name="status" value="{{ next }}" class="btn-sm {% if next == 'confirmed' or next == 'completed' %}btn-primary{% else %}btn-secondary{% endif %}">
+        {% if next == "confirmed" %}{% translate "Confirmer" %}{% elif next == "declined" %}{% translate "Refuser" %}{% elif next == "completed" %}{% translate "Honorée" %}{% elif next == "no_show" %}{% translate "Absent" %}{% elif next == "cancelled" %}{% translate "Annuler" %}{% endif %}
+      </button>
+    {% endfor %}
+  </form>
+  {% endif %}
+</div>

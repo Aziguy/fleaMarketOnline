@@ -1,0 +1,43 @@
+{% extends "dashboard/_layout.html" %}{% load i18n %}
+{% block title %}{% if product %}{{ product.name }}{% else %}{% translate "Nouveau produit" %}{% endif %}{% endblock %}
+{% block dashboard %}
+<h1 class="text-2xl">{% if product %}{% translate "Modifier le produit" %}{% else %}{% translate "Nouveau produit" %}{% endif %}</h1>
+<form method="post" enctype="multipart/form-data" class="mt-6 space-y-6">
+  {% csrf_token %}
+  <div class="card card-body grid gap-4 sm:grid-cols-2">
+    {% for error in form.non_field_errors %}<div class="sm:col-span-2 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">{{ error }}</div>{% endfor %}
+    {% include "includes/field.html" with field=form.name wrapper="sm:col-span-2" %}
+    {% include "includes/field.html" with field=form.category %}
+    {% include "includes/field.html" with field=form.stock %}
+    {% include "includes/field.html" with field=form.price %}
+    {% include "includes/field.html" with field=form.compare_at_price %}
+    {% include "includes/field.html" with field=form.description wrapper="sm:col-span-2" %}
+    {% include "includes/field.html" with field=form.image %}
+    {% include "includes/field.html" with field=form.is_active %}
+  </div>
+  <div class="card card-body">
+    <h2 class="font-semibold">{% translate "Photos supplémentaires" %}</h2>
+    {{ formset.management_form }}
+    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+      {% for f in formset %}
+      <div class="rounded-xl border border-stone-200 p-3">
+        {{ f.id }}
+        {% if f.instance.image %}<img src="{{ f.instance.image.url }}" class="mb-2 h-24 w-24 rounded-lg object-cover" alt="">{% endif %}
+        {% include "includes/field.html" with field=f.image %}
+        {% if f.instance.pk %}<label class="mt-2 flex items-center gap-2 text-sm text-red-600">{{ f.DELETE }} {% translate "Supprimer" %}</label>{% endif %}
+        {{ f.position.as_hidden }}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="flex flex-wrap gap-2">
+    <button class="btn-primary">{% translate "Enregistrer" %}</button>
+    <a href="{% url 'dashboard:products' %}" class="btn-ghost">{% translate "Annuler" %}</a>
+  </div>
+</form>
+{% if product %}
+<form method="post" action="{% url 'dashboard:product_delete' product.pk %}" class="mt-8" onsubmit="return confirm('{% translate "Supprimer définitivement ce produit ?" %}')">
+  {% csrf_token %}<button class="btn-ghost text-red-600">{% translate "Supprimer ce produit" %}</button>
+</form>
+{% endif %}
+{% endblock %}

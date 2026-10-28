@@ -1,0 +1,20 @@
+{% extends "dashboard/_layout.html" %}{% load i18n mall %}
+{% block title %}{% translate "Prestations" %}{% endblock %}
+{% block dashboard %}
+<div class="flex flex-wrap items-center justify-between gap-3">
+  <div><h1 class="text-2xl">{% translate "Prestations" %}</h1><p class="text-sm text-stone-500">{% translate "Coupe, tresses, soin, menu, formule... affichés sur votre vitrine." %}</p></div>
+  <a href="{% url 'dashboard:service_create' %}" class="btn-primary">+ {% translate "Nouvelle prestation" %}</a>
+</div>
+<div class="card mt-6 overflow-hidden">
+  <ul class="divide-y divide-stone-100 text-sm">
+    {% for s in services %}
+    <li class="flex items-center gap-3 px-5 py-3">
+      <span class="flex-1"><span class="font-medium">{{ s.name }}</span> <span class="text-xs text-stone-500">{{ s.duration_minutes }} min</span></span>
+      <span class="font-semibold">{% if s.price %}{{ s.price|fcfa }}{% else %}{% translate "Sur devis" %}{% endif %}</span>
+      {% if not s.is_active %}<span class="badge-gray">{% translate "Hors ligne" %}</span>{% endif %}
+      <a href="{% url 'dashboard:service_edit' s.pk %}" class="btn-ghost btn-sm">{% translate "Modifier" %}</a>
+    </li>
+    {% empty %}<li class="px-5 py-6 text-center text-stone-500">{% translate "Aucune prestation." %}</li>{% endfor %}
+  </ul>
+</div>
+{% endblock %}
