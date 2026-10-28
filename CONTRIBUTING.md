@@ -69,3 +69,9 @@ npm run dev
 ```
 
 Il est publié automatiquement sur GitHub Pages à chaque fusion dans `master`.
+
+## Branche protégée et licence
+
+La branche `master` est protégée : pas de push direct, fusion uniquement par pull request avec CI verte et relecture approuvée (voir `.github/CODEOWNERS`).
+
+En contribuant, vous acceptez que votre contribution soit distribuée sous la [licence MIT](LICENSE) du projet.

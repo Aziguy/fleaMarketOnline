@@ -27,3 +27,7 @@ cd docs
 npm install
 npm run dev
 ```
+
+## Licence
+
+Le projet est distribué sous [licence MIT](https://github.com/Aziguy/fleaMarketOnline/blob/master/LICENSE). En contribuant, vous acceptez que votre contribution soit publiée sous cette licence.
