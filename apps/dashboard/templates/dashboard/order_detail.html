@@ -1,0 +1,30 @@
+{% extends "dashboard/_layout.html" %}{% load i18n mall %}
+{% block title %}{{ order.reference }}{% endblock %}
+{% block dashboard %}
+<a href="{% url 'dashboard:orders' %}" class="text-sm text-brand-700 hover:underline">← {% translate "Commandes" %}</a>
+<h1 class="mt-2 text-2xl">{% translate "Commande" %} <span class="font-mono">{{ order.reference }}</span></h1>
+<p class="text-sm text-stone-500">{{ order.created_at|date:"d/m/Y H:i" }}</p>
+<div class="mt-6 grid gap-6 xl:grid-cols-[1fr_22rem]">
+  <div class="space-y-6">
+    <div class="card overflow-hidden">
+      <ul class="divide-y divide-stone-100 text-sm">
+        {% for item in order.items.all %}<li class="flex justify-between gap-3 px-5 py-3"><span>{{ item.quantity }} x {{ item.product_name }} <span class="text-stone-400">({{ item.unit_price|fcfa }})</span></span><span class="font-medium">{{ item.total|fcfa }}</span></li>{% endfor %}
+      </ul>
+      <dl class="space-y-1 border-t border-stone-100 bg-stone-50 px-5 py-4 text-sm">
+        <div class="flex justify-between"><dt>{% translate "Sous-total" %}</dt><dd>{{ order.subtotal|fcfa }}</dd></div>
+        {% if order.delivery_fee %}<div class="flex justify-between"><dt>{% translate "Livraison" %}</dt><dd>{{ order.delivery_fee|fcfa }}</dd></div>{% endif %}
+        <div class="flex justify-between text-base font-bold"><dt>{% translate "À encaisser" %}</dt><dd>{{ order.total|fcfa }}</dd></div>
+      </dl>
+    </div>
+    <div class="card card-body grid gap-4 text-sm sm:grid-cols-2">
+      <div><p class="text-stone-500">{% translate "Client" %}</p><p class="font-medium">{{ order.contact_name }}</p>
+        <p class="mt-1 flex flex-wrap gap-2"><a href="tel:{{ order.contact_phone }}" class="text-brand-700">{{ order.contact_phone|phone }}</a> · <a href="{% whatsapp order.contact_phone order.reference %}" target="_blank" rel="noopener" class="text-brand-700">WhatsApp</a></p></div>
+      <div><p class="text-stone-500">{{ order.get_fulfillment_display }}</p>
+        {% if order.is_pickup %}<p class="font-medium">{% translate "Le client vient en boutique" %}</p>{% else %}<p class="font-medium">{{ order.delivery_address }}</p><p>{{ order.delivery_landmark }}</p>{% endif %}</div>
+      <div><p class="text-stone-500">{% translate "Paiement prévu" %}</p><p class="font-medium">{{ order.get_payment_method_display }}</p></div>
+      {% if order.note %}<div class="sm:col-span-2"><p class="text-stone-500">{% translate "Note du client" %}</p><p class="whitespace-pre-line">{{ order.note }}</p></div>{% endif %}
+    </div>
+  </div>
+  {% include "dashboard/_order_actions.html" %}
+</div>
+{% endblock %}

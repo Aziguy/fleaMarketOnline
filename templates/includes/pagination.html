@@ -1,0 +1,8 @@
+{% load i18n mall %}
+{% if page.has_other_pages %}
+<nav class="mt-8 flex items-center justify-center gap-2 text-sm">
+  {% if page.has_previous %}<a class="btn-secondary btn-sm" href="{% query page=page.previous_page_number %}">{% translate "Précédent" %}</a>{% endif %}
+  <span class="px-3 text-stone-500">{% blocktranslate with n=page.number total=page.paginator.num_pages %}Page {{ n }} sur {{ total }}{% endblocktranslate %}</span>
+  {% if page.has_next %}<a class="btn-secondary btn-sm" href="{% query page=page.next_page_number %}">{% translate "Suivant" %}</a>{% endif %}
+</nav>
+{% endif %}

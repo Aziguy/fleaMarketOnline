@@ -1,0 +1,15 @@
+{% extends "accounts/_auth_layout.html" %}{% load i18n %}
+{% block title %}{% translate "Créer un compte" %}{% endblock %}
+{% block heading %}{% translate "Créer un compte" %}{% endblock %}
+{% block subheading %}<p class="mt-1 text-sm text-stone-500">{% translate "Un seul compte pour acheter et pour gérer votre boutique." %}</p>{% endblock %}
+{% block card %}
+<form method="post" class="space-y-4">
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{{ next }}">
+  {% include "includes/form.html" %}
+  <button class="btn-primary w-full">{% translate "Créer mon compte" %}</button>
+</form>
+{% endblock %}
+{% block below %}
+<p class="mt-6 text-center text-sm text-stone-600">{% translate "Déjà inscrit ?" %} <a href="{% url 'accounts:login' %}" class="font-semibold text-brand-700 hover:underline">{% translate "Se connecter" %}</a></p>
+{% endblock %}

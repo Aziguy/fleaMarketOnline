@@ -1,0 +1,20 @@
+{% extends "accounts/_account_layout.html" %}{% load i18n %}
+{% block title %}{% translate "Mes réservations" %}{% endblock %}
+{% block account %}
+<h1 class="text-2xl">{% translate "Mes réservations" %}</h1>
+<div class="mt-6 space-y-3">
+  {% for booking in bookings %}
+  <a href="{{ booking.get_absolute_url }}" class="card flex flex-col gap-2 p-4 hover:border-brand-300 sm:flex-row sm:items-center">
+    <div class="flex-1">
+      <p class="font-semibold">{{ booking.shop.name }} <span class="ml-2 font-mono text-xs text-stone-500">{{ booking.reference }}</span></p>
+      <p class="text-xs text-stone-500">{{ booking.get_kind_display }}{% if booking.service %} · {{ booking.service.name }}{% endif %}{% if booking.kind == "table" %} · {{ booking.party_size }} pers.{% endif %}</p>
+    </div>
+    <span class="text-sm font-medium">{{ booking.date|date:"D d/m/Y" }} {{ booking.time|time:"H:i" }}</span>
+    <span class="{{ booking.status_badge }}">{{ booking.get_status_display }}</span>
+  </a>
+  {% empty %}
+    {% translate "Aucune réservation" as t %}{% translate "Réservez un rendez-vous dans un salon ou une table dans un restaurant du mall." as x %}
+    {% include "includes/empty.html" with title=t text=x icon="📅" %}
+  {% endfor %}
+</div>
+{% endblock %}

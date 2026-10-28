@@ -1,0 +1,12 @@
+{% extends "dashboard/_layout.html" %}{% load i18n %}
+{% block title %}{% translate "Prestation" %}{% endblock %}
+{% block dashboard %}
+<h1 class="text-2xl">{% if service %}{% translate "Modifier la prestation" %}{% else %}{% translate "Nouvelle prestation" %}{% endif %}</h1>
+<form method="post" class="card card-body mt-6 grid max-w-2xl gap-4 sm:grid-cols-2">
+  {% csrf_token %}{% include "includes/form.html" %}
+  <div class="flex gap-2 sm:col-span-2"><button class="btn-primary">{% translate "Enregistrer" %}</button><a href="{% url 'dashboard:services' %}" class="btn-ghost">{% translate "Annuler" %}</a></div>
+</form>
+{% if service %}
+<form method="post" action="{% url 'dashboard:service_delete' service.pk %}" class="mt-6" onsubmit="return confirm('{% translate "Supprimer cette prestation ?" %}')">{% csrf_token %}<button class="btn-ghost text-red-600">{% translate "Supprimer" %}</button></form>
+{% endif %}
+{% endblock %}

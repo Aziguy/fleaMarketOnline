@@ -1,0 +1,20 @@
+{% extends "accounts/_account_layout.html" %}{% load i18n mall %}
+{% block title %}{% translate "Mes commandes" %}{% endblock %}
+{% block account %}
+<h1 class="text-2xl">{% translate "Mes commandes" %}</h1>
+<div class="mt-6 space-y-3">
+  {% for order in orders %}
+  <a href="{{ order.get_absolute_url }}" class="card flex flex-col gap-2 p-4 hover:border-brand-300 sm:flex-row sm:items-center">
+    <div class="flex-1">
+      <p class="font-semibold">{{ order.shop.name }} <span class="ml-2 font-mono text-xs text-stone-500">{{ order.reference }}</span></p>
+      <p class="text-xs text-stone-500">{{ order.created_at|date:"d/m/Y H:i" }} · {{ order.get_fulfillment_display }} · {% blocktranslate count n=order.items.all|length %}{{ n }} article{% plural %}{{ n }} articles{% endblocktranslate %}</p>
+    </div>
+    <span class="{{ order.status_badge }}">{{ order.get_status_display }}</span>
+    <span class="font-bold sm:w-32 sm:text-right">{{ order.total|fcfa }}</span>
+  </a>
+  {% empty %}
+    {% translate "Aucune commande pour l'instant" as t %}{% url 'shops:list' as u %}{% translate "Découvrir les boutiques" as c %}
+    {% include "includes/empty.html" with title=t url=u cta=c icon="🧾" %}
+  {% endfor %}
+</div>
+{% endblock %}

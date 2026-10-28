@@ -1,0 +1,19 @@
+{% extends "base.html" %}{% load i18n mall %}
+{% block title %}{% if current_type %}{{ current_type.label }}{% else %}{% translate "Boutiques" %}{% endif %}{% endblock %}
+{% block content %}
+<div class="container-page py-8">
+  <h1 class="text-2xl sm:text-3xl">{% if current_type %}{{ current_type.icon }} {{ current_type.label }}{% else %}{% translate "Les boutiques du mall" %}{% endif %}</h1>
+  <form class="mt-6 flex flex-col gap-3 sm:flex-row" hx-get="{% url 'shops:list' %}" hx-target="#results" hx-trigger="input delay:300ms from:input[name=q], change" hx-push-url="true">
+    <input type="search" name="q" value="{{ q }}" placeholder="{% translate 'Nom de la boutique...' %}" class="input sm:max-w-xs">
+    <select name="type" class="input sm:max-w-xs">
+      <option value="">{% translate "Tous les types" %}</option>
+      {% for t in shop_types %}<option value="{{ t.slug }}" {% if current_type.pk == t.pk %}selected{% endif %}>{{ t.icon }} {{ t.label }} ({{ t.n }})</option>{% endfor %}
+    </select>
+    <select name="niveau" class="input sm:max-w-[12rem]">
+      <option value="">{% translate "Tous les niveaux" %}</option>
+      {% for value, label in levels %}<option value="{{ value }}" {% if request.GET.niveau == value %}selected{% endif %}>{{ label }}</option>{% endfor %}
+    </select>
+  </form>
+  <div id="results" class="mt-6">{% include "shops/_results.html" %}</div>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "dashboard/_layout.html" %}{% load i18n %}
+{% block title %}{% translate "Horaires" %}{% endblock %}
+{% block dashboard %}
+<h1 class="text-2xl">{% translate "Horaires d'ouverture" %}</h1>
+<p class="mt-1 text-sm text-stone-500">{% translate "Utilisés pour afficher « Ouvert / Fermé » et valider les réservations." %}</p>
+<form method="post" class="card mt-6 overflow-hidden">
+  {% csrf_token %}{{ formset.management_form }}
+  {% for error in formset.non_form_errors %}<p class="error px-5 pt-4">{{ error }}</p>{% endfor %}
+  <div class="divide-y divide-stone-100">
+    {% for form in formset %}
+    <div class="grid grid-cols-2 items-center gap-3 px-5 py-3 sm:grid-cols-[8rem_1fr_1fr_auto]">
+      {{ form.id }}{{ form.weekday }}
+      <p class="col-span-2 font-medium sm:col-span-1">{{ form.instance.get_weekday_display }}</p>
+      <div>{{ form.opens }}{% for e in form.opens.errors %}<p class="error">{{ e }}</p>{% endfor %}</div>
+      <div>{{ form.closes }}{% for e in form.closes.errors %}<p class="error">{{ e }}</p>{% endfor %}</div>
+      <label class="col-span-2 flex items-center gap-2 text-sm sm:col-span-1">{{ form.closed }} {% translate "Fermé" %}</label>
+      {% for e in form.non_field_errors %}<p class="error col-span-full">{{ e }}</p>{% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+  <div class="border-t border-stone-100 px-5 py-4"><button class="btn-primary">{% translate "Enregistrer" %}</button></div>
+</form>
+{% endblock %}

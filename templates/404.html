@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% translate "Page introuvable" %}{% endblock %}
+{% block content %}
+<div class="container-page py-20 text-center">
+  <p class="text-6xl font-bold text-brand-600">404</p>
+  <h1 class="mt-4 text-2xl">{% translate "Cette page n'existe pas ou n'est plus disponible." %}</h1>
+  <a href="{% url 'core:home' %}" class="btn-primary mt-8">{% translate "Retour à l'accueil" %}</a>
+</div>
+{% endblock %}

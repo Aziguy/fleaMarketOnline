@@ -1,0 +1,15 @@
+{% load i18n static mall %}
+<tr id="product-{{ product.pk }}">
+  <td><div class="flex items-center gap-3">
+    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/placeholder.svg' %}{% endif %}" class="h-10 w-10 rounded-lg object-cover" alt="">
+    <div class="min-w-0"><a href="{% url 'dashboard:product_edit' product.pk %}" class="block truncate font-medium hover:text-brand-700">{{ product.name }}</a><span class="text-xs text-stone-500">{{ product.category|default:"" }}</span></div>
+  </div></td>
+  <td class="whitespace-nowrap">{{ product.price|fcfa }}</td>
+  <td>{% if product.stock is None %}<span class="text-stone-400">∞</span>{% else %}{{ product.stock }}{% endif %}</td>
+  <td>
+    <form method="post" action="{% url 'dashboard:product_toggle' product.pk %}" hx-post="{% url 'dashboard:product_toggle' product.pk %}" hx-target="#product-{{ product.pk }}" hx-swap="outerHTML">
+      {% csrf_token %}<button class="{% if product.is_active %}badge-green{% else %}badge-gray{% endif %}">{% if product.is_active %}{% translate "En ligne" %}{% else %}{% translate "Hors ligne" %}{% endif %}</button>
+    </form>
+  </td>
+  <td class="text-right"><a href="{% url 'dashboard:product_edit' product.pk %}" class="btn-ghost btn-sm">{% translate "Modifier" %}</a></td>
+</tr>

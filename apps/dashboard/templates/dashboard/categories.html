@@ -1,0 +1,24 @@
+{% extends "dashboard/_layout.html" %}{% load i18n %}
+{% block title %}{% translate "Rayons" %}{% endblock %}
+{% block dashboard %}
+<h1 class="text-2xl">{% translate "Rayons" %}</h1>
+<p class="mt-1 text-sm text-stone-500">{% translate "Organisez vos produits : Boissons, Smartphones, Soins visage..." %}</p>
+<div class="mt-6 grid gap-6 lg:grid-cols-[1fr_20rem]">
+  <div class="card overflow-hidden">
+    <ul class="divide-y divide-stone-100 text-sm">
+      {% for c in categories %}
+      <li class="flex items-center gap-3 px-5 py-3">
+        <span class="w-8 text-stone-400">{{ c.position }}</span><span class="flex-1 font-medium">{{ c.name }}</span>
+        <a href="{% url 'dashboard:category_edit' c.pk %}" class="btn-ghost btn-sm">{% translate "Modifier" %}</a>
+        <form method="post" action="{% url 'dashboard:category_delete' c.pk %}" onsubmit="return confirm('{% translate "Supprimer ce rayon ?" %}')">{% csrf_token %}<button class="btn-ghost btn-sm text-red-600">{% translate "Supprimer" %}</button></form>
+      </li>
+      {% empty %}<li class="px-5 py-6 text-center text-stone-500">{% translate "Aucun rayon." %}</li>{% endfor %}
+    </ul>
+  </div>
+  <form method="post" class="card card-body h-fit space-y-4">
+    {% csrf_token %}<h2 class="font-semibold">{% translate "Nouveau rayon" %}</h2>
+    {% include "includes/form.html" %}
+    <button class="btn-primary w-full">{% translate "Ajouter" %}</button>
+  </form>
+</div>
+{% endblock %}

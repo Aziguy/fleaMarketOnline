@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% load static %}
+{% block content %}
+<div class="container-page flex justify-center py-10 sm:py-16">
+  <div class="w-full max-w-md">
+    <div class="mb-6 text-center">
+      <img src="{% static 'img/logo-mark.svg' %}" class="mx-auto h-12 w-12" alt="">
+      <h1 class="mt-4 text-2xl">{% block heading %}{% endblock %}</h1>
+      {% block subheading %}{% endblock %}
+    </div>
+    <div class="card card-body">{% block card %}{% endblock %}</div>
+    {% block below %}{% endblock %}
+  </div>
+</div>
+{% endblock %}

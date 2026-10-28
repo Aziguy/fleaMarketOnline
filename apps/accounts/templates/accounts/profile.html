@@ -1,0 +1,10 @@
+{% extends "accounts/_account_layout.html" %}{% load i18n %}
+{% block title %}{% translate "Mon profil" %}{% endblock %}
+{% block account %}
+<h1 class="text-2xl">{% translate "Mon profil" %}</h1>
+<form method="post" class="card card-body mt-6 grid max-w-2xl gap-4 sm:grid-cols-2">
+  {% csrf_token %}
+  {% include "includes/form.html" %}
+  <div class="sm:col-span-2"><button class="btn-primary">{% translate "Enregistrer" %}</button></div>
+</form>
+{% endblock %}

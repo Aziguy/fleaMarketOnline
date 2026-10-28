@@ -1,54 +1,39 @@
-{% load static %}
-
-        <!-- Footer Start -->
-		<footer id="footer" class="footer-style-2">
-			<div class="footer-widget">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<div class="widget widget-newsletter">
-								<div class="widget-title">
-									<h5>Subscribe to our Newsletter</h5>
-								</div>
-								<div class="fieldset">
-									<form action="#">
-										<div class="field-holder">
-											<label>
-												<i class=" icon-envelope3"></i>
-												<input type="text" class="field-input" placeholder=" Enter Your Email Address...">
-											</label>
-										</div>
-										<div class="field-holder btn-holder">
-											<input class="subscribe-btn bgcolor" type="submit" value="Sign Up">
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="copyright-sec">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<div class="copyright-inner">
-								<div class="copy-right">
-									<p>&copy {% now "m/Y" %} OnlineMall. All Rights Reserved. Developed By <a href="https://www.linkedin.com/in/hippolyte-kengni/" target="_blank" rel="noreferrer">Aziguy</a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div> <!-- /.cs-copyright -->
-		</footer>
-		<!-- Footer End -->
-	</div>
-
-	<!-- Modal Popup End -->
-	<script src="{% static 'js/scripts.js' %}"></script>
-	<script src="{% static 'js/functions.js' %}"></script>
-</body>
-
-</html>
+{% load i18n static %}
+<footer class="mt-16 bg-brand-950 text-brand-100">
+  <div class="container-page grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
+    <div>
+      <div class="flex items-center gap-2">
+        <img src="{% static 'img/logo-mark.svg' %}" alt="" class="h-9 w-9">
+        <span class="text-lg font-bold text-white">Mfoundi Mall</span>
+      </div>
+      <p class="mt-3 text-sm text-brand-200">{% translate "Toutes les boutiques du mall, à portée de main." %}</p>
+    </div>
+    <div>
+      <h3 class="text-sm font-semibold text-white">{% translate "Acheter" %}</h3>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a href="{% url 'shops:list' %}" class="hover:text-white">{% translate "Toutes les boutiques" %}</a></li>
+        <li><a href="{% url 'core:how_it_works' %}" class="hover:text-white">{% translate "Comment ça marche" %}</a></li>
+        <li><a href="{% url 'orders:list' %}" class="hover:text-white">{% translate "Suivre ma commande" %}</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="text-sm font-semibold text-white">{% translate "Vendre" %}</h3>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a href="{% url 'core:merchants' %}" class="hover:text-white">{% translate "Ouvrir ma boutique en ligne" %}</a></li>
+        <li><a href="{% url 'dashboard:home' %}" class="hover:text-white">{% translate "Espace boutique" %}</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="text-sm font-semibold text-white">{% translate "Nous trouver" %}</h3>
+      <p class="mt-3 text-sm">{{ MALL_ADDRESS }}</p>
+      {% if SITE_PHONE %}<p class="mt-1 text-sm">{{ SITE_PHONE }}</p>{% endif %}
+      <p class="mt-1 text-sm">{{ SITE_EMAIL }}</p>
+    </div>
+  </div>
+  <div class="border-t border-brand-900">
+    <div class="container-page flex flex-col gap-2 py-4 text-xs text-brand-300 sm:flex-row sm:justify-between">
+      <span>© {% now "Y" %} Mfoundi Mall, Yaoundé</span>
+      <span>{% translate "Prix en Franc CFA (FCFA). Paiement sur place uniquement." %}</span>
+    </div>
+  </div>
+</footer>

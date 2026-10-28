@@ -1,0 +1,14 @@
+{% load i18n mall %}{% blocktranslate with ref=order.reference %}Nouvelle commande {{ ref }}{% endblocktranslate %}
+
+{% translate "Client" %} : {{ order.contact_name }} ({{ order.contact_phone|phone }})
+{% translate "Mode de remise" %} : {{ order.get_fulfillment_display }}
+{% translate "Paiement prévu" %} : {{ order.get_payment_method_display }}
+{% if order.delivery_address %}{% translate "Adresse" %} : {{ order.delivery_address }} {{ order.delivery_landmark }}
+{% endif %}
+{% for item in order.items.all %}- {{ item.quantity }} x {{ item.product_name }} : {{ item.total|fcfa }}
+{% endfor %}
+{% translate "Total" %} : {{ order.total|fcfa }}
+{% if order.note %}
+{% translate "Note" %} : {{ order.note }}{% endif %}
+
+{% translate "Confirmez-la depuis votre espace boutique." %}

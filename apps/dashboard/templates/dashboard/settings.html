@@ -1,0 +1,40 @@
+{% extends "dashboard/_layout.html" %}{% load i18n %}
+{% block title %}{% translate "Informations & paiement" %}{% endblock %}
+{% block dashboard %}
+<h1 class="text-2xl">{% translate "Informations & paiement" %}</h1>
+<form method="post" enctype="multipart/form-data" class="mt-6 space-y-6">
+  {% csrf_token %}
+  {% for error in form.non_field_errors %}<div class="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">{{ error }}</div>{% endfor %}
+  <fieldset class="card card-body grid gap-4 sm:grid-cols-2">
+    <legend class="sr-only">{% translate "Vitrine" %}</legend>
+    <h2 class="font-semibold sm:col-span-2">{% translate "Vitrine" %}</h2>
+    {% include "includes/field.html" with field=form.name %}
+    {% include "includes/field.html" with field=form.tagline %}
+    {% include "includes/field.html" with field=form.description wrapper="sm:col-span-2" %}
+    {% include "includes/field.html" with field=form.logo %}
+    {% include "includes/field.html" with field=form.cover %}
+  </fieldset>
+  <fieldset class="card card-body grid gap-4 sm:grid-cols-2">
+    <h2 class="font-semibold sm:col-span-2">{% translate "Emplacement et contacts" %}</h2>
+    {% include "includes/field.html" with field=form.level %}
+    {% include "includes/field.html" with field=form.unit %}
+    {% include "includes/field.html" with field=form.phone %}
+    {% include "includes/field.html" with field=form.whatsapp %}
+    {% include "includes/field.html" with field=form.email %}
+  </fieldset>
+  <fieldset class="card card-body grid gap-4 sm:grid-cols-2">
+    <h2 class="font-semibold sm:col-span-2">{% translate "Paiement sur place" %}</h2>
+    {% include "includes/field.html" with field=form.accepts_cash wrapper="sm:col-span-2" %}
+    {% include "includes/field.html" with field=form.mtn_momo_number %}
+    {% include "includes/field.html" with field=form.orange_money_number %}
+  </fieldset>
+  <fieldset class="card card-body grid gap-4 sm:grid-cols-2">
+    <h2 class="font-semibold sm:col-span-2">{% translate "Retrait et livraison" %}</h2>
+    {% include "includes/field.html" with field=form.offers_pickup %}
+    {% include "includes/field.html" with field=form.offers_delivery %}
+    {% include "includes/field.html" with field=form.delivery_fee %}
+    {% include "includes/field.html" with field=form.delivery_area %}
+  </fieldset>
+  <button class="btn-primary">{% translate "Enregistrer" %}</button>
+</form>
+{% endblock %}

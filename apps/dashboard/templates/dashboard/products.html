@@ -1,0 +1,23 @@
+{% extends "dashboard/_layout.html" %}{% load i18n mall %}
+{% block title %}{% translate "Produits" %}{% endblock %}
+{% block dashboard %}
+<div class="flex flex-wrap items-center justify-between gap-3">
+  <h1 class="text-2xl">{% translate "Produits" %}</h1>
+  <a href="{% url 'dashboard:product_create' %}" class="btn-primary">+ {% translate "Nouveau produit" %}</a>
+</div>
+<form class="mt-4 flex flex-wrap gap-2">
+  <input type="search" name="q" value="{{ q }}" placeholder="{% translate 'Rechercher' %}" class="input max-w-xs">
+  <select name="filtre" class="input max-w-[12rem]" onchange="this.form.submit()">
+    <option value="">{% translate "Tous" %}</option>
+    <option value="stock" {% if request.GET.filtre == "stock" %}selected{% endif %}>{% translate "Stock faible" %}</option>
+    <option value="hors-ligne" {% if request.GET.filtre == "hors-ligne" %}selected{% endif %}>{% translate "Hors ligne" %}</option>
+  </select>
+</form>
+<div class="card mt-4 overflow-x-auto">
+  <table class="table-base">
+    <thead class="bg-stone-50"><tr><th>{% translate "Produit" %}</th><th>{% translate "Prix" %}</th><th>{% translate "Stock" %}</th><th>{% translate "Statut" %}</th><th></th></tr></thead>
+    <tbody class="divide-y divide-stone-100">{% for product in page %}{% include "dashboard/_product_row.html" %}{% empty %}<tr><td colspan="5" class="py-8 text-center text-stone-500">{% translate "Aucun produit." %}</td></tr>{% endfor %}</tbody>
+  </table>
+</div>
+{% include "includes/pagination.html" %}
+{% endblock %}
