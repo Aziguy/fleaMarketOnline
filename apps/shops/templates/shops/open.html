@@ -1,0 +1,23 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% translate "Ouvrir ma boutique" %}{% endblock %}
+{% block content %}
+<div class="container-page max-w-3xl py-10">
+  <h1 class="text-2xl sm:text-3xl">{% translate "Ouvrir ma boutique en ligne" %}</h1>
+  <p class="mt-2 text-stone-600">{% translate "Renseignez les informations de votre boutique du Mfoundi Mall. Elle sera publiée après validation par l'administration." %}</p>
+  <form method="post" enctype="multipart/form-data" class="card card-body mt-6 grid gap-4 sm:grid-cols-2">
+    {% csrf_token %}
+    {% for error in form.non_field_errors %}<div class="sm:col-span-2 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">{{ error }}</div>{% endfor %}
+    {% include "includes/field.html" with field=form.name wrapper="sm:col-span-2" %}
+    {% include "includes/field.html" with field=form.shop_type %}
+    {% include "includes/field.html" with field=form.tagline %}
+    {% include "includes/field.html" with field=form.description wrapper="sm:col-span-2" %}
+    {% include "includes/field.html" with field=form.level %}
+    {% include "includes/field.html" with field=form.unit %}
+    {% include "includes/field.html" with field=form.phone %}
+    {% include "includes/field.html" with field=form.whatsapp %}
+    {% include "includes/field.html" with field=form.email %}
+    {% include "includes/field.html" with field=form.logo %}
+    <div class="sm:col-span-2"><button class="btn-primary">{% translate "Créer ma boutique" %}</button></div>
+  </form>
+</div>
+{% endblock %}

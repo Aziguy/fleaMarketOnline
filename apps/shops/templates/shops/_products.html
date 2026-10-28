@@ -1,0 +1,9 @@
+{% load i18n %}
+{% if page.object_list %}
+  <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4">
+    {% for product in page %}{% include "includes/product_card.html" with show_shop=False %}{% endfor %}
+  </div>
+  {% include "includes/pagination.html" %}
+{% else %}
+  {% translate "Aucun produit pour le moment" as t %}{% include "includes/empty.html" with title=t icon="📦" %}
+{% endif %}
