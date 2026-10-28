@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% translate "Panier" %}{% endblock %}
+{% block content %}
+<div class="container-page py-8">
+  <h1 class="text-2xl sm:text-3xl">{% translate "Mon panier" %}</h1>
+  <p class="mt-1 text-sm text-stone-500">{% translate "Chaque boutique traite sa commande séparément. Validez boutique par boutique." %}</p>
+  <div id="cart-content" class="mt-6">{% include "cart/_content.html" %}</div>
+</div>
+{% endblock %}

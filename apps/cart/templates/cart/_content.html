@@ -1,0 +1,39 @@
+{% load i18n static mall %}
+{% if request.htmx %}{% include "cart/_counter.html" with hx_oob=True %}{% endif %}
+{% for group in groups %}
+<section class="card mb-6 overflow-hidden">
+  <header class="flex items-center justify-between gap-3 border-b border-stone-100 bg-brand-50/60 px-5 py-3">
+    <a href="{{ group.shop.get_absolute_url }}" class="flex items-center gap-2 font-semibold hover:text-brand-700"><span class="text-xl">{{ group.shop.shop_type.icon }}</span>{{ group.shop.name }}</a>
+    <span class="text-xs text-stone-500">{{ group.shop.location_label }}</span>
+  </header>
+  <ul class="divide-y divide-stone-100">
+    {% for line in group.lines %}
+    <li class="flex items-center gap-4 px-5 py-4">
+      <img src="{% if line.product.image %}{{ line.product.image.url }}{% else %}{% static 'img/placeholder.svg' %}{% endif %}" alt="" class="h-16 w-16 rounded-xl object-cover">
+      <div class="min-w-0 flex-1">
+        <a href="{{ line.product.get_absolute_url }}" class="line-clamp-2 text-sm font-medium hover:text-brand-700">{{ line.product.name }}</a>
+        <p class="text-xs text-stone-500">{{ line.product.price|fcfa }}</p>
+      </div>
+      <form method="post" action="{% url 'cart:update' line.product.pk %}" hx-post="{% url 'cart:update' line.product.pk %}" hx-target="#cart-content" hx-trigger="change">
+        {% csrf_token %}<input type="number" name="quantity" value="{{ line.quantity }}" min="0" max="{{ line.product.max_quantity }}" class="input w-20 py-1.5" aria-label="{% translate 'Quantité' %}">
+        <noscript><button class="btn-ghost btn-sm">OK</button></noscript>
+      </form>
+      <p class="hidden w-28 text-right font-semibold sm:block">{{ line.total|fcfa }}</p>
+      <form method="post" action="{% url 'cart:remove' line.product.pk %}" hx-post="{% url 'cart:remove' line.product.pk %}" hx-target="#cart-content">
+        {% csrf_token %}<button class="btn-ghost p-2 text-stone-400 hover:text-red-600" aria-label="{% translate 'Retirer' %}">✕</button>
+      </form>
+    </li>
+    {% endfor %}
+  </ul>
+  <footer class="flex flex-col gap-3 border-t border-stone-100 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+    <p class="text-sm">{% translate "Sous-total" %} : <strong class="text-lg">{{ group.subtotal|fcfa }}</strong></p>
+    <div class="flex flex-wrap gap-2">
+      <a href="{{ group.whatsapp_url }}" target="_blank" rel="noopener" class="btn-whatsapp">{% include "icons/whatsapp.html" %} {% translate "Commander sur WhatsApp" %}</a>
+      <a href="{% url 'orders:checkout' group.shop.slug %}" class="btn-primary">{% translate "Valider cette commande" %}</a>
+    </div>
+  </footer>
+</section>
+{% empty %}
+  {% translate "Votre panier est vide" as t %}{% translate "Parcourez les boutiques du mall et ajoutez vos articles." as x %}{% url 'shops:list' as u %}{% translate "Voir les boutiques" as c %}
+  {% include "includes/empty.html" with title=t text=x url=u cta=c icon="🛍️" %}
+{% endfor %}
