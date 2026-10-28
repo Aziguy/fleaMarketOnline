@@ -5,7 +5,7 @@
 <div class="mt-6 grid grid-cols-2 gap-4 xl:grid-cols-4">
   <a href="{% url 'dashboard:orders' %}?statut=pending" class="card card-body hover:border-brand-300"><p class="text-sm text-stone-500">{% translate "À confirmer" %}</p><p class="mt-1 text-3xl font-bold {% if pending_orders %}text-amber-600{% endif %}">{{ pending_orders }}</p></a>
   <a href="{% url 'dashboard:orders' %}" class="card card-body hover:border-brand-300"><p class="text-sm text-stone-500">{% translate "Commandes en cours" %}</p><p class="mt-1 text-3xl font-bold">{{ open_orders }}</p></a>
-  <div class="card card-body"><p class="text-sm text-stone-500">{% translate "Encaissé ce mois" %}</p><p class="mt-1 text-2xl font-bold text-brand-700">{{ month_revenue|fcfa }}</p></div>
+  <div class="card card-body"><p class="text-sm text-stone-500">{% translate "Encaissé ce mois" %}</p><p class="mt-1 text-xl font-bold text-brand-700 sm:text-2xl">{{ month_revenue|fcfa }}</p></div>
   <a href="{% url 'dashboard:products' %}" class="card card-body hover:border-brand-300"><p class="text-sm text-stone-500">{% translate "Produits" %}</p><p class="mt-1 text-3xl font-bold">{{ product_count }}</p></a>
 </div>
 
@@ -21,7 +21,7 @@
 </div>
 {% endif %}
 
-<div class="mt-6 grid gap-6 xl:grid-cols-2">
+<div class="mt-6 grid gap-6 xl:grid-cols-2 [&>*]:min-w-0">
   <div class="card">
     <div class="flex items-center justify-between border-b border-stone-100 px-5 py-3"><h2 class="font-semibold">{% translate "Dernières commandes" %}</h2><a href="{% url 'dashboard:orders' %}" class="text-sm text-brand-700">{% translate "Tout voir" %}</a></div>
     <ul class="divide-y divide-stone-100 text-sm">

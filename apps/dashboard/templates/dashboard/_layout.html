@@ -10,7 +10,7 @@
     </div>
   {% endif %}
   <div class="grid gap-6 lg:grid-cols-[15rem_1fr]">
-    <aside>
+    <aside class="min-w-0">
       <div class="mb-3 flex items-center gap-3 px-2">
         <span class="text-2xl">{{ shop.shop_type.icon }}</span>
         <div class="min-w-0"><p class="truncate font-semibold">{{ shop.name }}</p><a href="{{ shop.get_absolute_url }}" class="text-xs text-brand-700 hover:underline">{% translate "Voir ma vitrine" %} ↗</a></div>

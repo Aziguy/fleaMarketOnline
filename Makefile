@@ -36,8 +36,8 @@ format:
 	ruff format .
 
 messages:         ## Met à jour et compile les traductions
-	$(PY) manage.py makemessages -l en --ignore=node_modules --no-location --no-obsolete
-	$(PY) manage.py compilemessages --ignore=node_modules
+	$(PY) manage.py makemessages -l en --ignore=node_modules --ignore=docs --no-location --no-obsolete
+	$(PY) manage.py compilemessages --ignore=node_modules --ignore=docs
 
 docs:             ## Site de documentation en local
 	cd docs && npm install && npm run dev

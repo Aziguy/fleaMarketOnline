@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container-page py-8">
   <nav class="text-sm text-stone-500"><a href="{{ product.shop.get_absolute_url }}" class="hover:text-brand-700">{{ product.shop.name }}</a>{% if product.category %} / <a href="{{ product.shop.get_absolute_url }}?rayon={{ product.category.slug }}" class="hover:text-brand-700">{{ product.category.name }}</a>{% endif %}</nav>
-  <div class="mt-4 grid gap-8 lg:grid-cols-2">
+  <div class="mt-4 grid gap-8 lg:grid-cols-2 [&>*]:min-w-0">
     <div>
       <div class="card overflow-hidden"><img id="main-image" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/placeholder.svg' %}{% endif %}" alt="{{ product.name }}" class="aspect-square w-full object-cover"></div>
       {% if product.images.all %}
@@ -16,7 +16,7 @@
     </div>
     <div>
       <h1 class="text-2xl sm:text-3xl">{{ product.name }}</h1>
-      <div class="mt-4 flex items-baseline gap-3">
+      <div class="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
         <p class="text-3xl font-bold text-brand-700">{{ product.price|fcfa }}</p>
         {% if product.compare_at_price %}<p class="text-lg text-stone-400 line-through">{{ product.compare_at_price|fcfa }}</p><span class="badge bg-sun-500 text-brand-950">-{{ product.discount_percent }}%</span>{% endif %}
       </div>
