@@ -1,0 +1,34 @@
+{% extends "base.html" %}{% load i18n mall %}
+{% block title %}{% translate "Réserver" %}{% endblock %}
+{% block content %}
+<div class="container-page max-w-2xl py-8">
+  <a href="{{ shop.get_absolute_url }}" class="text-sm text-brand-700 hover:underline">← {{ shop.name }}</a>
+  <h1 class="mt-2 text-2xl sm:text-3xl">{% translate "Réservation" %}</h1>
+  <p class="mt-1 text-sm text-stone-500">{% translate "Votre demande est envoyée à la boutique, qui la confirme. Le paiement se fait sur place." %}</p>
+  <form method="post" class="card card-body mt-6 space-y-4" id="booking-form">
+    {% csrf_token %}
+    {% for error in form.non_field_errors %}<div class="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">{{ error }}</div>{% endfor %}
+    {% include "includes/field.html" with field=form.kind %}
+    <div data-kind="appointment">{% include "includes/field.html" with field=form.service %}</div>
+    <div data-kind="table">{% include "includes/field.html" with field=form.party_size %}</div>
+    <div class="grid gap-4 sm:grid-cols-2">
+      {% include "includes/field.html" with field=form.date %}
+      {% include "includes/field.html" with field=form.time %}
+    </div>
+    {% include "includes/field.html" with field=form.contact_phone %}
+    {% include "includes/field.html" with field=form.note %}
+    <button class="btn-primary">{% translate "Envoyer la demande" %}</button>
+  </form>
+</div>
+<script>
+  (() => {
+    const form = document.getElementById("booking-form");
+    const sync = () => {
+      const kind = form.querySelector("input[name=kind]:checked")?.value;
+      form.querySelectorAll("[data-kind]").forEach((el) => el.classList.toggle("hidden", kind !== el.dataset.kind));
+    };
+    form.addEventListener("change", sync);
+    sync();
+  })();
+</script>
+{% endblock %}
