@@ -36,3 +36,8 @@ def test_whatsapp_message(client, product):
     group = Cart(client.session).groups()[0]
     assert "2 x Riz 5 kg" in group.whatsapp_message()
     assert group.whatsapp_url.startswith("https://wa.me/237677000000?text=")
+
+
+def test_add_ignores_external_next(client, product):
+    response = client.post(reverse("cart:add", args=[product.pk]), {"next": "https://evil.example"})
+    assert response.url == reverse("cart:detail")

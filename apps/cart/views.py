@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 from django_htmx.http import trigger_client_event
@@ -30,7 +31,10 @@ def add(request, product_id):
         response = render(request, "cart/_counter.html", {"cart_count": len(cart)})
         message = _("Ajouté au panier") if product.in_stock else _("Produit épuisé")
         return trigger_client_event(response, "toast", {"value": message})
-    return redirect(request.POST.get("next") or "cart:detail")
+    target = request.POST.get("next", "")
+    if url_has_allowed_host_and_scheme(target, {request.get_host()}, request.is_secure()):
+        return redirect(target)
+    return redirect("cart:detail")
 
 
 @require_POST
