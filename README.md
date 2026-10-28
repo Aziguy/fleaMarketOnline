@@ -1,4 +1,30 @@
-# Mfoundi Mall en ligne
+<p align="center">
+  <img src="docs/src/assets/logo.svg" alt="Mfoundi Mall" width="96">
+</p>
+
+<h1 align="center">Mfoundi Mall en ligne</h1>
+
+<p align="center">
+  <a href="https://github.com/Aziguy/fleaMarketOnline/actions/workflows/ci.yml"><img src="https://github.com/Aziguy/fleaMarketOnline/actions/workflows/ci.yml/badge.svg?branch=master" alt="CI"></a>
+  <a href="https://github.com/Aziguy/fleaMarketOnline/actions/workflows/docs.yml"><img src="https://github.com/Aziguy/fleaMarketOnline/actions/workflows/docs.yml/badge.svg?branch=master" alt="Docs"></a>
+  <a href="https://aziguy.github.io/fleaMarketOnline/"><img src="https://img.shields.io/endpoint?url=https://aziguy.github.io/fleaMarketOnline/badges/tests.json" alt="Tests"></a>
+  <a href="https://aziguy.github.io/fleaMarketOnline/"><img src="https://img.shields.io/endpoint?url=https://aziguy.github.io/fleaMarketOnline/badges/coverage.json" alt="Couverture"></a>
+  <br>
+  <img src="https://img.shields.io/badge/python-3.12%2B-3776AB?logo=python&logoColor=white" alt="Python 3.12+">
+  <img src="https://img.shields.io/badge/django-5.2-0C4B33?logo=django&logoColor=white" alt="Django 5.2">
+  <img src="https://img.shields.io/badge/htmx-2-3366CC" alt="HTMX 2">
+  <img src="https://img.shields.io/badge/tailwind-3-06B6D4?logo=tailwindcss&logoColor=white" alt="Tailwind CSS 3">
+  <img src="https://img.shields.io/badge/postgresql-16-4169E1?logo=postgresql&logoColor=white" alt="PostgreSQL 16">
+  <a href="https://github.com/astral-sh/ruff"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json" alt="Ruff"></a>
+  <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-bienvenues-138a43" alt="PRs bienvenues"></a>
+</p>
+
+<p align="center">
+  <a href="https://aziguy.github.io/fleaMarketOnline/"><strong>Documentation</strong></a> ·
+  <a href="https://aziguy.github.io/fleaMarketOnline/demo/">Essayer en local</a> ·
+  <a href="CONTRIBUTING.md">Contribuer</a> ·
+  <a href="https://github.com/Aziguy/fleaMarketOnline/issues">Issues</a>
+</p>
 
 Plateforme web des boutiques du **Mfoundi Mall** (Yaoundé, Cameroun). Chaque boutique du mall (épicerie, technologie, coiffure, restaurant, bar, parfumerie, électroménager, cave...) crée son espace, publie produits et services et reçoit commandes et réservations.
 
@@ -12,7 +38,7 @@ Pensée pour le contexte local :
 - connexion par **numéro de téléphone** (+237) ou e-mail ;
 - interface **mobile d'abord**, en **français** et **anglais**.
 
-![Accueil](docs/images/accueil.png)
+![Accueil](docs/public/images/accueil.png)
 
 ## Fonctionnalités
 
@@ -57,14 +83,16 @@ docker compose up --build
 
 ## Documentation
 
-- **Développeurs** : [installation](docs/developpeur/installation.md), [développement](docs/developpeur/developpement.md), [architecture](docs/developpeur/architecture.md), [configuration](docs/developpeur/configuration.md), [déploiement](docs/developpeur/deploiement.md)
-- **Utilisateurs** : [clients](docs/utilisateur/client.md), [commerçants](docs/utilisateur/commercant.md), [administration du mall](docs/utilisateur/administrateur.md)
+La documentation complète est publiée sur **[aziguy.github.io/fleaMarketOnline](https://aziguy.github.io/fleaMarketOnline/)** (sources dans `docs/`).
+
+- **Utilisateurs** : [clients](https://aziguy.github.io/fleaMarketOnline/guides/client/), [commerçants](https://aziguy.github.io/fleaMarketOnline/guides/commercant/), [administration du mall](https://aziguy.github.io/fleaMarketOnline/guides/administrateur/)
+- **Développeurs** : [installation](https://aziguy.github.io/fleaMarketOnline/developpeur/installation/), [développement](https://aziguy.github.io/fleaMarketOnline/developpeur/developpement/), [architecture](https://aziguy.github.io/fleaMarketOnline/developpeur/architecture/), [configuration](https://aziguy.github.io/fleaMarketOnline/developpeur/configuration/), [déploiement](https://aziguy.github.io/fleaMarketOnline/developpeur/deploiement/)
 
 ## Captures
 
 | Boutique | Espace commerçant | Mobile |
 | --- | --- | --- |
-| ![Boutique](docs/images/boutique.png) | ![Espace boutique](docs/images/espace-boutique.png) | ![Mobile](docs/images/mobile.png) |
+| ![Boutique](docs/public/images/boutique.png) | ![Espace boutique](docs/public/images/espace-boutique.png) | ![Mobile](docs/public/images/mobile.png) |
 
 ## Tests
 
@@ -72,3 +100,7 @@ docker compose up --build
 make test
 make lint
 ```
+
+## Contribuer
+
+Les contributions sont les bienvenues. Lisez le [guide de contribution](CONTRIBUTING.md) et le [code de conduite](CODE_OF_CONDUCT.md). Pour une faille de sécurité, voir [SECURITY.md](SECURITY.md).
