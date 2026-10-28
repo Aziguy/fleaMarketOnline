@@ -3,11 +3,19 @@ updates:
   - package-ecosystem: pip
     directory: /
     schedule: { interval: weekly }
+    ignore:
+      # Django 5.2 LTS : passage à une version supérieure planifié manuellement.
+      - dependency-name: django
+        versions: [">=5.3"]
     groups:
       python: { patterns: ["*"] }
   - package-ecosystem: npm
     directory: /
     schedule: { interval: weekly }
+    ignore:
+      # Tailwind 4 change la configuration et le CLI : migration à faire à part.
+      - dependency-name: tailwindcss
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: npm
     directory: /docs
     schedule: { interval: weekly }
