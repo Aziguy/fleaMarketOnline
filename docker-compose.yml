@@ -1,0 +1,44 @@
+# Environnement de développement : PostgreSQL + Django (runserver, rechargement auto).
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: mfoundi
+      POSTGRES_USER: mfoundi
+      POSTGRES_PASSWORD: mfoundi
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mfoundi"]
+      interval: 5s
+      retries: 10
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    environment:
+      COLLECTSTATIC: "0"
+      DJANGO_SETTINGS_MODULE: config.settings.dev
+      DATABASE_URL: postgres://mfoundi:mfoundi@db:5432/mfoundi
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  css:
+    image: node:22-alpine
+    working_dir: /app
+    command: sh -c "npm install && npm run watch"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    tty: true
+
+volumes:
+  pgdata:
