@@ -1,0 +1,57 @@
+{% extends "accounts/_account_layout.html" %}{% load i18n mall %}
+{% block title %}{% translate "Commande" %} {{ order.reference }}{% endblock %}
+{% block account %}
+<div class="flex flex-wrap items-center gap-3">
+  <h1 class="text-2xl">{% translate "Commande" %} <span class="font-mono">{{ order.reference }}</span></h1>
+  <span class="{{ order.status_badge }}">{{ order.get_status_display }}</span>
+</div>
+<p class="mt-1 text-sm text-stone-500">{{ order.shop.name }} · {{ order.created_at|date:"d/m/Y H:i" }}</p>
+
+{% if order.is_open %}
+<div class="mt-6 grid gap-4 md:grid-cols-2">
+  {% if order.is_pickup %}
+  <div class="card card-body border-brand-300 bg-brand-50 text-center">
+    <p class="text-sm font-medium text-brand-800">{% translate "Votre code de retrait" %}</p>
+    <p class="mt-2 font-mono text-4xl font-bold tracking-[0.3em] text-brand-700">{{ order.pickup_code }}</p>
+    <p class="mt-2 text-xs text-brand-800">{% translate "Donnez ce code au commerçant au moment du retrait." %}</p>
+  </div>
+  {% endif %}
+  <div class="card card-body text-sm">
+    <p class="font-semibold">{% translate "Paiement sur place" %} : {{ order.get_payment_method_display }}</p>
+    {% if order.payment_method == "mtn_momo" and order.shop.mtn_momo_number %}<p class="mt-2">{% translate "Numéro MTN MoMo de la boutique" %} : <strong>{{ order.shop.mtn_momo_number|phone }}</strong></p>{% endif %}
+    {% if order.payment_method == "orange_money" and order.shop.orange_money_number %}<p class="mt-2">{% translate "Numéro Orange Money de la boutique" %} : <strong>{{ order.shop.orange_money_number|phone }}</strong></p>{% endif %}
+    <p class="mt-2 text-stone-500">{% translate "Le transfert se fait devant le commerçant ou le livreur, au moment de la remise." %}</p>
+    <p class="mt-3 font-semibold">{% translate "Montant à payer" %} : {{ order.total|fcfa }}</p>
+  </div>
+</div>
+{% endif %}
+
+<div class="card mt-6 overflow-hidden">
+  <ul class="divide-y divide-stone-100 text-sm">
+    {% for item in order.items.all %}<li class="flex justify-between gap-3 px-5 py-3"><span>{{ item.quantity }} x {{ item.product_name }}</span><span class="font-medium">{{ item.total|fcfa }}</span></li>{% endfor %}
+  </ul>
+  <dl class="space-y-1 border-t border-stone-100 bg-stone-50 px-5 py-4 text-sm">
+    <div class="flex justify-between"><dt>{% translate "Sous-total" %}</dt><dd>{{ order.subtotal|fcfa }}</dd></div>
+    {% if order.delivery_fee %}<div class="flex justify-between"><dt>{% translate "Livraison" %}</dt><dd>{{ order.delivery_fee|fcfa }}</dd></div>{% endif %}
+    <div class="flex justify-between text-base font-bold"><dt>{% translate "Total" %}</dt><dd>{{ order.total|fcfa }}</dd></div>
+  </dl>
+</div>
+
+<div class="mt-6 grid gap-4 text-sm md:grid-cols-2">
+  <div class="card card-body">
+    <p class="font-semibold">{{ order.get_fulfillment_display }}</p>
+    {% if order.is_pickup %}<p class="mt-1 text-stone-600">{{ order.shop.name }}, {{ order.shop.location_label }}</p>
+    {% else %}<p class="mt-1 text-stone-600">{{ order.delivery_address }}{% if order.delivery_landmark %}<br>{{ order.delivery_landmark }}{% endif %}</p>{% endif %}
+    <p class="mt-2 text-stone-600">{{ order.contact_name }} · {{ order.contact_phone|phone }}</p>
+    {% if order.cancel_reason %}<p class="mt-2 text-red-700">{% translate "Motif d'annulation" %} : {{ order.cancel_reason }}</p>{% endif %}
+  </div>
+  <div class="card card-body flex flex-col gap-2">
+    <a href="{{ whatsapp_url }}" target="_blank" rel="noopener" class="btn-whatsapp">{% include "icons/whatsapp.html" %} {% translate "Contacter la boutique" %}</a>
+    {% if order.customer_can_cancel %}
+    <form method="post" action="{% url 'orders:cancel' order.reference %}" onsubmit="return confirm('{% translate "Annuler cette commande ?" %}')">
+      {% csrf_token %}<button class="btn-ghost w-full text-red-600">{% translate "Annuler la commande" %}</button>
+    </form>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}{% load i18n static mall %}
+{% block title %}{% translate "Valider la commande" %}{% endblock %}
+{% block content %}
+<div class="container-page py-8">
+  <h1 class="text-2xl sm:text-3xl">{% blocktranslate with shop=shop.name %}Commande chez {{ shop }}{% endblocktranslate %}</h1>
+  <div class="mt-6 grid gap-8 lg:grid-cols-[1fr_22rem]">
+    <form method="post" class="card card-body space-y-5" id="checkout-form">
+      {% csrf_token %}
+      {% for error in form.non_field_errors %}<div class="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">{{ error }}</div>{% endfor %}
+      {% include "includes/field.html" with field=form.fulfillment %}
+      <div id="delivery-fields" class="grid gap-4 sm:grid-cols-2">
+        {% include "includes/field.html" with field=form.delivery_address %}
+        {% include "includes/field.html" with field=form.delivery_landmark %}
+        {% if shop.delivery_area %}<p class="help sm:col-span-2">{% translate "Zone de livraison" %} : {{ shop.delivery_area }}</p>{% endif %}
+      </div>
+      {% include "includes/field.html" with field=form.payment_method %}
+      <div class="rounded-xl bg-brand-50 p-4 text-sm text-brand-900">
+        <p class="font-semibold">{% translate "Aucun paiement en ligne." %}</p>
+        <p class="mt-1">{% translate "Vous payez au moment du retrait ou de la livraison, devant le commerçant ou le livreur." %}</p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {% include "includes/field.html" with field=form.contact_name %}
+        {% include "includes/field.html" with field=form.contact_phone %}
+      </div>
+      {% include "includes/field.html" with field=form.note %}
+      <button class="btn-primary w-full sm:w-auto">{% translate "Envoyer la commande" %}</button>
+    </form>
+    <aside class="card card-body h-fit">
+      <h2 class="font-semibold">{% translate "Récapitulatif" %}</h2>
+      <ul class="mt-4 space-y-3 text-sm">
+        {% for line in group.lines %}<li class="flex justify-between gap-3"><span>{{ line.quantity }} x {{ line.product.name }}</span><span class="whitespace-nowrap font-medium">{{ line.total|fcfa }}</span></li>{% endfor %}
+      </ul>
+      <dl class="mt-4 space-y-2 border-t border-stone-100 pt-4 text-sm">
+        <div class="flex justify-between"><dt>{% translate "Sous-total" %}</dt><dd>{{ group.subtotal|fcfa }}</dd></div>
+        {% if shop.offers_delivery %}<div class="flex justify-between text-stone-500"><dt>{% translate "Livraison (si choisie)" %}</dt><dd>{% if shop.delivery_fee %}{{ shop.delivery_fee|fcfa }}{% else %}{% translate "gratuite" %}{% endif %}</dd></div>{% endif %}
+      </dl>
+    </aside>
+  </div>
+</div>
+<script>
+  (() => {
+    const form = document.getElementById("checkout-form");
+    const zone = document.getElementById("delivery-fields");
+    const sync = () => {
+      const choice = form.querySelector("input[name=fulfillment]:checked");
+      zone.classList.toggle("hidden", !choice || choice.value !== "delivery");
+    };
+    form.addEventListener("change", sync);
+    sync();
+  })();
+</script>
+{% endblock %}
