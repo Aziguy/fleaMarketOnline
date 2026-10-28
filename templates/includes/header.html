@@ -1,0 +1,74 @@
+{% load i18n static %}
+<header class="sticky top-0 z-40 border-b border-stone-200 bg-white/95 backdrop-blur">
+  <div class="bg-brand-700 text-brand-50">
+    <div class="container-page flex h-8 items-center justify-between text-xs">
+      <span class="truncate">{% translate "Commandez en ligne, payez sur place : espèces, MTN MoMo ou Orange Money" %}</span>
+      <form action="{% url 'set_language' %}" method="post" class="flex items-center gap-1">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        {% get_current_language as LANG %}
+        <button name="language" value="fr" class="rounded px-1.5 {% if LANG == 'fr' %}bg-brand-600 font-semibold{% endif %}">FR</button>
+        <button name="language" value="en" class="rounded px-1.5 {% if LANG == 'en' %}bg-brand-600 font-semibold{% endif %}">EN</button>
+      </form>
+    </div>
+  </div>
+  <div class="container-page flex h-16 items-center gap-3">
+    <button type="button" class="btn-ghost -ml-2 p-2 lg:hidden" data-toggle="mobile-nav" aria-label="{% translate 'Menu' %}">{% include "icons/menu.html" %}</button>
+    <a href="{% url 'core:home' %}" class="flex shrink-0 items-center gap-2">
+      <img src="{% static 'img/logo-mark.svg' %}" alt="" class="h-9 w-9">
+      <span class="hidden text-lg font-bold leading-tight text-brand-900 sm:block">Mfoundi<span class="text-brand-600"> Mall</span></span>
+    </a>
+    <form action="{% url 'core:search' %}" class="relative mx-2 hidden flex-1 md:block" role="search">
+      <span class="pointer-events-none absolute inset-y-0 left-3 flex items-center text-stone-400">{% include "icons/search.html" %}</span>
+      <input type="search" name="q" value="{{ q|default:'' }}" placeholder="{% translate 'Rechercher un produit, une boutique...' %}"
+             class="input rounded-full pl-10" autocomplete="off"
+             hx-get="{% url 'core:search' %}" hx-trigger="input changed delay:300ms, search" hx-target="#search-suggestions">
+      <div id="search-suggestions" class="absolute inset-x-0 top-full mt-2"></div>
+    </form>
+    <nav class="ml-auto hidden items-center gap-1 lg:flex">
+      <a href="{% url 'shops:list' %}" class="nav-link">{% translate "Boutiques" %}</a>
+      <a href="{% url 'core:how_it_works' %}" class="nav-link">{% translate "Comment ça marche" %}</a>
+      {% if not user.is_authenticated or not user.shop %}
+        <a href="{% url 'core:merchants' %}" class="nav-link">{% translate "Vendre au mall" %}</a>
+      {% endif %}
+    </nav>
+    <div class="ml-auto flex items-center gap-1 lg:ml-2">
+      <a href="{% url 'core:search' %}" class="btn-ghost p-2 md:hidden" aria-label="{% translate 'Rechercher' %}">{% include "icons/search.html" %}</a>
+      <a href="{% url 'cart:detail' %}" class="btn-ghost relative p-2" aria-label="{% translate 'Panier' %}">
+        {% include "icons/bag.html" with class="h-6 w-6" %}
+        {% include "cart/_counter.html" %}
+      </a>
+      {% if user.is_authenticated %}
+        <div class="relative">
+          <button type="button" class="btn-ghost gap-1.5 p-2" data-toggle="account-menu">
+            {% include "icons/user.html" with class="h-6 w-6" %}
+            <span class="hidden max-w-[8rem] truncate text-sm sm:inline">{{ user.first_name }}</span>
+          </button>
+          <div id="account-menu" data-dropdown class="card absolute right-0 mt-2 hidden w-56 p-2 text-sm">
+            {% if user.shop %}
+              <a href="{% url 'dashboard:home' %}" class="nav-link block font-semibold text-brand-700">{% translate "Mon espace boutique" %}</a>
+            {% endif %}
+            <a href="{% url 'orders:list' %}" class="nav-link block">{% translate "Mes commandes" %}</a>
+            <a href="{% url 'bookings:list' %}" class="nav-link block">{% translate "Mes réservations" %}</a>
+            <a href="{% url 'accounts:profile' %}" class="nav-link block">{% translate "Mon profil" %}</a>
+            {% if user.is_staff %}<a href="{% url 'admin:index' %}" class="nav-link block">{% translate "Administration" %}</a>{% endif %}
+            <form method="post" action="{% url 'accounts:logout' %}">{% csrf_token %}
+              <button class="nav-link block w-full text-left text-red-600">{% translate "Déconnexion" %}</button>
+            </form>
+          </div>
+        </div>
+      {% else %}
+        <a href="{% url 'accounts:login' %}" class="btn-primary hidden sm:inline-flex">{% translate "Connexion" %}</a>
+        <a href="{% url 'accounts:login' %}" class="btn-ghost p-2 sm:hidden" aria-label="{% translate 'Connexion' %}">{% include "icons/user.html" with class="h-6 w-6" %}</a>
+      {% endif %}
+    </div>
+  </div>
+  <nav id="mobile-nav" class="hidden border-t border-stone-200 lg:hidden">
+    <div class="container-page flex flex-col py-2">
+      <a href="{% url 'shops:list' %}" class="nav-link">{% translate "Boutiques" %}</a>
+      <a href="{% url 'core:how_it_works' %}" class="nav-link">{% translate "Comment ça marche" %}</a>
+      <a href="{% url 'core:merchants' %}" class="nav-link">{% translate "Vendre au mall" %}</a>
+      {% if not user.is_authenticated %}<a href="{% url 'accounts:signup' %}" class="nav-link">{% translate "Créer un compte" %}</a>{% endif %}
+    </div>
+  </nav>
+</header>

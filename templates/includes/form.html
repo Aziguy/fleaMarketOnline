@@ -1,0 +1,3 @@
+{% for error in form.non_field_errors %}<div class="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">{{ error }}</div>{% endfor %}
+{% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+{% for field in form.visible_fields %}{% include "includes/field.html" %}{% endfor %}

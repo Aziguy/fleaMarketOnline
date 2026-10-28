@@ -1,0 +1,26 @@
+{% load i18n %}
+<div class="{{ wrapper|default:'' }}">
+  {% if field.widget_type == 'checkbox' %}
+    <label class="flex items-start gap-3 text-sm">
+      {{ field }}
+      <span><span class="font-medium text-stone-800">{{ field.label }}</span>
+        {% if field.help_text %}<span class="help block">{{ field.help_text }}</span>{% endif %}</span>
+    </label>
+  {% elif field.widget_type == 'radioselect' %}
+    <fieldset>
+      <legend class="label">{{ field.label }}</legend>
+      <div class="grid gap-2 sm:grid-cols-2">
+        {% for choice in field %}
+          <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm has-[:checked]:border-brand-500 has-[:checked]:bg-brand-50">
+            {{ choice.tag }}<span class="font-medium">{{ choice.choice_label }}</span>
+          </label>
+        {% endfor %}
+      </div>
+    </fieldset>
+  {% else %}
+    <label class="label" for="{{ field.id_for_label }}">{{ field.label }}{% if not field.field.required %} <span class="font-normal text-stone-400">({% translate "facultatif" %})</span>{% endif %}</label>
+    {{ field }}
+    {% if field.help_text %}<p class="help">{{ field.help_text }}</p>{% endif %}
+  {% endif %}
+  {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+</div>

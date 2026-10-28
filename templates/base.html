@@ -1,0 +1,26 @@
+{% load i18n static %}<!DOCTYPE html>
+{% get_current_language as LANG %}
+<html lang="{{ LANG }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <meta name="theme-color" content="#138a43">
+  <title>{% block title %}{{ SITE_NAME }}{% endblock %} · {{ SITE_NAME }}</title>
+  <meta name="description" content="{% block description %}{% translate "Toutes les boutiques du Mfoundi Mall en ligne : commandez, réservez et payez sur place en espèces ou Mobile Money." %}{% endblock %}">
+  <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  <script src="{% static 'js/htmx.min.js' %}" defer></script>
+  <script src="{% static 'js/app.js' %}" defer></script>
+</head>
+<body class="flex min-h-screen flex-col" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  {% include "includes/header.html" %}
+  {% include "includes/messages.html" %}
+  <main class="flex-1">{% block content %}{% endblock %}</main>
+  {% block footer %}{% include "includes/footer.html" %}{% endblock %}
+  <div id="toasts" class="pointer-events-none fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 flex-col gap-2"></div>
+</body>
+</html>
