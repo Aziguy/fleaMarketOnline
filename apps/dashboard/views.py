@@ -15,6 +15,7 @@ from apps.orders.forms import CancelForm, CompleteOrderForm
 from apps.orders.models import Order
 from apps.shops.forms import OpeningHourFormSet, ShopSettingsForm
 from apps.shops.services import ensure_opening_hours
+from apps.shops.views import CURRENT_SHOP_KEY
 
 from .decorators import merchant_required
 from .forms import CategoryForm, ProductForm, ProductImageFormSet, ServiceForm
@@ -45,6 +46,14 @@ def home(request):
         "product_count": shop.products.count(),
     }
     return render(request, "dashboard/home.html", context)
+
+
+@merchant_required
+@require_POST
+def switch_shop(request):
+    shop = get_object_or_404(request.user.shops, pk=request.POST.get("shop"))
+    request.session[CURRENT_SHOP_KEY] = shop.pk
+    return redirect("dashboard:home")
 
 
 @merchant_required

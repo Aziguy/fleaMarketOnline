@@ -71,3 +71,19 @@ def test_opening_hours_default_sunday_closed(shop):
     sunday = shop.opening_hours.get(weekday=6)
     assert sunday.closed
     assert shop.opening_hours.get(weekday=0).opens == time(8, 0)
+
+
+def test_merchant_can_open_second_shop(merchant_client, merchant, shop):
+    assert merchant_client.get(reverse("shops:open")).status_code == 200
+    merchant_client.post(
+        reverse("shops:open"),
+        {
+            "name": "Resto Paul",
+            "shop_type": ShopType.objects.get(slug="restaurant").pk,
+            "level": "2",
+            "phone": "699222222",
+        },
+    )
+    assert merchant.shops.count() == 2
+    second = merchant.shops.get(name="Resto Paul")
+    assert merchant_client.session["dashboard_shop_id"] == second.pk

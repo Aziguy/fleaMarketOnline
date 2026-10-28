@@ -65,10 +65,10 @@ class Shop(models.Model):
         THIRD = "3", _("3e étage")
         OUTSIDE = "ext", _("Extérieur")
 
-    owner = models.OneToOneField(
+    owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name="shop",
+        related_name="shops",
         verbose_name=_("propriétaire"),
     )
     shop_type = models.ForeignKey(

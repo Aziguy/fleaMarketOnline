@@ -137,8 +137,8 @@ class Command(BaseCommand):
             owner.save()
             shop, _ = Shop.objects.update_or_create(
                 owner=owner,
+                name=data["name"],
                 defaults={
-                    "name": data["name"],
                     "shop_type": ShopType.objects.get(slug=data["type"]),
                     "tagline": data["tagline"],
                     "unit": data["unit"],

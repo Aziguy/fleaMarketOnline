@@ -15,6 +15,16 @@
         <span class="text-2xl">{{ shop.shop_type.icon }}</span>
         <div class="min-w-0"><p class="truncate font-semibold">{{ shop.name }}</p><a href="{{ shop.get_absolute_url }}" class="text-xs text-brand-700 hover:underline">{% translate "Voir ma vitrine" %} ↗</a></div>
       </div>
+      {% if request.shops|length > 1 %}
+      <form method="post" action="{% url 'dashboard:switch_shop' %}" class="mb-3 px-2">
+        {% csrf_token %}
+        <label class="sr-only" for="shop-switch">{% translate "Changer de boutique" %}</label>
+        <select id="shop-switch" name="shop" class="input py-1.5" onchange="this.form.submit()">
+          {% for s in request.shops %}<option value="{{ s.pk }}" {% if s.pk == shop.pk %}selected{% endif %}>{{ s.name }}</option>{% endfor %}
+        </select>
+        <noscript><button class="btn-ghost btn-sm mt-1">OK</button></noscript>
+      </form>
+      {% endif %}
       <nav class="flex gap-1 overflow-x-auto pb-2 lg:flex-col lg:pb-0">
         {% url 'dashboard:home' as u %}<a href="{{ u }}" class="nav-link whitespace-nowrap {% if request.path == u %}nav-link-active{% endif %}">{% translate "Tableau de bord" %}</a>
         {% url 'dashboard:orders' as u %}<a href="{{ u }}" class="nav-link whitespace-nowrap {% if u in request.path %}nav-link-active{% endif %}">{% translate "Commandes" %}</a>
@@ -26,6 +36,7 @@
         {% url 'dashboard:services' as u %}<a href="{{ u }}" class="nav-link whitespace-nowrap {% if u in request.path %}nav-link-active{% endif %}">{% translate "Prestations" %}</a>
         {% url 'dashboard:settings' as u %}<a href="{{ u }}" class="nav-link whitespace-nowrap {% if request.path == u %}nav-link-active{% endif %}">{% translate "Informations & paiement" %}</a>
         {% url 'dashboard:hours' as u %}<a href="{{ u }}" class="nav-link whitespace-nowrap {% if request.path == u %}nav-link-active{% endif %}">{% translate "Horaires" %}</a>
+        <a href="{% url 'shops:open' %}" class="nav-link whitespace-nowrap text-brand-700">+ {% translate "Ajouter une boutique" %}</a>
       </nav>
     </aside>
     <section class="min-w-0">{% block dashboard %}{% endblock %}</section>

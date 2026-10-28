@@ -39,4 +39,4 @@ Cochez **Mise en avant** dans la liste des boutiques : elles apparaissent en pre
 ## 6. Support aux utilisateurs
 
 - **Mot de passe oublié sans e-mail** : dans la fiche utilisateur, utilisez le lien de changement de mot de passe et communiquez le nouveau mot de passe au titulaire après vérification de son identité.
-- **Changement de propriétaire d'une boutique** : modifiez le champ **Propriétaire** de la boutique.
+- **Changement de propriétaire d'une boutique** : modifiez le champ **Propriétaire** de la boutique. Un commerçant peut posséder plusieurs boutiques.

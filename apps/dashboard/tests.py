@@ -112,3 +112,19 @@ def test_booking_action(client, salon, customer):
     booking.refresh_from_db()
     assert booking.status == Booking.Status.CONFIRMED
     assert booking.merchant_note == "À lundi"
+
+
+def test_merchant_can_manage_several_shops(merchant_client, merchant, shop):
+    from conftest import make_shop
+
+    second = make_shop(merchant, "restaurant", name="Resto Paul")
+    assert merchant_client.get(reverse("dashboard:home")).wsgi_request.shop == shop
+    merchant_client.post(reverse("dashboard:switch_shop"), {"shop": second.pk})
+    response = merchant_client.get(reverse("dashboard:products"))
+    assert response.wsgi_request.shop == second
+    assert len(response.wsgi_request.shops) == 2
+
+
+def test_cannot_switch_to_other_merchant_shop(merchant_client, salon):
+    response = merchant_client.post(reverse("dashboard:switch_shop"), {"shop": salon.pk})
+    assert response.status_code == 404

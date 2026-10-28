@@ -10,6 +10,8 @@ from . import services
 from .forms import ShopCreateForm
 from .models import Shop, ShopType
 
+CURRENT_SHOP_KEY = "dashboard_shop_id"
+
 
 def shop_list(request):
     shops = Shop.objects.public().select_related("shop_type")
@@ -70,11 +72,10 @@ def shop_detail(request, slug):
 
 @login_required
 def open_shop(request):
-    if hasattr(request.user, "shop"):
-        return redirect("dashboard:home")
     form = ShopCreateForm(request.POST or None, request.FILES or None)
     if request.method == "POST" and form.is_valid():
-        services.create_shop(request.user, form)
+        shop = services.create_shop(request.user, form)
+        request.session[CURRENT_SHOP_KEY] = shop.pk
         messages.success(
             request,
             _("Boutique créée. Elle sera visible dès sa validation par l'administration du mall."),

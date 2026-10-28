@@ -28,7 +28,7 @@
     <nav class="ml-auto hidden items-center gap-1 lg:flex">
       <a href="{% url 'shops:list' %}" class="nav-link">{% translate "Boutiques" %}</a>
       <a href="{% url 'core:how_it_works' %}" class="nav-link">{% translate "Comment ça marche" %}</a>
-      {% if not user.is_authenticated or not user.shop %}
+      {% if not user.is_merchant %}
         <a href="{% url 'core:merchants' %}" class="nav-link">{% translate "Vendre au mall" %}</a>
       {% endif %}
     </nav>
@@ -45,7 +45,7 @@
             <span class="hidden max-w-[8rem] truncate text-sm sm:inline">{{ user.first_name }}</span>
           </button>
           <div id="account-menu" data-dropdown class="card absolute right-0 mt-2 hidden w-56 p-2 text-sm">
-            {% if user.shop %}
+            {% if user.is_merchant %}
               <a href="{% url 'dashboard:home' %}" class="nav-link block font-semibold text-brand-700">{% translate "Mon espace boutique" %}</a>
             {% endif %}
             <a href="{% url 'orders:list' %}" class="nav-link block">{% translate "Mes commandes" %}</a>

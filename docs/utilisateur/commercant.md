@@ -12,6 +12,12 @@
 
 En attendant, vous pouvez déjà préparer votre catalogue : la boutique est visible par vous seul (aperçu).
 
+### Plusieurs boutiques
+
+Un même compte peut gérer plusieurs boutiques du mall (par exemple une épicerie et un restaurant). Dans l'espace boutique, cliquez sur **+ Ajouter une boutique**. Chaque boutique est validée séparément par l'administration.
+
+Quand vous avez plusieurs boutiques, une liste en haut du menu de l'espace boutique permet de **changer de boutique** : le tableau de bord, le catalogue, les commandes et les réservations affichés sont ceux de la boutique choisie.
+
 ## 2. L'espace boutique
 
 Accessible depuis le menu de votre compte : **Mon espace boutique**.

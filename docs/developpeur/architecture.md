@@ -19,7 +19,7 @@ Monolithe Django 5 rendu côté serveur, enrichi par HTMX. Pas d'API ni de frame
 
 ```mermaid
 erDiagram
-    User ||--o| Shop : "possède"
+    User ||--o{ Shop : "possède"
     ShopType ||--o{ Shop : "classe"
     Shop ||--o{ OpeningHour : "a"
     Shop ||--o{ Category : "a"
@@ -39,7 +39,7 @@ Points clés :
 
 - **User** : `USERNAME_FIELD = "phone"`, e-mail facultatif et unique. Rôles : client, commerçant, administrateur.
 - **ShopType** : définit les fonctionnalités d'une famille de boutique (produits, rendez-vous, tables). 16 types sont créés par la migration `shops.0002`.
-- **Shop** : un commerçant possède une boutique (`OneToOneField`). Statut `pending` à la création, `approved` après validation, `suspended` en cas de problème. Seules les boutiques `approved` sont publiques (`Shop.objects.public()`).
+- **Shop** : un commerçant peut posséder plusieurs boutiques (`ForeignKey`, `user.shops`). Dans l'espace commerçant, la boutique courante est mémorisée en session (`dashboard_shop_id`) et exposée par le décorateur `merchant_required` (`request.shop`, `request.shops`). Statut `pending` à la création, `approved` après validation, `suspended` en cas de problème. Seules les boutiques `approved` sont publiques (`Shop.objects.public()`).
 - **Product** : prix en FCFA, ancien prix facultatif (promotion), stock facultatif (`None` = non suivi).
 - **Order** : une commande concerne **une seule boutique**. Les lignes copient le nom et le prix du produit au moment de la commande.
 - **Booking** : `kind` = `appointment` (avec prestation) ou `table` (avec nombre de personnes).

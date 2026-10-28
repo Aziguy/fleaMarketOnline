@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-28 14:54+0100\n"
+"POT-Creation-Date: 2026-10-28 16:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -747,6 +747,10 @@ msgstr ""
 msgid "Voir ma vitrine"
 msgstr "View my storefront"
 
+#| msgid "type de boutique"
+msgid "Changer de boutique"
+msgstr "Switch shop"
+
 msgid "Tableau de bord"
 msgstr "Dashboard"
 
@@ -764,6 +768,10 @@ msgstr "Details & payment"
 
 msgid "Horaires"
 msgstr "Opening hours"
+
+#| msgid "Toutes les boutiques"
+msgid "Ajouter une boutique"
+msgstr "Add a shop"
 
 msgid "Statut"
 msgstr "Status"

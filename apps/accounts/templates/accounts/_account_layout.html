@@ -8,7 +8,7 @@
       <a href="{{ u2 }}" class="nav-link whitespace-nowrap {% if request.path == u2 %}nav-link-active{% endif %}">{% translate "Mes réservations" %}</a>
       <a href="{{ u3 }}" class="nav-link whitespace-nowrap {% if request.path == u3 %}nav-link-active{% endif %}">{% translate "Mon profil" %}</a>
       <a href="{{ u4 }}" class="nav-link whitespace-nowrap {% if request.path == u4 %}nav-link-active{% endif %}">{% translate "Mot de passe" %}</a>
-      {% if user.shop %}<a href="{% url 'dashboard:home' %}" class="nav-link whitespace-nowrap font-semibold text-brand-700">{% translate "Espace boutique" %} →</a>
+      {% if user.is_merchant %}<a href="{% url 'dashboard:home' %}" class="nav-link whitespace-nowrap font-semibold text-brand-700">{% translate "Espace boutique" %} →</a>
       {% else %}<a href="{% url 'shops:open' %}" class="nav-link whitespace-nowrap text-brand-700">{% translate "Ouvrir ma boutique" %}</a>{% endif %}
     </nav>
     <section>{% block account %}{% endblock %}</section>
