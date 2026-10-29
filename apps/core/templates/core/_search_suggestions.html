@@ -8,7 +8,7 @@
   {% endfor %}
   {% for product in products|slice:":6" %}
     <a href="{{ product.get_absolute_url }}" class="flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-brand-50">
-      <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/placeholder.svg' %}{% endif %}" class="h-9 w-9 rounded-lg object-cover" alt="">
+      <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/placeholder.svg' %}{% endif %}" class="bg-brand-50 h-9 w-9 rounded-lg object-cover" alt="">
       <span class="min-w-0 flex-1"><span class="block truncate">{{ product.name }}</span><span class="block truncate text-xs text-stone-400">{{ product.shop.name }}</span></span>
       <span class="font-semibold">{{ product.price|fcfa }}</span>
     </a>

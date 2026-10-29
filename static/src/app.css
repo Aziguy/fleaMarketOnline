@@ -1,31 +1,44 @@
+@import "./tokens.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@view-transition {
+  navigation: auto;
+}
+
 @layer base {
-  html { @apply scroll-smooth; }
-  body { @apply bg-stone-50 text-stone-800 antialiased; }
-  h1, h2, h3 { @apply font-semibold tracking-tight text-stone-900; }
+  html { @apply scroll-smooth; -webkit-tap-highlight-color: transparent; }
+  body { @apply bg-stone-50 text-stone-800 antialiased selection:bg-brand-300/40; }
+  h1, h2, h3 { @apply font-display font-semibold tracking-tight text-stone-900; }
   a { @apply transition-colors; }
-  [x-cloak], .htmx-indicator { display: none; }
-  .htmx-request .htmx-indicator, .htmx-request.htmx-indicator { display: inline-block; }
+  :focus-visible { @apply outline-none ring-2 ring-brand-400 ring-offset-2 ring-offset-stone-50; }
+  [type="checkbox"], [type="radio"] { @apply border-stone-300 bg-surface; }
+  [type="date"], [type="time"] { color-scheme: inherit; }
+  .htmx-indicator { display: none; }
+  .htmx-request .htmx-indicator, .htmx-request.htmx-indicator { display: inline-flex; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .25s; }
+  #site-header { view-transition-name: site-header; }
 }
 
 @layer components {
   .container-page { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
 
-  .btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50; }
-  .btn-primary { @apply btn bg-brand-600 text-white hover:bg-brand-700; }
-  .btn-secondary { @apply btn border border-brand-200 bg-white text-brand-700 hover:bg-brand-50; }
-  .btn-ghost { @apply btn text-stone-600 hover:bg-stone-100; }
-  .btn-danger { @apply btn bg-red-600 text-white hover:bg-red-700; }
-  .btn-whatsapp { @apply btn bg-[#25D366] text-white hover:bg-[#1ebe5b]; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition duration-200 active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-50; }
+  .btn-primary { @apply btn bg-gradient-to-br from-brand-500 to-brand-600 text-white shadow-sm hover:shadow-glow hover:brightness-110; }
+  .btn-secondary { @apply btn border border-brand-200 bg-surface text-brand-700 hover:border-brand-300 hover:bg-brand-50; }
+  .btn-ghost { @apply btn text-stone-600 hover:bg-stone-100 hover:text-stone-900; }
+  .btn-danger { @apply btn bg-red-600 text-white hover:bg-red-500; }
+  .btn-whatsapp { @apply btn bg-[#25D366] text-white hover:brightness-110 hover:shadow-[0_8px_24px_-8px_#25D366]; }
   .btn-sm { @apply px-3 py-1.5 text-xs; }
 
-  .card { @apply rounded-2xl border border-stone-200/70 bg-white shadow-card; }
+  .card { @apply rounded-2xl border border-stone-200/70 bg-surface shadow-card; }
   .card-body { @apply p-5 sm:p-6; }
+  .card-hover { @apply transition duration-300 hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-glow; }
+  .glass { @apply border-stone-200/60 bg-surface/70 backdrop-blur-xl backdrop-saturate-150; }
 
-  .input { @apply block w-full rounded-xl border-stone-300 bg-white text-sm shadow-sm focus:border-brand-500 focus:ring-brand-500; }
+  .input { @apply block w-full rounded-xl border-stone-300 bg-surface text-sm text-stone-900 shadow-sm placeholder:text-stone-400 focus:border-brand-500 focus:ring-brand-500; }
   .label { @apply mb-1.5 block text-sm font-medium text-stone-700; }
   .help { @apply mt-1 text-xs text-stone-500; }
   .error { @apply mt-1 text-xs font-medium text-red-600; }
@@ -41,7 +54,31 @@
   .nav-link-active { @apply bg-brand-50 text-brand-700; }
 
   .section-title { @apply text-xl font-semibold sm:text-2xl; }
+  .eyebrow { @apply text-xs font-semibold uppercase tracking-[0.18em] text-brand-600; }
+  .text-gradient { @apply bg-gradient-to-r from-brand-400 via-brand-300 to-sun-400 bg-clip-text text-transparent; }
+  .kbd { @apply rounded-md border border-stone-300 bg-stone-100 px-1.5 py-0.5 font-mono text-[11px] text-stone-500; }
+  .skeleton { @apply animate-shimmer rounded-lg bg-gradient-to-r from-stone-100 via-stone-200 to-stone-100 bg-[length:200%_100%]; }
+
   .table-base { @apply min-w-full divide-y divide-stone-200 text-sm; }
   .table-base th { @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-stone-500; }
   .table-base td { @apply px-4 py-3 align-middle; }
+
+  .aurora { @apply pointer-events-none absolute rounded-full blur-3xl motion-safe:animate-aurora; }
+  .grid-pattern {
+    background-image: linear-gradient(rgb(255 255 255 / 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.06) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
+  }
+}
+
+@layer utilities {
+  .js [data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+  .js [data-reveal].is-visible { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  .js [data-reveal] { opacity: 1; transform: none; }
+  @view-transition { navigation: none; }
 }

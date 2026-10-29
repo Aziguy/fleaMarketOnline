@@ -1,7 +1,7 @@
 {% load i18n static mall %}
 <tr id="product-{{ product.pk }}">
   <td><div class="flex items-center gap-3">
-    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/placeholder.svg' %}{% endif %}" class="h-10 w-10 rounded-lg object-cover" alt="">
+    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/placeholder.svg' %}{% endif %}" class="bg-brand-50 h-10 w-10 rounded-lg object-cover" alt="">
     <div class="min-w-0"><a href="{% url 'dashboard:product_edit' product.pk %}" class="block truncate font-medium hover:text-brand-700">{{ product.name }}</a><span class="text-xs text-stone-500">{{ product.category|default:"" }}</span></div>
   </div></td>
   <td class="whitespace-nowrap">{{ product.price|fcfa }}</td>
