@@ -26,6 +26,9 @@
       };
       window.addEventListener("pageswap", quiet);
       window.addEventListener("pagereveal", quiet);
+      window.addEventListener("unhandledrejection", function (e) {
+        if (e.reason && /^Transition was (aborted|skipped)/.test(e.reason.message)) e.preventDefault();
+      });
     })();
   </script>
   <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
