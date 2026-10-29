@@ -43,6 +43,8 @@ Pensée pour le contexte local :
 - interface **mobile d'abord**, en **français** et **anglais**, thème **clair, sombre ou système** ;
 - **application installable** (PWA), consultable hors ligne ;
 - commerçants prévenus **en direct** des nouvelles commandes ;
+- **avis clients vérifiés**, **favoris** avec alerte de retour en stock, **statistiques** et export comptable ;
+- **plan du mall** par étage et **affiche QR code** pour chaque vitrine ;
 - **assistant IA** (Claude) et **API REST** documentée.
 
 ![Accueil](docs/public/images/accueil.png)
@@ -59,14 +61,17 @@ Pensée pour le contexte local :
 | Commande pré-remplie sur WhatsApp | Horaires, moyens de paiement, livraison | |
 | Historique commandes et réservations | Tableau de bord : à confirmer, encaissé du mois, stock faible | Supervision : `/healthz`, logs JSON |
 | Palette de recherche (Ctrl+K), recherche élargie par l'IA | Commandes et réservations en direct (son, notification) | Jetons d'API |
-| Application installable, mode hors ligne, thème sombre | Descriptions produits rédigées par l'IA | |
+| Application installable, mode hors ligne, thème sombre | Descriptions produits rédigées par l'IA | Modération des avis |
+| Favoris et alerte de retour en stock, notifications | Logo et bannière avec aperçu, images optimisées en WebP | |
+| Avis vérifiés (clients servis uniquement) | Réponses aux avis, statistiques de ventes, export CSV | |
+| Plan du mall par étage | Affiche QR code à imprimer pour la vitrine | |
 
 ## Stack
 
 | Couche | Technologies |
 | --- | --- |
 | Serveur | Django 5.2 en ASGI (Gunicorn + Uvicorn), Server-Sent Events, Django Ninja (API REST, OpenAPI) |
-| Interface | HTMX 2, Tailwind CSS 3 (tokens de thème), View Transitions, service worker (PWA) |
+| Interface | HTMX 2, Tailwind CSS 3 (tokens de thème), icônes Lucide, View Transitions, service worker (PWA) |
 | Données | PostgreSQL 16, Redis (cache) |
 | IA | API Claude (sorties structurées, repli serveur) |
 | Qualité | pytest (couverture), ruff, mypy strict, GitHub Actions, Dependabot |
@@ -109,6 +114,10 @@ La documentation complète est publiée sur **[aziguy.github.io/fleaMarketOnline
 | Boutique | Espace commerçant | Mobile |
 | --- | --- | --- |
 | ![Boutique](docs/public/images/boutique.png) | ![Espace boutique](docs/public/images/espace-boutique.png) | ![Mobile](docs/public/images/mobile.png) |
+
+| Statistiques | Avis clients | Plan du mall |
+| --- | --- | --- |
+| ![Statistiques](docs/public/images/statistiques.png) | ![Avis](docs/public/images/avis-commercant.png) | ![Plan](docs/public/images/plan.png) |
 
 ## Tests
 

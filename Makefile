@@ -1,4 +1,4 @@
-.PHONY: install css css-watch run run-asgi migrate seed test cov lint typecheck format messages docs docs-build up down prod
+.PHONY: install css css-watch icons run run-asgi migrate seed test cov lint typecheck format messages docs docs-build up down prod
 
 PY ?= python
 
@@ -8,6 +8,9 @@ install:          ## Dépendances Python (dev) et front
 
 css:              ## Compile le CSS Tailwind
 	npm run build
+
+icons:            ## Extrait les icônes Lucide utilisées vers apps/core/icons.json
+	npm run icons
 
 css-watch:        ## Compile le CSS en continu
 	npm run watch

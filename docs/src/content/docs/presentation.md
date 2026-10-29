@@ -17,6 +17,10 @@ Mfoundi Mall en ligne réunit les boutiques du **Mfoundi Mall** (Yaoundé, Camer
 - Site disponible en **français** et en **anglais**, en **thème clair ou sombre**.
 - **Application installable** sur téléphone, consultable hors ligne.
 - **Commerçants prévenus en direct** des nouvelles commandes et réservations.
+- **Avis clients vérifiés** : seuls les clients servis notent la boutique, qui peut répondre.
+- **Favoris et alertes** de retour en stock, centre de notifications.
+- **Statistiques de ventes** et export comptable CSV pour chaque boutique.
+- **Plan du mall** par étage et **affiche QR code** à imprimer pour chaque vitrine.
 - **Assistant IA** : descriptions produits et recherche élargie.
 - **API REST** documentée pour les applications partenaires.
 
@@ -24,9 +28,9 @@ Mfoundi Mall en ligne réunit les boutiques du **Mfoundi Mall** (Yaoundé, Camer
 
 | Rôle | Peut |
 | --- | --- |
-| Client | Chercher, commander, réserver, suivre ses commandes, contacter une boutique |
-| Commerçant | Gérer une ou plusieurs boutiques : vitrine, catalogue, horaires, paiement, commandes, réservations |
-| Administration du mall | Valider ou suspendre les boutiques, mettre en avant, gérer les types de boutique et les utilisateurs |
+| Client | Chercher, commander, réserver, suivre ses commandes, contacter une boutique, suivre ses favoris, noter une boutique |
+| Commerçant | Gérer une ou plusieurs boutiques : logo et bannière, catalogue, horaires, paiement, commandes, réservations, avis, statistiques |
+| Administration du mall | Valider ou suspendre les boutiques, mettre en avant, gérer les types de boutique et les utilisateurs, modérer les avis |
 
 ## Le parcours d'une commande
 
@@ -48,3 +52,4 @@ sequenceDiagram
 | Boutique | Espace commerçant |
 | --- | --- |
 | ![Page boutique](/fleaMarketOnline/images/boutique.png) | ![Espace commerçant](/fleaMarketOnline/images/espace-boutique.png) |
+| ![Statistiques](/fleaMarketOnline/images/statistiques.png) | ![Plan du mall](/fleaMarketOnline/images/plan.png) |
