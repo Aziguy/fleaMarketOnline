@@ -17,7 +17,7 @@
       <button type="button" class="btn-secondary btn-sm mt-2"
               hx-post="{% url 'dashboard:ai_description' %}" hx-include="closest form" hx-target="#description-field"
               hx-vals='{"product": "{{ product.pk|default:'' }}"}' hx-indicator="this">
-        {% include "icons/sparkles.html" with class="h-4 w-4" %} {% translate "Rédiger avec l'IA" %}
+        {% icon "sparkles" class="h-4 w-4" %} {% translate "Rédiger avec l'IA" %}
         <span class="htmx-indicator h-3.5 w-3.5 animate-spin rounded-full border-2 border-brand-500 border-t-transparent"></span>
       </button>
       <p class="help">{% translate "L'assistant propose un texte à partir du nom, du rayon, du prix, de vos notes et de la photo. Relisez avant d'enregistrer." %}</p>
@@ -29,11 +29,10 @@
   <div class="card card-body">
     <h2 class="font-semibold">{% translate "Photos supplémentaires" %}</h2>
     {{ formset.management_form }}
-    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+    <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
       {% for f in formset %}
       <div class="rounded-xl border border-stone-200 p-3">
         {{ f.id }}
-        {% if f.instance.image %}<img src="{{ f.instance.image.url }}" class="mb-2 h-24 w-24 rounded-lg object-cover" alt="">{% endif %}
         {% include "includes/field.html" with field=f.image %}
         {% if f.instance.pk %}<label class="mt-2 flex items-center gap-2 text-sm text-red-600">{{ f.DELETE }} {% translate "Supprimer" %}</label>{% endif %}
         {{ f.position.as_hidden }}

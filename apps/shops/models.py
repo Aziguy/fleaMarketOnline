@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.db.models import Avg, Count, Q
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
@@ -7,6 +8,7 @@ from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
 
 from apps.core.fields import MoneyField, PhoneField
+from apps.core.images import cleanup_files
 
 
 def unique_slug(instance, value, field="slug"):
@@ -25,7 +27,7 @@ class ShopType(models.Model):
     name = models.CharField(_("nom"), max_length=60)
     name_en = models.CharField(_("nom (anglais)"), max_length=60, blank=True)
     slug = models.SlugField(unique=True)
-    icon = models.CharField(_("icône"), max_length=8, blank=True, help_text=_("Emoji"))
+    icon = models.CharField(_("icône"), max_length=40, default="store", help_text=_("Icône Lucide"))
     sells_products = models.BooleanField(_("vend des produits"), default=True)
     takes_appointments = models.BooleanField(_("prend des rendez-vous"), default=False)
     takes_table_bookings = models.BooleanField(_("réserve des tables"), default=False)
@@ -50,7 +52,15 @@ class ShopQuerySet(models.QuerySet):
     def public(self):
         return self.filter(status=Shop.Status.APPROVED)
 
+    def with_rating(self):
+        published = Q(reviews__is_published=True)
+        return self.annotate(
+            rating_avg=Avg("reviews__rating", filter=published),
+            rating_count=Count("reviews", filter=published),
+        )
 
+
+@cleanup_files
 class Shop(models.Model):
     class Status(models.TextChoices):
         PENDING = "pending", _("En attente de validation")
@@ -79,7 +89,7 @@ class Shop(models.Model):
     tagline = models.CharField(_("slogan"), max_length=120, blank=True)
     description = models.TextField(_("description"), blank=True)
     logo = models.ImageField(_("logo"), upload_to="shops/logos/", blank=True)
-    cover = models.ImageField(_("image de couverture"), upload_to="shops/covers/", blank=True)
+    banner = models.ImageField(_("bannière"), upload_to="shops/banners/", blank=True)
 
     level = models.CharField(_("niveau"), max_length=4, choices=Level, default=Level.GROUND)
     unit = models.CharField(

@@ -1,12 +1,24 @@
 """Espace commerçant : boutiques, commandes et réservations reçues."""
 
 from django.shortcuts import get_object_or_404
-from ninja import Router
+from ninja import Router, Status
 
 from apps.bookings import services as booking_services
+from apps.dashboard import stats
 from apps.orders import services as order_services
+from apps.reviews import services as review_services
 
-from ..schemas import BookingOut, BookingStatusIn, ErrorOut, OrderOut, OrderStatusIn, ShopOut
+from ..schemas import (
+    BookingOut,
+    BookingStatusIn,
+    ErrorOut,
+    OrderOut,
+    OrderStatusIn,
+    ReplyIn,
+    ReviewOut,
+    ShopOut,
+    StatsOut,
+)
 
 router = Router(tags=["Commerçant"])
 
@@ -51,3 +63,25 @@ def shop_bookings(request, slug: str, status: str = ""):
 def update_booking_status(request, slug: str, reference: str, payload: BookingStatusIn):
     booking = get_object_or_404(_shop(request, slug).bookings, reference=reference)
     return booking_services.change_status(booking, payload.status, note=payload.note)
+
+
+@router.get("/shops/{slug}/stats", response={200: StatsOut, 422: ErrorOut})
+def shop_stats(request, slug: str, days: int = 30):
+    """Encaissé, commandes, panier moyen et meilleures ventes (7, 30 ou 90 jours)."""
+    if days not in stats.PERIODS:
+        return Status(422, {"detail": "days doit valoir 7, 30 ou 90."})
+    data = stats.shop_stats(_shop(request, slug), days)
+    return {**data, "top_products": list(data["top_products"])}
+
+
+@router.get("/shops/{slug}/reviews", response=list[ReviewOut])
+def shop_reviews(request, slug: str):
+    return _shop(request, slug).reviews.select_related("customer")
+
+
+@router.post("/shops/{slug}/reviews/{review_id}/reply", response=ReviewOut)
+def reply_review(request, slug: str, review_id: int, payload: ReplyIn):
+    review = get_object_or_404(
+        _shop(request, slug).reviews.select_related("customer"), pk=review_id
+    )
+    return review_services.reply(review, payload.reply.strip())

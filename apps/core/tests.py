@@ -136,3 +136,48 @@ def test_healthcheck_command(db, capsys):
 
     call_command("healthcheck")
     assert '"database": "ok"' in capsys.readouterr().out
+
+
+def test_icon_tag_renders_lucide_and_brand():
+    from django.template import Context, Template
+
+    html = Template(
+        '{% icon "search" class="h-4 w-4" %}{% icon "whatsapp" label="WhatsApp" %}'
+    ).render(Context())
+    assert 'class="h-4 w-4"' in html and 'stroke="currentColor"' in html
+    assert 'fill="currentColor" role="img" aria-label="WhatsApp"' in html
+
+
+def test_icon_tag_falls_back_on_unknown_name():
+    from apps.core.templatetags.mall import icon
+
+    assert icon("inconnue") == icon("store")
+
+
+@pytest.mark.django_db
+def test_shop_types_use_bundled_icons():
+    from apps.core.templatetags.mall import ICONS
+    from apps.shops.models import ShopType
+
+    assert set(ShopType.objects.values_list("icon", flat=True)) <= set(ICONS["lucide"])
+
+
+def test_notification_icons_are_bundled():
+    from apps.core.templatetags.mall import ICONS
+    from apps.notifications.models import Notification
+
+    assert set(Notification.ICONS.values()) <= set(ICONS["lucide"])
+
+
+@pytest.mark.django_db
+def test_seed_demo_is_idempotent():
+    from django.core.management import call_command
+
+    from apps.orders.models import Order
+    from apps.reviews.models import Review
+
+    call_command("seed_demo", stdout=None)
+    orders, reviews = Order.objects.count(), Review.objects.count()
+    call_command("seed_demo", stdout=None)
+    assert orders > 0 and reviews > 0
+    assert (Order.objects.count(), Review.objects.count()) == (orders, reviews)

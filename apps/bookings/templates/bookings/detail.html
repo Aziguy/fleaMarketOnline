@@ -14,7 +14,8 @@
   {% if booking.note %}<p><span class="text-stone-500">{% translate "Votre message" %} :</span> {{ booking.note }}</p>{% endif %}
   {% if booking.merchant_note %}<p class="rounded-xl bg-brand-50 p-3"><span class="font-medium">{% translate "Réponse de la boutique" %} :</span> {{ booking.merchant_note }}</p>{% endif %}
   <div class="flex flex-wrap gap-2 pt-3">
-    <a href="{% whatsapp booking.shop.contact_whatsapp booking.reference %}" target="_blank" rel="noopener" class="btn-whatsapp">{% include "icons/whatsapp.html" %} WhatsApp</a>
+    <a href="{% whatsapp booking.shop.contact_whatsapp booking.reference %}" target="_blank" rel="noopener" class="btn-whatsapp">{% icon "whatsapp" %} WhatsApp</a>
+    {% if booking.status == "completed" %}<a href="{{ booking.shop.get_absolute_url }}#avis" class="btn-secondary">{% icon "star" %} {% translate "Donner mon avis" %}</a>{% endif %}
     {% if booking.customer_can_cancel %}
     <form method="post" action="{% url 'bookings:cancel' booking.reference %}" onsubmit="return confirm('{% translate "Annuler cette réservation ?" %}')">
       {% csrf_token %}<button class="btn-ghost text-red-600">{% translate "Annuler" %}</button>

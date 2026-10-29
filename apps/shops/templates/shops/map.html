@@ -1,0 +1,44 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% translate "Plan du mall" %}{% endblock %}
+{% block description %}{% translate "Trouvez chaque boutique du Mfoundi Mall par étage et par local." %}{% endblock %}
+{% block content %}
+<div class="container-page py-8">
+  <p class="eyebrow">{% translate "Se repérer" %}</p>
+  <h1 class="mt-1 text-2xl sm:text-3xl">{% translate "Plan du mall" %}</h1>
+  <p class="mt-1 max-w-2xl text-sm text-stone-500">{% translate "Les boutiques par étage, triées par numéro de local. Touchez une boutique pour voir sa vitrine." %}</p>
+  {% if levels %}
+  <div class="mt-6 flex gap-1 overflow-x-auto pb-1" role="tablist" aria-label="{% translate 'Étages' %}">
+    {% for level in levels %}
+    <button type="button" role="tab" data-level-tab="{{ level.code }}" aria-selected="{% if level.code == current %}true{% else %}false{% endif %}" class="nav-link inline-flex shrink-0 items-center gap-2 whitespace-nowrap aria-selected:bg-brand-600 aria-selected:text-white">{% icon "layers" class="h-4 w-4" %}{{ level.label }} <span class="text-xs opacity-70">{{ level.shops|length }}</span></button>
+    {% endfor %}
+  </div>
+  {% for level in levels %}
+  <section data-level="{{ level.code }}" role="tabpanel" class="mt-4{% if level.code != current %} hidden{% endif %}">
+    <div class="relative overflow-hidden rounded-3xl border border-stone-200 bg-stone-50 p-4 sm:p-6">
+      <div class="grid-pattern absolute inset-0 opacity-60"></div>
+      <div class="relative mb-4 flex items-center justify-between text-xs font-medium uppercase tracking-wider text-stone-400">
+        <span class="inline-flex items-center gap-1">{% icon "door-open" class="h-4 w-4" %} {% translate "Entrée / escalators" %}</span>
+        <span>{{ level.label }}</span>
+      </div>
+      <ol class="relative grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+        {% for shop in level.shops %}
+        <li id="local-{{ shop.slug }}">
+          <a href="{{ shop.get_absolute_url }}" class="card card-hover group flex h-full flex-col gap-2 p-3{% if shop.slug == highlight %} ring-4 ring-sun-400{% endif %}">
+            <span class="flex items-center justify-between">
+              <span class="flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl bg-brand-50 text-brand-700">{% if shop.logo %}<img src="{{ shop.logo.url }}" alt="" class="h-full w-full object-cover">{% else %}{% icon shop.shop_type.icon class="h-5 w-5" %}{% endif %}</span>
+              {% if shop.unit %}<span class="rounded-md bg-stone-900 px-1.5 py-0.5 font-mono text-[11px] font-bold text-stone-50">{{ shop.unit }}</span>{% endif %}
+            </span>
+            <span class="line-clamp-2 text-sm font-semibold group-hover:text-brand-700">{{ shop.name }}</span>
+            <span class="mt-auto text-xs text-stone-500">{{ shop.shop_type.label }}</span>
+          </a>
+        </li>
+        {% endfor %}
+      </ol>
+    </div>
+  </section>
+  {% endfor %}
+  {% else %}
+    <div class="mt-6">{% translate "Aucune boutique pour le moment" as t %}{% include "includes/empty.html" with title=t icon="map" %}</div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% load i18n l10n %}
+<section id="avis" class="mt-12 scroll-mt-24">
+  <div class="flex flex-wrap items-end justify-between gap-2">
+    <h2 class="text-2xl">{% translate "Avis clients" %}</h2>
+    {% if reviews_summary.count %}<p class="flex items-center gap-2 text-sm text-stone-500">{% stars reviews_summary.average %}<strong class="text-stone-900">{{ reviews_summary.average|floatformat:1 }}</strong> · {% blocktranslate count n=reviews_summary.count %}{{ n }} avis{% plural %}{{ n }} avis{% endblocktranslate %}</p>{% endif %}
+  </div>
+  {% if reviews_summary.count %}
+  <div class="mt-4 grid gap-6 md:grid-cols-[14rem_1fr]">
+    <div class="card card-body space-y-1.5 text-sm">
+      {% for bar in reviews_summary.bars %}
+      <div class="flex items-center gap-2">
+        <span class="w-3 text-stone-500">{{ bar.stars }}</span>{% icon "star" class="h-3.5 w-3.5 fill-current text-sun-500" %}
+        <span class="h-2 flex-1 overflow-hidden rounded-full bg-stone-100"><span class="block h-full rounded-full bg-sun-500" style="width: {{ bar.percent|unlocalize }}%"></span></span>
+        <span class="w-6 text-right text-xs text-stone-400">{{ bar.count }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    <ul class="space-y-3">
+      {% for review in reviews %}
+      <li class="card card-body">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <p class="flex items-center gap-2 font-medium">
+            <span class="flex h-8 w-8 items-center justify-center rounded-full bg-brand-100 text-xs font-bold text-brand-700">{{ review.customer.first_name|first|upper }}</span>
+            {{ review.author_name }}
+            <span class="badge-green inline-flex items-center gap-1">{% icon "badge-check" class="h-3.5 w-3.5" %} {% translate "Client vérifié" %}</span>
+          </p>
+          <span class="flex items-center gap-2 text-xs text-stone-400">{% stars review.rating %}{{ review.created_at|date:"d/m/Y" }}</span>
+        </div>
+        {% if review.comment %}<p class="mt-2 whitespace-pre-line text-sm text-stone-700">{{ review.comment }}</p>{% endif %}
+        {% if review.reply %}
+        <div class="mt-3 rounded-xl border-l-4 border-brand-400 bg-brand-50 px-4 py-2 text-sm">
+          <p class="font-semibold text-brand-800">{% blocktranslate with shop=shop.name %}Réponse de {{ shop }}{% endblocktranslate %}</p>
+          <p class="mt-1 whitespace-pre-line text-stone-700">{{ review.reply }}</p>
+        </div>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% else %}
+  <p class="mt-3 text-sm text-stone-500">{% translate "Pas encore d'avis. Les clients servis par la boutique peuvent en laisser un." %}</p>
+  {% endif %}
+
+  {% if can_review %}
+  <form method="post" action="{% url 'reviews:submit' shop.slug %}" hx-post="{% url 'reviews:submit' shop.slug %}" hx-target="#avis" hx-swap="outerHTML" class="card card-body mt-6 space-y-4">
+    {% csrf_token %}
+    <h3 class="font-semibold">{% if my_review %}{% translate "Modifier mon avis" %}{% else %}{% translate "Donner mon avis" %}{% endif %}</h3>
+    {% if review_form %}
+    <fieldset>
+      <legend class="label">{{ review_form.rating.label }}</legend>
+      <div class="star-input flex flex-row-reverse justify-end gap-1">
+        {% for choice in review_form.rating %}
+        <label class="cursor-pointer text-stone-300 transition hover:scale-110" title="{{ choice.choice_label }}/5">
+          <input type="radio" name="{{ review_form.rating.html_name }}" value="{{ choice.data.value }}" class="sr-only"{% if choice.data.selected %} checked{% endif %} required>
+          {% icon "star" class="h-8 w-8" %}<span class="sr-only">{{ choice.choice_label }}/5</span>
+        </label>
+        {% endfor %}
+      </div>
+      {% for error in review_form.rating.errors %}<p class="error">{{ error }}</p>{% endfor %}
+    </fieldset>
+    {% include "includes/field.html" with field=review_form.comment %}
+    <button class="btn-primary">{% translate "Publier" %}</button>
+    {% else %}
+    <p class="flex items-center gap-2 text-sm text-brand-700">{% icon "circle-check" class="h-5 w-5" %} {% translate "Merci, votre avis est publié." %}</p>
+    {% endif %}
+  </form>
+  {% endif %}
+</section>

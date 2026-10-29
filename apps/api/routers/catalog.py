@@ -15,7 +15,12 @@ router = Router(tags=["Catalogue"])
 
 
 def _shops():
-    return Shop.objects.public().select_related("shop_type").prefetch_related("opening_hours")
+    return (
+        Shop.objects.public()
+        .with_rating()
+        .select_related("shop_type")
+        .prefetch_related("opening_hours")
+    )
 
 
 @router.get("/shop-types", response=list[ShopTypeOut])

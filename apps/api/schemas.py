@@ -37,6 +37,7 @@ class ShopOut(Schema):
     phone: str
     whatsapp: str = Field(alias="contact_whatsapp")
     logo: str | None
+    banner: str | None
     accepts_cash: bool
     mtn_momo_number: str
     orange_money_number: str
@@ -45,6 +46,8 @@ class ShopOut(Schema):
     delivery_fee: int
     delivery_area: str
     is_open_now: bool | None
+    rating: float | None = Field(None, description="Note moyenne des avis publiés")
+    reviews_count: int = 0
     url: str
 
     @staticmethod
@@ -52,8 +55,21 @@ class ShopOut(Schema):
         return _url(obj.logo)
 
     @staticmethod
+    def resolve_banner(obj):
+        return _url(obj.banner)
+
+    @staticmethod
     def resolve_is_open_now(obj):
         return obj.is_open_now()
+
+    @staticmethod
+    def resolve_rating(obj):
+        value = getattr(obj, "rating_avg", None)
+        return round(value, 1) if value is not None else None
+
+    @staticmethod
+    def resolve_reviews_count(obj):
+        return getattr(obj, "rating_count", 0) or 0
 
     @staticmethod
     def resolve_url(obj):
@@ -233,3 +249,72 @@ class BookingStatusIn(Schema):
 
 class ErrorOut(Schema):
     detail: str | dict
+
+
+class ReviewIn(Schema):
+    rating: int = Field(ge=1, le=5)
+    comment: str = Field("", max_length=1000)
+
+
+class ReviewOut(Schema):
+    id: int
+    author: str = Field(alias="author_name")
+    rating: int
+    comment: str
+    reply: str
+    replied_at: datetime | None
+    created_at: datetime
+
+
+class ReplyIn(Schema):
+    reply: str = Field(max_length=1000)
+
+
+class FavoritesOut(Schema):
+    shops: list[ShopOut]
+    products: list[ProductOut]
+
+
+class NotificationOut(Schema):
+    id: int
+    kind: str
+    title: str
+    body: str
+    url: str
+    read_at: datetime | None
+    created_at: datetime
+
+
+class DayOut(Schema):
+    day: date
+    revenue: int
+    orders: int
+
+
+class TopProductOut(Schema):
+    product_name: str
+    sold: int
+    revenue: int
+
+
+class PaymentShareOut(Schema):
+    paid_with: str
+    label: str
+    revenue: int
+    orders: int
+    percent: int
+
+
+class StatsOut(Schema):
+    days: int
+    revenue: int
+    orders: int
+    basket: int
+    trend: int | None = Field(
+        description="Évolution de l'encaissé en % par rapport à la période précédente"
+    )
+    cancel_rate: int
+    bookings_done: int
+    series: list[DayOut]
+    top_products: list[TopProductOut]
+    payments: list[PaymentShareOut]

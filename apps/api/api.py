@@ -12,7 +12,7 @@ from apps.orders.services import OrderError
 
 from .auth import TokenAuth
 from .errors import InvalidInput
-from .routers import account, catalog, merchant
+from .routers import account, catalog, community, merchant
 
 api = NinjaAPI(
     title="Mfoundi Mall API",
@@ -28,6 +28,7 @@ api = NinjaAPI(
 
 api.add_router("/", catalog.router)
 api.add_router("/", account.router)
+api.add_router("/", community.router)
 api.add_router("/merchant", merchant.router, auth=TokenAuth())
 
 

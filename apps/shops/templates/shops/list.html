@@ -2,12 +2,12 @@
 {% block title %}{% if current_type %}{{ current_type.label }}{% else %}{% translate "Boutiques" %}{% endif %}{% endblock %}
 {% block content %}
 <div class="container-page py-8">
-  <h1 class="text-2xl sm:text-3xl">{% if current_type %}{{ current_type.icon }} {{ current_type.label }}{% else %}{% translate "Les boutiques du mall" %}{% endif %}</h1>
+  <h1 class="text-2xl sm:text-3xl">{% if current_type %}<span class="inline-flex items-center gap-2">{% icon current_type.icon class="h-7 w-7 text-brand-600" %}{{ current_type.label }}</span>{% else %}{% translate "Les boutiques du mall" %}{% endif %}</h1>
   <form class="mt-6 flex flex-col gap-3 sm:flex-row" hx-get="{% url 'shops:list' %}" hx-target="#results" hx-trigger="input delay:300ms from:input[name=q], change" hx-push-url="true" hx-indicator="#results-wrap">
     <input type="search" name="q" value="{{ q }}" placeholder="{% translate 'Nom de la boutique...' %}" class="input sm:max-w-xs">
     <select name="type" class="input sm:max-w-xs">
       <option value="">{% translate "Tous les types" %}</option>
-      {% for t in shop_types %}<option value="{{ t.slug }}" {% if current_type.pk == t.pk %}selected{% endif %}>{{ t.icon }} {{ t.label }} ({{ t.n }})</option>{% endfor %}
+      {% for t in shop_types %}<option value="{{ t.slug }}" {% if current_type.pk == t.pk %}selected{% endif %}>{{ t.label }} ({{ t.n }})</option>{% endfor %}
     </select>
     <select name="niveau" class="input sm:max-w-[12rem]">
       <option value="">{% translate "Tous les niveaux" %}</option>

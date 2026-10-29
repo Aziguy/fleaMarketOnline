@@ -1,6 +1,7 @@
 from django import forms
 
 from .phone import normalize_phone
+from .widgets import ImagePicker
 
 _INPUT = "input"
 _CHECK = "h-4 w-4 rounded border-stone-300 text-brand-600 focus:ring-brand-500"
@@ -15,6 +16,8 @@ class StyledFormMixin:
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             widget = field.widget
+            if isinstance(widget, ImagePicker):
+                continue
             if isinstance(widget, forms.CheckboxInput):
                 css = _CHECK
             elif isinstance(widget, (forms.RadioSelect, forms.CheckboxSelectMultiple)):

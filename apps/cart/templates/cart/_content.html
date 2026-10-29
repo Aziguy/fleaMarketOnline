@@ -3,7 +3,7 @@
 {% for group in groups %}
 <section class="card mb-6 overflow-hidden">
   <header class="flex items-center justify-between gap-3 border-b border-stone-100 bg-brand-50/60 px-5 py-3">
-    <a href="{{ group.shop.get_absolute_url }}" class="flex items-center gap-2 font-semibold hover:text-brand-700"><span class="text-xl">{{ group.shop.shop_type.icon }}</span>{{ group.shop.name }}</a>
+    <a href="{{ group.shop.get_absolute_url }}" class="flex items-center gap-2 font-semibold hover:text-brand-700">{% icon group.shop.shop_type.icon class="h-5 w-5 text-brand-600" %}{{ group.shop.name }}</a>
     <span class="text-xs text-stone-500">{{ group.shop.location_label }}</span>
   </header>
   <ul class="divide-y divide-stone-100">
@@ -20,7 +20,7 @@
       </form>
       <p class="hidden w-28 text-right font-semibold sm:block">{{ line.total|fcfa }}</p>
       <form method="post" action="{% url 'cart:remove' line.product.pk %}" hx-post="{% url 'cart:remove' line.product.pk %}" hx-target="#cart-content">
-        {% csrf_token %}<button class="btn-ghost p-2 text-stone-400 hover:text-red-600" aria-label="{% translate 'Retirer' %}">✕</button>
+        {% csrf_token %}<button class="btn-ghost p-2 text-stone-400 hover:text-red-600" aria-label="{% translate 'Retirer' %}">{% icon "x" class="h-4 w-4" %}</button>
       </form>
     </li>
     {% endfor %}
@@ -28,12 +28,12 @@
   <footer class="flex flex-col gap-3 border-t border-stone-100 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
     <p class="text-sm">{% translate "Sous-total" %} : <strong class="text-lg">{{ group.subtotal|fcfa }}</strong></p>
     <div class="flex flex-wrap gap-2">
-      <a href="{{ group.whatsapp_url }}" target="_blank" rel="noopener" class="btn-whatsapp">{% include "icons/whatsapp.html" %} {% translate "Commander sur WhatsApp" %}</a>
+      <a href="{{ group.whatsapp_url }}" target="_blank" rel="noopener" class="btn-whatsapp">{% icon "whatsapp" %} {% translate "Commander sur WhatsApp" %}</a>
       <a href="{% url 'orders:checkout' group.shop.slug %}" class="btn-primary">{% translate "Valider cette commande" %}</a>
     </div>
   </footer>
 </section>
 {% empty %}
   {% translate "Votre panier est vide" as t %}{% translate "Parcourez les boutiques du mall et ajoutez vos articles." as x %}{% url 'shops:list' as u %}{% translate "Voir les boutiques" as c %}
-  {% include "includes/empty.html" with title=t text=x url=u cta=c icon="🛍️" %}
+  {% include "includes/empty.html" with title=t text=x url=u cta=c icon="shopping-bag" %}
 {% endfor %}

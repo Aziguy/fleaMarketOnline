@@ -20,11 +20,15 @@
       /* Une transition entre pages interrompue (navigation rapide) n'est pas une erreur. */
       var quiet = function (e) {
         if (!e.viewTransition) return;
-        e.viewTransition.ready.catch(function () {});
-        e.viewTransition.finished.catch(function () {});
+        ["ready", "finished", "updateCallbackDone"].forEach(function (k) {
+          if (e.viewTransition[k]) e.viewTransition[k].catch(function () {});
+        });
       };
       window.addEventListener("pageswap", quiet);
       window.addEventListener("pagereveal", quiet);
+      window.addEventListener("unhandledrejection", function (e) {
+        if (e.reason && /^Transition was (aborted|skipped)/.test(e.reason.message)) e.preventDefault();
+      });
     })();
   </script>
   <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">

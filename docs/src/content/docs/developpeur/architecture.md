@@ -16,7 +16,7 @@ flowchart LR
     Pages["Pages HTML + HTMX"] --> Services
     API["API REST /api/v1"] --> Services
     Live["Flux temps réel (SSE)"] --> Models
-    Services["services.py\norders · bookings · shops"] --> Models[(Modèles Django)]
+    Services["services.py\norders · bookings · shops\nreviews · favorites · notifications"] --> Models[(Modèles Django)]
     Search["core.search\nrecherche partagée"] --> Models
     AI["ai.services\n(Claude)"] -.->|mots-clés| Search
     Pages --> Search
@@ -29,6 +29,11 @@ flowchart LR
 | Créer, annuler, confirmer une réservation | `apps/bookings/services.py` |
 | Créer une boutique, valider ou suspendre | `apps/shops/services.py` |
 | Recherche catalogue (pages, palette, API) et recherche élargie | `apps/core/search.py` |
+| Droit de noter (client servi), note moyenne, réponse du commerçant | `apps/reviews/services.py` |
+| Favoris, alerte de retour en stock | `apps/favorites/services.py`, `apps/favorites/signals.py` |
+| Notifications (base + e-mail) | `apps/notifications/services.py` |
+| Statistiques de ventes et export CSV | `apps/dashboard/stats.py` |
+| Optimisation des images, suppression des fichiers remplacés | `apps/core/images.py` |
 | Validation des saisies (commande, réservation) | Formulaires Django, réutilisés tels quels par l'API |
 
 ## Applications
@@ -42,7 +47,10 @@ flowchart LR
 | `cart` | Panier en session, regroupé par boutique, lien WhatsApp pré-rempli |
 | `orders` | Commandes par boutique, code de retrait, statuts, stock |
 | `bookings` | Rendez-vous (coiffure, services) et réservations de tables (restaurants, bars) |
-| `dashboard` | Espace commerçant : statistiques, catalogue, commandes, réservations, réglages, flux temps réel |
+| `dashboard` | Espace commerçant : tableau de bord, statistiques et export CSV, catalogue, commandes, réservations, avis, réglages, affiche QR code, flux temps réel |
+| `reviews` | Avis clients vérifiés (1 par client et par boutique), réponse publique, modération |
+| `favorites` | Boutiques et produits suivis, alerte de retour en stock |
+| `notifications` | Centre de notifications (cloche), envoi par e-mail si l'utilisateur en a un |
 | `api` | API REST v1 (Django Ninja) : catalogue, compte client, espace commerçant, jetons d'accès |
 | `ai` | Assistant IA (API Claude) : descriptions produits, mots-clés de recherche |
 
@@ -64,6 +72,12 @@ erDiagram
     User ||--o{ Booking : "réserve"
     Shop ||--o{ Booking : "reçoit"
     Service ||--o{ Booking : "concerne"
+    Shop ||--o{ Review : "reçoit"
+    User ||--o{ Review : "rédige"
+    User ||--o{ Favorite : "suit"
+    Shop ||--o{ Favorite : "suivie"
+    Product ||--o{ Favorite : "suivi"
+    User ||--o{ Notification : "reçoit"
 ```
 
 Points clés :
@@ -74,6 +88,9 @@ Points clés :
 - **Product** : prix en FCFA, ancien prix facultatif (promotion), stock facultatif (`None` = non suivi).
 - **Order** : une commande concerne **une seule boutique**. Les lignes copient le nom et le prix du produit au moment de la commande.
 - **Booking** : `kind` = `appointment` (avec prestation) ou `table` (avec nombre de personnes).
+- **Review** : contrainte d'unicité `(shop, customer)` et note de 1 à 5 en base. `Shop.objects.with_rating()` annote `rating_avg` et `rating_count` (avis publiés uniquement).
+- **Favorite** : soit une boutique, soit un produit (contrainte `CheckConstraint`), unique par utilisateur.
+- **Notification** : titre, message, lien, date de lecture ; `kind` = `restock`, `review` ou `reply`.
 
 ## Paiement sur place
 
@@ -108,6 +125,35 @@ Règles (`apps/orders/services.py`) :
 - Créneau au moins 30 minutes à l'avance et au plus 60 jours.
 - Refusé si la boutique est fermée à ce moment selon ses horaires.
 - Le commerçant confirme ou refuse, puis marque « honorée » ou « absent ».
+
+## Avis, favoris et notifications
+
+- `reviews.services.can_review()` n'autorise que les clients ayant une commande `completed` ou une réservation `completed` dans la boutique, jamais son propriétaire. `save_review()` crée ou met à jour l'avis et prévient le commerçant à la création ; `reply()` prévient le client à la première réponse.
+- Un signal `pre_save`/`post_save` sur `Product` (`apps/favorites/signals.py`) détecte le passage d'un stock de 0 à disponible et, après validation de la transaction (`on_commit`), notifie les clients qui suivent le produit.
+- `notifications.services.notify()` enregistre la notification et l'envoie par e-mail après la transaction si l'utilisateur a une adresse. Le compteur de la cloche vient du processeur de contexte `notifications`.
+
+## Images
+
+`apps/core/images.py` centralise le traitement des photos :
+
+| Élément | Rôle |
+| --- | --- |
+| `optimize_image()` | Corrige l'orientation EXIF, vérifie poids (5 Mo) et dimensions minimales, recadre au centre si demandé, convertit en WebP |
+| `OptimizedImagesMixin` | Applique `optimize_image()` aux champs listés dans `image_specs` d'un formulaire |
+| `@cleanup_files` | Décorateur de modèle : supprime du stockage les fichiers remplacés, vidés ou dont l'objet est supprimé (après la transaction) |
+| `ImagePicker` | Widget avec aperçu, glisser-déposer et case « Supprimer l'image » (`apps/core/widgets.py`) |
+
+| Image | Taille produite | Minimum |
+| --- | --- | --- |
+| Logo de boutique | 512 × 512 (recadrée) | 128 × 128 |
+| Bannière de boutique | 1800 × 600 (recadrée) | 900 × 300 |
+| Photo produit | 1600 px de côté maximum | 300 × 300 |
+
+## Icônes
+
+Les icônes viennent de [Lucide](https://lucide.dev/) (licence ISC), plus le logo WhatsApp. Elles sont rendues en SVG dans le HTML par la balise `{% icon "nom" class="h-5 w-5" %}` (bibliothèque `mall`, chargée partout), sans police ni JavaScript. Un nom inconnu affiche l'icône `store`. Le paramètre `label` rend l'icône lisible par les lecteurs d'écran ; sinon elle est décorative (`aria-hidden`).
+
+`npm run icons` (script `scripts/icons.mjs`) relève les icônes utilisées dans les gabarits et celles listées dans `static/src/icons.json` (icônes des types de boutique et des notifications), puis les extrait du paquet `lucide-static` vers `apps/core/icons.json`. La CI vérifie que ce fichier est à jour.
 
 ## Fuseau horaire et langue
 

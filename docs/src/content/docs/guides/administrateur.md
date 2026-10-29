@@ -26,7 +26,7 @@ Cochez **Mise en avant** dans la liste des boutiques : elles apparaissent en pre
 
 ## 3. Types de boutique
 
-**Boutiques > Types de boutique** : ajoutez ou modifiez les familles (nom français, nom anglais, emoji, ordre d'affichage) et leurs fonctionnalités :
+**Boutiques > Types de boutique** : ajoutez ou modifiez les familles (nom français, nom anglais, icône, ordre d'affichage) et leurs fonctionnalités. L'icône se choisit dans une liste d'icônes [Lucide](https://lucide.dev/icons/) incluses dans la plateforme (panier, smartphone, ciseaux, couverts...) :
 
 | Option | Effet |
 | --- | --- |
@@ -34,15 +34,23 @@ Cochez **Mise en avant** dans la liste des boutiques : elles apparaissent en pre
 | Prend des rendez-vous | Bouton « Prendre rendez-vous », prestations réservables |
 | Réserve des tables | Bouton « Réserver une table » |
 
-## 4. Utilisateurs
+## 4. Modérer les avis
+
+**Avis > Avis** liste tous les avis clients, filtrables par note et par statut de publication. Seuls des clients réellement servis (commande remise ou rendez-vous honoré) peuvent en déposer.
+
+Pour retirer un avis injurieux ou hors sujet, décochez **Publié** dans la liste : il disparaît de la page de la boutique et n'est plus compté dans sa note, mais reste visible par le commerçant avec la mention « Masqué par la modération ».
+
+## 5. Utilisateurs
 
 **Comptes > Utilisateurs** : recherche par téléphone, nom ou e-mail ; désactivation d'un compte (case **Actif**) ; attribution de l'accès administration à un membre de l'équipe du mall (case **Accès administration** et permissions).
 
-## 5. Commandes et réservations
+## 6. Commandes et réservations
 
 **Commandes** et **Réservations** donnent une vue globale, filtrable par boutique, statut et date, pour le support client ou le règlement d'un litige. Le traitement courant reste fait par chaque commerçant dans son espace.
 
-## 6. Support aux utilisateurs
+**Favoris** et **Notifications** sont également consultables, par exemple pour vérifier qu'un client a bien été prévenu d'un retour en stock.
+
+## 7. Support aux utilisateurs
 
 - **Mot de passe oublié sans e-mail** : dans la fiche utilisateur, utilisez le lien de changement de mot de passe et communiquez le nouveau mot de passe au titulaire après vérification de son identité.
 - **Changement de propriétaire d'une boutique** : modifiez le champ **Propriétaire** de la boutique. Un commerçant peut posséder plusieurs boutiques.

@@ -14,7 +14,7 @@
   </a>
   {% empty %}
     {% translate "Aucune réservation" as t %}{% translate "Réservez un rendez-vous dans un salon ou une table dans un restaurant du mall." as x %}
-    {% include "includes/empty.html" with title=t text=x icon="📅" %}
+    {% include "includes/empty.html" with title=t text=x icon="calendar" %}
   {% endfor %}
 </div>
 {% endblock %}

@@ -1,4 +1,4 @@
 {% load i18n %}
 <label class="label" for="id_description">{% translate "Description" %}</label>
 <textarea name="description" id="id_description" rows="5" class="input animate-pop-in">{{ description }}</textarea>
-{% if error %}<p class="error">{{ error }}</p>{% else %}<p class="help text-brand-700">✨ {% translate "Proposition de l'assistant : modifiez-la librement." %}</p>{% endif %}
+{% if error %}<p class="error">{{ error }}</p>{% else %}<p class="help flex items-center gap-1 text-brand-700">{% icon "sparkles" class="h-3.5 w-3.5" %} {% translate "Proposition de l'assistant : modifiez-la librement." %}</p>{% endif %}

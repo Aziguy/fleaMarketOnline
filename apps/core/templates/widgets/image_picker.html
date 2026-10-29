@@ -1,0 +1,19 @@
+{% load i18n mall %}
+<div data-image-picker>
+  <label for="{{ widget.attrs.id }}" data-drop class="group relative flex cursor-pointer items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-stone-300 bg-stone-50 transition hover:border-brand-400 data-[over]:border-brand-500 data-[over]:bg-brand-50 {{ widget.ratio }}">
+    <img data-preview src="{% if widget.is_initial %}{{ widget.value.url }}{% endif %}" alt="" class="absolute inset-0 h-full w-full object-cover transition{% if not widget.is_initial %} hidden{% endif %}">
+    <span data-placeholder class="flex flex-col items-center gap-1 p-4 text-center text-sm text-stone-500{% if widget.is_initial %} hidden{% endif %}">
+      {% icon "image-up" class="h-7 w-7 text-brand-600" %}
+      <span class="font-medium text-stone-700">{% translate "Choisir ou déposer une image" %}</span>
+      {% if widget.hint %}<span class="text-xs">{{ widget.hint }}</span>{% endif %}
+    </span>
+    <span data-change class="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-full bg-night-950/75 px-3 py-1 text-xs font-medium text-white opacity-0 transition group-hover:opacity-100 group-focus-within:opacity-100{% if not widget.is_initial %} hidden{% endif %}">{% icon "pencil" class="h-3.5 w-3.5" %} {% translate "Changer" %}</span>
+  </label>
+  <input type="{{ widget.type }}" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>
+  {% if widget.is_initial and not widget.required %}
+  <label class="mt-2 inline-flex cursor-pointer items-center gap-2 text-sm text-stone-600 hover:text-red-600">
+    <input type="checkbox" name="{{ widget.checkbox_name }}" id="{{ widget.checkbox_id }}" data-clear class="h-4 w-4 rounded border-stone-300 text-red-600 focus:ring-red-500">
+    {% icon "trash-2" class="h-4 w-4" %} {% translate "Supprimer l'image" %}
+  </label>
+  {% endif %}
+</div>

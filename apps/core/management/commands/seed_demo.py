@@ -1,12 +1,17 @@
-"""Données de démonstration : boutiques, produits, prestations."""
+"""Données de démonstration : boutiques, produits, prestations, ventes et avis."""
 
+import random
+from datetime import timedelta
 from typing import Any
 
 from django.core.management.base import BaseCommand
 from django.db import transaction
+from django.utils import timezone
 
 from apps.accounts.models import User
 from apps.catalog.models import Category, Product, Service
+from apps.orders.models import Order, OrderItem
+from apps.reviews.models import Review
 from apps.shops.models import Shop, ShopType
 from apps.shops.services import ensure_opening_hours
 
@@ -124,6 +129,17 @@ SHOPS: list[dict[str, Any]] = [
     },
 ]
 
+REVIEWERS = [
+    ("670000011", "Awa", "Mballa"),
+    ("670000012", "Jean", "Atangana"),
+    ("670000013", "Linda", "Fouda"),
+]
+REVIEWS = [
+    (5, "Accueil chaleureux et produits frais, je recommande."),
+    (4, "Bon service, retrait rapide avec le code."),
+    (5, "Très professionnels, paiement MoMo sans souci."),
+]
+
 
 class Command(BaseCommand):
     help = "Crée des boutiques et produits de démonstration (mot de passe : demo12345)."
@@ -177,6 +193,22 @@ class Command(BaseCommand):
                     shop=shop, name=name, defaults={"price": price, "duration_minutes": minutes}
                 )
 
+        reviewers = []
+        for phone, first, last in REVIEWERS:
+            user, _ = User.objects.get_or_create(
+                phone=f"+237{phone}", defaults={"first_name": first, "last_name": last}
+            )
+            reviewers.append(user)
+        for n, shop in enumerate(Shop.objects.filter(owner__phone__startswith="+2376500000")):
+            for k, user in enumerate(reviewers[: 1 + n % 3]):
+                rating, comment = REVIEWS[(n + k) % len(REVIEWS)]
+                Review.objects.get_or_create(
+                    shop=shop, customer=user, defaults={"rating": rating, "comment": comment}
+                )
+
+        for shop in Shop.objects.filter(owner__phone__startswith="+2376500000"):
+            self._seed_sales(shop, reviewers)
+
         customer, created = User.objects.get_or_create(
             phone="+237670000000", defaults={"first_name": "Client", "last_name": "Démo"}
         )
@@ -189,3 +221,39 @@ class Command(BaseCommand):
                 f"Commerçants : 650000001..{len(SHOPS):02d} / {DEMO_PASSWORD}."
             )
         )
+
+    def _seed_sales(self, shop, customers):
+        """Commandes remises et payées réparties sur les 30 derniers jours."""
+        products = list(shop.products.all())
+        if not products or shop.orders.exists():
+            return
+        rng = random.Random(shop.pk)
+        now = timezone.now()
+        methods = shop.payment_methods()
+        for n in range(rng.randint(18, 30)):
+            moment = now - timedelta(days=rng.randint(0, 29), hours=rng.randint(0, 8))
+            lines = rng.sample(products, k=min(len(products), rng.randint(1, 3)))
+            items = [(p, rng.randint(1, 3)) for p in lines]
+            subtotal = sum(p.price * q for p, q in items)
+            customer = customers[n % len(customers)]
+            method = rng.choice(methods)
+            order = Order.objects.create(
+                shop=shop,
+                customer=customer,
+                fulfillment="pickup",
+                payment_method=method,
+                contact_name=customer.first_name,
+                contact_phone=customer.phone,
+                subtotal=subtotal,
+                total=subtotal,
+                status=Order.Status.COMPLETED,
+                paid_with=method,
+                paid_at=moment,
+            )
+            OrderItem.objects.bulk_create(
+                OrderItem(
+                    order=order, product=p, product_name=p.name, unit_price=p.price, quantity=q
+                )
+                for p, q in items
+            )
+            Order.objects.filter(pk=order.pk).update(created_at=moment)

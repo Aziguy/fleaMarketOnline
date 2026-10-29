@@ -1,12 +1,35 @@
+from django import forms
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
+
+from apps.core.templatetags.mall import ICONS
 
 from . import services
 from .models import OpeningHour, Shop, ShopType
 
 
+class ShopTypeForm(forms.ModelForm):
+    icon = forms.ChoiceField(
+        label=_("icône"), choices=[(name, name) for name in sorted(ICONS["lucide"])]
+    )
+
+    class Meta:
+        model = ShopType
+        fields = (
+            "name",
+            "name_en",
+            "slug",
+            "icon",
+            "sells_products",
+            "takes_appointments",
+            "takes_table_bookings",
+            "position",
+        )
+
+
 @admin.register(ShopType)
 class ShopTypeAdmin(admin.ModelAdmin):
+    form = ShopTypeForm
     list_display = (
         "name",
         "icon",

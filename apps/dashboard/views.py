@@ -1,13 +1,19 @@
-from datetime import timedelta
+import csv
+from datetime import date, timedelta
+from io import BytesIO
+from itertools import chain
 from typing import Any
 
+import segno
 from django.conf import settings
 from django.contrib import messages
 from django.core.cache import cache
 from django.core.paginator import Paginator
 from django.db.models import Q, Sum
+from django.http import HttpResponse, StreamingHttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
@@ -18,10 +24,13 @@ from apps.bookings.models import Booking
 from apps.orders import services as order_services
 from apps.orders.forms import CancelForm, CompleteOrderForm
 from apps.orders.models import Order
+from apps.reviews import services as review_services
+from apps.reviews.forms import ReplyForm
 from apps.shops.forms import OpeningHourFormSet, ShopSettingsForm
 from apps.shops.services import ensure_opening_hours
 from apps.shops.views import CURRENT_SHOP_KEY
 
+from . import stats
 from .decorators import merchant_required
 from .forms import CategoryForm, ProductForm, ProductImageFormSet, ServiceForm
 
@@ -63,7 +72,8 @@ def switch_shop(request):
 
 @merchant_required
 def shop_settings(request):
-    form = ShopSettingsForm(request.POST or None, request.FILES or None, instance=request.shop)
+    instance = type(request.shop).objects.get(pk=request.shop.pk)
+    form = ShopSettingsForm(request.POST or None, request.FILES or None, instance=instance)
     if request.method == "POST" and form.is_valid():
         form.save()
         messages.success(request, _("Informations enregistrées."))
@@ -347,4 +357,108 @@ def ai_description(request):
             error = _("L'assistant n'est pas disponible pour le moment.")
     return render(
         request, "dashboard/_ai_description.html", {"description": description, "error": error}
+    )
+
+
+@merchant_required
+def reviews(request):
+    qs = request.shop.reviews.select_related("customer")
+    if request.GET.get("filtre") == "sans-reponse":
+        qs = qs.filter(reply="")
+    return render(
+        request,
+        "dashboard/reviews.html",
+        {
+            "page": Paginator(qs, 20).get_page(request.GET.get("page")),
+            "summary": review_services.summary(request.shop),
+            "unanswered": request.GET.get("filtre") == "sans-reponse",
+        },
+    )
+
+
+@merchant_required
+@require_POST
+def review_reply(request, pk):
+    review = get_object_or_404(request.shop.reviews.select_related("customer"), pk=pk)
+    form = ReplyForm(request.POST, instance=review)
+    if form.is_valid():
+        review_services.reply(review, form.cleaned_data["reply"].strip())
+        messages.success(request, _("Réponse publiée."))
+    if request.htmx:
+        return render(request, "dashboard/_review_card.html", {"review": review, "form": form})
+    return redirect("dashboard:reviews")
+
+
+@merchant_required
+def statistics(request):
+    period = request.GET.get("periode", "")
+    days = int(period) if period.isdigit() and int(period) in stats.PERIODS else 30
+    return render(
+        request,
+        "dashboard/statistics.html",
+        {"stats": stats.shop_stats(request.shop, days), "periods": stats.PERIODS},
+    )
+
+
+class _Echo:
+    def write(self, value):
+        return value
+
+
+def _csv_safe(value):
+    if isinstance(value, str) and value[:1] in ("=", "+", "-", "@", "\t", "\r"):
+        return f"'{value}"
+    return value
+
+
+@merchant_required
+def orders_export(request):
+    orders = request.shop.orders.prefetch_related("items").order_by("created_at")
+    try:
+        start = date.fromisoformat(request.GET.get("du", ""))
+        orders = orders.filter(created_at__date__gte=start)
+    except ValueError:
+        pass
+    try:
+        end = date.fromisoformat(request.GET.get("au", ""))
+        orders = orders.filter(created_at__date__lte=end)
+    except ValueError:
+        pass
+    writer = csv.writer(_Echo(), delimiter=";")
+    rows = (writer.writerow([_csv_safe(v) for v in row]) for row in stats.orders_csv_rows(orders))
+    filename = f"commandes-{request.shop.slug}-{timezone.localdate():%Y%m%d}.csv"
+    return StreamingHttpResponse(
+        chain(["﻿"], rows),
+        content_type="text/csv; charset=utf-8",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
+
+
+def _shop_qr(request):
+    return segno.make(request.build_absolute_uri(request.shop.get_absolute_url()), error="m")
+
+
+@merchant_required
+def poster(request):
+    qr = _shop_qr(request)
+    return render(
+        request,
+        "dashboard/poster.html",
+        {
+            "shop": request.shop,
+            "qr_svg": mark_safe(qr.svg_inline(scale=1, border=0, omitsize=True, dark="#052e16")),
+            "shop_url": request.build_absolute_uri(request.shop.get_absolute_url()),
+        },
+    )
+
+
+@merchant_required
+def poster_qr(request, kind):
+    buffer = BytesIO()
+    _shop_qr(request).save(buffer, kind=kind, scale=16, border=2, dark="#052e16")
+    filename = f"qr-{request.shop.slug}.{kind}"
+    return HttpResponse(
+        buffer.getvalue(),
+        content_type="image/svg+xml" if kind == "svg" else "image/png",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
     )

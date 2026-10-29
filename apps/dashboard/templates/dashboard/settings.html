@@ -5,14 +5,34 @@
 <form method="post" enctype="multipart/form-data" class="mt-6 space-y-6">
   {% csrf_token %}
   {% for error in form.non_field_errors %}<div class="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">{{ error }}</div>{% endfor %}
+  <fieldset class="card card-body space-y-5">
+    <h2 class="font-semibold">{% translate "Identité visuelle" %}</h2>
+    <div class="max-w-2xl overflow-hidden rounded-2xl border border-stone-200" aria-label="{% translate 'Aperçu de la vitrine' %}">
+      <div class="relative aspect-[3/1] bg-gradient-to-br from-night-600 via-night-800 to-night-950">
+        <img id="preview-banner" src="{% if shop.banner %}{{ shop.banner.url }}{% endif %}" alt="" class="h-full w-full object-cover{% if not shop.banner %} hidden{% endif %}">
+      </div>
+      <div class="flex items-end gap-3 px-4 pb-4">
+        <div class="relative z-10 -mt-8 flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl border-4 border-surface bg-brand-50 text-brand-700 shadow sm:-mt-10 sm:h-20 sm:w-20">
+          <img id="preview-logo" src="{% if shop.logo %}{{ shop.logo.url }}{% endif %}" alt="" class="h-full w-full object-cover{% if not shop.logo %} hidden{% endif %}">
+          {% if not shop.logo %}<span data-preview-fallback="#preview-logo">{% icon shop.shop_type.icon class="h-8 w-8" %}</span>{% endif %}
+        </div>
+        <div class="min-w-0 pt-2">
+          <p class="truncate font-display text-lg font-semibold" data-mirror="#id_name">{{ shop.name }}</p>
+          <p class="truncate text-sm text-stone-500" data-mirror="#id_tagline">{{ shop.tagline }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="grid gap-5 sm:grid-cols-[auto_1fr]">
+      {% include "includes/field.html" with field=form.logo %}
+      {% include "includes/field.html" with field=form.banner %}
+    </div>
+    <p class="help">{% translate "Les images sont recadrées et optimisées automatiquement (WebP). JPEG, PNG ou WebP, 5 Mo maximum." %}</p>
+  </fieldset>
   <fieldset class="card card-body grid gap-4 sm:grid-cols-2">
-    <legend class="sr-only">{% translate "Vitrine" %}</legend>
     <h2 class="font-semibold sm:col-span-2">{% translate "Vitrine" %}</h2>
     {% include "includes/field.html" with field=form.name %}
     {% include "includes/field.html" with field=form.tagline %}
     {% include "includes/field.html" with field=form.description wrapper="sm:col-span-2" %}
-    {% include "includes/field.html" with field=form.logo %}
-    {% include "includes/field.html" with field=form.cover %}
   </fieldset>
   <fieldset class="card card-body grid gap-4 sm:grid-cols-2">
     <h2 class="font-semibold sm:col-span-2">{% translate "Emplacement et contacts" %}</h2>

@@ -21,11 +21,16 @@ Vous pouvez parcourir le site et remplir votre panier sans compte. Le compte est
 ## 2. Trouver un produit ou une boutique
 
 - **Recherche rapide** : cliquez sur la barre en haut de page, ou appuyez sur `Ctrl + K` (ou `/`) sur ordinateur. Les résultats s'affichent pendant la saisie ; naviguez avec les flèches et ouvrez avec `Entrée`.
-- **Recherche élargie** : si une recherche trouve peu de produits, l'assistant propose des mots proches (synonymes, noms locaux) et les résultats correspondants apparaissent, signalés par ✨.
+- **Recherche élargie** : si une recherche trouve peu de produits, l'assistant propose des mots proches (synonymes, noms locaux) et les résultats correspondants apparaissent, signalés par une icône d'étincelles.
 - **Par type** : depuis l'accueil, choisissez Épicerie, Technologie, Coiffure, Restaurant...
 - **Page Boutiques** : filtrez par type, par niveau du mall ou par nom.
+- **Plan du mall** (menu **Plan**) : les boutiques de chaque étage, triées par numéro de local. Depuis une boutique, **Voir sur le plan** ouvre le bon étage et la met en évidence.
 
-La page d'une boutique indique son **emplacement dans le mall** (niveau, numéro de local), ses **horaires** (avec « Ouvert maintenant » / « Fermé maintenant »), ses moyens de paiement et ses modes de remise.
+![Plan du mall](/fleaMarketOnline/images/plan.png)
+
+La page d'une boutique indique son **emplacement dans le mall** (niveau, numéro de local), ses **horaires** (avec « Ouvert maintenant » / « Fermé maintenant »), ses moyens de paiement, ses modes de remise et la **note moyenne** laissée par ses clients.
+
+![Page d'une boutique](/fleaMarketOnline/images/boutique.png)
 
 ## 3. Commander
 
@@ -76,23 +81,48 @@ Sur la page d'un salon de coiffure, d'un restaurant ou d'un bar :
 
 Les créneaux doivent être pris au moins 30 minutes à l'avance, pendant les horaires d'ouverture. Suivez et annulez vos demandes dans **Mes réservations**.
 
-## 7. Personnaliser l'affichage
+## 7. Favoris et alertes de retour en stock
+
+- Touchez le **cœur** d'un produit pour l'ajouter à vos favoris, ou **Suivre** sur la page d'une boutique.
+- Retrouvez-les dans **Mes favoris** (menu de votre compte).
+- Si un produit favori est **épuisé**, vous êtes prévenu dès que la boutique le réapprovisionne.
+
+![Mes favoris](/fleaMarketOnline/images/favoris.png)
+
+## 8. Notifications
+
+La **cloche** en haut de page indique le nombre de notifications non lues : retour en stock d'un favori, réponse d'une boutique à votre avis. Si vous avez renseigné un e-mail, vous les recevez aussi par e-mail.
+
+![Notifications](/fleaMarketOnline/images/notifications.png)
+
+## 9. Donner votre avis
+
+Après une commande **remise et payée** ou un rendez-vous **honoré**, un bouton **Donner mon avis** apparaît sur votre commande ou votre réservation. Sur la page de la boutique, choisissez une note de 1 à 5 étoiles et ajoutez un commentaire si vous le souhaitez.
+
+- Votre avis est publié avec votre prénom et l'initiale de votre nom, et le badge **Client vérifié**.
+- Vous pouvez le modifier à tout moment depuis la même page.
+- La boutique peut y répondre publiquement : vous en êtes prévenu.
+
+![Avis clients](/fleaMarketOnline/images/avis.png)
+
+## 10. Personnaliser l'affichage
 
 - **Thème** : l'icône soleil / lune en haut de page propose **Clair**, **Sombre** ou **Système** (suit le réglage du téléphone). Le choix est mémorisé.
 - **Langue** : boutons **FR** / **EN** en haut de page.
 
-## 8. Installer l'application
+## 11. Installer l'application
 
 Le site s'installe comme une application, sans passer par un magasin d'applications :
 
-- **Android (Chrome)** : bouton **📲 Installer l'application** en bas de page, ou menu ⋮ > *Installer l'application*.
+- **Android (Chrome)** : bouton **Installer l'application** en bas de page, ou menu ⋮ > *Installer l'application*.
 - **iPhone (Safari)** : bouton Partager > *Sur l'écran d'accueil*.
 
 L'application s'ouvre en plein écran et reste consultable sans connexion pour les pages déjà vues (boutiques, produits). Commander et réserver nécessitent une connexion.
 
-## 9. Mon compte
+## 12. Mon compte
 
 - **Mon profil** : nom, téléphone, e-mail.
+- **Mes favoris** et **Notifications** : boutiques suivies, produits favoris, alertes.
 - **Mot de passe** : modification.
 - **Mot de passe oublié** : lien envoyé par e-mail. Sans e-mail enregistré, contactez l'administration du mall.
 
@@ -102,4 +132,4 @@ L'application s'ouvre en plein écran et reste consultable sans connexion pour l
 
 **Puis-je commander dans plusieurs boutiques ?** Oui, validez une commande par boutique depuis le panier.
 
-**Un article est épuisé ?** Il ne peut pas être ajouté au panier. Contactez la boutique sur WhatsApp pour connaître la date de réapprovisionnement.
+**Un article est épuisé ?** Il ne peut pas être ajouté au panier. Ajoutez-le à vos favoris : vous serez prévenu dès son retour en stock. Vous pouvez aussi contacter la boutique sur WhatsApp.

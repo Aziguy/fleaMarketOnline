@@ -14,7 +14,7 @@
   </a>
   {% empty %}
     {% translate "Aucune commande pour l'instant" as t %}{% url 'shops:list' as u %}{% translate "Découvrir les boutiques" as c %}
-    {% include "includes/empty.html" with title=t url=u cta=c icon="🧾" %}
+    {% include "includes/empty.html" with title=t url=u cta=c icon="receipt" %}
   {% endfor %}
 </div>
 {% endblock %}

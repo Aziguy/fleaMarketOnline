@@ -11,13 +11,14 @@ sidebar:
 | --- | --- |
 | `make run` | Serveur de développement |
 | `make css-watch` | Recompile le CSS à chaque modification de template |
+| `make icons` | Met à jour les icônes Lucide embarquées (`apps/core/icons.json`) |
 | `make test` | Lance la suite de tests (pytest) |
 | `make lint` | Vérifie le style (ruff) |
 | `make typecheck` | Typage statique (mypy) |
 | `make run-asgi` | Serveur ASGI Uvicorn, comme en production |
 | `make format` | Corrige et formate le code |
 | `make messages` | Met à jour puis compile les traductions |
-| `make seed` | Charge les données de démonstration |
+| `make seed` | Charge les données de démonstration (boutiques, produits, 30 jours de ventes, avis) |
 
 ## Arborescence
 
@@ -25,7 +26,8 @@ sidebar:
 apps/            Applications Django (voir architecture.md)
 config/          Réglages (settings/base, dev, test, prod), URLs, WSGI
 templates/       Gabarits communs : base, en-tête, pied de page, composants
-static/src/      Source CSS Tailwind (app.css)
+static/src/      Source CSS Tailwind (app.css, tokens.css) et icons.json (icônes à embarquer)
+scripts/         icons.mjs : extraction des icônes Lucide
 static/css/      CSS compilé (généré, non versionné)
 static/js/       htmx.min.js et app.js
 locale/en/       Traduction anglaise
@@ -53,6 +55,8 @@ docs/            Site de documentation (Astro Starlight, publié sur GitHub Page
 - Après ajout de classes dans un gabarit, relancer `make css` (ou laisser tourner `make css-watch`).
 - HTMX est utilisé pour l'ajout au panier, la mise à jour des quantités, la recherche instantanée et les actions du tableau de bord. Une vue détecte une requête HTMX avec `request.htmx` et renvoie alors un fragment (`_nom.html`).
 - Les événements `toast` (en-tête `HX-Trigger`) affichent une notification.
+- **Icônes** : `{% icon "shopping-bag" class="h-5 w-5" %}` avec un nom du catalogue [Lucide](https://lucide.dev/icons/). Après avoir utilisé une nouvelle icône, lancez `make icons` et commitez `apps/core/icons.json` (la CI échoue sinon). Une icône choisie dynamiquement (variable) doit être ajoutée à la liste `extra` de `static/src/icons.json`. Pas d'emoji dans l'interface.
+- **Valeurs numériques dans le CSS** (`style="width: {{ x }}%"`) : utilisez `{{ x|unlocalize }}` (`{% load l10n %}`), sinon le français écrit `81,8` et le navigateur ignore la règle.
 
 ## Formulaires
 
@@ -62,6 +66,22 @@ Hériter de `apps.core.forms.StyledFormMixin` pour appliquer les classes Tailwin
 {% include "includes/form.html" %}
 {% include "includes/field.html" with field=form.name wrapper="sm:col-span-2" %}
 ```
+
+## Images téléversées
+
+Pour un champ image, utilisez le widget `ImagePicker` et le mixin `OptimizedImagesMixin` :
+
+```python
+class LogoForm(OptimizedImagesMixin, StyledFormMixin, forms.ModelForm):
+    image_specs = {"logo": {"size": (512, 512), "crop": True, "min_size": (128, 128)}}
+
+    class Meta:
+        model = Shop
+        fields = ("logo",)
+        widgets = {"logo": ImagePicker(ratio="aspect-square w-40")}
+```
+
+Décorez le modèle avec `@cleanup_files` pour que les anciens fichiers soient supprimés du stockage.
 
 ## PWA
 
@@ -90,4 +110,4 @@ Les types de boutique ont un champ `name_en` dédié, géré depuis l'administra
 
 ## Ajouter un type de boutique
 
-Depuis l'administration (**Boutiques > Types de boutique**) : nom, nom anglais, emoji, et fonctionnalités (`vend des produits`, `prend des rendez-vous`, `réserve des tables`). Aucune modification de code nécessaire.
+Depuis l'administration (**Boutiques > Types de boutique**) : nom, nom anglais, icône et fonctionnalités (`vend des produits`, `prend des rendez-vous`, `réserve des tables`). Aucune modification de code nécessaire si l'icône voulue est déjà embarquée ; sinon, ajoutez son nom à `extra` dans `static/src/icons.json`, lancez `make icons` et déployez.

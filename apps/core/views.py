@@ -29,6 +29,7 @@ def home(request):
     context = {
         **(cache.get_or_set("home:overview", _home_overview, HOME_CACHE_SECONDS) or {}),
         "featured_shops": Shop.objects.public()
+        .with_rating()
         .select_related("shop_type")
         .order_by("-is_featured", "-created_at")[:8],
         "latest_products": Product.objects.public().select_related("shop")[:12],
