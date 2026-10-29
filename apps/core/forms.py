@@ -9,6 +9,8 @@ _CHECK = "h-4 w-4 rounded border-stone-300 text-brand-600 focus:ring-brand-500"
 class StyledFormMixin:
     """Applique les classes Tailwind aux widgets."""
 
+    fields: dict[str, forms.Field]
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():

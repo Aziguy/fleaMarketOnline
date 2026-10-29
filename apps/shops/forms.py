@@ -9,6 +9,8 @@ _PHONE_FIELDS = ("phone", "whatsapp", "mtn_momo_number", "orange_money_number")
 
 
 class _ShopPhonesMixin:
+    fields: dict[str, forms.Field]
+
     def _setup_phones(self):
         for name in _PHONE_FIELDS:
             if name in self.fields:
@@ -74,7 +76,8 @@ class ShopSettingsForm(StyledFormMixin, _ShopPhonesMixin, forms.ModelForm):
         self._setup_phones()
 
     def clean(self):
-        data = super().clean()
+        super().clean()
+        data = self.cleaned_data
         if not (data.get("offers_pickup") or data.get("offers_delivery")):
             raise forms.ValidationError(_("Proposez au moins le retrait ou la livraison."))
         if not (

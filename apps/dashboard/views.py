@@ -1,4 +1,5 @@
 from datetime import timedelta
+from typing import Any
 
 from django.contrib import messages
 from django.core.paginator import Paginator
@@ -241,17 +242,19 @@ def order_detail(request, reference):
 def order_action(request, reference):
     order = get_object_or_404(request.shop.orders, reference=reference)
     target = request.POST.get("status")
-    forms = {}
+    forms: dict[str, Any] = {}
     try:
         if target == Order.Status.COMPLETED:
-            forms["complete_form"] = form = CompleteOrderForm(request.POST)
-            if not form.is_valid():
+            forms["complete_form"] = complete = CompleteOrderForm(request.POST)
+            if not complete.is_valid():
                 raise order_services.OrderError(_("Formulaire incomplet."))
-            order_services.change_status(order, target, **form.cleaned_data)
+            order_services.change_status(order, target, **complete.cleaned_data)
         elif target == Order.Status.CANCELLED:
-            forms["cancel_form"] = form = CancelForm(request.POST)
-            form.is_valid()
-            order_services.change_status(order, target, reason=form.cleaned_data.get("reason", ""))
+            forms["cancel_form"] = cancel = CancelForm(request.POST)
+            cancel.is_valid()
+            order_services.change_status(
+                order, target, reason=cancel.cleaned_data.get("reason", "")
+            )
         else:
             order_services.change_status(order, target)
         messages.success(

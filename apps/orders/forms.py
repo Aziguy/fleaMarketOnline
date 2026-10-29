@@ -1,3 +1,5 @@
+from typing import cast
+
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
@@ -34,20 +36,21 @@ class CheckoutForm(StyledFormMixin, forms.Form):
     def __init__(self, *args, shop, user, **kwargs):
         super().__init__(*args, **kwargs)
         self.shop = shop
-        self.fields["fulfillment"].choices = [
-            (m.value, m.label) for m in shop.fulfillment_methods()
-        ]
-        self.fields["payment_method"].choices = [(m.value, m.label) for m in shop.payment_methods()]
-        if len(self.fields["fulfillment"].choices) == 1:
-            self.fields["fulfillment"].initial = self.fields["fulfillment"].choices[0][0]
-        if len(self.fields["payment_method"].choices) == 1:
-            self.fields["payment_method"].initial = self.fields["payment_method"].choices[0][0]
+        for name, methods in (
+            ("fulfillment", shop.fulfillment_methods()),
+            ("payment_method", shop.payment_methods()),
+        ):
+            field = cast(forms.ChoiceField, self.fields[name])
+            field.choices = [(m.value, m.label) for m in methods]
+            if len(methods) == 1:
+                field.initial = methods[0].value
         if not self.is_bound:
             self.fields["contact_name"].initial = user.get_full_name()
             self.fields["contact_phone"].initial = user.phone
 
     def clean(self):
-        data = super().clean()
+        super().clean()
+        data = self.cleaned_data
         if data.get("fulfillment") == Fulfillment.DELIVERY and not data.get("delivery_address"):
             self.add_error("delivery_address", _("Indiquez l'adresse de livraison."))
         return data

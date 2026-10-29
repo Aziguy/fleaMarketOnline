@@ -101,7 +101,7 @@ class Order(models.Model):
 
     def next_statuses(self):
         S = self.Status
-        flow = {
+        flow: dict[str, list[str]] = {
             S.PENDING: [S.CONFIRMED, S.CANCELLED],
             S.CONFIRMED: [S.READY if self.is_pickup else S.SHIPPED, S.CANCELLED],
             S.READY: [S.COMPLETED, S.CANCELLED],
@@ -115,14 +115,15 @@ class Order(models.Model):
 
     @property
     def status_badge(self):
-        return {
+        badges: dict[str, str] = {
             self.Status.PENDING: "badge-yellow",
             self.Status.CONFIRMED: "badge-blue",
             self.Status.READY: "badge-green",
             self.Status.SHIPPED: "badge-blue",
             self.Status.COMPLETED: "badge-green",
             self.Status.CANCELLED: "badge-red",
-        }[self.status]
+        }
+        return badges[self.status]
 
 
 class OrderItem(models.Model):

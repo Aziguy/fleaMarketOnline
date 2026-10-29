@@ -7,7 +7,7 @@ from apps.core.fields import PhoneField
 from apps.core.phone import normalize_phone
 
 
-class UserManager(BaseUserManager):
+class UserManager(BaseUserManager["User"]):
     use_in_migrations = True
 
     def create_user(self, phone, password=None, **extra):

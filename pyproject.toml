@@ -22,3 +22,14 @@ known-first-party = ["apps", "config"]
 DJANGO_SETTINGS_MODULE = "config.settings.test"
 python_files = ["tests.py", "test_*.py"]
 addopts = "-q"
+
+[tool.mypy]
+python_version = "3.12"
+plugins = ["mypy_django_plugin.main"]
+ignore_missing_imports = true
+warn_unused_ignores = true
+check_untyped_defs = true
+exclude = ["/migrations/", "/tests\\.py$", "^conftest\\.py$", "^docs/"]
+
+[tool.django-stubs]
+django_settings_module = "config.settings.test"
