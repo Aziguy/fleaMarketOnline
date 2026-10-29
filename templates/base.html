@@ -17,6 +17,14 @@
         var t = localStorage.getItem("theme");
         if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
       } catch (e) {}
+      /* Une transition entre pages interrompue (navigation rapide) n'est pas une erreur. */
+      var quiet = function (e) {
+        if (!e.viewTransition) return;
+        e.viewTransition.ready.catch(function () {});
+        e.viewTransition.finished.catch(function () {});
+      };
+      window.addEventListener("pageswap", quiet);
+      window.addEventListener("pagereveal", quiet);
     })();
   </script>
   <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
