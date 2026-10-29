@@ -7,13 +7,13 @@
     <button class="btn-primary">{% translate "Rechercher" %}</button>
   </form>
   {% if q %}
-    {% if shops %}
+    {% if result.shops %}
       <h2 class="section-title mt-8">{% translate "Boutiques" %}</h2>
-      <div class="mt-4 grid grid-cols-2 gap-4 md:grid-cols-4">{% for shop in shops %}{% include "includes/shop_card.html" %}{% endfor %}</div>
+      <div class="mt-4 grid grid-cols-2 gap-4 md:grid-cols-4">{% for shop in result.shops %}{% include "includes/shop_card.html" %}{% endfor %}</div>
     {% endif %}
-    <h2 class="section-title mt-8">{% blocktranslate count n=products|length %}{{ n }} produit pour « {{ q }} »{% plural %}{{ n }} produits pour « {{ q }} »{% endblocktranslate %}</h2>
-    {% if products %}
-      <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">{% for product in products %}{% include "includes/product_card.html" %}{% endfor %}</div>
+    <h2 class="section-title mt-8">{% blocktranslate count n=result.products|length %}{{ n }} produit pour « {{ q }} »{% plural %}{{ n }} produits pour « {{ q }} »{% endblocktranslate %}</h2>
+    {% if result.products %}
+      <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">{% for product in result.products %}{% include "includes/product_card.html" %}{% endfor %}</div>
     {% else %}
       <div class="mt-4">{% translate "Aucun produit trouvé" as t %}{% translate "Essayez un autre mot ou parcourez les boutiques." as x %}{% url 'shops:list' as u %}{% translate "Voir les boutiques" as c %}{% include "includes/empty.html" with title=t text=x url=u cta=c icon="🔎" %}</div>
     {% endif %}

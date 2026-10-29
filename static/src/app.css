@@ -59,6 +59,8 @@
   .kbd { @apply rounded-md border border-stone-300 bg-stone-100 px-1.5 py-0.5 font-mono text-[11px] text-stone-500; }
   .skeleton { @apply animate-shimmer rounded-lg bg-gradient-to-r from-stone-100 via-stone-200 to-stone-100 bg-[length:200%_100%]; }
 
+  .palette-item { @apply text-stone-700 outline-none transition hover:bg-brand-50 aria-selected:bg-brand-50 aria-selected:text-brand-800; }
+
   .table-base { @apply min-w-full divide-y divide-stone-200 text-sm; }
   .table-base th { @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-stone-500; }
   .table-base td { @apply px-4 py-3 align-middle; }

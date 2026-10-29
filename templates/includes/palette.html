@@ -1,0 +1,18 @@
+{% load i18n %}
+<dialog id="palette" aria-label="{% translate 'Recherche' %}" class="m-0 mx-auto mt-[10vh] w-[calc(100%-2rem)] max-w-xl rounded-2xl border border-stone-200 bg-surface p-0 text-stone-800 shadow-2xl backdrop:bg-night-950/60 backdrop:backdrop-blur-sm open:animate-pop-in">
+  <div class="flex items-center gap-3 border-b border-stone-200 px-4">
+    {% include "icons/search.html" with class="h-5 w-5 text-stone-400" %}
+    <input id="palette-input" type="search" name="q" autocomplete="off" role="combobox" aria-expanded="true" aria-controls="palette-results"
+           placeholder="{% translate 'Produit, boutique, type de boutique...' %}"
+           class="h-14 flex-1 border-0 bg-transparent text-base text-stone-900 placeholder:text-stone-400 focus:ring-0"
+           hx-get="{% url 'core:palette' %}" hx-trigger="input changed delay:200ms, palette:open" hx-target="#palette-results" hx-sync="this:replace">
+    <span class="htmx-indicator h-4 w-4 animate-spin rounded-full border-2 border-brand-500 border-t-transparent"></span>
+    <button type="button" data-palette-close class="kbd">Esc</button>
+  </div>
+  <div id="palette-results" role="listbox" class="max-h-[60vh] overflow-y-auto p-2"></div>
+  <div class="flex items-center gap-4 border-t border-stone-200 px-4 py-2 text-[11px] text-stone-500">
+    <span><span class="kbd">↑</span> <span class="kbd">↓</span> {% translate "naviguer" %}</span>
+    <span><span class="kbd">↵</span> {% translate "ouvrir" %}</span>
+    <span class="ml-auto"><span class="kbd">Ctrl K</span> {% translate "ou" %} <span class="kbd">/</span></span>
+  </div>
+</dialog>

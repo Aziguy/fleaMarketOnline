@@ -4,6 +4,8 @@ from django.shortcuts import render
 from apps.catalog.models import Product
 from apps.shops.models import Shop, ShopType
 
+from .search import search_catalog
+
 
 def home(request):
     context = {
@@ -26,25 +28,15 @@ def home(request):
 
 
 def search(request):
-    q = request.GET.get("q", "").strip()
-    products, shops = Product.objects.none(), Shop.objects.none()
-    if len(q) >= 2:
-        products = (
-            Product.objects.public()
-            .filter(
-                Q(name__icontains=q) | Q(description__icontains=q) | Q(category__name__icontains=q)
-            )
-            .select_related("shop")[:48]
-        )
-        shops = (
-            Shop.objects.public()
-            .filter(
-                Q(name__icontains=q) | Q(tagline__icontains=q) | Q(shop_type__name__icontains=q)
-            )
-            .select_related("shop_type")[:12]
-        )
-    template = "core/_search_suggestions.html" if request.htmx else "core/search.html"
-    return render(request, template, {"q": q, "products": products, "shops": shops})
+    result = search_catalog(request.GET.get("q"))
+    return render(request, "core/search.html", {"q": result.query, "result": result})
+
+
+def palette(request):
+    """Résultats de la palette de recherche (fragment HTMX)."""
+    q = (request.GET.get("q") or "").strip()
+    result = search_catalog(q, products_limit=6, shops_limit=4)
+    return render(request, "core/_palette_results.html", {"q": q, "result": result})
 
 
 def how_it_works(request):

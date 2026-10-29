@@ -98,3 +98,57 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("[data-autodismiss]").forEach((el) => setTimeout(() => el.remove(), 5000));
 });
 document.addEventListener("htmx:afterSwap", (event) => reveal(event.target));
+
+/* Palette de recherche : Ctrl+K, Cmd+K ou « / ». */
+const Palette = {
+  el: () => document.getElementById("palette"),
+  open() {
+    const dialog = Palette.el();
+    if (!dialog || dialog.open) return;
+    dialog.showModal();
+    const input = document.getElementById("palette-input");
+    input.select();
+    htmx.trigger(input, "palette:open");
+  },
+  close() {
+    Palette.el()?.close();
+  },
+  items: () => [...document.querySelectorAll("#palette-results [role=option]")],
+  move(step) {
+    const items = Palette.items();
+    if (!items.length) return;
+    const current = items.findIndex((el) => el.getAttribute("aria-selected") === "true");
+    const next = (current + step + items.length) % items.length;
+    items.forEach((el, i) => el.setAttribute("aria-selected", i === next));
+    items[next].scrollIntoView({ block: "nearest" });
+  },
+};
+
+document.addEventListener("keydown", (event) => {
+  const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName) || document.activeElement?.isContentEditable;
+  if ((event.key === "k" && (event.ctrlKey || event.metaKey)) || (event.key === "/" && !typing)) {
+    event.preventDefault();
+    Palette.open();
+    return;
+  }
+  if (!Palette.el()?.open) return;
+  if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+    event.preventDefault();
+    Palette.move(event.key === "ArrowDown" ? 1 : -1);
+  } else if (event.key === "Enter") {
+    const active = Palette.items().find((el) => el.getAttribute("aria-selected") === "true") || Palette.items()[0];
+    if (active) {
+      event.preventDefault();
+      active.click();
+    }
+  }
+});
+
+document.addEventListener("click", (event) => {
+  if (event.target.closest("[data-palette-open]")) {
+    event.preventDefault();
+    Palette.open();
+  } else if (event.target.closest("[data-palette-close]") || event.target === Palette.el()) {
+    Palette.close();
+  }
+});

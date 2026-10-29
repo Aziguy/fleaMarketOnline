@@ -35,6 +35,7 @@
   {% include "includes/messages.html" %}
   <main id="main" class="flex-1">{% block content %}{% endblock %}</main>
   {% block footer %}{% include "includes/footer.html" %}{% endblock %}
+  {% include "includes/palette.html" %}
   <div id="toasts" class="pointer-events-none fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 flex-col gap-2" aria-live="polite"></div>
 </body>
 </html>

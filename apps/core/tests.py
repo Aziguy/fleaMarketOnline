@@ -37,17 +37,34 @@ def test_format_fcfa():
 def test_home_and_search(client, product):
     assert client.get("/").status_code == 200
     response = client.get("/recherche/", {"q": "riz"})
-    assert product in response.context["products"]
+    assert product in response.context["result"].products
 
 
 def test_search_hides_pending_shops(client, product):
     product.shop.status = "pending"
     product.shop.save()
     response = client.get("/recherche/", {"q": "riz"})
-    assert list(response.context["products"]) == []
+    assert response.context["result"].products == []
 
 
 def test_english_translation(client, db):
     client.cookies["django_language"] = "en"
     content = client.get("/").content.decode()
     assert "Every shop in the mall," in content
+
+
+def test_search_catalog_matches_terms_and_shop_type(product):
+    from apps.core.search import search_catalog
+
+    assert search_catalog("x").products == []
+    assert product in search_catalog("inconnu", terms=["riz", "huile"]).products
+    assert product.shop in search_catalog("Grocery").shops
+
+
+def test_palette_shortcuts_and_results(client, product):
+    empty = client.get("/recherche/palette/", HTTP_HX_REQUEST="true").content.decode()
+    assert "Toutes les boutiques" in empty
+    found = client.get("/recherche/palette/", {"q": "riz"}, HTTP_HX_REQUEST="true").content.decode()
+    assert product.get_absolute_url() in found
+    missing = client.get("/recherche/palette/", {"q": "zzzz"}).content.decode()
+    assert "Aucun résultat" in missing
