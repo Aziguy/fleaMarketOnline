@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.db.models import Avg, Count, Q
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
@@ -50,6 +51,13 @@ class ShopType(models.Model):
 class ShopQuerySet(models.QuerySet):
     def public(self):
         return self.filter(status=Shop.Status.APPROVED)
+
+    def with_rating(self):
+        published = Q(reviews__is_published=True)
+        return self.annotate(
+            rating_avg=Avg("reviews__rating", filter=published),
+            rating_count=Count("reviews", filter=published),
+        )
 
 
 @cleanup_files

@@ -7,6 +7,7 @@ from django.db import transaction
 
 from apps.accounts.models import User
 from apps.catalog.models import Category, Product, Service
+from apps.reviews.models import Review
 from apps.shops.models import Shop, ShopType
 from apps.shops.services import ensure_opening_hours
 
@@ -124,6 +125,17 @@ SHOPS: list[dict[str, Any]] = [
     },
 ]
 
+REVIEWERS = [
+    ("670000011", "Awa", "Mballa"),
+    ("670000012", "Jean", "Atangana"),
+    ("670000013", "Linda", "Fouda"),
+]
+REVIEWS = [
+    (5, "Accueil chaleureux et produits frais, je recommande."),
+    (4, "Bon service, retrait rapide avec le code."),
+    (5, "Très professionnels, paiement MoMo sans souci."),
+]
+
 
 class Command(BaseCommand):
     help = "Crée des boutiques et produits de démonstration (mot de passe : demo12345)."
@@ -175,6 +187,19 @@ class Command(BaseCommand):
             for name, price, minutes in data.get("services", []):
                 Service.objects.update_or_create(
                     shop=shop, name=name, defaults={"price": price, "duration_minutes": minutes}
+                )
+
+        reviewers = []
+        for phone, first, last in REVIEWERS:
+            user, _ = User.objects.get_or_create(
+                phone=f"+237{phone}", defaults={"first_name": first, "last_name": last}
+            )
+            reviewers.append(user)
+        for n, shop in enumerate(Shop.objects.filter(owner__phone__startswith="+2376500000")):
+            for k, user in enumerate(reviewers[: 1 + n % 3]):
+                rating, comment = REVIEWS[(n + k) % len(REVIEWS)]
+                Review.objects.get_or_create(
+                    shop=shop, customer=user, defaults={"rating": rating, "comment": comment}
                 )
 
         customer, created = User.objects.get_or_create(

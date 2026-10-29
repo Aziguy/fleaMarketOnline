@@ -28,4 +28,6 @@ urlpatterns = [
     path("commandes/<str:reference>/action/", views.order_action, name="order_action"),
     path("reservations/", views.bookings, name="bookings"),
     path("reservations/<str:reference>/action/", views.booking_action, name="booking_action"),
+    path("avis/", views.reviews, name="reviews"),
+    path("avis/<int:pk>/repondre/", views.review_reply, name="review_reply"),
 ]

@@ -1,0 +1,20 @@
+{% extends "dashboard/_layout.html" %}{% load i18n %}
+{% block title %}{% translate "Avis clients" %}{% endblock %}
+{% block dashboard %}
+<div class="flex flex-wrap items-end justify-between gap-3">
+  <div>
+    <h1 class="text-2xl">{% translate "Avis clients" %}</h1>
+    {% if summary.count %}<p class="mt-1 flex items-center gap-2 text-sm text-stone-500">{% stars summary.average %}<strong class="text-stone-900">{{ summary.average|floatformat:1 }}/5</strong> · {% blocktranslate count n=summary.count %}{{ n }} avis publié{% plural %}{{ n }} avis publiés{% endblocktranslate %}</p>{% endif %}
+  </div>
+  <div class="flex gap-1 text-sm">
+    <a href="?" class="nav-link {% if not unanswered %}nav-link-active{% endif %}">{% translate "Tous" %}</a>
+    <a href="?filtre=sans-reponse" class="nav-link {% if unanswered %}nav-link-active{% endif %}">{% translate "Sans réponse" %}</a>
+  </div>
+</div>
+<p class="mt-3 text-sm text-stone-500">{% translate "Seuls les clients dont la commande a été remise ou le rendez-vous honoré peuvent laisser un avis. Une réponse courtoise rassure les futurs clients." %}</p>
+<ul class="mt-6 space-y-3">
+  {% for review in page %}{% include "dashboard/_review_card.html" %}
+  {% empty %}<li>{% translate "Aucun avis pour le moment" as t %}{% include "includes/empty.html" with title=t icon="star" %}</li>{% endfor %}
+</ul>
+{% include "includes/pagination.html" %}
+{% endblock %}

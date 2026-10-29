@@ -57,6 +57,11 @@
   .section-title { @apply text-xl font-semibold sm:text-2xl; }
   .eyebrow { @apply text-xs font-semibold uppercase tracking-[0.18em] text-brand-600; }
   .text-gradient { @apply bg-gradient-to-r from-brand-400 via-brand-300 to-sun-400 bg-clip-text text-transparent; }
+  .star-input label:hover,
+  .star-input label:hover ~ label,
+  .star-input:not(:hover) label:has(:checked),
+  .star-input:not(:hover) label:has(:checked) ~ label { @apply text-sun-500 [&_svg]:fill-current; }
+  .star-input label:has(:focus-visible) { @apply rounded-md ring-2 ring-brand-500; }
   .kbd { @apply rounded-md border border-stone-300 bg-stone-100 px-1.5 py-0.5 font-mono text-[11px] text-stone-500; }
   .skeleton { @apply animate-shimmer rounded-lg bg-gradient-to-r from-stone-100 via-stone-200 to-stone-100 bg-[length:200%_100%]; }
 

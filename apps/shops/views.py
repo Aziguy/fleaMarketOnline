@@ -6,6 +6,8 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext as _
 
+from apps.reviews.views import review_context
+
 from . import services
 from .forms import ShopCreateForm
 from .models import Shop, ShopType
@@ -14,7 +16,7 @@ CURRENT_SHOP_KEY = "dashboard_shop_id"
 
 
 def shop_list(request):
-    shops = Shop.objects.public().select_related("shop_type")
+    shops = Shop.objects.public().with_rating().select_related("shop_type")
     q = request.GET.get("q", "").strip()
     current_type = None
     if q:
@@ -66,6 +68,8 @@ def shop_detail(request, slug):
         "services": shop.services.filter(is_active=True),
         "hours": shop.opening_hours.all(),
     }
+    if not request.htmx:
+        context |= review_context(request, shop)
     template = "shops/_products.html" if request.htmx else "shops/detail.html"
     return render(request, template, context)
 

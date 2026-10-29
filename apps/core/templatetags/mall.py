@@ -2,9 +2,11 @@ import json
 from pathlib import Path
 
 from django import template
+from django.template.defaultfilters import floatformat
 from django.utils.html import format_html
 from django.utils.http import urlencode
 from django.utils.safestring import mark_safe
+from django.utils.translation import gettext as _
 
 from apps.core.money import format_fcfa
 from apps.core.phone import format_phone, whatsapp_url
@@ -62,4 +64,26 @@ def icon(name, label="", **attrs):
         mark_safe(paint),
         a11y,
         mark_safe(body),
+    )
+
+
+@register.simple_tag
+def stars(value, size="h-4 w-4"):
+    """Note sur 5 en étoiles pleines et vides."""
+    filled = round(value or 0)
+    icons = "".join(
+        icon(
+            "star",
+            **{
+                "class": f"{size} fill-current text-sun-500"
+                if n < filled
+                else f"{size} text-stone-300"
+            },
+        )
+        for n in range(5)
+    )
+    return format_html(
+        '<span class="inline-flex items-center gap-0.5" role="img" aria-label="{}">{}</span>',
+        _("%(value)s sur 5") % {"value": floatformat(value or 0, 1)},
+        mark_safe(icons),
     )

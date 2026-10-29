@@ -26,6 +26,7 @@ urlpatterns = [
     path("espace-boutique/", include("apps.dashboard.urls")),
     path("notifications/", include("apps.notifications.urls")),
     path("favoris/", include("apps.favorites.urls")),
+    path("avis/", include("apps.reviews.urls")),
 ]
 
 if settings.DEBUG:

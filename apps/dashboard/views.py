@@ -18,6 +18,8 @@ from apps.bookings.models import Booking
 from apps.orders import services as order_services
 from apps.orders.forms import CancelForm, CompleteOrderForm
 from apps.orders.models import Order
+from apps.reviews import services as review_services
+from apps.reviews.forms import ReplyForm
 from apps.shops.forms import OpeningHourFormSet, ShopSettingsForm
 from apps.shops.services import ensure_opening_hours
 from apps.shops.views import CURRENT_SHOP_KEY
@@ -349,3 +351,32 @@ def ai_description(request):
     return render(
         request, "dashboard/_ai_description.html", {"description": description, "error": error}
     )
+
+
+@merchant_required
+def reviews(request):
+    qs = request.shop.reviews.select_related("customer")
+    if request.GET.get("filtre") == "sans-reponse":
+        qs = qs.filter(reply="")
+    return render(
+        request,
+        "dashboard/reviews.html",
+        {
+            "page": Paginator(qs, 20).get_page(request.GET.get("page")),
+            "summary": review_services.summary(request.shop),
+            "unanswered": request.GET.get("filtre") == "sans-reponse",
+        },
+    )
+
+
+@merchant_required
+@require_POST
+def review_reply(request, pk):
+    review = get_object_or_404(request.shop.reviews.select_related("customer"), pk=pk)
+    form = ReplyForm(request.POST, instance=review)
+    if form.is_valid():
+        review_services.reply(review, form.cleaned_data["reply"].strip())
+        messages.success(request, _("Réponse publiée."))
+    if request.htmx:
+        return render(request, "dashboard/_review_card.html", {"review": review, "form": form})
+    return redirect("dashboard:reviews")

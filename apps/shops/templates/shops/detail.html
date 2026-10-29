@@ -16,7 +16,7 @@
       {% if shop.logo %}<img src="{{ shop.logo.url }}" alt="{{ shop.name }}" class="h-full w-full object-cover">{% else %}{% icon shop.shop_type.icon class="h-10 w-10 text-brand-700" %}{% endif %}
     </div>
     <div class="flex-1">
-      <p class="text-sm font-medium text-brand-700">{{ shop.shop_type.label }}</p>
+      <p class="flex flex-wrap items-center gap-x-3 text-sm font-medium text-brand-700">{{ shop.shop_type.label }}{% if reviews_summary.count %}<a href="#avis" class="inline-flex items-center gap-1 text-stone-500 hover:text-brand-700">{% icon "star" class="h-4 w-4 fill-current text-sun-500" %}<strong class="text-stone-900">{{ reviews_summary.average|floatformat:1 }}</strong> ({{ reviews_summary.count }})</a>{% endif %}</p>
       <h1 class="text-2xl sm:text-4xl">{{ shop.name }}</h1>
       {% if shop.tagline %}<p class="text-stone-500">{{ shop.tagline }}</p>{% endif %}
     </div>
@@ -71,6 +71,7 @@
         {% endif %}
         <div id="shop-products" class="mt-5">{% include "shops/_products.html" %}</div>
       </section>
+      {% include "reviews/_section.html" %}
     </div>
 
     <aside class="space-y-4">

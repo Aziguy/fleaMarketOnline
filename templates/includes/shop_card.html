@@ -10,7 +10,7 @@
       {% if shop.logo %}<img src="{{ shop.logo.url }}" alt="{{ shop.name }}" class="h-full w-full object-cover">{% else %}{% icon shop.shop_type.icon|default:"store" class="h-6 w-6 text-brand-700" %}{% endif %}
     </div>
     <h3 class="mt-2 truncate font-semibold group-hover:text-brand-700">{{ shop.name }}</h3>
-    <p class="text-xs font-medium text-brand-700">{{ shop.shop_type.label }}</p>
+    <p class="flex items-center gap-2 text-xs font-medium text-brand-700">{{ shop.shop_type.label }}{% if shop.rating_count %}<span class="inline-flex items-center gap-0.5 text-stone-500">{% icon "star" class="h-3.5 w-3.5 fill-current text-sun-500" %}<strong class="text-stone-800">{{ shop.rating_avg|floatformat:1 }}</strong> ({{ shop.rating_count }})</span>{% endif %}</p>
     {% if shop.tagline %}<p class="mt-1 line-clamp-2 text-sm text-stone-500">{{ shop.tagline }}</p>{% endif %}
     <p class="mt-auto flex items-center gap-1 pt-3 text-xs text-stone-500">{% icon "map-pin" class="h-3.5 w-3.5" %}{{ shop.location_label }}</p>
   </div>

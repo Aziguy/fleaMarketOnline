@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "apps.api",
     "apps.ai",
     "apps.notifications",
+    "apps.reviews",
     "apps.favorites",
 ]
 
