@@ -9,6 +9,14 @@
   <a href="{% url 'dashboard:products' %}" class="card card-body hover:border-brand-300"><p class="text-sm text-stone-500">{% translate "Produits" %}</p><p class="mt-1 text-3xl font-bold">{{ product_count }}</p></a>
 </div>
 
+{% if not two_factor %}
+<a href="{% url 'security:index' %}" class="card card-body mt-6 flex items-center gap-4 border-brand-200 hover:border-brand-400">
+  <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-100 text-brand-700">{% icon "shield-check" class="h-6 w-6" %}</span>
+  <span class="flex-1"><span class="block font-semibold">{% translate "Protégez votre boutique" %}</span><span class="block text-sm text-stone-500">{% translate "Activez la double authentification : même avec votre mot de passe, personne ne pourra gérer vos commandes à votre place." %}</span></span>
+  {% icon "chevron-right" class="h-5 w-5 text-stone-400" %}
+</a>
+{% endif %}
+
 {% if not product_count %}
 <div class="card card-body mt-6 border-brand-200 bg-brand-50">
   <h2 class="font-semibold">{% translate "Pour bien démarrer" %}</h2>
