@@ -9,6 +9,7 @@ from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
+from apps.bookings import services as booking_services
 from apps.bookings.forms import MerchantBookingForm
 from apps.bookings.models import Booking
 from apps.orders import services as order_services
@@ -295,15 +296,15 @@ def bookings(request):
 @require_POST
 def booking_action(request, reference):
     booking = get_object_or_404(request.shop.bookings, reference=reference)
-    target = request.POST.get("status")
     form = MerchantBookingForm(request.POST)
-    if target in booking.next_statuses() and form.is_valid():
-        booking.status = target
-        booking.merchant_note = form.cleaned_data["merchant_note"] or booking.merchant_note
-        booking.save(update_fields=["status", "merchant_note"])
+    form.is_valid()
+    try:
+        booking_services.change_status(
+            booking, request.POST.get("status"), note=form.cleaned_data.get("merchant_note", "")
+        )
         messages.success(request, _("Réservation : %(s)s.") % {"s": booking.get_status_display()})
-    else:
-        messages.error(request, _("Changement de statut impossible."))
+    except booking_services.BookingError as exc:
+        messages.error(request, str(exc))
     if request.htmx:
         return render(
             request,
