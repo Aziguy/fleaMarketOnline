@@ -173,3 +173,68 @@ def test_api_responses_are_not_cached_by_service_worker(client, db, url):
     from apps.core.pwa import PRIVATE_PREFIXES
 
     assert "/api/" in PRIVATE_PREFIXES
+
+
+def _complete(shop, customer):
+    return Order.objects.create(
+        shop=shop,
+        customer=customer,
+        fulfillment="pickup",
+        payment_method="cash",
+        contact_name="Awa",
+        contact_phone="677111111",
+        subtotal=4500,
+        total=4500,
+        status=Order.Status.COMPLETED,
+        paid_with="cash",
+        paid_at=timezone.now(),
+    )
+
+
+def test_reviews_via_api(client, customer, merchant, shop):
+    url = f"{API}/shops/{shop.slug}/reviews"
+    payload = {"rating": 4, "comment": "Rapide"}
+    headers = bearer(customer)
+    assert client.post(url, payload, content_type="application/json", **headers).status_code == 403
+    _complete(shop, customer)
+    bad = client.post(url, {"rating": 6}, content_type="application/json", **headers)
+    assert bad.status_code == 422
+    created = client.post(url, payload, content_type="application/json", **headers)
+    assert created.status_code == 201 and created.json()["author"] == "Awa"
+    review_id = created.json()["id"]
+    assert client.get(url).json()["items"][0]["rating"] == 4
+    assert client.get(f"{API}/shops/{shop.slug}").json()["reviews_count"] == 1
+    reply = client.post(
+        f"{API}/merchant/shops/{shop.slug}/reviews/{review_id}/reply",
+        {"reply": "Merci"},
+        content_type="application/json",
+        **bearer(merchant),
+    )
+    assert reply.json()["reply"] == "Merci"
+    notifications = client.get(f"{API}/notifications", **headers).json()
+    assert notifications["items"][0]["kind"] == "reply"
+    assert client.post(f"{API}/notifications/read", **headers).status_code == 204
+
+
+def test_favorites_via_api(client, customer, product):
+    headers = bearer(customer)
+    shop_url = f"{API}/favorites/shops/{product.shop.slug}"
+    assert client.put(shop_url, **headers).status_code == 204
+    assert client.put(shop_url, **headers).status_code == 204
+    assert client.put(f"{API}/favorites/products/{product.pk}", **headers).status_code == 204
+    data = client.get(f"{API}/favorites", **headers).json()
+    assert [s["slug"] for s in data["shops"]] == [product.shop.slug]
+    assert [p["id"] for p in data["products"]] == [product.pk]
+    assert client.delete(shop_url, **headers).status_code == 204
+    assert client.get(f"{API}/favorites", **headers).json()["shops"] == []
+    assert client.put(f"{API}/favorites/products/999", **headers).status_code == 404
+
+
+def test_merchant_stats_via_api(client, merchant, customer, shop):
+    _complete(shop, customer)
+    url = f"{API}/merchant/shops/{shop.slug}/stats"
+    data = client.get(url, {"days": 7}, **bearer(merchant)).json()
+    assert data["revenue"] == 4500 and len(data["series"]) == 7
+    assert data["payments"][0]["paid_with"] == "cash"
+    assert client.get(url, {"days": 12}, **bearer(merchant)).status_code == 422
+    assert client.get(url, **bearer(customer)).status_code == 404

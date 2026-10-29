@@ -59,7 +59,7 @@ def shop_stats(shop, days=30):
     cancelled = created.filter(status=Order.Status.CANCELLED).count()
     labels = dict(PaymentMethod.choices)
     payments = [
-        {"label": labels.get(row["paid_with"], row["paid_with"]), **row}
+        {"label": str(labels.get(row["paid_with"], row["paid_with"])), **row}
         for row in current.values("paid_with")
         .annotate(revenue=Sum("total"), orders=Count("pk"))
         .order_by("-revenue")
