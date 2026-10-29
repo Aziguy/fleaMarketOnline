@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-29 10:31+0100\n"
+"POT-Creation-Date: 2026-10-29 12:08+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,132 +18,220 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: apps/accounts/admin.py:24
 msgid "Identité"
 msgstr "Identity"
 
+#: apps/accounts/admin.py:26
 msgid "Droits"
 msgstr "Permissions"
 
+#: apps/accounts/admin.py:29
 msgid "Dates"
 msgstr "Dates"
 
+#: apps/accounts/apps.py:7
 msgid "Comptes"
 msgstr "Accounts"
 
+#: apps/accounts/forms.py:11 apps/accounts/forms.py:43
+#: apps/bookings/forms.py:17 apps/orders/forms.py:17
 msgid "Téléphone"
 msgstr "Phone"
 
+#: apps/accounts/forms.py:16
 msgid "Facultatif. Utile pour récupérer votre mot de passe."
 msgstr "Optional. Useful to recover your password."
 
+#: apps/accounts/forms.py:21 apps/accounts/forms.py:52
 msgid "Ce numéro est déjà utilisé."
 msgstr "This number is already in use."
 
+#: apps/accounts/forms.py:27 apps/accounts/forms.py:59
 msgid "Cet e-mail est déjà utilisé."
 msgstr "This email is already in use."
 
+#: apps/accounts/forms.py:33
 msgid "Téléphone ou e-mail"
 msgstr "Phone or email"
 
+#: apps/accounts/forms.py:37
 msgid "Identifiants incorrects."
 msgstr "Incorrect credentials."
 
+#: apps/accounts/forms.py:38
 msgid "Ce compte est désactivé."
 msgstr "This account is disabled."
 
+#: apps/accounts/models.py:33
+#: apps/dashboard/templates/dashboard/order_detail.html:20
+#: apps/dashboard/templates/dashboard/orders.html:13
+#: apps/orders/templates/orders/emails/new_order.txt:3
 msgid "Client"
 msgstr "Customer"
 
+#: apps/accounts/models.py:34
 msgid "Commerçant"
 msgstr "Merchant"
 
+#: apps/accounts/models.py:35
 msgid "Administrateur du mall"
 msgstr "Mall administrator"
 
+#: apps/accounts/models.py:37
 msgid "prénom"
 msgstr "first name"
 
+#: apps/accounts/models.py:38 apps/api/models.py:47 apps/catalog/models.py:27
+#: apps/catalog/models.py:62 apps/catalog/models.py:136
+#: apps/shops/models.py:27
 msgid "nom"
 msgstr "name"
 
+#: apps/accounts/models.py:39 apps/bookings/models.py:43
+#: apps/shops/models.py:99
 msgid "téléphone"
 msgstr "phone"
 
+#: apps/accounts/models.py:40 apps/shops/models.py:101
 msgid "e-mail"
 msgstr "email"
 
+#: apps/accounts/models.py:41
 msgid "rôle"
 msgstr "role"
 
+#: apps/accounts/models.py:42
 msgid "actif"
 msgstr "active"
 
+#: apps/accounts/models.py:43
 msgid "accès administration"
 msgstr "admin access"
 
+#: apps/accounts/models.py:44
 msgid "inscrit le"
 msgstr "joined on"
 
+#: apps/accounts/models.py:52 apps/api/models.py:45
 msgid "utilisateur"
 msgstr "user"
 
+#: apps/accounts/models.py:53
 msgid "utilisateurs"
 msgstr "users"
 
+#: apps/accounts/templates/accounts/_account_layout.html:7 apps/core/pwa.py:71
+#: apps/core/templates/core/_palette_results.html:33
+#: apps/orders/templates/orders/my_orders.html:2
+#: apps/orders/templates/orders/my_orders.html:4
+#: templates/includes/header.html:53
 msgid "Mes commandes"
 msgstr "My orders"
 
+#: apps/accounts/templates/accounts/_account_layout.html:8
+#: apps/bookings/templates/bookings/my_bookings.html:2
+#: apps/bookings/templates/bookings/my_bookings.html:4
+#: templates/includes/header.html:54
 msgid "Mes réservations"
 msgstr "My bookings"
 
+#: apps/accounts/templates/accounts/_account_layout.html:9
+#: apps/favorites/templates/favorites/list.html:2
+#: apps/favorites/templates/favorites/list.html:4
+#: templates/includes/header.html:55
+msgid "Mes favoris"
+msgstr "My favourites"
+
+#: apps/accounts/templates/accounts/_account_layout.html:10
+#: apps/dashboard/templates/dashboard/_layout.html:32
+#: apps/notifications/apps.py:7
+#: apps/notifications/templates/notifications/list.html:2
+#: apps/notifications/templates/notifications/list.html:4
+#: templates/includes/header.html:40
+msgid "Notifications"
+msgstr "Notifications"
+
+#: apps/accounts/templates/accounts/_account_layout.html:11
+#: apps/accounts/templates/accounts/profile.html:2
+#: apps/accounts/templates/accounts/profile.html:4
+#: templates/includes/header.html:56
 msgid "Mon profil"
 msgstr "My profile"
 
+#: apps/accounts/templates/accounts/_account_layout.html:12
+#: apps/accounts/templates/accounts/password_change.html:2
 msgid "Mot de passe"
 msgstr "Password"
 
+#: apps/accounts/templates/accounts/_account_layout.html:13
+#: apps/dashboard/apps.py:7 apps/dashboard/templates/dashboard/poster.html:14
+#: templates/includes/footer.html:27
 msgid "Espace boutique"
 msgstr "Shop dashboard"
 
+#: apps/accounts/templates/accounts/_account_layout.html:14
+#: apps/core/templates/core/home.html:111
+#: apps/shops/templates/shops/open.html:2
 msgid "Ouvrir ma boutique"
 msgstr "Open my shop"
 
+#: apps/accounts/templates/accounts/emails/password_reset.txt:1
 msgid "Bonjour,"
 msgstr "Hello,"
 
+#: apps/accounts/templates/accounts/emails/password_reset.txt:3
 msgid "Pour choisir un nouveau mot de passe, ouvrez ce lien :"
 msgstr "To choose a new password, open this link:"
 
+#: apps/accounts/templates/accounts/emails/password_reset.txt:6
 msgid "Si vous n'êtes pas à l'origine de cette demande, ignorez ce message."
 msgstr "If you did not make this request, please ignore this message."
 
+#: apps/accounts/templates/accounts/emails/password_reset_subject.txt:1
 msgid "Réinitialisation de votre mot de passe Mfoundi Mall"
 msgstr "Reset your Mfoundi Mall password"
 
+#: apps/accounts/templates/accounts/login.html:2
+#: apps/accounts/templates/accounts/login.html:3
+#: templates/includes/header.html:64 templates/includes/header.html:65
 msgid "Connexion"
 msgstr "Log in"
 
+#: apps/accounts/templates/accounts/login.html:9
 msgid "Mot de passe oublié ?"
 msgstr "Forgot password?"
 
+#: apps/accounts/templates/accounts/login.html:10
+#: apps/accounts/templates/accounts/signup.html:14
 msgid "Se connecter"
 msgstr "Log in"
 
+#: apps/accounts/templates/accounts/login.html:14
 msgid "Pas encore de compte ?"
 msgstr "No account yet?"
 
+#: apps/accounts/templates/accounts/login.html:14
+#: apps/accounts/templates/accounts/signup.html:2
+#: apps/accounts/templates/accounts/signup.html:3
+#: templates/includes/header.html:75
 msgid "Créer un compte"
 msgstr "Create an account"
 
+#: apps/accounts/templates/accounts/password_change.html:4
 msgid "Changer de mot de passe"
 msgstr "Change password"
 
+#: apps/accounts/templates/accounts/password_change.html:8
 msgid "Changer le mot de passe"
 msgstr "Change password"
 
+#: apps/accounts/templates/accounts/password_reset.html:2
+#: apps/accounts/templates/accounts/password_reset.html:3
 msgid "Mot de passe oublié"
 msgstr "Forgot password"
 
+#: apps/accounts/templates/accounts/password_reset.html:4
 msgid ""
 "Saisissez l'e-mail de votre compte pour recevoir un lien. Sans e-mail "
 "enregistré, contactez l'administration du mall."
@@ -151,173 +239,246 @@ msgstr ""
 "Enter your account email to receive a link. Without a registered email, "
 "contact the mall administration."
 
+#: apps/accounts/templates/accounts/password_reset.html:9
 msgid "Envoyer le lien"
 msgstr "Send link"
 
+#: apps/accounts/templates/accounts/password_reset_confirm.html:2
+#: apps/accounts/templates/accounts/password_reset_confirm.html:3
 msgid "Nouveau mot de passe"
 msgstr "New password"
 
+#: apps/accounts/templates/accounts/password_reset_confirm.html:9
+#: apps/accounts/templates/accounts/profile.html:8
+#: apps/dashboard/templates/dashboard/category_form.html:7
+#: apps/dashboard/templates/dashboard/hours.html:21
+#: apps/dashboard/templates/dashboard/product_form.html:44
+#: apps/dashboard/templates/dashboard/service_form.html:7
+#: apps/dashboard/templates/dashboard/settings.html:58
 msgid "Enregistrer"
 msgstr "Save"
 
+#: apps/accounts/templates/accounts/password_reset_confirm.html:12
 msgid "Ce lien n'est plus valide. Faites une nouvelle demande."
 msgstr "This link is no longer valid. Please make a new request."
 
+#: apps/accounts/templates/accounts/password_reset_confirm.html:13
 msgid "Nouvelle demande"
 msgstr "New request"
 
+#: apps/accounts/templates/accounts/password_reset_done.html:2
 msgid "E-mail envoyé"
 msgstr "Email sent"
 
+#: apps/accounts/templates/accounts/password_reset_done.html:3
 msgid "Vérifiez vos e-mails"
 msgstr "Check your email"
 
+#: apps/accounts/templates/accounts/password_reset_done.html:4
 msgid ""
 "Si un compte correspond à cet e-mail, un lien de réinitialisation vient "
 "d'être envoyé."
 msgstr "If an account matches this email, a reset link has been sent."
 
+#: apps/accounts/templates/accounts/signup.html:4
 msgid "Un seul compte pour acheter et pour gérer votre boutique."
 msgstr "One account to shop and to manage your store."
 
+#: apps/accounts/templates/accounts/signup.html:10
 msgid "Créer mon compte"
 msgstr "Create my account"
 
+#: apps/accounts/templates/accounts/signup.html:14
 msgid "Déjà inscrit ?"
 msgstr "Already registered?"
 
+#: apps/accounts/views.py:35
 #, python-format
 msgid "Bienvenue %(name)s, votre compte est créé."
 msgstr "Welcome %(name)s, your account has been created."
 
+#: apps/accounts/views.py:56
 msgid "Profil mis à jour."
 msgstr "Profile updated."
 
+#: apps/accounts/views.py:67
 msgid "Mot de passe modifié."
 msgstr "Password changed."
 
+#: apps/accounts/views.py:89
 msgid "Mot de passe réinitialisé. Vous pouvez vous connecter."
 msgstr "Password reset. You can now log in."
 
+#: apps/ai/apps.py:7
 msgid "Assistant IA"
 msgstr "AI assistant"
 
+#: apps/api/apps.py:7
 msgid "API"
 msgstr "API"
 
+#: apps/api/models.py:48
 msgid "préfixe"
 msgstr "prefix"
 
+#: apps/api/models.py:50 apps/reviews/models.py:27
 msgid "créé le"
 msgstr "created on"
 
+#: apps/api/models.py:51
 msgid "dernière utilisation"
 msgstr "last used"
 
+#: apps/api/models.py:57
 msgid "jeton d'API"
 msgstr "API token"
 
+#: apps/api/models.py:58
 msgid "jetons d'API"
 msgstr "API tokens"
 
+#: apps/bookings/apps.py:7 apps/core/templates/core/merchants.html:22
+#: apps/dashboard/templates/dashboard/_layout.html:38
+#: apps/dashboard/templates/dashboard/bookings.html:2
+#: apps/dashboard/templates/dashboard/bookings.html:4
 msgid "Réservations"
 msgstr "Bookings"
 
+#: apps/bookings/forms.py:54
 msgid "Choisissez une prestation."
 msgstr "Choose a service."
 
+#: apps/bookings/forms.py:60
 #, python-format
 msgid "Entre 1 et %(max)s personnes."
 msgstr "Between 1 and %(max)s people."
 
+#: apps/bookings/forms.py:68
 msgid "Choisissez un créneau au moins 30 minutes à l'avance."
 msgstr "Choose a slot at least 30 minutes in advance."
 
+#: apps/bookings/forms.py:71
 #, python-format
 msgid "Réservation possible jusqu'à %(n)s jours."
 msgstr "Bookings are possible up to %(n)s days ahead."
 
+#: apps/bookings/forms.py:74
 msgid "La boutique est fermée à ce moment."
 msgstr "The shop is closed at that time."
 
+#: apps/bookings/forms.py:79
 msgid "Message au client"
 msgstr "Message to the customer"
 
+#: apps/bookings/models.py:17
 msgid "Rendez-vous"
 msgstr "Appointment"
 
+#: apps/bookings/models.py:18
 msgid "Réservation de table"
 msgstr "Table booking"
 
+#: apps/bookings/models.py:21 apps/orders/models.py:36
 msgid "En attente"
 msgstr "Pending"
 
+#: apps/bookings/models.py:22 apps/orders/models.py:37
 msgid "Confirmée"
 msgstr "Confirmed"
 
+#: apps/bookings/models.py:23
 msgid "Refusée"
 msgstr "Declined"
 
+#: apps/bookings/models.py:24 apps/orders/models.py:41
 msgid "Annulée"
 msgstr "Cancelled"
 
+#: apps/bookings/models.py:25
+#: apps/dashboard/templates/dashboard/_booking_row.html:15
 msgid "Honorée"
 msgstr "Completed"
 
+#: apps/bookings/models.py:26
+#: apps/dashboard/templates/dashboard/_booking_row.html:15
 msgid "Absent"
 msgstr "No-show"
 
+#: apps/bookings/models.py:28 apps/orders/models.py:45
 msgid "référence"
 msgstr "reference"
 
+#: apps/bookings/models.py:34 apps/orders/models.py:51
 msgid "client"
 msgstr "customer"
 
+#: apps/bookings/models.py:36 apps/notifications/models.py:21
+#: apps/shops/models.py:85
 msgid "type"
 msgstr "type"
 
+#: apps/bookings/models.py:38 apps/catalog/models.py:145
 msgid "prestation"
 msgstr "service"
 
+#: apps/bookings/models.py:40
 msgid "date"
 msgstr "date"
 
+#: apps/bookings/models.py:41
 msgid "heure"
 msgstr "time"
 
+#: apps/bookings/models.py:42
 msgid "nombre de personnes"
 msgstr "number of people"
 
+#: apps/bookings/models.py:44 apps/notifications/models.py:23
 msgid "message"
 msgstr "message"
 
+#: apps/bookings/models.py:45 apps/orders/models.py:53
+#: apps/shops/models.py:114
 msgid "statut"
 msgstr "status"
 
+#: apps/bookings/models.py:46 apps/reviews/models.py:24
 msgid "réponse de la boutique"
 msgstr "shop reply"
 
+#: apps/bookings/models.py:47 apps/notifications/models.py:26
+#: apps/orders/models.py:72 apps/shops/models.py:116
 msgid "créée le"
 msgstr "created on"
 
+#: apps/bookings/models.py:51
 msgid "réservation"
 msgstr "booking"
 
+#: apps/bookings/models.py:52
 msgid "réservations"
 msgstr "bookings"
 
+#: apps/bookings/services.py:22
 msgid "Cette réservation ne peut plus être annulée."
 msgstr "This booking can no longer be cancelled."
 
+#: apps/bookings/services.py:30 apps/orders/services.py:86
 msgid "Changement de statut impossible."
 msgstr "Status change not allowed."
 
+#: apps/bookings/templates/bookings/create.html:2
+#: apps/shops/templates/shops/detail.html:49
 msgid "Réserver"
 msgstr "Book"
 
+#: apps/bookings/templates/bookings/create.html:6
+#: apps/bookings/templates/bookings/detail.html:2
+#: apps/bookings/templates/bookings/detail.html:5
 msgid "Réservation"
 msgstr "Booking"
 
+#: apps/bookings/templates/bookings/create.html:7
 msgid ""
 "Votre demande est envoyée à la boutique, qui la confirme. Le paiement se "
 "fait sur place."
@@ -325,240 +486,371 @@ msgstr ""
 "Your request is sent to the shop, which confirms it. Payment is made on "
 "site."
 
+#: apps/bookings/templates/bookings/create.html:20
 msgid "Envoyer la demande"
 msgstr "Send request"
 
+#: apps/bookings/templates/bookings/detail.html:9
 msgid "Boutique"
 msgstr "Shop"
 
+#: apps/bookings/templates/bookings/detail.html:10
 msgid "Type"
 msgstr "Type"
 
+#: apps/bookings/templates/bookings/detail.html:11
+#: apps/dashboard/templates/dashboard/service_form.html:2
 msgid "Prestation"
 msgstr "Service"
 
+#: apps/bookings/templates/bookings/detail.html:12
 msgid "Personnes"
 msgstr "People"
 
+#: apps/bookings/templates/bookings/detail.html:13
+#: apps/dashboard/templates/dashboard/orders.html:13
 msgid "Date"
 msgstr "Date"
 
+#: apps/bookings/templates/bookings/detail.html:14
 msgid "Votre message"
 msgstr "Your message"
 
+#: apps/bookings/templates/bookings/detail.html:15
 msgid "Réponse de la boutique"
 msgstr "Shop reply"
 
+#: apps/bookings/templates/bookings/detail.html:18
+#: apps/orders/templates/orders/detail.html:50
+#: apps/reviews/templates/reviews/_section.html:47
+msgid "Donner mon avis"
+msgstr "Leave a review"
+
+#: apps/bookings/templates/bookings/detail.html:20
 msgid "Annuler cette réservation ?"
 msgstr "Cancel this booking?"
 
+#: apps/bookings/templates/bookings/detail.html:21
+#: apps/dashboard/templates/dashboard/_booking_row.html:15
+#: apps/dashboard/templates/dashboard/category_form.html:7
+#: apps/dashboard/templates/dashboard/product_form.html:45
+#: apps/dashboard/templates/dashboard/service_form.html:7
 msgid "Annuler"
 msgstr "Cancel"
 
+#: apps/bookings/templates/bookings/my_bookings.html:16
+#: apps/dashboard/templates/dashboard/bookings.html:14
 msgid "Aucune réservation"
 msgstr "No bookings"
 
+#: apps/bookings/templates/bookings/my_bookings.html:16
 msgid ""
 "Réservez un rendez-vous dans un salon ou une table dans un restaurant du "
 "mall."
 msgstr ""
 "Book an appointment at a salon or a table at a restaurant in the mall."
 
+#: apps/bookings/views.py:31
 msgid "Demande de réservation envoyée. La boutique va la confirmer."
 msgstr "Booking request sent. The shop will confirm it."
 
+#: apps/bookings/views.py:58
 msgid "Réservation annulée."
 msgstr "Booking cancelled."
 
+#: apps/cart/apps.py:7 apps/cart/templates/cart/detail.html:2
+#: templates/includes/header.html:35
 msgid "Panier"
 msgstr "Cart"
 
+#: apps/cart/cart.py:39
 #, python-format
 msgid "Bonjour %(shop)s, je souhaite commander :"
 msgstr "Hello %(shop)s, I would like to order:"
 
+#: apps/cart/cart.py:44
 #, python-format
 msgid "Total : %(total)s"
 msgstr "Total: %(total)s"
 
+#: apps/cart/templates/cart/_content.html:18
+#: apps/catalog/templates/catalog/product_detail.html:31
 msgid "Quantité"
 msgstr "Quantity"
 
+#: apps/cart/templates/cart/_content.html:23
 msgid "Retirer"
 msgstr "Remove"
 
+#: apps/cart/templates/cart/_content.html:29
+#: apps/dashboard/templates/dashboard/order_detail.html:14
+#: apps/orders/templates/orders/checkout.html:34
+#: apps/orders/templates/orders/detail.html:34
 msgid "Sous-total"
 msgstr "Subtotal"
 
+#: apps/cart/templates/cart/_content.html:31
 msgid "Commander sur WhatsApp"
 msgstr "Order on WhatsApp"
 
+#: apps/cart/templates/cart/_content.html:32
 msgid "Valider cette commande"
 msgstr "Check out this order"
 
+#: apps/cart/templates/cart/_content.html:37
 msgid "Votre panier est vide"
 msgstr "Your cart is empty"
 
+#: apps/cart/templates/cart/_content.html:37
 msgid "Parcourez les boutiques du mall et ajoutez vos articles."
 msgstr "Browse the mall's shops and add your items."
 
+#: apps/cart/templates/cart/_content.html:37
+#: apps/core/templates/core/search.html:25
 msgid "Voir les boutiques"
 msgstr "See the shops"
 
+#: apps/cart/templates/cart/detail.html:5 apps/core/pwa.py:70
+#: apps/core/templates/core/_palette_results.html:31
 msgid "Mon panier"
 msgstr "My cart"
 
+#: apps/cart/templates/cart/detail.html:6
 msgid ""
 "Chaque boutique traite sa commande séparément. Validez boutique par "
 "boutique."
 msgstr "Each shop handles its own order. Check out shop by shop."
 
+#: apps/cart/views.py:32
 msgid "Ajouté au panier"
 msgstr "Added to cart"
 
+#: apps/cart/views.py:32
 msgid "Produit épuisé"
 msgstr "Out of stock"
 
+#: apps/catalog/apps.py:7 apps/core/templates/core/merchants.html:20
 msgid "Catalogue"
 msgstr "Catalog"
 
+#: apps/catalog/models.py:29 apps/catalog/models.py:141
+#: apps/shops/models.py:34
 msgid "ordre"
 msgstr "order"
 
+#: apps/catalog/models.py:34 apps/catalog/models.py:60
 msgid "rayon"
 msgstr "aisle"
 
+#: apps/catalog/models.py:35
 msgid "rayons"
 msgstr "aisles"
 
+#: apps/catalog/models.py:64 apps/catalog/models.py:137
+#: apps/shops/models.py:90
 msgid "description"
 msgstr "description"
 
+#: apps/catalog/models.py:65 apps/catalog/models.py:138
 msgid "prix (FCFA)"
 msgstr "price (FCFA)"
 
+#: apps/catalog/models.py:67
 msgid "ancien prix (FCFA)"
 msgstr "former price (FCFA)"
 
+#: apps/catalog/models.py:70
 msgid "Affiché barré pour une promotion."
 msgstr "Shown struck through for a promotion."
 
+#: apps/catalog/models.py:73
 msgid "stock"
 msgstr "stock"
 
+#: apps/catalog/models.py:73
 msgid "Laisser vide si le stock n'est pas suivi."
 msgstr "Leave empty if stock is not tracked."
 
+#: apps/catalog/models.py:75
 msgid "photo principale"
 msgstr "main photo"
 
+#: apps/catalog/models.py:76 apps/catalog/models.py:140
 msgid "en ligne"
 msgstr "online"
 
+#: apps/catalog/models.py:85 apps/orders/models.py:132
 msgid "produit"
 msgstr "product"
 
+#: apps/catalog/models.py:86
 msgid "produits"
 msgstr "products"
 
+#: apps/catalog/models.py:120 apps/catalog/models.py:125
 msgid "photo"
 msgstr "photo"
 
+#: apps/catalog/models.py:126
 msgid "photos"
 msgstr "photos"
 
+#: apps/catalog/models.py:138
 msgid "Vide = sur devis."
 msgstr "Empty = on quote."
 
+#: apps/catalog/models.py:139
 msgid "durée (minutes)"
 msgstr "duration (minutes)"
 
+#: apps/catalog/models.py:146
 msgid "prestations"
 msgstr "services"
 
+#: apps/catalog/templates/catalog/product_detail.html:24
+#: templates/includes/product_card.html:8
 msgid "Épuisé"
 msgstr "Sold out"
 
+#: apps/catalog/templates/catalog/product_detail.html:25
 #, python-format
 msgid "Plus que %(n)s en stock"
 msgstr "Only %(n)s left in stock"
 
+#: apps/catalog/templates/catalog/product_detail.html:26
 msgid "Disponible"
 msgstr "Available"
 
+#: apps/catalog/templates/catalog/product_detail.html:32
+#: templates/includes/product_card.html:21
 msgid "Ajouter au panier"
 msgstr "Add to cart"
 
+#: apps/catalog/templates/catalog/product_detail.html:34
 #, python-format
 msgid "Déjà %(n)s dans votre panier."
 msgstr "Already %(n)s in your cart."
 
+#: apps/catalog/templates/catalog/product_detail.html:34
 msgid "Voir le panier"
 msgstr "View cart"
 
+#: apps/catalog/templates/catalog/product_detail.html:37
 msgid "Poser une question"
 msgstr "Ask a question"
 
+#: apps/catalog/templates/catalog/product_detail.html:40
+msgid ""
+"Ajoutez ce produit à vos favoris pour être prévenu de son retour en stock."
+msgstr ""
+"Add this product to your favourites to be notified when it is back in stock."
+
+#: apps/catalog/templates/catalog/product_detail.html:41
+#: apps/dashboard/templates/dashboard/_ai_description.html:2
 msgid "Description"
 msgstr "Description"
 
+#: apps/catalog/templates/catalog/product_detail.html:45
 msgid "Voir la boutique"
 msgstr "Visit shop"
 
+#: apps/catalog/templates/catalog/product_detail.html:51
 msgid "Dans la même boutique"
 msgstr "From the same shop"
 
+#: apps/core/apps.py:7
 msgid "Général"
 msgstr "General"
 
+#: apps/core/images.py:19
+msgid "Image trop lourde : 5 Mo maximum."
+msgstr "Image too large: 5 MB maximum."
+
+#: apps/core/images.py:24
+#, python-format
+msgid "Image trop petite : au moins %(w)s × %(h)s pixels."
+msgstr "Image too small: at least %(w)s × %(h)s pixels."
+
+#: apps/core/phone.py:21
 msgid "Numéro invalide. Exemple : 6 77 12 34 56."
 msgstr "Invalid number. Example: 6 77 12 34 56."
 
+#: apps/core/pwa.py:49
 msgid ""
 "Toutes les boutiques du Mfoundi Mall en ligne : commandez, réservez et payez"
 " sur place."
 msgstr "Every Mfoundi Mall shop online: order, book and pay on site."
 
+#: apps/core/pwa.py:69 apps/core/templates/core/_palette_results.html:4
+#: apps/core/templates/core/home.html:24
+#: apps/core/templates/core/search.html:18 apps/shops/apps.py:7
+#: apps/shops/templates/shops/list.html:2 templates/includes/header.html:27
+#: templates/includes/header.html:71
 msgid "Boutiques"
 msgstr "Shops"
 
+#: apps/core/templates/core/_palette_results.html:13
+#: apps/core/templates/core/home.html:25
+#: apps/dashboard/templates/dashboard/_layout.html:42
+#: apps/dashboard/templates/dashboard/home.html:9
+#: apps/dashboard/templates/dashboard/products.html:2
+#: apps/dashboard/templates/dashboard/products.html:5
+#: apps/shops/templates/shops/detail.html:59
 msgid "Produits"
 msgstr "Products"
 
+#: apps/core/templates/core/_palette_results.html:22
 msgid "Voir tous les résultats"
 msgstr "See all results"
 
+#: apps/core/templates/core/_palette_results.html:25
 #, python-format
 msgid "Aucun résultat pour « %(q)s »."
 msgstr "No results for “%(q)s”."
 
+#: apps/core/templates/core/_palette_results.html:26
 msgid "Lancer une recherche complète"
 msgstr "Run a full search"
 
+#: apps/core/templates/core/_palette_results.html:29
 msgid "Raccourcis"
 msgstr "Shortcuts"
 
+#: apps/core/templates/core/_palette_results.html:30
+#: templates/includes/footer.html:17
 msgid "Toutes les boutiques"
 msgstr "All shops"
 
+#: apps/core/templates/core/_palette_results.html:34
+#: templates/includes/header.html:51
 msgid "Mon espace boutique"
 msgstr "My shop dashboard"
 
+#: apps/core/templates/core/_palette_results.html:36
+#: apps/core/templates/core/how_it_works.html:2
+#: apps/core/templates/core/how_it_works.html:5
+#: templates/includes/footer.html:19 templates/includes/header.html:29
+#: templates/includes/header.html:73
 msgid "Comment ça marche"
 msgstr "How it works"
 
+#: apps/core/templates/core/home.html:2
 msgid "Le mall en ligne"
 msgstr "The mall online"
 
+#: apps/core/templates/core/home.html:12
 msgid "Mfoundi Mall, Yaoundé"
 msgstr "Mfoundi Mall, Yaoundé"
 
+#: apps/core/templates/core/home.html:15
 msgid "Toutes les boutiques du mall,"
 msgstr "Every shop in the mall,"
 
+#: apps/core/templates/core/home.html:15
 msgid "en ligne."
 msgstr "online."
 
+#: apps/core/templates/core/home.html:17
 msgid ""
 "Commandez, réservez, puis payez sur place en espèces, MTN MoMo ou Orange "
 "Money. Retrait en boutique ou livraison."
@@ -566,68 +858,100 @@ msgstr ""
 "Order, book, then pay on site in cash, MTN MoMo or Orange Money. In-store "
 "pickup or delivery."
 
+#: apps/core/templates/core/home.html:19 apps/core/templates/core/home.html:21
+#: apps/core/templates/core/search.html:7
+#: apps/dashboard/templates/dashboard/products.html:9
+#: templates/includes/header.html:33
 msgid "Rechercher"
 msgstr "Search"
 
+#: apps/core/templates/core/home.html:20
 msgid "Riz, téléphone, parfum, coiffure..."
 msgstr "Rice, phone, perfume, hairdresser..."
 
+#: apps/core/templates/core/home.html:26
 msgid "Paiement"
 msgstr "Payment"
 
+#: apps/core/templates/core/home.html:26
 msgid "Sur place"
 msgstr "On site"
 
+#: apps/core/templates/core/home.html:33
+#: apps/dashboard/templates/dashboard/order_detail.html:5
+#: apps/orders/templates/orders/detail.html:2
+#: apps/orders/templates/orders/detail.html:5
 msgid "Commande"
 msgstr "Order"
 
+#: apps/core/templates/core/home.html:33 apps/orders/models.py:38
 msgid "Prête au retrait"
 msgstr "Ready for pickup"
 
+#: apps/core/templates/core/home.html:36
+#: apps/orders/templates/orders/detail.html:14
 msgid "Votre code de retrait"
 msgstr "Your pickup code"
 
+#: apps/core/templates/core/home.html:40
+#: apps/dashboard/templates/dashboard/poster.html:36 apps/orders/models.py:24
+#: apps/shops/templates/shops/detail.html:94
 msgid "Espèces"
 msgstr "Cash"
 
+#: apps/core/templates/core/home.html:50
 msgid "Explorer"
 msgstr "Explore"
 
+#: apps/core/templates/core/home.html:51
 msgid "Parcourir par type de boutique"
 msgstr "Browse by shop type"
 
+#: apps/core/templates/core/home.html:66
 msgid "Le mall"
 msgstr "The mall"
 
+#: apps/core/templates/core/home.html:66
 msgid "Boutiques du mall"
 msgstr "Mall shops"
 
+#: apps/core/templates/core/home.html:67
+#: apps/dashboard/templates/dashboard/home.html:26
+#: apps/dashboard/templates/dashboard/home.html:39
 msgid "Tout voir"
 msgstr "See all"
 
+#: apps/core/templates/core/home.html:77
 msgid "Bons plans"
 msgstr "Good deals"
 
+#: apps/core/templates/core/home.html:78
 msgid "Promotions"
 msgstr "Deals"
 
+#: apps/core/templates/core/home.html:87
 msgid "Nouveau"
 msgstr "New"
 
+#: apps/core/templates/core/home.html:88
 msgid "Nouveautés"
 msgstr "New arrivals"
 
+#: apps/core/templates/core/home.html:97
 msgid "1. Choisissez"
 msgstr "1. Choose"
 
+#: apps/core/templates/core/home.html:97
 msgid ""
 "Ajoutez au panier les articles de une ou plusieurs boutiques, ou réservez un"
 " service."
 msgstr "Add items from one or more shops to your cart, or book a service."
 
+#: apps/core/templates/core/home.html:98
 msgid "2. La boutique confirme"
 msgstr "2. The shop confirms"
 
+#: apps/core/templates/core/home.html:98
 msgid ""
 "Vous recevez une référence et un code de retrait. Vous pouvez aussi écrire à"
 " la boutique sur WhatsApp."
@@ -635,20 +959,25 @@ msgstr ""
 "You get a reference and a pickup code. You can also message the shop on "
 "WhatsApp."
 
+#: apps/core/templates/core/home.html:99
 msgid "3. Payez sur place"
 msgstr "3. Pay on site"
 
+#: apps/core/templates/core/home.html:99
 msgid ""
 "En espèces, MTN MoMo ou Orange Money, au retrait en boutique ou à la "
 "livraison."
 msgstr "In cash, MTN MoMo or Orange Money, at in-store pickup or on delivery."
 
+#: apps/core/templates/core/home.html:108
 msgid "Vous avez une boutique au Mfoundi Mall ?"
 msgstr "Do you have a shop at Mfoundi Mall?"
 
+#: apps/core/templates/core/home.html:109
 msgid "Créez votre vitrine en ligne gratuitement et recevez des commandes."
 msgstr "Create your online storefront for free and receive orders."
 
+#: apps/core/templates/core/how_it_works.html:6
 msgid ""
 "Mfoundi Mall en ligne vous permet de voir les produits et services des "
 "boutiques du mall, de commander ou réserver, puis de payer sur place."
@@ -656,12 +985,15 @@ msgstr ""
 "Mfoundi Mall online lets you see the products and services of the mall's "
 "shops, order or book, then pay on site."
 
+#: apps/core/templates/core/how_it_works.html:10
 msgid "Commander des produits"
 msgstr "Ordering products"
 
+#: apps/core/templates/core/how_it_works.html:12
 msgid "Ajoutez des articles au panier. Le panier est séparé par boutique."
 msgstr "Add items to your cart. The cart is split by shop."
 
+#: apps/core/templates/core/how_it_works.html:13
 msgid ""
 "Validez la commande d'une boutique : retrait en boutique ou livraison, et "
 "moyen de paiement prévu."
@@ -669,19 +1001,23 @@ msgstr ""
 "Check out a shop's order: in-store pickup or delivery, and planned payment "
 "method."
 
+#: apps/core/templates/core/how_it_works.html:14
 msgid ""
 "La boutique confirme puis prépare votre commande. Suivez son statut dans « "
 "Mes commandes »."
 msgstr ""
 "The shop confirms then prepares your order. Track its status in “My orders”."
 
+#: apps/core/templates/core/how_it_works.html:15
 msgid ""
 "Au retrait, donnez votre code de retrait à 6 chiffres et payez sur place."
 msgstr "At pickup, give your 6-digit pickup code and pay on site."
 
+#: apps/core/templates/core/how_it_works.html:19
 msgid "Payer"
 msgstr "Paying"
 
+#: apps/core/templates/core/how_it_works.html:20
 msgid ""
 "Aucun paiement n'est demandé en ligne. Vous payez devant le commerçant ou le"
 " livreur :"
@@ -689,9 +1025,11 @@ msgstr ""
 "No online payment is required. You pay in front of the merchant or the "
 "delivery person:"
 
+#: apps/core/templates/core/how_it_works.html:22
 msgid "en espèces ;"
 msgstr "in cash;"
 
+#: apps/core/templates/core/how_it_works.html:23
 msgid ""
 "par MTN Mobile Money ou Orange Money, en transférant au numéro affiché par "
 "la boutique, devant le commerçant."
@@ -699,9 +1037,11 @@ msgstr ""
 "by MTN Mobile Money or Orange Money, transferring to the number shown by the"
 " shop, in front of the merchant."
 
+#: apps/core/templates/core/how_it_works.html:27
 msgid "Réserver un service"
 msgstr "Booking a service"
 
+#: apps/core/templates/core/how_it_works.html:28
 msgid ""
 "Salons de coiffure : prenez rendez-vous pour une prestation. Restaurants et "
 "bars : réservez une table. La boutique confirme ou propose un autre créneau."
@@ -709,6 +1049,7 @@ msgstr ""
 "Hair salons: book an appointment for a service. Restaurants and bars: book a"
 " table. The shop confirms or suggests another slot."
 
+#: apps/core/templates/core/how_it_works.html:32
 msgid ""
 "Chaque boutique peut être contactée sur WhatsApp. Depuis le panier, envoyez "
 "votre liste d'articles pré-remplie en un clic."
@@ -716,12 +1057,16 @@ msgstr ""
 "Every shop can be contacted on WhatsApp. From the cart, send your pre-filled"
 " item list in one click."
 
+#: apps/core/templates/core/merchants.html:2 templates/includes/header.html:30
+#: templates/includes/header.html:74
 msgid "Vendre au mall"
 msgstr "Sell at the mall"
 
+#: apps/core/templates/core/merchants.html:7
 msgid "Votre boutique du Mfoundi Mall, visible en ligne."
 msgstr "Your Mfoundi Mall shop, visible online."
 
+#: apps/core/templates/core/merchants.html:8
 msgid ""
 "Épicerie, téléphonie, coiffure, restaurant, bar, parfumerie, "
 "électroménager... Créez votre vitrine, publiez vos produits et services, "
@@ -731,46 +1076,66 @@ msgstr ""
 "Create your storefront, publish your products and services, receive orders "
 "and bookings."
 
+#: apps/core/templates/core/merchants.html:11
+#: apps/shops/templates/shops/open.html:20
 msgid "Créer ma boutique"
 msgstr "Create my shop"
 
+#: apps/core/templates/core/merchants.html:13
 msgid "Créer mon compte commerçant"
 msgstr "Create my merchant account"
 
+#: apps/core/templates/core/merchants.html:14
 msgid "J'ai déjà un compte"
 msgstr "I already have an account"
 
+#: apps/core/templates/core/merchants.html:19
 msgid "Vitrine en ligne"
 msgstr "Online storefront"
 
+#: apps/core/templates/core/merchants.html:19
 msgid "Logo, photos, emplacement dans le mall, horaires, contacts."
 msgstr "Logo, photos, location in the mall, opening hours, contacts."
 
+#: apps/core/templates/core/merchants.html:20
 msgid "Produits en FCFA, rayons, stock, promotions."
 msgstr "Products in FCFA, aisles, stock, deals."
 
+#: apps/core/templates/core/merchants.html:21
+#: apps/dashboard/templates/dashboard/_layout.html:36
+#: apps/dashboard/templates/dashboard/order_detail.html:4
+#: apps/dashboard/templates/dashboard/orders.html:2
+#: apps/dashboard/templates/dashboard/orders.html:4
+#: apps/dashboard/templates/dashboard/statistics.html:45 apps/orders/apps.py:7
 msgid "Commandes"
 msgstr "Orders"
 
+#: apps/core/templates/core/merchants.html:21
 msgid "Retrait avec code ou livraison, paiement sur place."
 msgstr "Pickup with code or delivery, payment on site."
 
+#: apps/core/templates/core/merchants.html:22
 msgid "Rendez-vous et tables pour salons, restaurants et bars."
 msgstr "Appointments and tables for salons, restaurants and bars."
 
+#: apps/core/templates/core/merchants.html:27
 msgid "Les étapes"
 msgstr "The steps"
 
+#: apps/core/templates/core/merchants.html:29
 msgid "Créez votre compte avec votre numéro de téléphone."
 msgstr "Create your account with your phone number."
 
+#: apps/core/templates/core/merchants.html:30
 msgid ""
 "Renseignez votre boutique : type, niveau et numéro de local dans le mall."
 msgstr "Fill in your shop details: type, floor and unit number in the mall."
 
+#: apps/core/templates/core/merchants.html:31
 msgid "L'administration du mall vérifie et valide votre boutique."
 msgstr "The mall administration checks and approves your shop."
 
+#: apps/core/templates/core/merchants.html:32
 msgid ""
 "Ajoutez vos produits et services, indiquez vos numéros MoMo / Orange Money, "
 "et c'est parti."
@@ -778,12 +1143,18 @@ msgstr ""
 "Add your products and services, enter your MoMo / Orange Money numbers, and "
 "you are live."
 
+#: apps/core/templates/core/offline.html:2
+#: apps/dashboard/templates/dashboard/_product_row.html:11
+#: apps/dashboard/templates/dashboard/products.html:13
+#: apps/dashboard/templates/dashboard/services.html:14
 msgid "Hors ligne"
 msgstr "Offline"
 
+#: apps/core/templates/core/offline.html:9
 msgid "Vous êtes hors ligne"
 msgstr "You are offline"
 
+#: apps/core/templates/core/offline.html:10
 msgid ""
 "Vérifiez votre connexion internet. Les pages déjà consultées restent "
 "disponibles."
@@ -791,53 +1162,90 @@ msgstr ""
 "Check your internet connection. Pages you have already visited remain "
 "available."
 
+#: apps/core/templates/core/offline.html:11
 msgid "Réessayer"
 msgstr "Try again"
 
+#: apps/core/templates/core/search.html:2 templates/includes/palette.html:2
 msgid "Recherche"
 msgstr "Search"
 
+#: apps/core/templates/core/search.html:6 templates/includes/header.html:23
 msgid "Rechercher un produit, une boutique..."
 msgstr "Search for a product, a shop..."
 
+#: apps/core/templates/core/search.html:13
 msgid "Recherche élargie par l'assistant :"
 msgstr "Search widened by the assistant:"
 
+#: apps/core/templates/core/search.html:21
 #, python-format
 msgid "%(n)s produit pour « %(q)s »"
 msgid_plural "%(n)s produits pour « %(q)s »"
 msgstr[0] "%(n)s product for “%(q)s”"
 msgstr[1] "%(n)s products for “%(q)s”"
 
+#: apps/core/templates/core/search.html:25
 msgid "Aucun produit trouvé"
 msgstr "No products found"
 
+#: apps/core/templates/core/search.html:25
 msgid "Essayez un autre mot ou parcourez les boutiques."
 msgstr "Try another word or browse the shops."
 
+#: apps/core/templates/widgets/image_picker.html:7
+msgid "Choisir ou déposer une image"
+msgstr "Choose or drop an image"
+
+#: apps/core/templates/widgets/image_picker.html:10
+msgid "Changer"
+msgstr "Change"
+
+#: apps/core/templates/widgets/image_picker.html:16
+msgid "Supprimer l'image"
+msgstr "Remove image"
+
+#: apps/core/templatetags/mall.py:87
+#, python-format
+msgid "%(value)s sur 5"
+msgstr "%(value)s out of 5"
+
+#: apps/dashboard/forms.py:37
+msgid "Carré conseillé"
+msgstr "Square recommended"
+
+#: apps/dashboard/forms.py:50
 msgid "L'ancien prix doit être supérieur au prix."
 msgstr "The former price must be higher than the price."
 
+#: apps/dashboard/realtime.py:64 apps/orders/services.py:114
+#: apps/orders/templates/orders/emails/new_order.txt:1
 #, python-format
 msgid "Nouvelle commande %(ref)s"
 msgstr "New order %(ref)s"
 
+#: apps/dashboard/realtime.py:82
 #, python-format
 msgid "Nouvelle réservation %(ref)s"
 msgstr "New booking %(ref)s"
 
+#: apps/dashboard/templates/dashboard/_ai_description.html:4
 msgid "Proposition de l'assistant : modifiez-la librement."
 msgstr "Assistant suggestion: edit it freely."
 
+#: apps/dashboard/templates/dashboard/_booking_row.html:12
 msgid "Message au client (facultatif)"
 msgstr "Message to the customer (optional)"
 
+#: apps/dashboard/templates/dashboard/_booking_row.html:15
 msgid "Confirmer"
 msgstr "Confirm"
 
+#: apps/dashboard/templates/dashboard/_booking_row.html:15
 msgid "Refuser"
 msgstr "Decline"
 
+#: apps/dashboard/templates/dashboard/_layout.html:9
 msgid ""
 "Votre boutique est en attente de validation par l'administration du mall. "
 "Préparez votre catalogue en attendant."
@@ -845,6 +1253,7 @@ msgstr ""
 "Your shop is awaiting approval by the mall administration. Prepare your "
 "catalog in the meantime."
 
+#: apps/dashboard/templates/dashboard/_layout.html:10
 msgid ""
 "Votre boutique est suspendue et n'est plus visible. Contactez "
 "l'administration du mall."
@@ -852,203 +1261,355 @@ msgstr ""
 "Your shop is suspended and no longer visible. Contact the mall "
 "administration."
 
+#: apps/dashboard/templates/dashboard/_layout.html:17
 msgid "Voir ma vitrine"
 msgstr "View my storefront"
 
+#: apps/dashboard/templates/dashboard/_layout.html:22
 msgid "Changer de boutique"
 msgstr "Switch shop"
 
+#: apps/dashboard/templates/dashboard/_layout.html:31
 msgid "En direct"
 msgstr "Live"
 
+#: apps/dashboard/templates/dashboard/_layout.html:31
 msgid "Hors ligne, reconnexion..."
 msgstr "Offline, reconnecting..."
 
+#: apps/dashboard/templates/dashboard/_layout.html:31
 msgid "Connexion au direct..."
 msgstr "Connecting to live updates..."
 
-msgid "Notifications"
-msgstr "Notifications"
-
+#: apps/dashboard/templates/dashboard/_layout.html:35
+#: apps/dashboard/templates/dashboard/home.html:2
 msgid "Tableau de bord"
 msgstr "Dashboard"
 
+#: apps/dashboard/templates/dashboard/_layout.html:40
+#: apps/dashboard/templates/dashboard/statistics.html:2
+#: apps/dashboard/templates/dashboard/statistics.html:6
+msgid "Statistiques"
+msgstr "Statistics"
+
+#: apps/dashboard/templates/dashboard/_layout.html:41
+#: apps/dashboard/templates/dashboard/reviews.html:2
+#: apps/dashboard/templates/dashboard/reviews.html:6
+#: apps/reviews/templates/reviews/_section.html:4
+msgid "Avis clients"
+msgstr "Customer reviews"
+
+#: apps/dashboard/templates/dashboard/_layout.html:43
+#: apps/dashboard/templates/dashboard/categories.html:2
+#: apps/dashboard/templates/dashboard/categories.html:4
 msgid "Rayons"
 msgstr "Aisles"
 
+#: apps/dashboard/templates/dashboard/_layout.html:44
+#: apps/dashboard/templates/dashboard/services.html:2
+#: apps/dashboard/templates/dashboard/services.html:5
+#: apps/shops/templates/shops/detail.html:38
 msgid "Prestations"
 msgstr "Services"
 
+#: apps/dashboard/templates/dashboard/_layout.html:45
+#: apps/dashboard/templates/dashboard/settings.html:2
+#: apps/dashboard/templates/dashboard/settings.html:4
 msgid "Informations & paiement"
 msgstr "Details & payment"
 
+#: apps/dashboard/templates/dashboard/_layout.html:46
+msgid "Affiche QR code"
+msgstr "QR code poster"
+
+#: apps/dashboard/templates/dashboard/_layout.html:47
+#: apps/dashboard/templates/dashboard/hours.html:2
 msgid "Horaires"
 msgstr "Opening hours"
 
+#: apps/dashboard/templates/dashboard/_layout.html:48
 msgid "Ajouter une boutique"
 msgstr "Add a shop"
 
+#: apps/dashboard/templates/dashboard/_order_actions.html:4
+#: apps/dashboard/templates/dashboard/orders.html:13
+#: apps/dashboard/templates/dashboard/products.html:18
 msgid "Statut"
 msgstr "Status"
 
+#: apps/dashboard/templates/dashboard/_order_actions.html:5
 #, python-format
 msgid "Payée par %(method)s le %(date)s"
 msgstr "Paid by %(method)s on %(date)s"
 
+#: apps/dashboard/templates/dashboard/_order_actions.html:11
 msgid "Remise et encaissement"
 msgstr "Handover and payment"
 
+#: apps/dashboard/templates/dashboard/_order_actions.html:14
 msgid "Marquer remise et payée"
 msgstr "Mark as handed over and paid"
 
+#: apps/dashboard/templates/dashboard/_order_actions.html:17
+#: apps/orders/templates/orders/detail.html:52
 msgid "Annuler cette commande ?"
 msgstr "Cancel this order?"
 
+#: apps/dashboard/templates/dashboard/_order_actions.html:20
+#: apps/orders/templates/orders/detail.html:53
 msgid "Annuler la commande"
 msgstr "Cancel order"
 
+#: apps/dashboard/templates/dashboard/_order_actions.html:26
 msgid "Confirmer la commande"
 msgstr "Confirm order"
 
+#: apps/dashboard/templates/dashboard/_order_actions.html:26
 msgid "Prête : prévenir le client"
 msgstr "Ready: notify the customer"
 
+#: apps/dashboard/templates/dashboard/_order_actions.html:26
 msgid "Partie en livraison"
 msgstr "Out for delivery"
 
+#: apps/dashboard/templates/dashboard/_order_actions.html:31
 msgid "Commande clôturée."
 msgstr "Order closed."
 
+#: apps/dashboard/templates/dashboard/_product_row.html:11
 msgid "En ligne"
 msgstr "Online"
 
+#: apps/dashboard/templates/dashboard/_product_row.html:14
+#: apps/dashboard/templates/dashboard/categories.html:12
+#: apps/dashboard/templates/dashboard/services.html:15
 msgid "Modifier"
 msgstr "Edit"
 
+#: apps/dashboard/templates/dashboard/_review_card.html:4
+msgid "Masqué par la modération"
+msgstr "Hidden by moderation"
+
+#: apps/dashboard/templates/dashboard/_review_card.html:10
+#: apps/reviews/forms.py:32
+msgid "Votre réponse publique"
+msgstr "Your public reply"
+
+#: apps/dashboard/templates/dashboard/_review_card.html:10
+msgid "Répondre publiquement"
+msgstr "Reply publicly"
+
+#: apps/dashboard/templates/dashboard/_review_card.html:11
+msgid "Merci pour votre visite…"
+msgstr "Thank you for your visit…"
+
+#: apps/dashboard/templates/dashboard/_review_card.html:14
+msgid "Mettre à jour"
+msgstr "Update"
+
+#: apps/dashboard/templates/dashboard/_review_card.html:14
+msgid "Publier la réponse"
+msgstr "Publish reply"
+
+#: apps/dashboard/templates/dashboard/_review_card.html:15
+#, python-format
+msgid "Répondu le %(d)s"
+msgstr "Replied on %(d)s"
+
+#: apps/dashboard/templates/dashboard/bookings.html:6
 msgid "À venir"
 msgstr "Upcoming"
 
+#: apps/dashboard/templates/dashboard/bookings.html:7
 msgid "Passées"
 msgstr "Past"
 
+#: apps/dashboard/templates/dashboard/bookings.html:9
 msgid "Tous les statuts"
 msgstr "All statuses"
 
+#: apps/dashboard/templates/dashboard/categories.html:5
 msgid "Organisez vos produits : Boissons, Smartphones, Soins visage..."
 msgstr "Organise your products: Drinks, Smartphones, Skincare..."
 
+#: apps/dashboard/templates/dashboard/categories.html:13
 msgid "Supprimer ce rayon ?"
 msgstr "Delete this aisle?"
 
+#: apps/dashboard/templates/dashboard/categories.html:13
+#: apps/dashboard/templates/dashboard/product_form.html:37
+#: apps/dashboard/templates/dashboard/service_form.html:10
 msgid "Supprimer"
 msgstr "Delete"
 
+#: apps/dashboard/templates/dashboard/categories.html:15
 msgid "Aucun rayon."
 msgstr "No aisles."
 
+#: apps/dashboard/templates/dashboard/categories.html:19
 msgid "Nouveau rayon"
 msgstr "New aisle"
 
+#: apps/dashboard/templates/dashboard/categories.html:21
 msgid "Ajouter"
 msgstr "Add"
 
+#: apps/dashboard/templates/dashboard/category_form.html:4
 msgid "Modifier le rayon"
 msgstr "Edit aisle"
 
+#: apps/dashboard/templates/dashboard/home.html:4
 #, python-format
 msgid "Bonjour %(name)s"
 msgstr "Hello %(name)s"
 
+#: apps/dashboard/templates/dashboard/home.html:6
 msgid "À confirmer"
 msgstr "To confirm"
 
+#: apps/dashboard/templates/dashboard/home.html:7
 msgid "Commandes en cours"
 msgstr "Open orders"
 
+#: apps/dashboard/templates/dashboard/home.html:8
 msgid "Encaissé ce mois"
 msgstr "Collected this month"
 
+#: apps/dashboard/templates/dashboard/home.html:14
 msgid "Pour bien démarrer"
 msgstr "Getting started"
 
+#: apps/dashboard/templates/dashboard/home.html:16
 msgid "Complétez vos informations et vos numéros Mobile Money"
 msgstr "Complete your details and Mobile Money numbers"
 
+#: apps/dashboard/templates/dashboard/home.html:17
 msgid "Vérifiez vos horaires"
 msgstr "Check your opening hours"
 
+#: apps/dashboard/templates/dashboard/home.html:18
 msgid "Créez vos rayons"
 msgstr "Create your aisles"
 
+#: apps/dashboard/templates/dashboard/home.html:19
 msgid "Ajoutez vos premiers produits"
 msgstr "Add your first products"
 
+#: apps/dashboard/templates/dashboard/home.html:26
 msgid "Dernières commandes"
 msgstr "Latest orders"
 
+#: apps/dashboard/templates/dashboard/home.html:33
 msgid "Aucune commande pour l'instant."
 msgstr "No orders yet."
 
+#: apps/dashboard/templates/dashboard/home.html:39
 msgid "Réservations à venir (7 jours)"
 msgstr "Upcoming bookings (7 days)"
 
+#: apps/dashboard/templates/dashboard/home.html:47
+#: apps/dashboard/templates/dashboard/products.html:12
 msgid "Stock faible"
 msgstr "Low stock"
 
+#: apps/dashboard/templates/dashboard/hours.html:4
 msgid "Horaires d'ouverture"
 msgstr "Opening hours"
 
+#: apps/dashboard/templates/dashboard/hours.html:5
 msgid "Utilisés pour afficher « Ouvert / Fermé » et valider les réservations."
 msgstr "Used to show “Open / Closed” and to validate bookings."
 
+#: apps/dashboard/templates/dashboard/hours.html:16
+#: apps/shops/templates/shops/detail.html:87
 msgid "Fermé"
 msgstr "Closed"
 
+#: apps/dashboard/templates/dashboard/order_detail.html:15
+#: apps/orders/models.py:31 apps/orders/templates/orders/detail.html:35
+#: apps/shops/templates/shops/detail.html:101
 msgid "Livraison"
 msgstr "Delivery"
 
+#: apps/dashboard/templates/dashboard/order_detail.html:16
 msgid "À encaisser"
 msgstr "To collect"
 
+#: apps/dashboard/templates/dashboard/order_detail.html:23
 msgid "Le client vient en boutique"
 msgstr "The customer comes to the shop"
 
+#: apps/dashboard/templates/dashboard/order_detail.html:24
+#: apps/orders/templates/orders/emails/new_order.txt:5
 msgid "Paiement prévu"
 msgstr "Planned payment"
 
+#: apps/dashboard/templates/dashboard/order_detail.html:25
 msgid "Note du client"
 msgstr "Customer note"
 
+#: apps/dashboard/templates/dashboard/orders.html:6
 msgid "En cours"
 msgstr "Open"
 
+#: apps/dashboard/templates/dashboard/orders.html:8
 msgid "Toutes"
 msgstr "All"
 
+#: apps/dashboard/templates/dashboard/orders.html:10
 msgid "Référence, nom, téléphone"
 msgstr "Reference, name, phone"
 
+#: apps/dashboard/templates/dashboard/orders.html:13
 msgid "Réf."
 msgstr "Ref."
 
+#: apps/dashboard/templates/dashboard/orders.html:13
+#: apps/shops/templates/shops/detail.html:98
 msgid "Remise"
 msgstr "Handover"
 
+#: apps/dashboard/templates/dashboard/orders.html:13
+#: apps/orders/templates/orders/detail.html:36
+#: apps/orders/templates/orders/emails/new_order.txt:10
 msgid "Total"
 msgstr "Total"
 
+#: apps/dashboard/templates/dashboard/orders.html:24
 msgid "Aucune commande."
 msgstr "No orders."
 
+#: apps/dashboard/templates/dashboard/poster.html:7
+msgid "Affiche"
+msgstr "Poster"
+
+#: apps/dashboard/templates/dashboard/poster.html:18
+msgid "Imprimer l'affiche"
+msgstr "Print the poster"
+
+#: apps/dashboard/templates/dashboard/poster.html:30
+msgid "Commandez en ligne, payez sur place"
+msgstr "Order online, pay in store"
+
+#: apps/dashboard/templates/dashboard/poster.html:31
+msgid "Scannez pour voir nos produits, réserver et nous écrire"
+msgstr "Scan to browse our products, book and message us"
+
+#: apps/dashboard/templates/dashboard/product_form.html:2
+#: apps/dashboard/templates/dashboard/product_form.html:4
+#: apps/dashboard/templates/dashboard/products.html:6
 msgid "Nouveau produit"
 msgstr "New product"
 
+#: apps/dashboard/templates/dashboard/product_form.html:4
 msgid "Modifier le produit"
 msgstr "Edit product"
 
+#: apps/dashboard/templates/dashboard/product_form.html:20
 msgid "Rédiger avec l'IA"
 msgstr "Write with AI"
 
+#: apps/dashboard/templates/dashboard/product_form.html:23
 msgid ""
 "L'assistant propose un texte à partir du nom, du rayon, du prix, de vos "
 "notes et de la photo. Relisez avant d'enregistrer."
@@ -1056,249 +1617,610 @@ msgstr ""
 "The assistant suggests a text from the name, aisle, price, your notes and "
 "the photo. Review it before saving."
 
+#: apps/dashboard/templates/dashboard/product_form.html:30
 msgid "Photos supplémentaires"
 msgstr "Additional photos"
 
+#: apps/dashboard/templates/dashboard/product_form.html:49
 msgid "Supprimer définitivement ce produit ?"
 msgstr "Permanently delete this product?"
 
+#: apps/dashboard/templates/dashboard/product_form.html:50
 msgid "Supprimer ce produit"
 msgstr "Delete this product"
 
+#: apps/dashboard/templates/dashboard/products.html:11
+#: apps/dashboard/templates/dashboard/reviews.html:10
 msgid "Tous"
 msgstr "All"
 
+#: apps/dashboard/templates/dashboard/products.html:18
+#: apps/dashboard/templates/dashboard/statistics.html:59
 msgid "Produit"
 msgstr "Product"
 
+#: apps/dashboard/templates/dashboard/products.html:18
 msgid "Prix"
 msgstr "Price"
 
+#: apps/dashboard/templates/dashboard/products.html:18
 msgid "Stock"
 msgstr "Stock"
 
+#: apps/dashboard/templates/dashboard/products.html:19
 msgid "Aucun produit."
 msgstr "No products."
 
+#: apps/dashboard/templates/dashboard/reviews.html:7
+#, python-format
+msgid "%(n)s avis publié"
+msgid_plural "%(n)s avis publiés"
+msgstr[0] "%(n)s published review"
+msgstr[1] "%(n)s published reviews"
+
+#: apps/dashboard/templates/dashboard/reviews.html:11
+msgid "Sans réponse"
+msgstr "Unanswered"
+
+#: apps/dashboard/templates/dashboard/reviews.html:14
+msgid ""
+"Seuls les clients dont la commande a été remise ou le rendez-vous honoré "
+"peuvent laisser un avis. Une réponse courtoise rassure les futurs clients."
+msgstr ""
+"Only customers whose order was handed over or whose appointment was honoured"
+" can leave a review. A courteous reply reassures future customers."
+
+#: apps/dashboard/templates/dashboard/reviews.html:17
+msgid "Aucun avis pour le moment"
+msgstr "No reviews yet"
+
+#: apps/dashboard/templates/dashboard/service_form.html:4
 msgid "Modifier la prestation"
 msgstr "Edit service"
 
+#: apps/dashboard/templates/dashboard/service_form.html:4
+#: apps/dashboard/templates/dashboard/services.html:6
 msgid "Nouvelle prestation"
 msgstr "New service"
 
+#: apps/dashboard/templates/dashboard/service_form.html:10
 msgid "Supprimer cette prestation ?"
 msgstr "Delete this service?"
 
+#: apps/dashboard/templates/dashboard/services.html:5
 msgid "Coupe, tresses, soin, menu, formule... affichés sur votre vitrine."
 msgstr ""
 "Haircut, braids, treatment, menu, set meal... shown on your storefront."
 
+#: apps/dashboard/templates/dashboard/services.html:13
+#: apps/shops/templates/shops/detail.html:48
 msgid "Sur devis"
 msgstr "On quote"
 
+#: apps/dashboard/templates/dashboard/services.html:17
 msgid "Aucune prestation."
 msgstr "No services."
 
+#: apps/dashboard/templates/dashboard/settings.html:9
+msgid "Identité visuelle"
+msgstr "Visual identity"
+
+#: apps/dashboard/templates/dashboard/settings.html:10
+msgid "Aperçu de la vitrine"
+msgstr "Shop page preview"
+
+#: apps/dashboard/templates/dashboard/settings.html:29
+msgid ""
+"Les images sont recadrées et optimisées automatiquement (WebP). JPEG, PNG ou"
+" WebP, 5 Mo maximum."
+msgstr ""
+"Images are cropped and optimised automatically (WebP). JPEG, PNG or WebP, 5 "
+"MB maximum."
+
+#: apps/dashboard/templates/dashboard/settings.html:32
 msgid "Vitrine"
 msgstr "Storefront"
 
+#: apps/dashboard/templates/dashboard/settings.html:38
 msgid "Emplacement et contacts"
 msgstr "Location and contacts"
 
+#: apps/dashboard/templates/dashboard/settings.html:46
+#: apps/orders/templates/orders/detail.html:20
+#: apps/shops/templates/shops/detail.html:92
 msgid "Paiement sur place"
 msgstr "Payment on site"
 
+#: apps/dashboard/templates/dashboard/settings.html:52
 msgid "Retrait et livraison"
 msgstr "Pickup and delivery"
 
+#: apps/dashboard/templates/dashboard/statistics.html:7
+msgid "Commandes remises et payées sur place."
+msgstr "Orders handed over and paid in store."
+
+#: apps/dashboard/templates/dashboard/statistics.html:9
+msgid "Période"
+msgstr "Period"
+
+#: apps/dashboard/templates/dashboard/statistics.html:10
+#, python-format
+msgid "%(p)s jours"
+msgstr "%(p)s days"
+
+#: apps/dashboard/templates/dashboard/statistics.html:16
+#: apps/dashboard/templates/dashboard/statistics.html:45
+#: apps/dashboard/templates/dashboard/statistics.html:59
+msgid "Encaissé"
+msgstr "Collected"
+
+#: apps/dashboard/templates/dashboard/statistics.html:18
+msgid "vs période précédente"
+msgstr "vs previous period"
+
+#: apps/dashboard/templates/dashboard/statistics.html:20
+msgid "Commandes payées"
+msgstr "Paid orders"
+
+#: apps/dashboard/templates/dashboard/statistics.html:21
+msgid "Panier moyen"
+msgstr "Average basket"
+
+#: apps/dashboard/templates/dashboard/statistics.html:22
+msgid "Taux d'annulation"
+msgstr "Cancellation rate"
+
+#: apps/dashboard/templates/dashboard/statistics.html:22
+#, python-format
+msgid "%(n)s rendez-vous honoré"
+msgid_plural "%(n)s rendez-vous honorés"
+msgstr[0] "%(n)s appointment honoured"
+msgstr[1] "%(n)s appointments honoured"
+
+#: apps/dashboard/templates/dashboard/statistics.html:26
+msgid "Encaissé par jour"
+msgstr "Collected per day"
+
+#: apps/dashboard/templates/dashboard/statistics.html:35
+#, python-format
+msgid "%(n)s cmd"
+msgid_plural "%(n)s cmd"
+msgstr[0] "%(n)s order"
+msgstr[1] "%(n)s orders"
+
+#: apps/dashboard/templates/dashboard/statistics.html:39
+msgid "aujourd'hui"
+msgstr "today"
+
+#: apps/dashboard/templates/dashboard/statistics.html:43
+msgid "Voir les données"
+msgstr "Show data"
+
+#: apps/dashboard/templates/dashboard/statistics.html:45
+msgid "Jour"
+msgstr "Day"
+
+#: apps/dashboard/templates/dashboard/statistics.html:50
+msgid "Aucune commande payée sur cette période."
+msgstr "No paid orders in this period."
+
+#: apps/dashboard/templates/dashboard/statistics.html:56
+msgid "Produits les plus vendus"
+msgstr "Best-selling products"
+
+#: apps/dashboard/templates/dashboard/statistics.html:59
+msgid "Qté"
+msgstr "Qty"
+
+#: apps/dashboard/templates/dashboard/statistics.html:62
+msgid "Pas encore de ventes sur cette période."
+msgstr "No sales in this period yet."
+
+#: apps/dashboard/templates/dashboard/statistics.html:65
+msgid "Moyens de paiement"
+msgstr "Payment methods"
+
+#: apps/dashboard/templates/dashboard/statistics.html:72
+msgid "Aucun paiement enregistré."
+msgstr "No payments recorded."
+
+#: apps/dashboard/templates/dashboard/statistics.html:78
+msgid "Export comptable"
+msgstr "Accounting export"
+
+#: apps/dashboard/templates/dashboard/statistics.html:79
+msgid ""
+"Fichier CSV (séparateur point-virgule) lisible dans Excel, LibreOffice ou "
+"Google Sheets : une ligne par commande."
+msgstr ""
+"CSV file (semicolon separated) readable in Excel, LibreOffice or Google "
+"Sheets: one row per order."
+
+#: apps/dashboard/templates/dashboard/statistics.html:81
+msgid "Du"
+msgstr "From"
+
+#: apps/dashboard/templates/dashboard/statistics.html:82
+msgid "Au"
+msgstr "To"
+
+#: apps/dashboard/templates/dashboard/statistics.html:83
+msgid "Télécharger"
+msgstr "Download"
+
+#: apps/dashboard/views.py:79
 msgid "Informations enregistrées."
 msgstr "Details saved."
 
+#: apps/dashboard/views.py:90
 msgid "Horaires enregistrés."
 msgstr "Opening hours saved."
 
+#: apps/dashboard/views.py:102
 msgid "Enregistré."
 msgstr "Saved."
 
+#: apps/dashboard/views.py:136
 msgid "Rayon supprimé. Ses produits restent en ligne sans rayon."
 msgstr "Aisle deleted. Its products stay online without an aisle."
 
+#: apps/dashboard/views.py:166
 msgid "Produit enregistré."
 msgstr "Product saved."
 
+#: apps/dashboard/views.py:190
 msgid "Produit supprimé."
 msgstr "Product deleted."
 
+#: apps/dashboard/views.py:212
 msgid "Prestation supprimée."
 msgstr "Service deleted."
 
+#: apps/dashboard/views.py:264
 msgid "Formulaire incomplet."
 msgstr "Incomplete form."
 
+#: apps/dashboard/views.py:275
 #, python-format
 msgid "Commande : %(status)s."
 msgstr "Order: %(status)s."
 
+#: apps/dashboard/views.py:318
 #, python-format
 msgid "Réservation : %(s)s."
 msgstr "Booking: %(s)s."
 
+#: apps/dashboard/views.py:342
 msgid "Indiquez d'abord le nom du produit."
 msgstr "Enter the product name first."
 
+#: apps/dashboard/views.py:344
 msgid "Limite atteinte. Réessayez dans une heure."
 msgstr "Limit reached. Try again in an hour."
 
+#: apps/dashboard/views.py:357
 msgid "L'assistant n'est pas disponible pour le moment."
 msgstr "The assistant is not available right now."
 
+#: apps/dashboard/views.py:386
+msgid "Réponse publiée."
+msgstr "Reply published."
+
+#: apps/favorites/apps.py:7
+msgid "Favoris"
+msgstr "Favourites"
+
+#: apps/favorites/models.py:23
+msgid "ajouté le"
+msgstr "added on"
+
+#: apps/favorites/models.py:27
+msgid "favori"
+msgstr "favourite"
+
+#: apps/favorites/models.py:28
+msgid "favoris"
+msgstr "favourites"
+
+#: apps/favorites/services.py:34
+#, python-format
+msgid "%(product)s est de nouveau disponible"
+msgstr "%(product)s is available again"
+
+#: apps/favorites/services.py:35
+#, python-format
+msgid "Chez %(shop)s, %(location)s."
+msgstr "At %(shop)s, %(location)s."
+
+#: apps/favorites/templates/favorites/_button.html:2
+msgid "Retirer des favoris"
+msgstr "Remove from favourites"
+
+#: apps/favorites/templates/favorites/_button.html:6
+msgid "Suivi"
+msgstr "Following"
+
+#: apps/favorites/templates/favorites/_button.html:8
+msgid "Ajouter aux favoris"
+msgstr "Add to favourites"
+
+#: apps/favorites/templates/favorites/_button.html:12
+msgid "Suivre"
+msgstr "Follow"
+
+#: apps/favorites/templates/favorites/_button.html:12
+msgid "Favori"
+msgstr "Favourite"
+
+#: apps/favorites/templates/favorites/list.html:5
+msgid "Vous êtes prévenu dès qu'un produit suivi revient en stock."
+msgstr "You are notified as soon as a followed product is back in stock."
+
+#: apps/favorites/templates/favorites/list.html:7
+msgid "Boutiques suivies"
+msgstr "Followed shops"
+
+#: apps/favorites/templates/favorites/list.html:13
+msgid "Produits favoris"
+msgstr "Favourite products"
+
+#: apps/favorites/templates/favorites/list.html:20
+msgid "Aucun favori pour l'instant"
+msgstr "No favourites yet"
+
+#: apps/favorites/templates/favorites/list.html:20
+msgid "Touchez le cœur sur un produit ou « Suivre » sur une boutique."
+msgstr "Tap the heart on a product or \"Follow\" on a shop."
+
+#: apps/favorites/templates/favorites/list.html:20
+#: apps/orders/templates/orders/my_orders.html:16
+msgid "Découvrir les boutiques"
+msgstr "Discover the shops"
+
+#: apps/notifications/models.py:8
+msgid "Retour en stock"
+msgstr "Back in stock"
+
+#: apps/notifications/models.py:9 apps/reviews/apps.py:7
+msgid "Avis"
+msgstr "Reviews"
+
+#: apps/notifications/models.py:10
+msgid "Réponse à un avis"
+msgstr "Review reply"
+
+#: apps/notifications/models.py:22
+msgid "titre"
+msgstr "title"
+
+#: apps/notifications/models.py:24
+msgid "lien"
+msgstr "link"
+
+#: apps/notifications/models.py:25
+msgid "lue le"
+msgstr "read on"
+
+#: apps/notifications/models.py:31
+msgid "notification"
+msgstr "notification"
+
+#: apps/notifications/models.py:32
+msgid "notifications"
+msgstr "notifications"
+
+#: apps/notifications/templates/notifications/list.html:14
+msgid "Non lue"
+msgstr "Unread"
+
+#: apps/notifications/templates/notifications/list.html:17
+msgid "Aucune notification"
+msgstr "No notifications"
+
+#: apps/notifications/templates/notifications/list.html:17
+msgid ""
+"Vous serez prévenu ici du retour en stock de vos favoris et des réponses à "
+"vos avis."
+msgstr ""
+"You will be notified here when your favourites are back in stock and when "
+"shops reply to your reviews."
+
+#: apps/orders/forms.py:12 apps/orders/templates/orders/emails/new_order.txt:4
 msgid "Mode de remise"
 msgstr "Handover method"
 
+#: apps/orders/forms.py:14
 msgid "Je paierai sur place par"
 msgstr "I will pay on site by"
 
+#: apps/orders/forms.py:16
 msgid "Nom complet"
 msgstr "Full name"
 
+#: apps/orders/forms.py:19
 msgid "Adresse de livraison"
 msgstr "Delivery address"
 
+#: apps/orders/forms.py:22
 msgid "Quartier, rue"
 msgstr "Neighbourhood, street"
 
+#: apps/orders/forms.py:25
 msgid "Point de repère"
 msgstr "Landmark"
 
+#: apps/orders/forms.py:28
 msgid "Ex. : face pharmacie du Soleil"
 msgstr "E.g. opposite Soleil pharmacy"
 
+#: apps/orders/forms.py:31
 msgid "Note pour la boutique"
 msgstr "Note for the shop"
 
+#: apps/orders/forms.py:55
 msgid "Indiquez l'adresse de livraison."
 msgstr "Enter the delivery address."
 
+#: apps/orders/forms.py:60
 msgid "Motif"
 msgstr "Reason"
 
+#: apps/orders/forms.py:65
 msgid "Code de retrait du client"
 msgstr "Customer pickup code"
 
+#: apps/orders/forms.py:70
 msgid "Paiement reçu par"
 msgstr "Payment received by"
 
+#: apps/orders/models.py:25
 msgid "MTN Mobile Money"
 msgstr "MTN Mobile Money"
 
+#: apps/orders/models.py:26
 msgid "Orange Money"
 msgstr "Orange Money"
 
+#: apps/orders/models.py:30 apps/shops/templates/shops/detail.html:100
 msgid "Retrait en boutique"
 msgstr "In-store pickup"
 
+#: apps/orders/models.py:39
 msgid "En livraison"
 msgstr "Out for delivery"
 
+#: apps/orders/models.py:40
 msgid "Remise et payée"
 msgstr "Handed over and paid"
 
+#: apps/orders/models.py:54
 msgid "mode de remise"
 msgstr "handover method"
 
+#: apps/orders/models.py:55
 msgid "paiement prévu"
 msgstr "planned payment"
 
+#: apps/orders/models.py:57
 msgid "nom du contact"
 msgstr "contact name"
 
+#: apps/orders/models.py:58
 msgid "téléphone du contact"
 msgstr "contact phone"
 
+#: apps/orders/models.py:59
 msgid "adresse de livraison"
 msgstr "delivery address"
 
+#: apps/orders/models.py:60
 msgid "point de repère"
 msgstr "landmark"
 
+#: apps/orders/models.py:61
 msgid "note pour la boutique"
 msgstr "note for the shop"
 
+#: apps/orders/models.py:63
 msgid "sous-total"
 msgstr "subtotal"
 
+#: apps/orders/models.py:64
 msgid "frais de livraison"
 msgstr "delivery fee"
 
+#: apps/orders/models.py:65
 msgid "total"
 msgstr "total"
 
+#: apps/orders/models.py:67
 msgid "code de retrait"
 msgstr "pickup code"
 
+#: apps/orders/models.py:68
 msgid "payé par"
 msgstr "paid by"
 
+#: apps/orders/models.py:69
 msgid "payée le"
 msgstr "paid on"
 
+#: apps/orders/models.py:70
 msgid "motif d'annulation"
 msgstr "cancellation reason"
 
+#: apps/orders/models.py:73
 msgid "mise à jour le"
 msgstr "updated on"
 
+#: apps/orders/models.py:77
 msgid "commande"
 msgstr "order"
 
+#: apps/orders/models.py:78
 msgid "commandes"
 msgstr "orders"
 
+#: apps/orders/models.py:133
 msgid "prix unitaire"
 msgstr "unit price"
 
+#: apps/orders/models.py:134
 msgid "quantité"
 msgstr "quantity"
 
+#: apps/orders/models.py:137
 msgid "article"
 msgstr "item"
 
+#: apps/orders/models.py:138
 msgid "articles"
 msgstr "items"
 
+#: apps/orders/services.py:27 apps/orders/views.py:22
 msgid "Votre panier est vide pour cette boutique."
 msgstr "Your cart is empty for this shop."
 
+#: apps/orders/services.py:39
 #, python-format
 msgid "« %(name)s » n'est plus disponible."
 msgstr "“%(name)s” is no longer available."
 
+#: apps/orders/services.py:42
 #, python-format
 msgid "Stock insuffisant pour « %(name)s » (%(stock)s restant(s))."
 msgstr "Not enough stock for “%(name)s” (%(stock)s left)."
 
+#: apps/orders/services.py:90
 msgid "Code de retrait incorrect."
 msgstr "Incorrect pickup code."
 
+#: apps/orders/services.py:105
 msgid "Cette commande ne peut plus être annulée."
 msgstr "This order can no longer be cancelled."
 
+#: apps/orders/services.py:106
 msgid "Annulée par le client"
 msgstr "Cancelled by the customer"
 
+#: apps/orders/templates/orders/checkout.html:2
 msgid "Valider la commande"
 msgstr "Check out"
 
+#: apps/orders/templates/orders/checkout.html:5
 #, python-format
 msgid "Commande chez %(shop)s"
 msgstr "Order at %(shop)s"
 
+#: apps/orders/templates/orders/checkout.html:14
 msgid "Zone de livraison"
 msgstr "Delivery area"
 
+#: apps/orders/templates/orders/checkout.html:18
 msgid "Aucun paiement en ligne."
 msgstr "No online payment."
 
+#: apps/orders/templates/orders/checkout.html:19
 msgid ""
 "Vous payez au moment du retrait ou de la livraison, devant le commerçant ou "
 "le livreur."
@@ -1306,27 +2228,36 @@ msgstr ""
 "You pay at pickup or delivery, in front of the merchant or the delivery "
 "person."
 
+#: apps/orders/templates/orders/checkout.html:26
 msgid "Envoyer la commande"
 msgstr "Send order"
 
+#: apps/orders/templates/orders/checkout.html:29
 msgid "Récapitulatif"
 msgstr "Summary"
 
+#: apps/orders/templates/orders/checkout.html:35
 msgid "Livraison (si choisie)"
 msgstr "Delivery (if chosen)"
 
+#: apps/orders/templates/orders/checkout.html:35
+#: apps/shops/templates/shops/detail.html:101
 msgid "gratuite"
 msgstr "free"
 
+#: apps/orders/templates/orders/detail.html:16
 msgid "Donnez ce code au commerçant au moment du retrait."
 msgstr "Give this code to the merchant at pickup."
 
+#: apps/orders/templates/orders/detail.html:21
 msgid "Numéro MTN MoMo de la boutique"
 msgstr "Shop's MTN MoMo number"
 
+#: apps/orders/templates/orders/detail.html:22
 msgid "Numéro Orange Money de la boutique"
 msgstr "Shop's Orange Money number"
 
+#: apps/orders/templates/orders/detail.html:23
 msgid ""
 "Le transfert se fait devant le commerçant ou le livreur, au moment de la "
 "remise."
@@ -1334,306 +2265,529 @@ msgstr ""
 "The transfer is made in front of the merchant or the delivery person, at "
 "handover."
 
+#: apps/orders/templates/orders/detail.html:24
 msgid "Montant à payer"
 msgstr "Amount to pay"
 
+#: apps/orders/templates/orders/detail.html:46
 msgid "Motif d'annulation"
 msgstr "Cancellation reason"
 
+#: apps/orders/templates/orders/detail.html:49
 msgid "Contacter la boutique"
 msgstr "Contact the shop"
 
+#: apps/orders/templates/orders/emails/new_order.txt:6
 msgid "Adresse"
 msgstr "Address"
 
+#: apps/orders/templates/orders/emails/new_order.txt:12
 msgid "Note"
 msgstr "Note"
 
+#: apps/orders/templates/orders/emails/new_order.txt:14
 msgid "Confirmez-la depuis votre espace boutique."
 msgstr "Confirm it from your shop dashboard."
 
+#: apps/orders/templates/orders/my_orders.html:10
 #, python-format
 msgid "%(n)s article"
 msgid_plural "%(n)s articles"
 msgstr[0] "%(n)s item"
 msgstr[1] "%(n)s items"
 
+#: apps/orders/templates/orders/my_orders.html:16
 msgid "Aucune commande pour l'instant"
 msgstr "No orders yet"
 
-msgid "Découvrir les boutiques"
-msgstr "Discover the shops"
-
+#: apps/orders/views.py:25
 msgid "Cette boutique ne prend pas encore de commandes en ligne."
 msgstr "This shop does not take online orders yet."
 
+#: apps/orders/views.py:39
 #, python-format
 msgid "Commande %(ref)s envoyée à la boutique."
 msgstr "Order %(ref)s sent to the shop."
 
+#: apps/orders/views.py:73
 msgid "Commande annulée."
 msgstr "Order cancelled."
 
+#: apps/orders/whatsapp.py:7
 #, python-format
 msgid "Bonjour %(shop)s, à propos de ma commande %(ref)s."
 msgstr "Hello %(shop)s, about my order %(ref)s."
 
-msgid "Valider les boutiques sélectionnées"
-msgstr "Approve selected shops"
+#: apps/reviews/forms.py:11
+msgid "Votre note"
+msgstr "Your rating"
 
-msgid "Suspendre les boutiques sélectionnées"
-msgstr "Suspend selected shops"
+#: apps/reviews/forms.py:22
+msgid "Accueil, qualité, rapidité…"
+msgstr "Welcome, quality, speed…"
 
-msgid "Affiché au client pour payer sur place. Vide = non accepté."
-msgstr "Shown to the customer to pay on site. Empty = not accepted."
+#: apps/reviews/models.py:21
+msgid "note"
+msgstr "rating"
 
-msgid "Proposez au moins le retrait ou la livraison."
-msgstr "Offer at least pickup or delivery."
+#: apps/reviews/models.py:23
+msgid "commentaire"
+msgstr "comment"
 
-msgid "Acceptez au moins un moyen de paiement."
-msgstr "Accept at least one payment method."
+#: apps/reviews/models.py:25
+msgid "répondu le"
+msgstr "replied on"
 
-msgid "nom (anglais)"
-msgstr "name (English)"
+#: apps/reviews/models.py:26
+msgid "publié"
+msgstr "published"
 
+#: apps/reviews/models.py:28
+msgid "modifié le"
+msgstr "updated on"
+
+#: apps/reviews/models.py:34 apps/reviews/models.py:35
+msgid "avis"
+msgstr "review"
+
+#: apps/reviews/services.py:46
+#, python-format
+msgid "Nouvel avis %(rating)s/5 pour %(shop)s"
+msgstr "New %(rating)s/5 review for %(shop)s"
+
+#: apps/reviews/services.py:67
+#, python-format
+msgid "%(shop)s a répondu à votre avis"
+msgstr "%(shop)s replied to your review"
+
+#: apps/reviews/templates/reviews/_section.html:5
+#, python-format
+msgid "%(n)s avis"
+msgid_plural "%(n)s avis"
+msgstr[0] "%(n)s review"
+msgstr[1] "%(n)s reviews"
+
+#: apps/reviews/templates/reviews/_section.html:25
+msgid "Client vérifié"
+msgstr "Verified customer"
+
+#: apps/reviews/templates/reviews/_section.html:32
+#, python-format
+msgid "Réponse de %(shop)s"
+msgstr "Reply from %(shop)s"
+
+#: apps/reviews/templates/reviews/_section.html:41
+msgid ""
+"Pas encore d'avis. Les clients servis par la boutique peuvent en laisser un."
+msgstr "No reviews yet. Customers served by the shop can leave one."
+
+#: apps/reviews/templates/reviews/_section.html:47
+msgid "Modifier mon avis"
+msgstr "Edit my review"
+
+#: apps/reviews/templates/reviews/_section.html:62
+msgid "Publier"
+msgstr "Publish"
+
+#: apps/reviews/templates/reviews/_section.html:64
+msgid "Merci, votre avis est publié."
+msgstr "Thank you, your review is published."
+
+#: apps/reviews/views.py:32
+msgid "Seuls les clients servis par cette boutique peuvent laisser un avis."
+msgstr "Only customers served by this shop can leave a review."
+
+#: apps/reviews/views.py:41
+msgid "Merci pour votre avis."
+msgstr "Thank you for your review."
+
+#: apps/reviews/views.py:43
+msgid "Choisissez une note de 1 à 5."
+msgstr "Choose a rating from 1 to 5."
+
+#: apps/shops/admin.py:13 apps/shops/models.py:30
 msgid "icône"
 msgstr "icon"
 
-msgid "Emoji"
-msgstr "Emoji"
+#: apps/shops/admin.py:70
+msgid "Valider les boutiques sélectionnées"
+msgstr "Approve selected shops"
 
+#: apps/shops/admin.py:75
+msgid "Suspendre les boutiques sélectionnées"
+msgstr "Suspend selected shops"
+
+#: apps/shops/forms.py:17
+msgid "Carré, 512 × 512 px conseillé"
+msgstr "Square, 512 × 512 px recommended"
+
+#: apps/shops/forms.py:21
+msgid "Format 3:1, 1800 × 600 px conseillé"
+msgstr "3:1 format, 1800 × 600 px recommended"
+
+#: apps/shops/forms.py:93 apps/shops/forms.py:94
+msgid "Affiché au client pour payer sur place. Vide = non accepté."
+msgstr "Shown to the customer to pay on site. Empty = not accepted."
+
+#: apps/shops/forms.py:104
+msgid "Proposez au moins le retrait ou la livraison."
+msgstr "Offer at least pickup or delivery."
+
+#: apps/shops/forms.py:110
+msgid "Acceptez au moins un moyen de paiement."
+msgstr "Accept at least one payment method."
+
+#: apps/shops/models.py:28
+msgid "nom (anglais)"
+msgstr "name (English)"
+
+#: apps/shops/models.py:30
+msgid "Icône Lucide"
+msgstr "Lucide icon"
+
+#: apps/shops/models.py:31
 msgid "vend des produits"
 msgstr "sells products"
 
+#: apps/shops/models.py:32
 msgid "prend des rendez-vous"
 msgstr "takes appointments"
 
+#: apps/shops/models.py:33
 msgid "réserve des tables"
 msgstr "takes table bookings"
 
+#: apps/shops/models.py:38
 msgid "type de boutique"
 msgstr "shop type"
 
+#: apps/shops/models.py:39
 msgid "types de boutique"
 msgstr "shop types"
 
+#: apps/shops/models.py:66
 msgid "En attente de validation"
 msgstr "Awaiting approval"
 
+#: apps/shops/models.py:67
 msgid "Validée"
 msgstr "Approved"
 
+#: apps/shops/models.py:68
 msgid "Suspendue"
 msgstr "Suspended"
 
+#: apps/shops/models.py:71
 msgid "Sous-sol"
 msgstr "Basement"
 
+#: apps/shops/models.py:72
 msgid "Rez-de-chaussée"
 msgstr "Ground floor"
 
+#: apps/shops/models.py:73
 msgid "1er étage"
 msgstr "1st floor"
 
+#: apps/shops/models.py:74
 msgid "2e étage"
 msgstr "2nd floor"
 
+#: apps/shops/models.py:75
 msgid "3e étage"
 msgstr "3rd floor"
 
+#: apps/shops/models.py:76
 msgid "Extérieur"
 msgstr "Outside"
 
+#: apps/shops/models.py:82
 msgid "propriétaire"
 msgstr "owner"
 
+#: apps/shops/models.py:87
 msgid "nom de la boutique"
 msgstr "shop name"
 
+#: apps/shops/models.py:89
 msgid "slogan"
 msgstr "tagline"
 
+#: apps/shops/models.py:91
 msgid "logo"
 msgstr "logo"
 
-msgid "image de couverture"
-msgstr "cover image"
+#: apps/shops/models.py:92
+msgid "bannière"
+msgstr "banner"
 
+#: apps/shops/models.py:94
 msgid "niveau"
 msgstr "floor"
 
+#: apps/shops/models.py:96
 msgid "numéro de local"
 msgstr "unit number"
 
+#: apps/shops/models.py:96
 msgid "Ex. : B12"
 msgstr "E.g. B12"
 
+#: apps/shops/models.py:100
 msgid "WhatsApp"
 msgstr "WhatsApp"
 
+#: apps/shops/models.py:103
 msgid "espèces"
 msgstr "cash"
 
+#: apps/shops/models.py:104
 msgid "numéro MTN Mobile Money"
 msgstr "MTN Mobile Money number"
 
+#: apps/shops/models.py:105
 msgid "numéro Orange Money"
 msgstr "Orange Money number"
 
+#: apps/shops/models.py:107
 msgid "retrait en boutique"
 msgstr "in-store pickup"
 
+#: apps/shops/models.py:108
 msgid "livraison"
 msgstr "delivery"
 
+#: apps/shops/models.py:109
 msgid "frais de livraison (FCFA)"
 msgstr "delivery fee (FCFA)"
 
+#: apps/shops/models.py:111
 msgid "zone de livraison"
 msgstr "delivery area"
 
+#: apps/shops/models.py:111
 msgid "Ex. : Yaoundé centre"
 msgstr "E.g. Yaoundé centre"
 
+#: apps/shops/models.py:115
 msgid "mise en avant"
 msgstr "featured"
 
+#: apps/shops/models.py:117
 msgid "modifiée le"
 msgstr "updated on"
 
+#: apps/shops/models.py:123
 msgid "boutique"
 msgstr "shop"
 
+#: apps/shops/models.py:124
 msgid "boutiques"
 msgstr "shops"
 
+#: apps/shops/models.py:145
 #, python-format
 msgid "local %(unit)s"
 msgstr "unit %(unit)s"
 
+#: apps/shops/models.py:191
 msgid "Lundi"
 msgstr "Monday"
 
+#: apps/shops/models.py:192
 msgid "Mardi"
 msgstr "Tuesday"
 
+#: apps/shops/models.py:193
 msgid "Mercredi"
 msgstr "Wednesday"
 
+#: apps/shops/models.py:194
 msgid "Jeudi"
 msgstr "Thursday"
 
+#: apps/shops/models.py:195
 msgid "Vendredi"
 msgstr "Friday"
 
+#: apps/shops/models.py:196
 msgid "Samedi"
 msgstr "Saturday"
 
+#: apps/shops/models.py:197
 msgid "Dimanche"
 msgstr "Sunday"
 
+#: apps/shops/models.py:200
 msgid "jour"
 msgstr "day"
 
+#: apps/shops/models.py:201
 msgid "ouverture"
 msgstr "opening"
 
+#: apps/shops/models.py:202
 msgid "fermeture"
 msgstr "closing"
 
+#: apps/shops/models.py:203
 msgid "fermé"
 msgstr "closed"
 
+#: apps/shops/models.py:208
 msgid "horaire"
 msgstr "opening hour"
 
+#: apps/shops/models.py:209
 msgid "horaires"
 msgstr "opening hours"
 
+#: apps/shops/models.py:219
 msgid "Indiquez les heures d'ouverture et de fermeture."
 msgstr "Enter opening and closing times."
 
+#: apps/shops/models.py:221
 msgid "La fermeture doit être après l'ouverture."
 msgstr "Closing time must be after opening time."
 
+#: apps/shops/services.py:38
 #, python-format
 msgid "Nouvelle boutique à valider : %(name)s"
 msgstr "New shop to approve: %(name)s"
 
+#: apps/shops/services.py:39
 #, python-format
 msgid "Boutique créée par %(owner)s (%(phone)s)."
 msgstr "Shop created by %(owner)s (%(phone)s)."
 
+#: apps/shops/services.py:53
 #, python-format
 msgid "Votre boutique %(name)s est en ligne"
 msgstr "Your shop %(name)s is online"
 
+#: apps/shops/services.py:54
 #, python-format
 msgid "Votre boutique %(name)s est suspendue"
 msgstr "Your shop %(name)s is suspended"
 
+#: apps/shops/services.py:59
 #, python-format
 msgid "Bonjour, le statut de votre boutique sur %(site)s est : %(status)s."
 msgstr "Hello, the status of your shop on %(site)s is: %(status)s."
 
+#: apps/shops/templates/shops/_products.html:8
 msgid "Aucun produit pour le moment"
 msgstr "No products yet"
 
+#: apps/shops/templates/shops/_results.html:8
 msgid "Aucune boutique trouvée"
 msgstr "No shops found"
 
+#: apps/shops/templates/shops/_results.html:8
 msgid ""
 "Modifiez les filtres ou revenez bientôt : de nouvelles boutiques arrivent."
 msgstr "Change the filters or come back soon: new shops are on the way."
 
+#: apps/shops/templates/shops/detail.html:6
 msgid "Aperçu : cette boutique n'est pas encore visible du public."
 msgstr "Preview: this shop is not visible to the public yet."
 
+#: apps/shops/templates/shops/detail.html:25
 msgid "Appeler"
 msgstr "Call"
 
+#: apps/shops/templates/shops/detail.html:28
 msgid "Réserver une table"
 msgstr "Book a table"
 
+#: apps/shops/templates/shops/detail.html:28
 msgid "Prendre rendez-vous"
 msgstr "Book an appointment"
 
+#: apps/shops/templates/shops/detail.html:30
 msgid "Gérer"
 msgstr "Manage"
 
+#: apps/shops/templates/shops/detail.html:60
 msgid "Chercher dans la boutique"
 msgstr "Search this shop"
 
+#: apps/shops/templates/shops/detail.html:65
 msgid "Tout"
 msgstr "All"
 
+#: apps/shops/templates/shops/detail.html:79
 msgid "Infos pratiques"
 msgstr "Practical info"
 
+#: apps/shops/templates/shops/detail.html:80
+msgid "Voir sur le plan"
+msgstr "Show on the map"
+
+#: apps/shops/templates/shops/detail.html:83
 msgid "Ouvert maintenant"
 msgstr "Open now"
 
+#: apps/shops/templates/shops/detail.html:83
 msgid "Fermé maintenant"
 msgstr "Closed now"
 
+#: apps/shops/templates/shops/detail.html:104
 msgid "À propos"
 msgstr "About"
 
+#: apps/shops/templates/shops/list.html:5
 msgid "Les boutiques du mall"
 msgstr "The mall's shops"
 
+#: apps/shops/templates/shops/list.html:7
 msgid "Nom de la boutique..."
 msgstr "Shop name..."
 
+#: apps/shops/templates/shops/list.html:9
 msgid "Tous les types"
 msgstr "All types"
 
+#: apps/shops/templates/shops/list.html:13
 msgid "Tous les niveaux"
 msgstr "All floors"
 
+#: apps/shops/templates/shops/map.html:2 apps/shops/templates/shops/map.html:7
+#: templates/includes/footer.html:18 templates/includes/header.html:72
+msgid "Plan du mall"
+msgstr "Mall map"
+
+#: apps/shops/templates/shops/map.html:3
+msgid "Trouvez chaque boutique du Mfoundi Mall par étage et par local."
+msgstr "Find every Mfoundi Mall shop by floor and unit."
+
+#: apps/shops/templates/shops/map.html:6
+msgid "Se repérer"
+msgstr "Find your way"
+
+#: apps/shops/templates/shops/map.html:8
+msgid ""
+"Les boutiques par étage, triées par numéro de local. Touchez une boutique "
+"pour voir sa vitrine."
+msgstr "Shops by floor, sorted by unit number. Tap a shop to open its page."
+
+#: apps/shops/templates/shops/map.html:10
+msgid "Étages"
+msgstr "Floors"
+
+#: apps/shops/templates/shops/map.html:20
+msgid "Entrée / escalators"
+msgstr "Entrance / escalators"
+
+#: apps/shops/templates/shops/map.html:41
+msgid "Aucune boutique pour le moment"
+msgstr "No shops yet"
+
+#: apps/shops/templates/shops/open.html:5 templates/includes/footer.html:26
 msgid "Ouvrir ma boutique en ligne"
 msgstr "Open my shop online"
 
+#: apps/shops/templates/shops/open.html:6
 msgid ""
 "Renseignez les informations de votre boutique du Mfoundi Mall. Elle sera "
 "publiée après validation par l'administration."
@@ -1641,36 +2795,46 @@ msgstr ""
 "Fill in your Mfoundi Mall shop details. It will be published after approval "
 "by the administration."
 
+#: apps/shops/views.py:100
 msgid ""
 "Boutique créée. Elle sera visible dès sa validation par l'administration du "
 "mall."
 msgstr ""
 "Shop created. It will be visible once approved by the mall administration."
 
+#: config/settings/base.py:100
 msgid "Français"
 msgstr "Français"
 
+#: config/settings/base.py:100
 msgid "English"
 msgstr "English"
 
+#: config/urls.py:10
 msgid "Administration Mfoundi Mall"
 msgstr "Mfoundi Mall administration"
 
+#: config/urls.py:11
 msgid "Mfoundi Mall"
 msgstr "Mfoundi Mall"
 
+#: config/urls.py:12
 msgid "Gestion du mall"
 msgstr "Mall management"
 
+#: templates/404.html:2
 msgid "Page introuvable"
 msgstr "Page not found"
 
+#: templates/404.html:6
 msgid "Cette page n'existe pas ou n'est plus disponible."
 msgstr "This page does not exist or is no longer available."
 
+#: templates/404.html:7
 msgid "Retour à l'accueil"
 msgstr "Back to home"
 
+#: templates/base.html:12
 msgid ""
 "Toutes les boutiques du Mfoundi Mall en ligne : commandez, réservez et payez"
 " sur place en espèces ou Mobile Money."
@@ -1678,82 +2842,112 @@ msgstr ""
 "Every Mfoundi Mall shop online: order, book and pay on site in cash or "
 "Mobile Money."
 
+#: templates/base.html:46
 msgid "Aller au contenu"
 msgstr "Skip to content"
 
+#: templates/includes/field.html:21
 msgid "facultatif"
 msgstr "optional"
 
+#: templates/includes/footer.html:11
 msgid "Toutes les boutiques du mall, à portée de main."
 msgstr "Every shop in the mall, at your fingertips."
 
+#: templates/includes/footer.html:12
 msgid "Installer l'application"
 msgstr "Install the app"
 
+#: templates/includes/footer.html:15
 msgid "Acheter"
 msgstr "Shop"
 
+#: templates/includes/footer.html:20
 msgid "Suivre ma commande"
 msgstr "Track my order"
 
+#: templates/includes/footer.html:24
 msgid "Vendre"
 msgstr "Sell"
 
+#: templates/includes/footer.html:28
 msgid "API développeurs"
 msgstr "Developer API"
 
+#: templates/includes/footer.html:32
 msgid "Nous trouver"
 msgstr "Find us"
 
+#: templates/includes/footer.html:41
 msgid "Prix en Franc CFA (FCFA). Paiement sur place uniquement."
 msgstr "Prices in CFA franc (FCFA). Payment on site only."
 
+#: templates/includes/header.html:5
 msgid ""
 "Commandez en ligne, payez sur place : espèces, MTN MoMo ou Orange Money"
 msgstr "Order online, pay on site: cash, MTN MoMo or Orange Money"
 
+#: templates/includes/header.html:16
 msgid "Menu"
 msgstr "Menu"
 
+#: templates/includes/header.html:28
+msgid "Plan"
+msgstr "Map"
+
+#: templates/includes/header.html:57
 msgid "Administration"
 msgstr "Administration"
 
+#: templates/includes/header.html:59
 msgid "Déconnexion"
 msgstr "Log out"
 
+#: templates/includes/pagination.html:4
 msgid "Précédent"
 msgstr "Previous"
 
+#: templates/includes/pagination.html:5
 #, python-format
 msgid "Page %(n)s sur %(total)s"
 msgstr "Page %(n)s of %(total)s"
 
+#: templates/includes/pagination.html:6
 msgid "Suivant"
 msgstr "Next"
 
+#: templates/includes/palette.html:6
 msgid "Produit, boutique, type de boutique..."
 msgstr "Product, shop, shop type..."
 
+#: templates/includes/palette.html:14
 msgid "naviguer"
 msgstr "navigate"
 
+#: templates/includes/palette.html:15
 msgid "ouvrir"
 msgstr "open"
 
+#: templates/includes/palette.html:16
 msgid "ou"
 msgstr "or"
 
+#: templates/includes/shop_card.html:6
 msgid "À la une"
 msgstr "Featured"
 
+#: templates/includes/theme_switcher.html:3
 msgid "Thème"
 msgstr "Theme"
 
+#: templates/includes/theme_switcher.html:8
 msgid "Clair"
 msgstr "Light"
 
+#: templates/includes/theme_switcher.html:9
 msgid "Sombre"
 msgstr "Dark"
 
+#: templates/includes/theme_switcher.html:10
 msgid "Système"
 msgstr "System"
