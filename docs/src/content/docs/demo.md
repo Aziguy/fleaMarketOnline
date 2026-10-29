@@ -14,7 +14,7 @@ python manage.py seed_demo
 make run
 ```
 
-Ouvrez `http://127.0.0.1:8000`.
+Ouvrez `http://localhost:8000`.
 
 ## Comptes de démonstration
 

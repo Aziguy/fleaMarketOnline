@@ -39,13 +39,29 @@ python manage.py createsuperuser
 make run
 ```
 
-Le site est disponible sur `http://127.0.0.1:8000` et l'administration sur `http://127.0.0.1:8000/admin/`.
+Le site est disponible sur `http://localhost:8000` et l'administration sur `http://localhost:8000/admin/`.
+
+:::caution[Utilisez `localhost`, pas `127.0.0.1`]
+Les clés d'accès (WebAuthn) refusent une adresse IP comme domaine : elles ne fonctionnent que sur `localhost` en local, et en HTTPS en production.
+:::
 
 Sans fichier `.env`, le projet utilise `config.settings.dev` et une base SQLite (`db.sqlite3`). Pour utiliser PostgreSQL, définir `DATABASE_URL` (voir [Configuration](/fleaMarketOnline/developpeur/configuration/)).
 
 :::note
 `createsuperuser` demande un **numéro de téléphone** (identifiant de connexion) et un prénom.
 :::
+
+### Accéder à l'administration en local
+
+L'administration exige une double authentification forte. À la première visite de `/admin/`, vous êtes redirigé vers **Sécurité du compte** : activez une application d'authentification (Google Authenticator, Authy...) ou une clé d'accès, puis revenez sur `/admin/`.
+
+Pour un environnement de développement jetable, vous pouvez désactiver cette exigence dans `.env` :
+
+```bash
+MFA_REQUIRED_FOR_STAFF=False
+```
+
+Ne jamais le faire en production.
 
 ## Installation avec Docker
 
@@ -71,7 +87,7 @@ docker compose exec web python manage.py createsuperuser
 
 ## Comptes de démonstration
 
-`seed_demo` crée six boutiques validées avec produits et prestations.
+`seed_demo` crée six boutiques validées avec produits et prestations, 30 jours de ventes (pour les statistiques) et quelques avis clients. Relancer la commande ne crée pas de doublons.
 
 | Rôle | Identifiant | Mot de passe |
 | --- | --- | --- |

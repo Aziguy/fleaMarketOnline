@@ -30,7 +30,15 @@ cd /opt/mfoundi
 cp .env.example .env
 ```
 
-Éditer `.env` : `SECRET_KEY`, `ALLOWED_HOSTS`, `CSRF_TRUSTED_ORIGINS`, mots de passe PostgreSQL (identiques dans `POSTGRES_PASSWORD` et `DATABASE_URL`), SMTP, `ADMINS`. Voir [Configuration](/fleaMarketOnline/developpeur/configuration/).
+Éditer `.env` : `SECRET_KEY`, `ALLOWED_HOSTS`, `CSRF_TRUSTED_ORIGINS`, mots de passe PostgreSQL (identiques dans `POSTGRES_PASSWORD` et `DATABASE_URL`), SMTP, `ADMINS`, et pour la sécurité des comptes `MFA_ENCRYPTION_KEY`, `WEBAUTHN_RP_ID` et `TRUSTED_PROXY_COUNT`. Voir [Configuration](/fleaMarketOnline/developpeur/configuration/).
+
+Générer les deux clés secrètes :
+
+```bash
+python3 -c "import secrets; print(secrets.token_urlsafe(50))"
+```
+
+Conservez `MFA_ENCRYPTION_KEY` avec vos sauvegardes : sans elle, les applications d'authentification des utilisateurs ne fonctionnent plus (ils doivent alors passer par leurs codes de secours).
 
 ## 3. Lancer
 
@@ -48,6 +56,8 @@ Créer le compte administrateur du mall :
 docker compose -f docker-compose.prod.yml exec web python manage.py createsuperuser
 ```
 
+Connectez-vous ensuite sur le site, ouvrez **Sécurité du compte** et activez une application d'authentification ou une clé d'accès : c'est obligatoire pour accéder à `/admin/`. Notez les codes de secours affichés.
+
 ## 4. HTTPS
 
 Le plus simple : placer un reverse proxy TLS devant Nginx (Caddy, Traefik) ou utiliser Certbot sur l'hôte. Exemple avec Certbot et Nginx sur l'hôte : faire écouter le conteneur Nginx en local uniquement (`HTTP_PORT=127.0.0.1:8080` dans `.env`), puis :
@@ -59,6 +69,8 @@ sudo certbot --nginx -d mfoundimall.cm -d www.mfoundimall.cm
 
 avec un bloc `location / { proxy_pass http://127.0.0.1:8080; proxy_set_header Host $host; proxy_set_header X-Forwarded-Proto $scheme; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; }`.
 
+Avec ce proxy supplémentaire devant le conteneur Nginx, définir `TRUSTED_PROXY_COUNT=2` : l'application lit ainsi la vraie adresse des visiteurs (limitation des essais de connexion, liste des appareils). Une valeur trop faible fait partager un même compteur à tous les visiteurs ; une valeur trop forte permet à un visiteur de falsifier son adresse.
+
 Une fois HTTPS validé, définir `SECURE_HSTS_SECONDS=31536000`.
 
 ## 5. Mettre à jour
@@ -68,6 +80,8 @@ cd /opt/mfoundi
 git pull
 docker compose -f docker-compose.prod.yml up -d --build
 ```
+
+La reconstruction installe les nouvelles dépendances et le démarrage applique les migrations. Comparez `.env` avec `.env.example` après chaque mise à jour : de nouvelles variables peuvent y apparaître.
 
 ## 6. Sauvegardes
 
@@ -114,6 +128,7 @@ Les erreurs 500 sont envoyées par e-mail aux `ADMINS` si le SMTP est configuré
 - [ ] SMTP testé (mot de passe oublié)
 - [ ] HTTPS actif, puis HSTS
 - [ ] `MFA_ENCRYPTION_KEY` fixée et sauvegardée, `WEBAUTHN_RP_ID` égal au domaine public (les clés d'accès exigent HTTPS)
+- [ ] `TRUSTED_PROXY_COUNT` égal au nombre de proxys devant Django (1 par défaut, 2 avec un proxy HTTPS sur l'hôte)
 - [ ] Comptes administrateurs : double authentification activée (obligatoire pour ouvrir `/admin/`)
 - [ ] Sauvegardes planifiées et restauration testée
 - [ ] `python manage.py check --deploy` sans erreur
