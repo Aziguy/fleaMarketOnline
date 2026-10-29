@@ -45,6 +45,7 @@ Pensée pour le contexte local :
 - commerçants prévenus **en direct** des nouvelles commandes ;
 - **avis clients vérifiés**, **favoris** avec alerte de retour en stock, **statistiques** et export comptable ;
 - **plan du mall** par étage et **affiche QR code** pour chaque vitrine ;
+- **double authentification** au choix (application, clés d'accès, e-mail, codes de secours) et alertes de connexion ;
 - **assistant IA** (Claude) et **API REST** documentée.
 
 ![Accueil](docs/public/images/accueil.png)
@@ -65,6 +66,7 @@ Pensée pour le contexte local :
 | Favoris et alerte de retour en stock, notifications | Logo et bannière avec aperçu, images optimisées en WebP | |
 | Avis vérifiés (clients servis uniquement) | Réponses aux avis, statistiques de ventes, export CSV | |
 | Plan du mall par étage | Affiche QR code à imprimer pour la vitrine | |
+| Double authentification, clés d'accès, appareils connectés | Idem, recommandée sur le tableau de bord | Double authentification obligatoire, réinitialisation |
 
 ## Stack
 
@@ -74,6 +76,7 @@ Pensée pour le contexte local :
 | Interface | HTMX 2, Tailwind CSS 3 (tokens de thème), icônes Lucide, View Transitions, service worker (PWA) |
 | Données | PostgreSQL 16, Redis (cache) |
 | IA | API Claude (sorties structurées, repli serveur) |
+| Sécurité | Double authentification TOTP (pyotp), clés d'accès WebAuthn, secrets chiffrés (Fernet), limitation des essais |
 | Qualité | pytest (couverture), ruff, mypy strict, GitHub Actions, Dependabot |
 | Exploitation | Docker Compose, Nginx, `/healthz`, logs JSON avec identifiant de requête |
 

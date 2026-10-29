@@ -21,6 +21,7 @@ Mfoundi Mall en ligne réunit les boutiques du **Mfoundi Mall** (Yaoundé, Camer
 - **Favoris et alertes** de retour en stock, centre de notifications.
 - **Statistiques de ventes** et export comptable CSV pour chaque boutique.
 - **Plan du mall** par étage et **affiche QR code** à imprimer pour chaque vitrine.
+- **Comptes protégés** : alertes de connexion, double authentification au choix (application, clés d'accès, e-mail, codes de secours), obligatoire pour l'administration.
 - **Assistant IA** : descriptions produits et recherche élargie.
 - **API REST** documentée pour les applications partenaires.
 

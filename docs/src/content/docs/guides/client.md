@@ -125,6 +125,7 @@ L'application s'ouvre en plein écran et reste consultable sans connexion pour l
 - **Mes favoris** et **Notifications** : boutiques suivies, produits favoris, alertes.
 - **Mot de passe** : modification.
 - **Mot de passe oublié** : lien envoyé par e-mail. Sans e-mail enregistré, contactez l'administration du mall.
+- **Sécurité** : alertes de connexion, appareils connectés et double authentification. Voir le [guide Sécurité du compte](/fleaMarketOnline/guides/securite-compte/).
 
 ## Questions fréquentes
 
