@@ -93,6 +93,8 @@ Les créneaux doivent être pris au moins 30 minutes à l'avance, pendant les ho
 
 La **cloche** en haut de page indique le nombre de notifications non lues : retour en stock d'un favori, réponse d'une boutique à votre avis. Si vous avez renseigné un e-mail, vous les recevez aussi par e-mail.
 
+![Notifications](/fleaMarketOnline/images/notifications.png)
+
 ## 9. Donner votre avis
 
 Après une commande **remise et payée** ou un rendez-vous **honoré**, un bouton **Donner mon avis** apparaît sur votre commande ou votre réservation. Sur la page de la boutique, choisissez une note de 1 à 5 étoiles et ajoutez un commentaire si vous le souhaitez.
