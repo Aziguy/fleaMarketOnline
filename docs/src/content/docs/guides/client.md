@@ -20,7 +20,8 @@ Vous pouvez parcourir le site et remplir votre panier sans compte. Le compte est
 
 ## 2. Trouver un produit ou une boutique
 
-- **Recherche** : la barre en haut de page cherche dans les produits et les boutiques ; des suggestions s'affichent pendant la saisie.
+- **Recherche rapide** : cliquez sur la barre en haut de page, ou appuyez sur `Ctrl + K` (ou `/`) sur ordinateur. Les résultats s'affichent pendant la saisie ; naviguez avec les flèches et ouvrez avec `Entrée`.
+- **Recherche élargie** : si une recherche trouve peu de produits, l'assistant propose des mots proches (synonymes, noms locaux) et les résultats correspondants apparaissent, signalés par ✨.
 - **Par type** : depuis l'accueil, choisissez Épicerie, Technologie, Coiffure, Restaurant...
 - **Page Boutiques** : filtrez par type, par niveau du mall ou par nom.
 
@@ -75,7 +76,21 @@ Sur la page d'un salon de coiffure, d'un restaurant ou d'un bar :
 
 Les créneaux doivent être pris au moins 30 minutes à l'avance, pendant les horaires d'ouverture. Suivez et annulez vos demandes dans **Mes réservations**.
 
-## 7. Mon compte
+## 7. Personnaliser l'affichage
+
+- **Thème** : l'icône soleil / lune en haut de page propose **Clair**, **Sombre** ou **Système** (suit le réglage du téléphone). Le choix est mémorisé.
+- **Langue** : boutons **FR** / **EN** en haut de page.
+
+## 8. Installer l'application
+
+Le site s'installe comme une application, sans passer par un magasin d'applications :
+
+- **Android (Chrome)** : bouton **📲 Installer l'application** en bas de page, ou menu ⋮ > *Installer l'application*.
+- **iPhone (Safari)** : bouton Partager > *Sur l'écran d'accueil*.
+
+L'application s'ouvre en plein écran et reste consultable sans connexion pour les pages déjà vues (boutiques, produits). Commander et réserver nécessitent une connexion.
+
+## 9. Mon compte
 
 - **Mon profil** : nom, téléphone, e-mail.
 - **Mot de passe** : modification.

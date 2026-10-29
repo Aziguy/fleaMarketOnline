@@ -37,6 +37,17 @@ Choisir avec `DJANGO_SETTINGS_MODULE`.
 | `SECURE_SSL_REDIRECT` | `True` | Redirection HTTP vers HTTPS (prod) |
 | `SECURE_HSTS_SECONDS` | `0` | Activer (ex. `31536000`) une fois HTTPS stable |
 | `LOG_LEVEL` | `INFO` | Niveau de journalisation |
+| `LOG_FORMAT` | `text` (dev), `json` (prod) | Format des logs |
+| `APP_VERSION` | `dev` | Version affichée par `/healthz` |
+| `CACHE_URL` | mémoire locale | Ex. `redis://redis:6379/1` (recommandé en production) |
+| `REALTIME_POLL_SECONDS` | `3` | Fréquence de vérification du flux temps réel |
+| `REALTIME_STREAM_SECONDS` | `300` | Durée d'une connexion avant reconnexion automatique |
+| `API_ANON_RATE`, `API_AUTH_RATE` | `120/m`, `600/m` | Limites de débit de l'API (anonyme, avec jeton) |
+| `ANTHROPIC_API_KEY` | vide | Clé de l'API Claude. Vide = assistant IA désactivé |
+| `AI_ENABLED` | `True` | Coupe l'assistant même si une clé est présente |
+| `AI_MODEL` | `claude-opus-5-5` | Modèle Claude utilisé |
+| `AI_TIMEOUT_SECONDS`, `AI_MAX_RETRIES` | `30`, `2` | Délai maximal et nouvelles tentatives des appels à Claude |
+| `AI_DESCRIPTIONS_PER_HOUR` | `30` | Quota de descriptions générées par commerçant et par heure |
 
 Générer une clé secrète :
 

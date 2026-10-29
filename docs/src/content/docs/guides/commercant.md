@@ -63,6 +63,12 @@ Dans **Horaires**, indiquez pour chaque jour l'heure d'ouverture et de fermeture
 
 Conseils : photos nettes sur fond clair, noms précis (marque, contenance, couleur), prix à jour.
 
+### Rédiger la description avec l'assistant IA
+
+Sur la fiche produit, le bouton **✨ Rédiger avec l'IA** propose une description en français à partir du nom, du rayon, du prix, de vos notes (ce que vous avez déjà écrit dans la description) et de la photo si le produit en a une. Relisez et corrigez le texte avant d'enregistrer : l'assistant n'invente ni prix ni caractéristique, mais vous restez responsable de votre fiche. Le nombre de propositions est limité par heure.
+
+Le bouton n'apparaît que si l'administration du mall a activé l'assistant.
+
 ## 6. Traiter une commande
 
 Vous recevez un e-mail à chaque nouvelle commande (si l'e-mail de la boutique est renseigné). Ouvrez la commande depuis **Commandes** :
@@ -82,14 +88,26 @@ Vous pouvez **annuler** une commande à tout moment avant sa clôture, en indiqu
 
 Les boutons **Appeler** et **WhatsApp** de la fiche commande permettent de joindre le client.
 
-## 7. Traiter une réservation
+## 7. Être prévenu en direct
+
+L'espace boutique se met à jour **sans recharger la page** : le point vert **En direct** en haut du menu indique que la connexion est active.
+
+À chaque nouvelle commande ou réservation :
+
+- un petit son retentit et un message apparaît en bas de l'écran ;
+- le compteur à côté de **Commandes** ou **Réservations** augmente ;
+- la liste des commandes (ou des réservations) se met à jour toute seule.
+
+Cliquez sur **Notifications** (sous le nom de la boutique) pour recevoir aussi une notification du téléphone ou de l'ordinateur quand l'onglet est en arrière-plan. Gardez l'espace boutique ouvert sur la tablette ou le téléphone de la caisse.
+
+## 8. Traiter une réservation
 
 Dans **Réservations** (onglet « À venir ») :
 
 - **Confirmer** ou **Refuser**, avec un message facultatif au client (ex. « Merci de venir 10 minutes avant ») ;
 - après le rendez-vous : **Honorée** ou **Absent**.
 
-## 8. Bonnes pratiques
+## 9. Bonnes pratiques
 
 - Confirmez les commandes rapidement : le client attend votre réponse.
 - Gardez stock et horaires à jour.
