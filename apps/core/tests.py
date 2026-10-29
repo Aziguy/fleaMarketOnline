@@ -167,3 +167,17 @@ def test_notification_icons_are_bundled():
     from apps.notifications.models import Notification
 
     assert set(Notification.ICONS.values()) <= set(ICONS["lucide"])
+
+
+@pytest.mark.django_db
+def test_seed_demo_is_idempotent():
+    from django.core.management import call_command
+
+    from apps.orders.models import Order
+    from apps.reviews.models import Review
+
+    call_command("seed_demo", stdout=None)
+    orders, reviews = Order.objects.count(), Review.objects.count()
+    call_command("seed_demo", stdout=None)
+    assert orders > 0 and reviews > 0
+    assert (Order.objects.count(), Review.objects.count()) == (orders, reviews)

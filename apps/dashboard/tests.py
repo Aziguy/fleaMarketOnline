@@ -211,3 +211,60 @@ def test_settings_replace_and_clear_delete_files(
         merchant_client.post(url, _settings_data(shop, **{"banner-clear": "on"}))
     shop.refresh_from_db()
     assert not shop.banner and not shop.banner.storage.exists(second)
+
+
+def _paid_order(shop, customer, total, paid_at, **extra):
+    from apps.orders.models import OrderItem
+
+    order = Order.objects.create(
+        shop=shop,
+        customer=customer,
+        fulfillment="pickup",
+        payment_method="mtn_momo",
+        contact_name=extra.pop("contact_name", "Awa"),
+        contact_phone="677111111",
+        subtotal=total,
+        total=total,
+        status=Order.Status.COMPLETED,
+        paid_with="mtn_momo",
+        paid_at=paid_at,
+        **extra,
+    )
+    OrderItem.objects.create(order=order, product_name="Riz 5 kg", unit_price=total, quantity=1)
+    return order
+
+
+def test_statistics(merchant_client, shop, customer):
+    from datetime import timedelta
+
+    from django.utils import timezone
+
+    now = timezone.now()
+    _paid_order(shop, customer, 4500, now)
+    _paid_order(shop, customer, 5500, now - timedelta(days=2))
+    _paid_order(shop, customer, 2000, now - timedelta(days=40))
+    response = merchant_client.get(reverse("dashboard:statistics"), {"periode": "30"})
+    stats = response.context["stats"]
+    assert stats["revenue"] == 10000 and stats["orders"] == 2 and stats["basket"] == 5000
+    assert stats["trend"] == 400
+    assert stats["payments"][0]["percent"] == 100
+    assert stats["top_products"][0]["sold"] == 2
+    assert len(stats["series"]) == 30 and stats["series"][-3].height == 100
+    assert (
+        merchant_client.get(reverse("dashboard:statistics"), {"periode": "999"}).context["stats"][
+            "days"
+        ]
+        == 30
+    )
+
+
+def test_orders_export_csv(merchant_client, shop, customer):
+    from django.utils import timezone
+
+    _paid_order(shop, customer, 4500, timezone.now(), contact_name="=HYPERLINK(1)")
+    response = merchant_client.get(reverse("dashboard:orders_export"))
+    content = b"".join(response.streaming_content).decode()
+    assert response["Content-Type"].startswith("text/csv")
+    assert content.startswith("﻿Référence;")
+    assert "'=HYPERLINK(1)" in content and "1 x Riz 5 kg" in content and ";4500\r\n" in content
+    assert "attachment" in response["Content-Disposition"]

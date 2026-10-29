@@ -37,6 +37,7 @@
         {% if shop.shop_type.takes_appointments or shop.shop_type.takes_table_bookings %}
           {% url 'dashboard:bookings' as u %}<a href="{{ u }}" class="nav-link flex items-center gap-2 whitespace-nowrap {% if u in request.path %}nav-link-active{% endif %}">{% translate "Réservations" %}<span data-live-count="booking" class="badge-yellow ml-auto {% if not request.pending.bookings %}hidden{% endif %}">{{ request.pending.bookings }}</span></a>
         {% endif %}
+        {% url 'dashboard:statistics' as u %}<a href="{{ u }}" class="nav-link whitespace-nowrap {% if u in request.path %}nav-link-active{% endif %}">{% translate "Statistiques" %}</a>
         {% url 'dashboard:reviews' as u %}<a href="{{ u }}" class="nav-link whitespace-nowrap {% if u in request.path %}nav-link-active{% endif %}">{% translate "Avis clients" %}</a>
         {% url 'dashboard:products' as u %}<a href="{{ u }}" class="nav-link whitespace-nowrap {% if u in request.path %}nav-link-active{% endif %}">{% translate "Produits" %}</a>
         {% url 'dashboard:categories' as u %}<a href="{{ u }}" class="nav-link whitespace-nowrap {% if u in request.path %}nav-link-active{% endif %}">{% translate "Rayons" %}</a>

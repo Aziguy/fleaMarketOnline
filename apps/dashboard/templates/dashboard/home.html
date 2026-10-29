@@ -5,7 +5,7 @@
 <div class="mt-6 grid grid-cols-2 gap-4 xl:grid-cols-4">
   <a href="{% url 'dashboard:orders' %}?statut=pending" class="card card-body hover:border-brand-300"><p class="text-sm text-stone-500">{% translate "À confirmer" %}</p><p class="mt-1 text-3xl font-bold {% if pending_orders %}text-amber-600{% endif %}">{{ pending_orders }}</p></a>
   <a href="{% url 'dashboard:orders' %}" class="card card-body hover:border-brand-300"><p class="text-sm text-stone-500">{% translate "Commandes en cours" %}</p><p class="mt-1 text-3xl font-bold">{{ open_orders }}</p></a>
-  <div class="card card-body"><p class="text-sm text-stone-500">{% translate "Encaissé ce mois" %}</p><p class="mt-1 text-xl font-bold text-brand-700 sm:text-2xl">{{ month_revenue|fcfa }}</p></div>
+  <a href="{% url 'dashboard:statistics' %}" class="card card-body hover:border-brand-300"><p class="text-sm text-stone-500">{% translate "Encaissé ce mois" %}</p><p class="mt-1 text-xl font-bold text-brand-700 sm:text-2xl">{{ month_revenue|fcfa }}</p></a>
   <a href="{% url 'dashboard:products' %}" class="card card-body hover:border-brand-300"><p class="text-sm text-stone-500">{% translate "Produits" %}</p><p class="mt-1 text-3xl font-bold">{{ product_count }}</p></a>
 </div>
 

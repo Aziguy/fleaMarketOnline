@@ -1,4 +1,6 @@
-from datetime import timedelta
+import csv
+from datetime import date, timedelta
+from itertools import chain
 from typing import Any
 
 from django.conf import settings
@@ -6,6 +8,7 @@ from django.contrib import messages
 from django.core.cache import cache
 from django.core.paginator import Paginator
 from django.db.models import Q, Sum
+from django.http import StreamingHttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django.utils.translation import gettext as _
@@ -24,6 +27,7 @@ from apps.shops.forms import OpeningHourFormSet, ShopSettingsForm
 from apps.shops.services import ensure_opening_hours
 from apps.shops.views import CURRENT_SHOP_KEY
 
+from . import stats
 from .decorators import merchant_required
 from .forms import CategoryForm, ProductForm, ProductImageFormSet, ServiceForm
 
@@ -380,3 +384,48 @@ def review_reply(request, pk):
     if request.htmx:
         return render(request, "dashboard/_review_card.html", {"review": review, "form": form})
     return redirect("dashboard:reviews")
+
+
+@merchant_required
+def statistics(request):
+    period = request.GET.get("periode", "")
+    days = int(period) if period.isdigit() and int(period) in stats.PERIODS else 30
+    return render(
+        request,
+        "dashboard/statistics.html",
+        {"stats": stats.shop_stats(request.shop, days), "periods": stats.PERIODS},
+    )
+
+
+class _Echo:
+    def write(self, value):
+        return value
+
+
+def _csv_safe(value):
+    if isinstance(value, str) and value[:1] in ("=", "+", "-", "@", "\t", "\r"):
+        return f"'{value}"
+    return value
+
+
+@merchant_required
+def orders_export(request):
+    orders = request.shop.orders.prefetch_related("items").order_by("created_at")
+    try:
+        start = date.fromisoformat(request.GET.get("du", ""))
+        orders = orders.filter(created_at__date__gte=start)
+    except ValueError:
+        pass
+    try:
+        end = date.fromisoformat(request.GET.get("au", ""))
+        orders = orders.filter(created_at__date__lte=end)
+    except ValueError:
+        pass
+    writer = csv.writer(_Echo(), delimiter=";")
+    rows = (writer.writerow([_csv_safe(v) for v in row]) for row in stats.orders_csv_rows(orders))
+    filename = f"commandes-{request.shop.slug}-{timezone.localdate():%Y%m%d}.csv"
+    return StreamingHttpResponse(
+        chain(["﻿"], rows),
+        content_type="text/csv; charset=utf-8",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
