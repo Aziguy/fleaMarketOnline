@@ -10,3 +10,5 @@ STORAGES["staticfiles"] = {  # noqa: F405
 MEDIA_ROOT = BASE_DIR / ".test-media"  # noqa: F405
 LANGUAGE_CODE = "fr"
 WHITENOISE_AUTOREFRESH = True
+CACHES = {"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}
+LOGGING["loggers"]["apps.requests"]["level"] = "WARNING"  # noqa: F405

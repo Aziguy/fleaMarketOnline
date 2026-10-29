@@ -128,3 +128,22 @@ def test_merchant_can_manage_several_shops(merchant_client, merchant, shop):
 def test_cannot_switch_to_other_merchant_shop(merchant_client, salon):
     response = merchant_client.post(reverse("dashboard:switch_shop"), {"shop": salon.pk})
     assert response.status_code == 404
+
+
+def test_dashboard_query_count_is_bounded(
+    merchant_client, shop, customer, product, django_assert_max_num_queries
+):
+    for _ in range(10):
+        Order.objects.create(
+            shop=shop,
+            customer=customer,
+            fulfillment="pickup",
+            payment_method="cash",
+            contact_name="Awa",
+            contact_phone="677111111",
+            subtotal=100,
+            total=100,
+        )
+    for name in ["home", "orders", "products"]:
+        with django_assert_max_num_queries(14):
+            merchant_client.get(reverse(f"dashboard:{name}"))

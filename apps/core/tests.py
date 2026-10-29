@@ -94,3 +94,45 @@ def test_authenticated_pages_are_private(client, customer):
     assert "private" not in client.get("/").get("Cache-Control", "")
     client.force_login(customer)
     assert "private" in client.get("/")["Cache-Control"]
+
+
+def test_healthz(client, db):
+    response = client.get("/healthz")
+    assert response.status_code == 200
+    assert response.json()["checks"] == {"database": "ok", "cache": "ok"}
+
+
+def test_request_id_is_generated_and_propagated(client, db):
+    generated = client.get("/healthz")["X-Request-ID"]
+    assert len(generated) == 32
+    assert client.get("/healthz", HTTP_X_REQUEST_ID="abc-123")["X-Request-ID"] == "abc-123"
+    assert client.get("/healthz", HTTP_X_REQUEST_ID="bad id!")["X-Request-ID"] != "bad id!"
+
+
+def test_json_formatter_includes_request_id():
+    import json
+    import logging
+
+    from apps.core.observability import JsonFormatter
+
+    record = logging.LogRecord("x", logging.INFO, __file__, 1, "bonjour %s", ("mall",), None)
+    record.request_id = "r1"
+    data = json.loads(JsonFormatter().format(record))
+    assert data["message"] == "bonjour mall" and data["request_id"] == "r1"
+
+
+@pytest.mark.parametrize("url", ["/", "/boutiques/", "/recherche/?q=riz"])
+def test_public_pages_query_count_is_bounded(client, product, django_assert_max_num_queries, url):
+    from apps.catalog.models import Product
+
+    for i in range(15):
+        Product.objects.create(shop=product.shop, name=f"Article {i}", price=100, stock=3)
+    with django_assert_max_num_queries(8):
+        client.get(url)
+
+
+def test_healthcheck_command(db, capsys):
+    from django.core.management import call_command
+
+    call_command("healthcheck")
+    assert '"database": "ok"' in capsys.readouterr().out

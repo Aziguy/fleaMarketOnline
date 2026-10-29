@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Any
 
 import environ
 from django.contrib.messages import constants as messages
@@ -34,6 +35,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "apps.core.observability.RequestIdMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -125,9 +127,29 @@ SITE_PHONE = env("SITE_PHONE", default="")
 SITE_EMAIL = env("SITE_EMAIL", default="contact@mfoundimall.cm")
 MALL_ADDRESS = env("MALL_ADDRESS", default="Marché Mfoundi, Yaoundé, Cameroun")
 
-LOGGING = {
+APP_VERSION = env("APP_VERSION", default="dev")
+
+CACHES = {"default": env.cache("CACHE_URL", default="locmemcache://")}
+
+LOG_FORMAT = env("LOG_FORMAT", default="text")
+LOGGING: dict[str, Any] = {
     "version": 1,
     "disable_existing_loggers": False,
-    "handlers": {"console": {"class": "logging.StreamHandler"}},
+    "filters": {"request_id": {"()": "apps.core.observability.RequestIdFilter"}},
+    "formatters": {
+        "text": {"format": "%(asctime)s %(levelname)s [%(request_id)s] %(name)s: %(message)s"},
+        "json": {"()": "apps.core.observability.JsonFormatter"},
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": LOG_FORMAT,
+            "filters": ["request_id"],
+        }
+    },
     "root": {"handlers": ["console"], "level": env("LOG_LEVEL", default="INFO")},
+    "loggers": {
+        "apps.requests": {"level": env("REQUEST_LOG_LEVEL", default="INFO")},
+        "django.server": {"level": "WARNING"},
+    },
 }

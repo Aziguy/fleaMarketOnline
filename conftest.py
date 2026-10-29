@@ -5,6 +5,14 @@ from apps.catalog.models import Product, Service
 from apps.shops.models import Shop, ShopType
 from apps.shops.services import ensure_opening_hours
 
+
+@pytest.fixture(autouse=True)
+def _clear_cache():
+    from django.core.cache import cache
+
+    cache.clear()
+
+
 PASSWORD = "Secret-pass-123"
 
 

@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from django.db.models import Count, Q
 from django.shortcuts import render
 
@@ -6,20 +7,31 @@ from apps.shops.models import Shop, ShopType
 
 from .search import search_catalog
 
+HOME_CACHE_SECONDS = 120
 
-def home(request):
-    context = {
-        "shop_types": ShopType.objects.annotate(
-            n=Count("shops", filter=Q(shops__status=Shop.Status.APPROVED))
-        ).order_by("position"),
-        "featured_shops": Shop.objects.public()
-        .select_related("shop_type")
-        .order_by("-is_featured", "-created_at")[:8],
-        "latest_products": Product.objects.public().select_related("shop")[:12],
+
+def _home_overview():
+    """Types de boutique et compteurs de l'accueil (mis en cache, peu volatils)."""
+    return {
+        "shop_types": list(
+            ShopType.objects.annotate(
+                n=Count("shops", filter=Q(shops__status=Shop.Status.APPROVED))
+            ).order_by("position")
+        ),
         "stats": {
             "shops": Shop.objects.public().count(),
             "products": Product.objects.public().count(),
         },
+    }
+
+
+def home(request):
+    context = {
+        **(cache.get_or_set("home:overview", _home_overview, HOME_CACHE_SECONDS) or {}),
+        "featured_shops": Shop.objects.public()
+        .select_related("shop_type")
+        .order_by("-is_featured", "-created_at")[:8],
+        "latest_products": Product.objects.public().select_related("shop")[:12],
         "deals": Product.objects.public()
         .filter(compare_at_price__isnull=False)
         .select_related("shop")[:4],
