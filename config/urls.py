@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.utils.translation import gettext_lazy as _
 
+from apps.api.api import api
 from apps.core.observability import healthz
 
 admin.site.site_header = _("Administration Mfoundi Mall")
@@ -13,6 +14,7 @@ admin.site.index_title = _("Gestion du mall")
 urlpatterns = [
     path("healthz", healthz, name="healthz"),
     path("admin/", admin.site.urls),
+    path("api/v1/", api.urls),
     path("i18n/", include("django.conf.urls.i18n")),
     path("", include("apps.core.urls")),
     path("compte/", include("apps.accounts.urls")),

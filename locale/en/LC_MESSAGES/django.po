@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-29 10:25+0100\n"
+"POT-Creation-Date: 2026-10-29 10:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -199,6 +199,25 @@ msgstr "Password changed."
 msgid "Mot de passe réinitialisé. Vous pouvez vous connecter."
 msgstr "Password reset. You can now log in."
 
+msgid "API"
+msgstr "API"
+
+msgid "préfixe"
+msgstr "prefix"
+
+#| msgid "créée le"
+msgid "créé le"
+msgstr "created on"
+
+msgid "dernière utilisation"
+msgstr "last used"
+
+msgid "jeton d'API"
+msgstr "API token"
+
+msgid "jetons d'API"
+msgstr "API tokens"
+
 msgid "Réservations"
 msgstr "Bookings"
 
@@ -285,6 +304,12 @@ msgstr "booking"
 msgid "réservations"
 msgstr "bookings"
 
+msgid "Cette réservation ne peut plus être annulée."
+msgstr "This booking can no longer be cancelled."
+
+msgid "Changement de statut impossible."
+msgstr "Status change not allowed."
+
 msgid "Réserver"
 msgstr "Book"
 
@@ -342,9 +367,6 @@ msgstr "Booking request sent. The shop will confirm it."
 
 msgid "Réservation annulée."
 msgstr "Booking cancelled."
-
-msgid "Cette réservation ne peut plus être annulée."
-msgstr "This booking can no longer be cancelled."
 
 msgid "Panier"
 msgstr "Cart"
@@ -796,7 +818,6 @@ msgid "Nouvelle commande %(ref)s"
 msgstr "New order %(ref)s"
 
 #, python-format
-#| msgid "Nouvelle commande %(ref)s"
 msgid "Nouvelle réservation %(ref)s"
 msgstr "New booking %(ref)s"
 
@@ -1103,9 +1124,6 @@ msgstr "Order: %(status)s."
 #, python-format
 msgid "Réservation : %(s)s."
 msgstr "Booking: %(s)s."
-
-msgid "Changement de statut impossible."
-msgstr "Status change not allowed."
 
 msgid "Mode de remise"
 msgstr "Handover method"
@@ -1653,6 +1671,9 @@ msgstr "Track my order"
 
 msgid "Vendre"
 msgstr "Sell"
+
+msgid "API développeurs"
+msgstr "Developer API"
 
 msgid "Nous trouver"
 msgstr "Find us"

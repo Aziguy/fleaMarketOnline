@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "apps.orders",
     "apps.bookings",
     "apps.dashboard",
+    "apps.api",
 ]
 
 MIDDLEWARE = [
@@ -128,6 +129,9 @@ SITE_EMAIL = env("SITE_EMAIL", default="contact@mfoundimall.cm")
 MALL_ADDRESS = env("MALL_ADDRESS", default="Marché Mfoundi, Yaoundé, Cameroun")
 
 APP_VERSION = env("APP_VERSION", default="dev")
+
+API_ANON_RATE = env("API_ANON_RATE", default="120/m")
+API_AUTH_RATE = env("API_AUTH_RATE", default="600/m")
 
 REALTIME_POLL_SECONDS = env.float("REALTIME_POLL_SECONDS", default=3)
 REALTIME_STREAM_SECONDS = env.int("REALTIME_STREAM_SECONDS", default=300)
