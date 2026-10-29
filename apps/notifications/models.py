@@ -8,11 +8,13 @@ class Notification(models.Model):
         RESTOCK = "restock", _("Retour en stock")
         REVIEW = "review", _("Avis")
         REPLY = "reply", _("Réponse à un avis")
+        SECURITY = "security", _("Sécurité")
 
     ICONS: dict[str, str] = {
         Kind.RESTOCK: "package-check",
         Kind.REVIEW: "star",
         Kind.REPLY: "message-circle",
+        Kind.SECURITY: "shield-alert",
     }
 
     user = models.ForeignKey(

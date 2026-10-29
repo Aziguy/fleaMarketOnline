@@ -1,0 +1,19 @@
+{% extends "accounts/_account_layout.html" %}{% load i18n %}
+{% block title %}{% translate "Codes de secours" %}{% endblock %}
+{% block account %}
+<h1 class="text-2xl">{% translate "Vos codes de secours" %}</h1>
+<div class="mt-4 flex gap-3 rounded-xl border border-amber-200 bg-sun-100 px-4 py-3 text-sm text-amber-900">
+  {% icon "triangle-alert" class="mt-0.5 h-5 w-5 shrink-0" %}
+  <p>{% translate "Notez-les ou imprimez-les maintenant : ils ne seront plus affichés. Chaque code ne sert qu'une fois, si vous n'avez plus accès à votre téléphone ou à votre e-mail." %}</p>
+</div>
+<div class="card card-body mt-6 max-w-lg">
+  <ol id="recovery-codes" class="grid grid-cols-2 gap-x-6 gap-y-2 font-mono text-lg">
+    {% for code in codes %}<li class="rounded-lg bg-stone-50 px-3 py-1.5 text-center">{{ code }}</li>{% endfor %}
+  </ol>
+  <div class="mt-6 flex flex-wrap gap-2 print:hidden">
+    <button type="button" class="btn-secondary" onclick="window.print()">{% icon "printer" class="h-4 w-4" %} {% translate "Imprimer" %}</button>
+    <a class="btn-secondary" download="codes-de-secours-mfoundi-mall.txt" href="data:text/plain;charset=utf-8,{% for code in codes %}{{ code }}%0A{% endfor %}">{% icon "download" class="h-4 w-4" %} {% translate "Télécharger" %}</a>
+    <a href="{% url 'security:index' %}" class="btn-primary">{% translate "J'ai noté mes codes" %}</a>
+  </div>
+</div>
+{% endblock %}

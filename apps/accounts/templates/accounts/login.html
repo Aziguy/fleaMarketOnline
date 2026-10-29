@@ -1,6 +1,7 @@
-{% extends "accounts/_auth_layout.html" %}{% load i18n %}
+{% extends "accounts/_auth_layout.html" %}{% load i18n static %}
 {% block title %}{% translate "Connexion" %}{% endblock %}
 {% block heading %}{% translate "Connexion" %}{% endblock %}
+{% block scripts %}<script src="{% static 'js/passkeys.js' %}" defer></script>{% endblock %}
 {% block card %}
 <form method="post" class="space-y-4">
   {% csrf_token %}
@@ -9,6 +10,13 @@
   <div class="text-right text-sm"><a href="{% url 'accounts:password_reset' %}" class="text-brand-700 hover:underline">{% translate "Mot de passe oublié ?" %}</a></div>
   <button class="btn-primary w-full">{% translate "Se connecter" %}</button>
 </form>
+<div class="my-5 flex items-center gap-3 text-xs uppercase tracking-wider text-stone-400"><span class="h-px flex-1 bg-stone-200"></span>{% translate "ou" %}<span class="h-px flex-1 bg-stone-200"></span></div>
+<button type="button" class="btn-secondary w-full" data-passkey data-mode="login"
+        data-options="{% url 'security:passkey_login_options' %}" data-verify="{% url 'security:passkey_login' %}{% if next %}?next={{ next|urlencode }}{% endif %}"
+        data-error="{% translate "Clé d'accès non reconnue sur ce site." %}" data-cancelled="{% translate "Opération annulée ou délai dépassé." %}">
+  {% icon "fingerprint" class="h-5 w-5" %} {% translate "Se connecter avec une clé d'accès" %}
+</button>
+<p data-passkey-status role="status" class="mt-2 text-center text-sm text-red-600"></p>
 {% endblock %}
 {% block below %}
 <p class="mt-6 text-center text-sm text-stone-600">{% translate "Pas encore de compte ?" %} <a href="{% url 'accounts:signup' %}{% if next %}?next={{ next|urlencode }}{% endif %}" class="font-semibold text-brand-700 hover:underline">{% translate "Créer un compte" %}</a></p>

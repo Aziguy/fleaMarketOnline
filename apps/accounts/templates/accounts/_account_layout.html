@@ -3,12 +3,13 @@
 <div class="container-page py-8">
   <div class="grid gap-6 lg:grid-cols-[14rem_1fr]">
     <nav class="flex gap-1 overflow-x-auto lg:flex-col">
-      {% url 'orders:list' as u1 %}{% url 'bookings:list' as u2 %}{% url 'accounts:profile' as u3 %}{% url 'accounts:password_change' as u4 %}{% url 'favorites:list' as u5 %}{% url 'notifications:list' as u6 %}
+      {% url 'orders:list' as u1 %}{% url 'bookings:list' as u2 %}{% url 'accounts:profile' as u3 %}{% url 'accounts:password_change' as u4 %}{% url 'favorites:list' as u5 %}{% url 'notifications:list' as u6 %}{% url 'security:index' as u7 %}
       <a href="{{ u1 }}" class="nav-link whitespace-nowrap {% if request.path == u1 %}nav-link-active{% endif %}">{% translate "Mes commandes" %}</a>
       <a href="{{ u2 }}" class="nav-link whitespace-nowrap {% if request.path == u2 %}nav-link-active{% endif %}">{% translate "Mes réservations" %}</a>
       <a href="{{ u5 }}" class="nav-link whitespace-nowrap {% if request.path == u5 %}nav-link-active{% endif %}">{% translate "Mes favoris" %}</a>
       <a href="{{ u6 }}" class="nav-link whitespace-nowrap {% if request.path == u6 %}nav-link-active{% endif %}">{% translate "Notifications" %}{% if unread_notifications %} <span class="ml-1 rounded-full bg-brand-600 px-1.5 text-xs font-bold text-white">{{ unread_notifications }}</span>{% endif %}</a>
       <a href="{{ u3 }}" class="nav-link whitespace-nowrap {% if request.path == u3 %}nav-link-active{% endif %}">{% translate "Mon profil" %}</a>
+      <a href="{{ u7 }}" class="nav-link whitespace-nowrap {% if u7 in request.path %}nav-link-active{% endif %}">{% translate "Sécurité" %}</a>
       <a href="{{ u4 }}" class="nav-link whitespace-nowrap {% if request.path == u4 %}nav-link-active{% endif %}">{% translate "Mot de passe" %}</a>
       {% if user.is_merchant %}<a href="{% url 'dashboard:home' %}" class="nav-link whitespace-nowrap font-semibold text-brand-700">{% translate "Espace boutique" %} →</a>
       {% else %}<a href="{% url 'shops:open' %}" class="nav-link whitespace-nowrap text-brand-700">{% translate "Ouvrir ma boutique" %}</a>{% endif %}

@@ -3,6 +3,7 @@ from django.contrib.auth import forms as auth_forms
 from django.utils.translation import gettext_lazy as _
 
 from apps.core.forms import PhoneFormField, StyledFormMixin
+from apps.security import throttle
 
 from .models import User
 
@@ -36,7 +37,18 @@ class LoginForm(StyledFormMixin, auth_forms.AuthenticationForm):
     error_messages = {
         "invalid_login": _("Identifiants incorrects."),
         "inactive": _("Ce compte est désactivé."),
+        "locked": _("Trop de tentatives. Réessayez dans 15 minutes."),
     }
+
+    def clean(self):
+        identifier = self.cleaned_data.get("username", "")
+        if throttle.is_locked("login", self.request, identifier):
+            raise forms.ValidationError(self.error_messages["locked"], code="locked")
+        try:
+            return super().clean()
+        except forms.ValidationError:
+            throttle.fail("login", self.request, identifier)
+            raise
 
 
 class ProfileForm(StyledFormMixin, forms.ModelForm):

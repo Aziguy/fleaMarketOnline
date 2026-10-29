@@ -12,6 +12,7 @@ from apps.catalog.models import Product
 from apps.orders import services as order_services
 from apps.orders.forms import CheckoutForm
 from apps.orders.models import Order
+from apps.security import factors, throttle
 from apps.shops.models import Shop
 
 from ..auth import TokenAuth
@@ -23,11 +24,25 @@ router = Router(tags=["Compte"])
 auth = TokenAuth()
 
 
-@router.post("/auth/token", response={201: TokenOut, 401: ErrorOut}, tags=["Authentification"])
+@router.post(
+    "/auth/token", response={201: TokenOut, 401: ErrorOut, 429: ErrorOut}, tags=["Authentification"]
+)
 def create_token(request, payload: TokenIn):
+    if throttle.is_locked("login", request, payload.username):
+        return Status(429, {"detail": "Trop de tentatives. Réessayez dans 15 minutes."})
     user = authenticate(request, username=payload.username, password=payload.password)
     if user is None:
+        throttle.fail("login", request, payload.username)
         return Status(401, {"detail": "Identifiants incorrects."})
+    if factors.has_second_factor(user):
+        if not payload.otp:
+            return Status(401, {"detail": "Code de double authentification requis (champ otp)."})
+        if not (
+            factors.verify_totp(user, payload.otp) or factors.use_recovery_code(user, payload.otp)
+        ):
+            throttle.fail("login", request, payload.username)
+            return Status(401, {"detail": "Code de double authentification incorrect."})
+    throttle.reset("login", request, payload.username)
     token, key = ApiToken.objects.issue(user, payload.name)
     return Status(201, {"token": key, "prefix": token.prefix})
 

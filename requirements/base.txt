@@ -7,3 +7,5 @@ whitenoise>=6.12.0
 django-ninja>=1.7,<2
 anthropic>=2,<3
 segno>=1.6.6
+pyotp>=2.9.0
+webauthn>=3.0.1,<4

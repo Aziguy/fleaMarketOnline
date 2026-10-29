@@ -1,0 +1,11 @@
+{% extends "accounts/_auth_layout.html" %}{% load i18n %}
+{% block title %}{% translate "Confirmer votre identité" %}{% endblock %}
+{% block heading %}{% translate "Confirmer votre identité" %}{% endblock %}
+{% block subheading %}<p class="mt-2 text-sm text-stone-500">{% translate "Pour modifier la sécurité du compte, saisissez votre mot de passe. Il ne sera pas redemandé pendant 10 minutes." %}</p>{% endblock %}
+{% block card %}
+<form method="post" class="space-y-4">
+  {% csrf_token %}<input type="hidden" name="next" value="{{ next }}">
+  {% include "includes/form.html" %}
+  <button class="btn-primary w-full">{% translate "Continuer" %}</button>
+</form>
+{% endblock %}

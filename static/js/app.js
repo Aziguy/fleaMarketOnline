@@ -236,3 +236,9 @@ document.addEventListener("click", (event) => {
   url.searchParams.set("niveau", level);
   history.replaceState(null, "", url);
 });
+
+/* Confirmation avant envoi : <form data-confirm="Message ?">. */
+document.addEventListener("submit", (event) => {
+  const message = event.target.dataset?.confirm;
+  if (message && !window.confirm(message)) event.preventDefault();
+});
