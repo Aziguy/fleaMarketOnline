@@ -152,3 +152,22 @@ document.addEventListener("click", (event) => {
     Palette.close();
   }
 });
+
+/* Application installable : service worker et bouton d'installation. */
+if ("serviceWorker" in navigator && document.body.dataset.sw) {
+  window.addEventListener("load", () => navigator.serviceWorker.register(document.body.dataset.sw, { scope: "/" }).catch(() => {}));
+}
+
+let installPrompt = null;
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  installPrompt = event;
+  document.querySelectorAll("[data-install]").forEach((el) => (el.hidden = false));
+});
+document.addEventListener("click", async (event) => {
+  if (!event.target.closest("[data-install]") || !installPrompt) return;
+  installPrompt.prompt();
+  await installPrompt.userChoice;
+  installPrompt = null;
+  document.querySelectorAll("[data-install]").forEach((el) => (el.hidden = true));
+});

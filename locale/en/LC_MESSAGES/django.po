@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-29 10:15+0100\n"
+"POT-Creation-Date: 2026-10-29 10:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -490,6 +490,14 @@ msgstr "General"
 msgid "Numéro invalide. Exemple : 6 77 12 34 56."
 msgstr "Invalid number. Example: 6 77 12 34 56."
 
+#| msgid ""
+#| "Toutes les boutiques du Mfoundi Mall en ligne : commandez, réservez et payez"
+#| " sur place en espèces ou Mobile Money."
+msgid ""
+"Toutes les boutiques du Mfoundi Mall en ligne : commandez, réservez et payez"
+" sur place."
+msgstr "Every Mfoundi Mall shop online: order, book and pay on site."
+
 msgid "Boutiques"
 msgstr "Shops"
 
@@ -500,8 +508,6 @@ msgid "Voir tous les résultats"
 msgstr "See all results"
 
 #, python-format
-#| msgid "%(n)s produit pour « %(q)s »"
-#| msgid_plural "%(n)s produits pour « %(q)s »"
 msgid "Aucun résultat pour « %(q)s »."
 msgstr "No results for “%(q)s”."
 
@@ -751,6 +757,22 @@ msgstr ""
 "Add your products and services, enter your MoMo / Orange Money numbers, and "
 "you are live."
 
+msgid "Hors ligne"
+msgstr "Offline"
+
+msgid "Vous êtes hors ligne"
+msgstr "You are offline"
+
+msgid ""
+"Vérifiez votre connexion internet. Les pages déjà consultées restent "
+"disponibles."
+msgstr ""
+"Check your internet connection. Pages you have already visited remain "
+"available."
+
+msgid "Réessayer"
+msgstr "Try again"
+
 msgid "Recherche"
 msgstr "Search"
 
@@ -852,9 +874,6 @@ msgstr "Order closed."
 
 msgid "En ligne"
 msgstr "Online"
-
-msgid "Hors ligne"
-msgstr "Offline"
 
 msgid "Modifier"
 msgstr "Edit"
@@ -1609,6 +1628,9 @@ msgstr "optional"
 msgid "Toutes les boutiques du mall, à portée de main."
 msgstr "Every shop in the mall, at your fingertips."
 
+msgid "Installer l'application"
+msgstr "Install the app"
+
 msgid "Acheter"
 msgstr "Shop"
 
@@ -1647,7 +1669,6 @@ msgstr "Page %(n)s of %(total)s"
 msgid "Suivant"
 msgstr "Next"
 
-#| msgid "Parcourir par type de boutique"
 msgid "Produit, boutique, type de boutique..."
 msgstr "Product, shop, shop type..."
 
@@ -1657,7 +1678,6 @@ msgstr "navigate"
 msgid "ouvrir"
 msgstr "open"
 
-#| msgid "Tous"
 msgid "ou"
 msgstr "or"
 

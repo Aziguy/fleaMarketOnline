@@ -9,6 +9,7 @@
 }
 
 @layer base {
+  [hidden] { display: none !important; }
   html { @apply scroll-smooth; -webkit-tap-highlight-color: transparent; }
   body { @apply bg-stone-50 text-stone-800 antialiased selection:bg-brand-300/40; }
   h1, h2, h3 { @apply font-display font-semibold tracking-tight text-stone-900; }

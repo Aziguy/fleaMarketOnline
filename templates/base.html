@@ -20,6 +20,10 @@
     })();
   </script>
   <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
+  <link rel="manifest" href="{% url 'core:manifest' %}">
+  <link rel="apple-touch-icon" href="{% static 'img/icons/apple-touch-icon.png' %}">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   {% block head_extra %}{% endblock %}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,7 +33,7 @@
   <script src="{% static 'js/app.js' %}" defer></script>
   {% block scripts %}{% endblock %}
 </head>
-<body class="flex min-h-screen flex-col" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+<body data-sw="{% url 'core:service_worker' %}" class="flex min-h-screen flex-col" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
   <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-surface focus:px-4 focus:py-2">{% translate "Aller au contenu" %}</a>
   {% include "includes/header.html" %}
   {% include "includes/messages.html" %}

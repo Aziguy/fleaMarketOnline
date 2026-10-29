@@ -68,3 +68,29 @@ def test_palette_shortcuts_and_results(client, product):
     assert product.get_absolute_url() in found
     missing = client.get("/recherche/palette/", {"q": "zzzz"}).content.decode()
     assert "Aucun résultat" in missing
+
+
+def test_manifest_is_valid(client, db):
+    response = client.get("/manifest.webmanifest")
+    assert response["Content-Type"] == "application/manifest+json"
+    data = response.json()
+    assert data["display"] == "standalone"
+    assert any(icon.get("purpose") == "maskable" for icon in data["icons"])
+
+
+def test_service_worker_scope_and_private_prefixes(client, db):
+    response = client.get("/sw.js")
+    assert response["Content-Type"].startswith("application/javascript")
+    assert response["Service-Worker-Allowed"] == "/"
+    body = response.content.decode()
+    assert '"/espace-boutique/"' in body and "/hors-ligne/" in body
+
+
+def test_offline_page(client, db):
+    assert client.get("/hors-ligne/").status_code == 200
+
+
+def test_authenticated_pages_are_private(client, customer):
+    assert "private" not in client.get("/").get("Cache-Control", "")
+    client.force_login(customer)
+    assert "private" in client.get("/")["Cache-Control"]
