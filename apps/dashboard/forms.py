@@ -1,3 +1,5 @@
+from typing import cast
+
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
@@ -28,12 +30,13 @@ class ProductForm(StyledFormMixin, forms.ModelForm):
 
     def __init__(self, *args, shop, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["category"].queryset = shop.categories.all()
+        cast(forms.ModelChoiceField, self.fields["category"]).queryset = shop.categories.all()
         for name in ("price", "compare_at_price", "stock"):
             self.fields[name].widget.attrs.update(min=0, inputmode="numeric")
 
     def clean(self):
-        data = super().clean()
+        super().clean()
+        data = self.cleaned_data
         price, old = data.get("price"), data.get("compare_at_price")
         if old is not None and price is not None and old <= price:
             self.add_error("compare_at_price", _("L'ancien prix doit être supérieur au prix."))

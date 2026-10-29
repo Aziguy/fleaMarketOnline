@@ -8,8 +8,8 @@ sidebar:
 Cible : un VPS Linux (Ubuntu 22.04 ou plus) avec Docker. Architecture :
 
 ```
-Internet ─▶ Nginx (port 80/443) ─▶ Gunicorn / Django (web:8000) ─▶ PostgreSQL (db)
-              │
+Internet ─▶ Nginx (port 80/443) ─▶ Gunicorn + workers Uvicorn (ASGI, web:8000) ─▶ PostgreSQL (db)
+              │                                   └─▶ Redis (cache)
               └─ sert /static/ et /media/ directement
 ```
 
@@ -37,6 +37,8 @@ cp .env.example .env
 ```bash
 docker compose -f docker-compose.prod.yml up -d --build
 ```
+
+Le conteneur `web` sert l'application en **ASGI** (Gunicorn avec workers Uvicorn), indispensable au flux temps réel des commerçants. Nginx transmet `/espace-boutique/flux/` sans tampon (voir `docker/nginx/default.conf`) ; tout reverse proxy placé devant doit faire de même (`proxy_buffering off`, délai de lecture ≥ 6 minutes).
 
 Au démarrage, le conteneur `web` applique les migrations puis collecte les fichiers statiques (désactivable avec `RUN_MIGRATIONS=0` / `COLLECTSTATIC=0`).
 
@@ -90,6 +92,10 @@ gunzip -c backup-AAAA-MM-JJ.sql.gz | docker compose -f docker-compose.prod.yml e
 Planifier ces commandes (cron) et copier les archives hors du serveur.
 
 ## 7. Surveillance
+
+`https://votre-domaine/healthz` renvoie l'état de la base et du cache (200 ou 503) : branchez-y votre outil de supervision (UptimeRobot, Uptime Kuma...). Docker utilise `python manage.py healthcheck` pour l'état du conteneur.
+
+Les logs sont au format JSON, une ligne par requête avec son `request_id` : un identifiant fourni par un utilisateur (en-tête `X-Request-ID` d'une réponse) permet de retrouver tous les logs de sa requête.
 
 ```bash
 docker compose -f docker-compose.prod.yml logs -f web

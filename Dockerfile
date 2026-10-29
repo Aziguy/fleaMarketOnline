@@ -27,4 +27,4 @@ RUN SECRET_KEY=build python manage.py compilemessages --ignore=node_modules -v0 
 USER app
 EXPOSE 8000
 ENTRYPOINT ["./docker/entrypoint.sh"]
-CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3", "--access-logfile", "-"]
+CMD ["gunicorn", "config.asgi:application", "--worker-class", "uvicorn_worker.UvicornWorker", "--bind", "0.0.0.0:8000", "--workers", "3", "--timeout", "120"]

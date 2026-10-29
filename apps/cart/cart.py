@@ -7,6 +7,7 @@ from django.utils.translation import gettext as _
 from apps.catalog.models import Product
 from apps.core.money import format_fcfa
 from apps.core.phone import whatsapp_url
+from apps.shops.models import Shop
 
 SESSION_KEY = "cart"
 
@@ -23,7 +24,7 @@ class CartLine:
 
 @dataclass
 class ShopGroup:
-    shop: object
+    shop: Shop
     lines: list[CartLine] = field(default_factory=list)
 
     @property

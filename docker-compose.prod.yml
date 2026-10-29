@@ -15,6 +15,11 @@ services:
       interval: 10s
       retries: 10
 
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --save "" --maxmemory 128mb --maxmemory-policy allkeys-lru
+
   web:
     build: .
     restart: unless-stopped
@@ -25,6 +30,13 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      redis:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "python", "manage.py", "healthcheck"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
 
   nginx:
     image: nginx:1.27-alpine

@@ -1,15 +1,33 @@
+from django.core.cache import cache
 from django.db.models import Count, Q
 from django.shortcuts import render
 
 from apps.catalog.models import Product
 from apps.shops.models import Shop, ShopType
 
+from .search import search_catalog, smart_search
+
+HOME_CACHE_SECONDS = 120
+
+
+def _home_overview():
+    """Types de boutique et compteurs de l'accueil (mis en cache, peu volatils)."""
+    return {
+        "shop_types": list(
+            ShopType.objects.annotate(
+                n=Count("shops", filter=Q(shops__status=Shop.Status.APPROVED))
+            ).order_by("position")
+        ),
+        "stats": {
+            "shops": Shop.objects.public().count(),
+            "products": Product.objects.public().count(),
+        },
+    }
+
 
 def home(request):
     context = {
-        "shop_types": ShopType.objects.annotate(
-            n=Count("shops", filter=Q(shops__status=Shop.Status.APPROVED))
-        ).order_by("position"),
+        **(cache.get_or_set("home:overview", _home_overview, HOME_CACHE_SECONDS) or {}),
         "featured_shops": Shop.objects.public()
         .select_related("shop_type")
         .order_by("-is_featured", "-created_at")[:8],
@@ -22,25 +40,15 @@ def home(request):
 
 
 def search(request):
-    q = request.GET.get("q", "").strip()
-    products, shops = Product.objects.none(), Shop.objects.none()
-    if len(q) >= 2:
-        products = (
-            Product.objects.public()
-            .filter(
-                Q(name__icontains=q) | Q(description__icontains=q) | Q(category__name__icontains=q)
-            )
-            .select_related("shop")[:48]
-        )
-        shops = (
-            Shop.objects.public()
-            .filter(
-                Q(name__icontains=q) | Q(tagline__icontains=q) | Q(shop_type__name__icontains=q)
-            )
-            .select_related("shop_type")[:12]
-        )
-    template = "core/_search_suggestions.html" if request.htmx else "core/search.html"
-    return render(request, template, {"q": q, "products": products, "shops": shops})
+    result = smart_search(request.GET.get("q"))
+    return render(request, "core/search.html", {"q": result.query, "result": result})
+
+
+def palette(request):
+    """Résultats de la palette de recherche (fragment HTMX)."""
+    q = (request.GET.get("q") or "").strip()
+    result = search_catalog(q, products_limit=6, shops_limit=4)
+    return render(request, "core/_palette_results.html", {"q": q, "result": result})
 
 
 def how_it_works(request):

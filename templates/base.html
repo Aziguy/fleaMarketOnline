@@ -3,24 +3,51 @@
 <html lang="{{ LANG }}">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="csrf-token" content="{{ csrf_token }}">
-  <meta name="theme-color" content="#138a43">
+  <meta name="theme-color" content="#f7fbf9" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#060d09" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
   <title>{% block title %}{{ SITE_NAME }}{% endblock %} · {{ SITE_NAME }}</title>
   <meta name="description" content="{% block description %}{% translate "Toutes les boutiques du Mfoundi Mall en ligne : commandez, réservez et payez sur place en espèces ou Mobile Money." %}{% endblock %}">
+  <script>
+    (function () {
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+      } catch (e) {}
+      /* Une transition entre pages interrompue (navigation rapide) n'est pas une erreur. */
+      var quiet = function (e) {
+        if (!e.viewTransition) return;
+        e.viewTransition.ready.catch(function () {});
+        e.viewTransition.finished.catch(function () {});
+      };
+      window.addEventListener("pageswap", quiet);
+      window.addEventListener("pagereveal", quiet);
+    })();
+  </script>
   <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
+  <link rel="manifest" href="{% url 'core:manifest' %}">
+  <link rel="apple-touch-icon" href="{% static 'img/icons/apple-touch-icon.png' %}">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  {% block head_extra %}{% endblock %}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/app.css' %}">
   <script src="{% static 'js/htmx.min.js' %}" defer></script>
   <script src="{% static 'js/app.js' %}" defer></script>
+  {% block scripts %}{% endblock %}
 </head>
-<body class="flex min-h-screen flex-col" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+<body data-sw="{% url 'core:service_worker' %}" class="flex min-h-screen flex-col" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-surface focus:px-4 focus:py-2">{% translate "Aller au contenu" %}</a>
   {% include "includes/header.html" %}
   {% include "includes/messages.html" %}
-  <main class="flex-1">{% block content %}{% endblock %}</main>
+  <main id="main" class="flex-1">{% block content %}{% endblock %}</main>
   {% block footer %}{% include "includes/footer.html" %}{% endblock %}
-  <div id="toasts" class="pointer-events-none fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 flex-col gap-2"></div>
+  {% include "includes/palette.html" %}
+  <div id="toasts" class="pointer-events-none fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 flex-col gap-2" aria-live="polite"></div>
 </body>
 </html>

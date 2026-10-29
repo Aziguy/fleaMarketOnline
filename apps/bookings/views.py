@@ -7,6 +7,7 @@ from django.views.decorators.http import require_POST
 
 from apps.shops.models import Shop
 
+from . import services
 from .forms import BookingForm
 from .models import Booking
 
@@ -26,10 +27,7 @@ def create(request, shop_slug):
         initial = {"service": service_id, "kind": Booking.Kind.APPOINTMENT}
     form = BookingForm(request.POST or None, shop=shop, user=request.user, initial=initial)
     if request.method == "POST" and form.is_valid():
-        booking = form.save(commit=False)
-        booking.shop = shop
-        booking.customer = request.user
-        booking.save()
+        booking = services.create_booking(form=form, shop=shop, customer=request.user)
         messages.success(request, _("Demande de réservation envoyée. La boutique va la confirmer."))
         return redirect(booking)
     return render(request, "bookings/create.html", {"shop": shop, "form": form})
@@ -55,10 +53,9 @@ def detail(request, reference):
 @require_POST
 def cancel(request, reference):
     booking = get_object_or_404(Booking, reference=reference, customer=request.user)
-    if booking.customer_can_cancel:
-        booking.status = Booking.Status.CANCELLED
-        booking.save(update_fields=["status"])
+    try:
+        services.cancel_by_customer(booking)
         messages.success(request, _("Réservation annulée."))
-    else:
-        messages.error(request, _("Cette réservation ne peut plus être annulée."))
+    except services.BookingError as exc:
+        messages.error(request, str(exc))
     return redirect(booking)

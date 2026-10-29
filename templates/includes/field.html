@@ -11,7 +11,7 @@
       <legend class="label">{{ field.label }}</legend>
       <div class="grid gap-2 sm:grid-cols-2">
         {% for choice in field %}
-          <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm has-[:checked]:border-brand-500 has-[:checked]:bg-brand-50">
+          <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-stone-200 bg-surface px-4 py-3 text-sm has-[:checked]:border-brand-500 has-[:checked]:bg-brand-50">
             {{ choice.tag }}<span class="font-medium">{{ choice.choice_label }}</span>
           </label>
         {% endfor %}

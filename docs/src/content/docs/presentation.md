@@ -14,7 +14,11 @@ Mfoundi Mall en ligne réunit les boutiques du **Mfoundi Mall** (Yaoundé, Camer
 - **Réservations** de rendez-vous (salons, services) et de tables (restaurants, bars).
 - **WhatsApp** : chaque boutique est joignable en un clic.
 - **Connexion par numéro de téléphone** (+237) ou e-mail.
-- Site disponible en **français** et en **anglais**.
+- Site disponible en **français** et en **anglais**, en **thème clair ou sombre**.
+- **Application installable** sur téléphone, consultable hors ligne.
+- **Commerçants prévenus en direct** des nouvelles commandes et réservations.
+- **Assistant IA** : descriptions produits et recherche élargie.
+- **API REST** documentée pour les applications partenaires.
 
 ## Qui fait quoi ?
 

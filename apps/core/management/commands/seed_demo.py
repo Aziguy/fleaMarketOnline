@@ -1,5 +1,7 @@
 """Données de démonstration : boutiques, produits, prestations."""
 
+from typing import Any
+
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
@@ -10,7 +12,7 @@ from apps.shops.services import ensure_opening_hours
 
 DEMO_PASSWORD = "demo12345"
 
-SHOPS = [
+SHOPS: list[dict[str, Any]] = [
     {
         "type": "epicerie",
         "name": "Épicerie Chez Mama Ngono",

@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Any
 
 import environ
 from django.contrib.messages import constants as messages
@@ -31,9 +32,12 @@ INSTALLED_APPS = [
     "apps.orders",
     "apps.bookings",
     "apps.dashboard",
+    "apps.api",
+    "apps.ai",
 ]
 
 MIDDLEWARE = [
+    "apps.core.observability.RequestIdMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -44,6 +48,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_htmx.middleware.HtmxMiddleware",
+    "apps.core.middleware.PrivateCacheMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -124,9 +129,43 @@ SITE_PHONE = env("SITE_PHONE", default="")
 SITE_EMAIL = env("SITE_EMAIL", default="contact@mfoundimall.cm")
 MALL_ADDRESS = env("MALL_ADDRESS", default="Marché Mfoundi, Yaoundé, Cameroun")
 
-LOGGING = {
+APP_VERSION = env("APP_VERSION", default="dev")
+
+ANTHROPIC_API_KEY = env("ANTHROPIC_API_KEY", default="")
+AI_ENABLED = env.bool("AI_ENABLED", default=True)
+AI_MODEL = env("AI_MODEL", default="claude-opus-5-5")
+AI_TIMEOUT_SECONDS = env.float("AI_TIMEOUT_SECONDS", default=30)
+AI_MAX_RETRIES = env.int("AI_MAX_RETRIES", default=2)
+AI_DESCRIPTIONS_PER_HOUR = env.int("AI_DESCRIPTIONS_PER_HOUR", default=30)
+
+API_ANON_RATE = env("API_ANON_RATE", default="120/m")
+API_AUTH_RATE = env("API_AUTH_RATE", default="600/m")
+
+REALTIME_POLL_SECONDS = env.float("REALTIME_POLL_SECONDS", default=3)
+REALTIME_STREAM_SECONDS = env.int("REALTIME_STREAM_SECONDS", default=300)
+REALTIME_RETRY_MS = 3000
+
+CACHES = {"default": env.cache("CACHE_URL", default="locmemcache://")}
+
+LOG_FORMAT = env("LOG_FORMAT", default="text")
+LOGGING: dict[str, Any] = {
     "version": 1,
     "disable_existing_loggers": False,
-    "handlers": {"console": {"class": "logging.StreamHandler"}},
+    "filters": {"request_id": {"()": "apps.core.observability.RequestIdFilter"}},
+    "formatters": {
+        "text": {"format": "%(asctime)s %(levelname)s [%(request_id)s] %(name)s: %(message)s"},
+        "json": {"()": "apps.core.observability.JsonFormatter"},
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": LOG_FORMAT,
+            "filters": ["request_id"],
+        }
+    },
     "root": {"handlers": ["console"], "level": env("LOG_LEVEL", default="INFO")},
+    "loggers": {
+        "apps.requests": {"level": env("REQUEST_LOG_LEVEL", default="INFO")},
+        "django.server": {"level": "WARNING"},
+    },
 }

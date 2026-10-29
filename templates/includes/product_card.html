@@ -1,9 +1,9 @@
 {% load i18n static mall %}
-<article class="card group flex flex-col overflow-hidden">
+<article data-reveal class="card card-hover group flex flex-col overflow-hidden">
   <a href="{{ product.get_absolute_url }}" class="relative block aspect-square overflow-hidden bg-brand-50">
     <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/placeholder.svg' %}{% endif %}" alt="{{ product.name }}" loading="lazy"
-         class="h-full w-full object-cover transition duration-300 group-hover:scale-105">
-    {% if product.discount_percent %}<span class="absolute left-2 top-2 rounded-full bg-sun-500 px-2 py-0.5 text-xs font-bold text-brand-950">-{{ product.discount_percent }}%</span>{% endif %}
+         class="bg-brand-50 h-full w-full object-cover transition duration-500 group-hover:scale-110">
+    {% if product.discount_percent %}<span class="absolute left-2 top-2 rounded-full bg-sun-500 px-2 py-0.5 text-xs font-bold text-night-950">-{{ product.discount_percent }}%</span>{% endif %}
     {% if not product.in_stock %}<span class="absolute inset-x-0 bottom-0 bg-stone-900/70 py-1 text-center text-xs font-semibold text-white">{% translate "Épuisé" %}</span>{% endif %}
   </a>
   <div class="flex flex-1 flex-col p-3">
@@ -11,13 +11,13 @@
     <a href="{{ product.get_absolute_url }}" class="mt-0.5 line-clamp-2 text-sm font-medium text-stone-900 hover:text-brand-700">{{ product.name }}</a>
     <div class="mt-auto flex items-end justify-between gap-2 pt-3">
       <div>
-        <p class="font-bold text-stone-900">{{ product.price|fcfa }}</p>
+        <p class="font-display font-bold text-stone-900">{{ product.price|fcfa }}</p>
         {% if product.compare_at_price %}<p class="text-xs text-stone-400 line-through">{{ product.compare_at_price|fcfa }}</p>{% endif %}
       </div>
       {% if product.in_stock %}
       <form method="post" action="{% url 'cart:add' product.pk %}" hx-post="{% url 'cart:add' product.pk %}" hx-target="#cart-counter" hx-swap="outerHTML">
         {% csrf_token %}<input type="hidden" name="next" value="{{ request.get_full_path }}">
-        <button class="btn-primary h-9 w-9 rounded-full p-0" aria-label="{% translate 'Ajouter au panier' %}">
+        <button class="btn-primary h-9 w-9 rounded-full p-0 hover:rotate-90" aria-label="{% translate 'Ajouter au panier' %}">
           <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" d="M12 5v14m7-7H5"/></svg>
         </button>
       </form>

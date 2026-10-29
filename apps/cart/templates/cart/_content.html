@@ -9,7 +9,7 @@
   <ul class="divide-y divide-stone-100">
     {% for line in group.lines %}
     <li class="flex items-center gap-4 px-5 py-4">
-      <img src="{% if line.product.image %}{{ line.product.image.url }}{% else %}{% static 'img/placeholder.svg' %}{% endif %}" alt="" class="h-16 w-16 rounded-xl object-cover">
+      <img src="{% if line.product.image %}{{ line.product.image.url }}{% else %}{% static 'img/placeholder.svg' %}{% endif %}" alt="" class="bg-brand-50 h-16 w-16 rounded-xl object-cover">
       <div class="min-w-0 flex-1">
         <a href="{{ line.product.get_absolute_url }}" class="line-clamp-2 text-sm font-medium hover:text-brand-700">{{ line.product.name }}</a>
         <p class="text-xs text-stone-500">{{ line.product.price|fcfa }}</p>

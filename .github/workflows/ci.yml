@@ -40,6 +40,8 @@ jobs:
         run: |
           ruff check .
           ruff format --check .
+      - name: Typage
+        run: mypy apps config
       - name: Assets et traductions
         run: |
           npm run build

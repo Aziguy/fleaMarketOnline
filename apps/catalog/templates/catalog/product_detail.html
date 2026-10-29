@@ -6,7 +6,7 @@
   <nav class="text-sm text-stone-500"><a href="{{ product.shop.get_absolute_url }}" class="hover:text-brand-700">{{ product.shop.name }}</a>{% if product.category %} / <a href="{{ product.shop.get_absolute_url }}?rayon={{ product.category.slug }}" class="hover:text-brand-700">{{ product.category.name }}</a>{% endif %}</nav>
   <div class="mt-4 grid gap-8 lg:grid-cols-2 [&>*]:min-w-0">
     <div>
-      <div class="card overflow-hidden"><img id="main-image" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/placeholder.svg' %}{% endif %}" alt="{{ product.name }}" class="aspect-square w-full object-cover"></div>
+      <div class="card overflow-hidden"><img id="main-image" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/placeholder.svg' %}{% endif %}" alt="{{ product.name }}" class="bg-brand-50 aspect-square w-full object-cover"></div>
       {% if product.images.all %}
       <div class="mt-3 grid grid-cols-5 gap-2">
         {% if product.image %}<button type="button" onclick="document.getElementById('main-image').src='{{ product.image.url }}'" class="card overflow-hidden"><img src="{{ product.image.url }}" class="aspect-square w-full object-cover" alt=""></button>{% endif %}
@@ -18,7 +18,7 @@
       <h1 class="text-2xl sm:text-3xl">{{ product.name }}</h1>
       <div class="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
         <p class="text-3xl font-bold text-brand-700">{{ product.price|fcfa }}</p>
-        {% if product.compare_at_price %}<p class="text-lg text-stone-400 line-through">{{ product.compare_at_price|fcfa }}</p><span class="badge bg-sun-500 text-brand-950">-{{ product.discount_percent }}%</span>{% endif %}
+        {% if product.compare_at_price %}<p class="text-lg text-stone-400 line-through">{{ product.compare_at_price|fcfa }}</p><span class="badge bg-sun-500 text-night-950">-{{ product.discount_percent }}%</span>{% endif %}
       </div>
       <p class="mt-2 text-sm">
         {% if not product.in_stock %}<span class="badge-red">{% translate "Épuisé" %}</span>

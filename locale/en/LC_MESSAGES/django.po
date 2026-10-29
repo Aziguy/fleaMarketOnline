@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-28 16:21+0100\n"
+"POT-Creation-Date: 2026-10-29 10:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -199,6 +199,27 @@ msgstr "Password changed."
 msgid "Mot de passe réinitialisé. Vous pouvez vous connecter."
 msgstr "Password reset. You can now log in."
 
+msgid "Assistant IA"
+msgstr "AI assistant"
+
+msgid "API"
+msgstr "API"
+
+msgid "préfixe"
+msgstr "prefix"
+
+msgid "créé le"
+msgstr "created on"
+
+msgid "dernière utilisation"
+msgstr "last used"
+
+msgid "jeton d'API"
+msgstr "API token"
+
+msgid "jetons d'API"
+msgstr "API tokens"
+
 msgid "Réservations"
 msgstr "Bookings"
 
@@ -285,6 +306,12 @@ msgstr "booking"
 msgid "réservations"
 msgstr "bookings"
 
+msgid "Cette réservation ne peut plus être annulée."
+msgstr "This booking can no longer be cancelled."
+
+msgid "Changement de statut impossible."
+msgstr "Status change not allowed."
+
 msgid "Réserver"
 msgstr "Book"
 
@@ -342,9 +369,6 @@ msgstr "Booking request sent. The shop will confirm it."
 
 msgid "Réservation annulée."
 msgstr "Booking cancelled."
-
-msgid "Cette réservation ne peut plus être annulée."
-msgstr "This booking can no longer be cancelled."
 
 msgid "Panier"
 msgstr "Cart"
@@ -490,11 +514,38 @@ msgstr "General"
 msgid "Numéro invalide. Exemple : 6 77 12 34 56."
 msgstr "Invalid number. Example: 6 77 12 34 56."
 
-msgid "Aucun résultat"
-msgstr "No results"
+msgid ""
+"Toutes les boutiques du Mfoundi Mall en ligne : commandez, réservez et payez"
+" sur place."
+msgstr "Every Mfoundi Mall shop online: order, book and pay on site."
+
+msgid "Boutiques"
+msgstr "Shops"
+
+msgid "Produits"
+msgstr "Products"
 
 msgid "Voir tous les résultats"
 msgstr "See all results"
+
+#, python-format
+msgid "Aucun résultat pour « %(q)s »."
+msgstr "No results for “%(q)s”."
+
+msgid "Lancer une recherche complète"
+msgstr "Run a full search"
+
+msgid "Raccourcis"
+msgstr "Shortcuts"
+
+msgid "Toutes les boutiques"
+msgstr "All shops"
+
+msgid "Mon espace boutique"
+msgstr "My shop dashboard"
+
+msgid "Comment ça marche"
+msgstr "How it works"
 
 msgid "Le mall en ligne"
 msgstr "The mall online"
@@ -502,8 +553,11 @@ msgstr "The mall online"
 msgid "Mfoundi Mall, Yaoundé"
 msgstr "Mfoundi Mall, Yaoundé"
 
-msgid "Toutes les boutiques du mall, en ligne."
-msgstr "Every shop in the mall, online."
+msgid "Toutes les boutiques du mall,"
+msgstr "Every shop in the mall,"
+
+msgid "en ligne."
+msgstr "online."
 
 msgid ""
 "Commandez, réservez, puis payez sur place en espèces, MTN MoMo ou Orange "
@@ -512,14 +566,38 @@ msgstr ""
 "Order, book, then pay on site in cash, MTN MoMo or Orange Money. In-store "
 "pickup or delivery."
 
-msgid "Riz, téléphone, parfum, coiffure..."
-msgstr "Rice, phone, perfume, hairdresser..."
-
 msgid "Rechercher"
 msgstr "Search"
 
+msgid "Riz, téléphone, parfum, coiffure..."
+msgstr "Rice, phone, perfume, hairdresser..."
+
+msgid "Paiement"
+msgstr "Payment"
+
+msgid "Sur place"
+msgstr "On site"
+
+msgid "Commande"
+msgstr "Order"
+
+msgid "Prête au retrait"
+msgstr "Ready for pickup"
+
+msgid "Votre code de retrait"
+msgstr "Your pickup code"
+
+msgid "Espèces"
+msgstr "Cash"
+
+msgid "Explorer"
+msgstr "Explore"
+
 msgid "Parcourir par type de boutique"
 msgstr "Browse by shop type"
+
+msgid "Le mall"
+msgstr "The mall"
 
 msgid "Boutiques du mall"
 msgstr "Mall shops"
@@ -527,8 +605,14 @@ msgstr "Mall shops"
 msgid "Tout voir"
 msgstr "See all"
 
+msgid "Bons plans"
+msgstr "Good deals"
+
 msgid "Promotions"
 msgstr "Deals"
+
+msgid "Nouveau"
+msgstr "New"
 
 msgid "Nouveautés"
 msgstr "New arrivals"
@@ -564,9 +648,6 @@ msgstr "Do you have a shop at Mfoundi Mall?"
 
 msgid "Créez votre vitrine en ligne gratuitement et recevez des commandes."
 msgstr "Create your online storefront for free and receive orders."
-
-msgid "Comment ça marche"
-msgstr "How it works"
 
 msgid ""
 "Mfoundi Mall en ligne vous permet de voir les produits et services des "
@@ -697,14 +778,30 @@ msgstr ""
 "Add your products and services, enter your MoMo / Orange Money numbers, and "
 "you are live."
 
+msgid "Hors ligne"
+msgstr "Offline"
+
+msgid "Vous êtes hors ligne"
+msgstr "You are offline"
+
+msgid ""
+"Vérifiez votre connexion internet. Les pages déjà consultées restent "
+"disponibles."
+msgstr ""
+"Check your internet connection. Pages you have already visited remain "
+"available."
+
+msgid "Réessayer"
+msgstr "Try again"
+
 msgid "Recherche"
 msgstr "Search"
 
 msgid "Rechercher un produit, une boutique..."
 msgstr "Search for a product, a shop..."
 
-msgid "Boutiques"
-msgstr "Shops"
+msgid "Recherche élargie par l'assistant :"
+msgstr "Search widened by the assistant:"
 
 #, python-format
 msgid "%(n)s produit pour « %(q)s »"
@@ -720,6 +817,17 @@ msgstr "Try another word or browse the shops."
 
 msgid "L'ancien prix doit être supérieur au prix."
 msgstr "The former price must be higher than the price."
+
+#, python-format
+msgid "Nouvelle commande %(ref)s"
+msgstr "New order %(ref)s"
+
+#, python-format
+msgid "Nouvelle réservation %(ref)s"
+msgstr "New booking %(ref)s"
+
+msgid "Proposition de l'assistant : modifiez-la librement."
+msgstr "Assistant suggestion: edit it freely."
 
 msgid "Message au client (facultatif)"
 msgstr "Message to the customer (optional)"
@@ -747,15 +855,23 @@ msgstr ""
 msgid "Voir ma vitrine"
 msgstr "View my storefront"
 
-#| msgid "type de boutique"
 msgid "Changer de boutique"
 msgstr "Switch shop"
 
+msgid "En direct"
+msgstr "Live"
+
+msgid "Hors ligne, reconnexion..."
+msgstr "Offline, reconnecting..."
+
+msgid "Connexion au direct..."
+msgstr "Connecting to live updates..."
+
+msgid "Notifications"
+msgstr "Notifications"
+
 msgid "Tableau de bord"
 msgstr "Dashboard"
-
-msgid "Produits"
-msgstr "Products"
 
 msgid "Rayons"
 msgstr "Aisles"
@@ -769,7 +885,6 @@ msgstr "Details & payment"
 msgid "Horaires"
 msgstr "Opening hours"
 
-#| msgid "Toutes les boutiques"
 msgid "Ajouter une boutique"
 msgstr "Add a shop"
 
@@ -806,9 +921,6 @@ msgstr "Order closed."
 
 msgid "En ligne"
 msgstr "Online"
-
-msgid "Hors ligne"
-msgstr "Offline"
 
 msgid "Modifier"
 msgstr "Edit"
@@ -892,9 +1004,6 @@ msgstr "Used to show “Open / Closed” and to validate bookings."
 msgid "Fermé"
 msgstr "Closed"
 
-msgid "Commande"
-msgstr "Order"
-
 msgid "Livraison"
 msgstr "Delivery"
 
@@ -936,6 +1045,16 @@ msgstr "New product"
 
 msgid "Modifier le produit"
 msgstr "Edit product"
+
+msgid "Rédiger avec l'IA"
+msgstr "Write with AI"
+
+msgid ""
+"L'assistant propose un texte à partir du nom, du rayon, du prix, de vos "
+"notes et de la photo. Relisez avant d'enregistrer."
+msgstr ""
+"The assistant suggests a text from the name, aisle, price, your notes and "
+"the photo. Review it before saving."
 
 msgid "Photos supplémentaires"
 msgstr "Additional photos"
@@ -1024,8 +1143,14 @@ msgstr "Order: %(status)s."
 msgid "Réservation : %(s)s."
 msgstr "Booking: %(s)s."
 
-msgid "Changement de statut impossible."
-msgstr "Status change not allowed."
+msgid "Indiquez d'abord le nom du produit."
+msgstr "Enter the product name first."
+
+msgid "Limite atteinte. Réessayez dans une heure."
+msgstr "Limit reached. Try again in an hour."
+
+msgid "L'assistant n'est pas disponible pour le moment."
+msgstr "The assistant is not available right now."
 
 msgid "Mode de remise"
 msgstr "Handover method"
@@ -1063,9 +1188,6 @@ msgstr "Customer pickup code"
 msgid "Paiement reçu par"
 msgstr "Payment received by"
 
-msgid "Espèces"
-msgstr "Cash"
-
 msgid "MTN Mobile Money"
 msgstr "MTN Mobile Money"
 
@@ -1074,9 +1196,6 @@ msgstr "Orange Money"
 
 msgid "Retrait en boutique"
 msgstr "In-store pickup"
-
-msgid "Prête au retrait"
-msgstr "Ready for pickup"
 
 msgid "En livraison"
 msgstr "Out for delivery"
@@ -1167,10 +1286,6 @@ msgstr "This order can no longer be cancelled."
 msgid "Annulée par le client"
 msgstr "Cancelled by the customer"
 
-#, python-format
-msgid "Nouvelle commande %(ref)s"
-msgstr "New order %(ref)s"
-
 msgid "Valider la commande"
 msgstr "Check out"
 
@@ -1202,9 +1317,6 @@ msgstr "Delivery (if chosen)"
 
 msgid "gratuite"
 msgstr "free"
-
-msgid "Votre code de retrait"
-msgstr "Your pickup code"
 
 msgid "Donnez ce code au commerçant au moment du retrait."
 msgstr "Give this code to the merchant at pickup."
@@ -1566,23 +1678,29 @@ msgstr ""
 "Every Mfoundi Mall shop online: order, book and pay on site in cash or "
 "Mobile Money."
 
+msgid "Aller au contenu"
+msgstr "Skip to content"
+
 msgid "facultatif"
 msgstr "optional"
 
 msgid "Toutes les boutiques du mall, à portée de main."
 msgstr "Every shop in the mall, at your fingertips."
 
+msgid "Installer l'application"
+msgstr "Install the app"
+
 msgid "Acheter"
 msgstr "Shop"
-
-msgid "Toutes les boutiques"
-msgstr "All shops"
 
 msgid "Suivre ma commande"
 msgstr "Track my order"
 
 msgid "Vendre"
 msgstr "Sell"
+
+msgid "API développeurs"
+msgstr "Developer API"
 
 msgid "Nous trouver"
 msgstr "Find us"
@@ -1596,9 +1714,6 @@ msgstr "Order online, pay on site: cash, MTN MoMo or Orange Money"
 
 msgid "Menu"
 msgstr "Menu"
-
-msgid "Mon espace boutique"
-msgstr "My shop dashboard"
 
 msgid "Administration"
 msgstr "Administration"
@@ -1616,5 +1731,29 @@ msgstr "Page %(n)s of %(total)s"
 msgid "Suivant"
 msgstr "Next"
 
+msgid "Produit, boutique, type de boutique..."
+msgstr "Product, shop, shop type..."
+
+msgid "naviguer"
+msgstr "navigate"
+
+msgid "ouvrir"
+msgstr "open"
+
+msgid "ou"
+msgstr "or"
+
 msgid "À la une"
 msgstr "Featured"
+
+msgid "Thème"
+msgstr "Theme"
+
+msgid "Clair"
+msgstr "Light"
+
+msgid "Sombre"
+msgstr "Dark"
+
+msgid "Système"
+msgstr "System"

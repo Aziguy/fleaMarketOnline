@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from typing import cast
 
 from django import forms
 from django.utils import timezone
@@ -33,10 +34,12 @@ class BookingForm(StyledFormMixin, forms.ModelForm):
             kinds.append(Booking.Kind.APPOINTMENT)
         if shop.shop_type.takes_table_bookings:
             kinds.append(Booking.Kind.TABLE)
-        self.fields["kind"].choices = [(k.value, k.label) for k in kinds]
+        cast(forms.ChoiceField, self.fields["kind"]).choices = [(k.value, k.label) for k in kinds]
         if len(kinds) == 1:
             self.fields["kind"].initial = kinds[0].value
-        self.fields["service"].queryset = shop.services.filter(is_active=True)
+        cast(forms.ModelChoiceField, self.fields["service"]).queryset = shop.services.filter(
+            is_active=True
+        )
         self.fields["service"].required = False
         self.fields["party_size"].widget.attrs.update(min=1, max=MAX_PARTY)
         if not self.is_bound:
@@ -44,7 +47,8 @@ class BookingForm(StyledFormMixin, forms.ModelForm):
             self.fields["date"].initial = timezone.localdate()
 
     def clean(self):
-        data = super().clean()
+        super().clean()
+        data = self.cleaned_data
         kind, date, time = data.get("kind"), data.get("date"), data.get("time")
         if kind == Booking.Kind.APPOINTMENT and not data.get("service"):
             self.add_error("service", _("Choisissez une prestation."))

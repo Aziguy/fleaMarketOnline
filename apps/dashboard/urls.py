@@ -1,11 +1,12 @@
 from django.urls import path
 
-from . import views
+from . import realtime, views
 
 app_name = "dashboard"
 
 urlpatterns = [
     path("", views.home, name="home"),
+    path("flux/", realtime.events, name="events"),
     path("boutique/", views.switch_shop, name="switch_shop"),
     path("informations/", views.shop_settings, name="settings"),
     path("horaires/", views.opening_hours, name="hours"),
@@ -14,6 +15,7 @@ urlpatterns = [
     path("rayons/<int:pk>/supprimer/", views.category_delete, name="category_delete"),
     path("produits/", views.products, name="products"),
     path("produits/nouveau/", views.product_form, name="product_create"),
+    path("produits/ia/description/", views.ai_description, name="ai_description"),
     path("produits/<int:pk>/", views.product_form, name="product_edit"),
     path("produits/<int:pk>/activer/", views.product_toggle, name="product_toggle"),
     path("produits/<int:pk>/supprimer/", views.product_delete, name="product_delete"),

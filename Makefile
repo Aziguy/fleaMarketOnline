@@ -1,4 +1,4 @@
-.PHONY: install css css-watch run migrate seed test cov lint format messages docs docs-build up down prod
+.PHONY: install css css-watch run run-asgi migrate seed test cov lint typecheck format messages docs docs-build up down prod
 
 PY ?= python
 
@@ -15,6 +15,9 @@ css-watch:        ## Compile le CSS en continu
 run:              ## Serveur de développement
 	$(PY) manage.py runserver
 
+run-asgi:         ## Serveur ASGI (comme en production)
+	uvicorn config.asgi:application --reload --port 8000
+
 migrate:
 	$(PY) manage.py migrate
 
@@ -30,6 +33,9 @@ cov:              ## Tests avec couverture
 lint:
 	ruff check .
 	ruff format --check .
+
+typecheck:        ## Typage statique (mypy)
+	mypy apps config
 
 format:
 	ruff check --fix .

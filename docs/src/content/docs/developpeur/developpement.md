@@ -13,6 +13,8 @@ sidebar:
 | `make css-watch` | Recompile le CSS à chaque modification de template |
 | `make test` | Lance la suite de tests (pytest) |
 | `make lint` | Vérifie le style (ruff) |
+| `make typecheck` | Typage statique (mypy) |
+| `make run-asgi` | Serveur ASGI Uvicorn, comme en production |
 | `make format` | Corrige et formate le code |
 | `make messages` | Met à jour puis compile les traductions |
 | `make seed` | Charge les données de démonstration |
@@ -43,8 +45,11 @@ docs/            Site de documentation (Astro Starlight, publié sur GitHub Page
 
 ## Interface : Tailwind et HTMX
 
-- Les classes réutilisables (`btn-primary`, `card`, `input`, `badge-green`...) sont définies dans `static/src/app.css`.
+- Les classes réutilisables (`btn-primary`, `card`, `card-hover`, `glass`, `input`, `badge-green`, `skeleton`...) sont définies dans `static/src/app.css`.
 - La couleur principale est `brand` (vert, `brand-600` = `#138a43`), la couleur d'accent `sun` (jaune). Voir `tailwind.config.js`.
+- **Thèmes clair, sombre et système** : les palettes `stone`, `brand`, `red`, `amber`, `sky` et `sun` sont des variables CSS (`static/src/tokens.css`) qui s'inversent en mode sombre (50 ↔ 950). Écrivez `text-stone-900` ou `bg-brand-50` : la classe reste correcte dans les deux thèmes. Utilisez `bg-surface` (et non `bg-white`) pour les fonds de cartes, et la palette fixe `night` pour les zones toujours sombres (héros, pied de page). Le variant `dark:` reste disponible pour les rares cas particuliers.
+- **Animations** : `data-reveal` fait apparaître un élément au défilement ; les transitions entre pages utilisent les View Transitions du navigateur. Tout est désactivé si l'utilisateur demande de réduire les animations.
+- **Palette de recherche** : `Ctrl+K` ou `/`, fragment `core/_palette_results.html`. Ajoutez `data-palette-open` à un lien pour qu'il ouvre la palette.
 - Après ajout de classes dans un gabarit, relancer `make css` (ou laisser tourner `make css-watch`).
 - HTMX est utilisé pour l'ajout au panier, la mise à jour des quantités, la recherche instantanée et les actions du tableau de bord. Une vue détecte une requête HTMX avec `request.htmx` et renvoie alors un fragment (`_nom.html`).
 - Les événements `toast` (en-tête `HX-Trigger`) affichent une notification.
@@ -57,6 +62,10 @@ Hériter de `apps.core.forms.StyledFormMixin` pour appliquer les classes Tailwin
 {% include "includes/form.html" %}
 {% include "includes/field.html" with field=form.name wrapper="sm:col-span-2" %}
 ```
+
+## PWA
+
+Le service worker n'est actif qu'en HTTPS ou sur `localhost`. Après modification de `apps/core/templates/core/sw.js`, rechargez deux fois la page (ou « Update on reload » dans les outils du navigateur). La version du cache change automatiquement avec les fichiers statiques.
 
 ## Tests
 

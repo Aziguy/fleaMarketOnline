@@ -83,18 +83,20 @@ class Booking(models.Model):
 
     def next_statuses(self):
         S = self.Status
-        return {
+        flow: dict[str, list[str]] = {
             S.PENDING: [S.CONFIRMED, S.DECLINED],
             S.CONFIRMED: [S.COMPLETED, S.NO_SHOW, S.CANCELLED],
-        }.get(self.status, [])
+        }
+        return flow.get(self.status, [])
 
     @property
     def status_badge(self):
-        return {
+        badges: dict[str, str] = {
             self.Status.PENDING: "badge-yellow",
             self.Status.CONFIRMED: "badge-green",
             self.Status.COMPLETED: "badge-green",
             self.Status.DECLINED: "badge-red",
             self.Status.CANCELLED: "badge-red",
             self.Status.NO_SHOW: "badge-gray",
-        }[self.status]
+        }
+        return badges[self.status]

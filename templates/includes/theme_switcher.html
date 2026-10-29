@@ -1,0 +1,12 @@
+{% load i18n %}
+<div class="relative">
+  <button type="button" class="btn-ghost p-2" data-toggle="theme-menu" aria-label="{% translate 'Thème' %}" aria-haspopup="menu">
+    <span class="dark:hidden">{% include "icons/sun.html" %}</span>
+    <span class="hidden dark:inline">{% include "icons/moon.html" %}</span>
+  </button>
+  <div id="theme-menu" data-dropdown role="menu" class="card absolute right-0 z-50 mt-2 hidden w-44 animate-pop-in p-1.5 text-sm">
+    <button type="button" role="menuitemradio" data-theme-choice="light" class="nav-link flex w-full items-center gap-2">{% include "icons/sun.html" with class="h-4 w-4" %} {% translate "Clair" %}</button>
+    <button type="button" role="menuitemradio" data-theme-choice="dark" class="nav-link flex w-full items-center gap-2">{% include "icons/moon.html" with class="h-4 w-4" %} {% translate "Sombre" %}</button>
+    <button type="button" role="menuitemradio" data-theme-choice="system" class="nav-link flex w-full items-center gap-2">{% include "icons/monitor.html" with class="h-4 w-4" %} {% translate "Système" %}</button>
+  </div>
+</div>

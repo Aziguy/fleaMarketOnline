@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container-page py-8">
   <h1 class="text-2xl sm:text-3xl">{% if current_type %}{{ current_type.icon }} {{ current_type.label }}{% else %}{% translate "Les boutiques du mall" %}{% endif %}</h1>
-  <form class="mt-6 flex flex-col gap-3 sm:flex-row" hx-get="{% url 'shops:list' %}" hx-target="#results" hx-trigger="input delay:300ms from:input[name=q], change" hx-push-url="true">
+  <form class="mt-6 flex flex-col gap-3 sm:flex-row" hx-get="{% url 'shops:list' %}" hx-target="#results" hx-trigger="input delay:300ms from:input[name=q], change" hx-push-url="true" hx-indicator="#results-wrap">
     <input type="search" name="q" value="{{ q }}" placeholder="{% translate 'Nom de la boutique...' %}" class="input sm:max-w-xs">
     <select name="type" class="input sm:max-w-xs">
       <option value="">{% translate "Tous les types" %}</option>
@@ -14,6 +14,11 @@
       {% for value, label in levels %}<option value="{{ value }}" {% if request.GET.niveau == value %}selected{% endif %}>{{ label }}</option>{% endfor %}
     </select>
   </form>
-  <div id="results" class="mt-6">{% include "shops/_results.html" %}</div>
+  <div id="results-wrap" class="group mt-6">
+    <div class="hidden grid-cols-2 gap-4 group-[.htmx-request]:grid md:grid-cols-3 lg:grid-cols-4" aria-hidden="true">
+      {% for i in "12345678" %}<div class="card overflow-hidden"><div class="skeleton h-28 rounded-none"></div><div class="space-y-2 p-4"><div class="skeleton h-4 w-2/3"></div><div class="skeleton h-3 w-1/3"></div></div></div>{% endfor %}
+    </div>
+    <div id="results" class="group-[.htmx-request]:hidden">{% include "shops/_results.html" %}</div>
+  </div>
 </div>
 {% endblock %}

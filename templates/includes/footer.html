@@ -1,12 +1,15 @@
 {% load i18n static %}
-<footer class="mt-16 bg-brand-950 text-brand-100">
-  <div class="container-page grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
+<footer class="relative mt-20 overflow-hidden bg-night-950 text-night-200">
+  <div class="grid-pattern absolute inset-0"></div>
+  <div class="aurora -left-32 -top-32 h-72 w-72 bg-night-500/25"></div>
+  <div class="container-page relative grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
     <div>
       <div class="flex items-center gap-2">
         <img src="{% static 'img/logo-mark.svg' %}" alt="" class="h-9 w-9">
-        <span class="text-lg font-bold text-white">Mfoundi Mall</span>
+        <span class="font-display text-lg font-bold text-white">Mfoundi Mall</span>
       </div>
-      <p class="mt-3 text-sm text-brand-200">{% translate "Toutes les boutiques du mall, à portée de main." %}</p>
+      <p class="mt-3 text-sm text-night-200/80">{% translate "Toutes les boutiques du mall, à portée de main." %}</p>
+      <button type="button" data-install hidden class="btn mt-5 border border-white/15 bg-white/5 text-white hover:bg-white/10">📲 {% translate "Installer l'application" %}</button>
     </div>
     <div>
       <h3 class="text-sm font-semibold text-white">{% translate "Acheter" %}</h3>
@@ -21,6 +24,7 @@
       <ul class="mt-3 space-y-2 text-sm">
         <li><a href="{% url 'core:merchants' %}" class="hover:text-white">{% translate "Ouvrir ma boutique en ligne" %}</a></li>
         <li><a href="{% url 'dashboard:home' %}" class="hover:text-white">{% translate "Espace boutique" %}</a></li>
+        <li><a href="{% url 'api-v1:openapi-view' %}" class="hover:text-white">{% translate "API développeurs" %}</a></li>
       </ul>
     </div>
     <div>
@@ -30,8 +34,8 @@
       <p class="mt-1 text-sm">{{ SITE_EMAIL }}</p>
     </div>
   </div>
-  <div class="border-t border-brand-900">
-    <div class="container-page flex flex-col gap-2 py-4 text-xs text-brand-300 sm:flex-row sm:justify-between">
+  <div class="relative border-t border-white/10">
+    <div class="container-page flex flex-col gap-2 py-4 text-xs text-night-300/80 sm:flex-row sm:justify-between">
       <span>© {% now "Y" %} Mfoundi Mall, Yaoundé</span>
       <span>{% translate "Prix en Franc CFA (FCFA). Paiement sur place uniquement." %}</span>
     </div>

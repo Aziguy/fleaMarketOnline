@@ -1,8 +1,9 @@
-{% extends "base.html" %}{% load i18n %}
+{% extends "base.html" %}{% load i18n static %}
+{% block scripts %}<script src="{% static 'js/live.js' %}" defer></script>{% endblock %}
 {% block footer %}{% endblock %}
 {% block content %}
 {% with shop=request.shop %}
-<div class="container-page py-6">
+<div class="container-page py-6" data-live="{% url 'dashboard:events' %}">
   {% if shop.status != "approved" %}
     <div class="mb-6 rounded-xl border border-amber-200 bg-sun-100 px-4 py-3 text-sm text-amber-900">
       {% if shop.status == "pending" %}{% translate "Votre boutique est en attente de validation par l'administration du mall. Préparez votre catalogue en attendant." %}
@@ -25,11 +26,16 @@
         <noscript><button class="btn-ghost btn-sm mt-1">OK</button></noscript>
       </form>
       {% endif %}
+      <div class="mb-3 flex items-center gap-2 px-2 text-xs text-stone-500">
+        <span data-live-status class="h-2 w-2 rounded-full bg-stone-300"></span>
+        <span data-live-label data-on="{% translate 'En direct' %}" data-off="{% translate 'Hors ligne, reconnexion...' %}">{% translate "Connexion au direct..." %}</span>
+        <button type="button" data-notify-enable hidden class="ml-auto inline-flex items-center gap-1 font-semibold text-brand-700 hover:underline">{% include "icons/bell.html" with class="h-3.5 w-3.5" %} {% translate "Notifications" %}</button>
+      </div>
       <nav class="flex gap-1 overflow-x-auto pb-2 lg:flex-col lg:pb-0">
         {% url 'dashboard:home' as u %}<a href="{{ u }}" class="nav-link whitespace-nowrap {% if request.path == u %}nav-link-active{% endif %}">{% translate "Tableau de bord" %}</a>
-        {% url 'dashboard:orders' as u %}<a href="{{ u }}" class="nav-link whitespace-nowrap {% if u in request.path %}nav-link-active{% endif %}">{% translate "Commandes" %}</a>
+        {% url 'dashboard:orders' as u %}<a href="{{ u }}" class="nav-link flex items-center gap-2 whitespace-nowrap {% if u in request.path %}nav-link-active{% endif %}">{% translate "Commandes" %}<span data-live-count="order" class="badge-yellow ml-auto {% if not request.pending.orders %}hidden{% endif %}">{{ request.pending.orders }}</span></a>
         {% if shop.shop_type.takes_appointments or shop.shop_type.takes_table_bookings %}
-          {% url 'dashboard:bookings' as u %}<a href="{{ u }}" class="nav-link whitespace-nowrap {% if u in request.path %}nav-link-active{% endif %}">{% translate "Réservations" %}</a>
+          {% url 'dashboard:bookings' as u %}<a href="{{ u }}" class="nav-link flex items-center gap-2 whitespace-nowrap {% if u in request.path %}nav-link-active{% endif %}">{% translate "Réservations" %}<span data-live-count="booking" class="badge-yellow ml-auto {% if not request.pending.bookings %}hidden{% endif %}">{{ request.pending.bookings }}</span></a>
         {% endif %}
         {% url 'dashboard:products' as u %}<a href="{{ u }}" class="nav-link whitespace-nowrap {% if u in request.path %}nav-link-active{% endif %}">{% translate "Produits" %}</a>
         {% url 'dashboard:categories' as u %}<a href="{{ u }}" class="nav-link whitespace-nowrap {% if u in request.path %}nav-link-active{% endif %}">{% translate "Rayons" %}</a>

@@ -1,6 +1,9 @@
 from datetime import timedelta
+from typing import Any
 
+from django.conf import settings
 from django.contrib import messages
+from django.core.cache import cache
 from django.core.paginator import Paginator
 from django.db.models import Q, Sum
 from django.shortcuts import get_object_or_404, redirect, render
@@ -8,6 +11,8 @@ from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
+from apps.ai import services as ai
+from apps.bookings import services as booking_services
 from apps.bookings.forms import MerchantBookingForm
 from apps.bookings.models import Booking
 from apps.orders import services as order_services
@@ -241,17 +246,19 @@ def order_detail(request, reference):
 def order_action(request, reference):
     order = get_object_or_404(request.shop.orders, reference=reference)
     target = request.POST.get("status")
-    forms = {}
+    forms: dict[str, Any] = {}
     try:
         if target == Order.Status.COMPLETED:
-            forms["complete_form"] = form = CompleteOrderForm(request.POST)
-            if not form.is_valid():
+            forms["complete_form"] = complete = CompleteOrderForm(request.POST)
+            if not complete.is_valid():
                 raise order_services.OrderError(_("Formulaire incomplet."))
-            order_services.change_status(order, target, **form.cleaned_data)
+            order_services.change_status(order, target, **complete.cleaned_data)
         elif target == Order.Status.CANCELLED:
-            forms["cancel_form"] = form = CancelForm(request.POST)
-            form.is_valid()
-            order_services.change_status(order, target, reason=form.cleaned_data.get("reason", ""))
+            forms["cancel_form"] = cancel = CancelForm(request.POST)
+            cancel.is_valid()
+            order_services.change_status(
+                order, target, reason=cancel.cleaned_data.get("reason", "")
+            )
         else:
             order_services.change_status(order, target)
         messages.success(
@@ -292,15 +299,15 @@ def bookings(request):
 @require_POST
 def booking_action(request, reference):
     booking = get_object_or_404(request.shop.bookings, reference=reference)
-    target = request.POST.get("status")
     form = MerchantBookingForm(request.POST)
-    if target in booking.next_statuses() and form.is_valid():
-        booking.status = target
-        booking.merchant_note = form.cleaned_data["merchant_note"] or booking.merchant_note
-        booking.save(update_fields=["status", "merchant_note"])
+    form.is_valid()
+    try:
+        booking_services.change_status(
+            booking, request.POST.get("status"), note=form.cleaned_data.get("merchant_note", "")
+        )
         messages.success(request, _("Réservation : %(s)s.") % {"s": booking.get_status_display()})
-    else:
-        messages.error(request, _("Changement de statut impossible."))
+    except booking_services.BookingError as exc:
+        messages.error(request, str(exc))
     if request.htmx:
         return render(
             request,
@@ -308,3 +315,36 @@ def booking_action(request, reference):
             {"booking": booking, "form": MerchantBookingForm()},
         )
     return redirect("dashboard:bookings")
+
+
+@merchant_required
+@require_POST
+def ai_description(request):
+    """Brouillon de description produit rédigé par l'assistant IA (fragment HTMX)."""
+    shop = request.shop
+    product = shop.products.filter(pk=request.POST.get("product") or None).first()
+    category = shop.categories.filter(pk=request.POST.get("category") or None).first()
+    error = ""
+    description = request.POST.get("description", "")
+    key = f"ai:quota:{request.user.pk}"
+    used = cache.get(key, 0)
+    if not request.POST.get("name", "").strip():
+        error = _("Indiquez d'abord le nom du produit.")
+    elif used >= settings.AI_DESCRIPTIONS_PER_HOUR:
+        error = _("Limite atteinte. Réessayez dans une heure.")
+    else:
+        cache.set(key, used + 1, 3600)
+        try:
+            description = ai.describe_product(
+                name=request.POST["name"].strip()[:120],
+                shop_type=shop.shop_type.name,
+                category=category.name if category else "",
+                price=request.POST.get("price") or None,
+                notes=description[:500],
+                image=product.image if product else None,
+            )
+        except ai.AIUnavailable:
+            error = _("L'assistant n'est pas disponible pour le moment.")
+    return render(
+        request, "dashboard/_ai_description.html", {"description": description, "error": error}
+    )
