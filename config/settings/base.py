@@ -129,6 +129,10 @@ MALL_ADDRESS = env("MALL_ADDRESS", default="Marché Mfoundi, Yaoundé, Cameroun"
 
 APP_VERSION = env("APP_VERSION", default="dev")
 
+REALTIME_POLL_SECONDS = env.float("REALTIME_POLL_SECONDS", default=3)
+REALTIME_STREAM_SECONDS = env.int("REALTIME_STREAM_SECONDS", default=300)
+REALTIME_RETRY_MS = 3000
+
 CACHES = {"default": env.cache("CACHE_URL", default="locmemcache://")}
 
 LOG_FORMAT = env("LOG_FORMAT", default="text")

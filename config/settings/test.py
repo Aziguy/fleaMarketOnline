@@ -12,3 +12,5 @@ LANGUAGE_CODE = "fr"
 WHITENOISE_AUTOREFRESH = True
 CACHES = {"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}
 LOGGING["loggers"]["apps.requests"]["level"] = "WARNING"  # noqa: F405
+REALTIME_POLL_SECONDS = 0
+REALTIME_STREAM_SECONDS = 0.05

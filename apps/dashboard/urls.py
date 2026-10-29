@@ -1,11 +1,12 @@
 from django.urls import path
 
-from . import views
+from . import realtime, views
 
 app_name = "dashboard"
 
 urlpatterns = [
     path("", views.home, name="home"),
+    path("flux/", realtime.events, name="events"),
     path("boutique/", views.switch_shop, name="switch_shop"),
     path("informations/", views.shop_settings, name="settings"),
     path("horaires/", views.opening_hours, name="hours"),

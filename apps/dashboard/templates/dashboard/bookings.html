@@ -9,7 +9,7 @@
     <select name="statut" class="input py-1 text-sm" onchange="this.form.submit()"><option value="">{% translate "Tous les statuts" %}</option>{% for v, l in statuses %}<option value="{{ v }}" {% if request.GET.statut == v %}selected{% endif %}>{{ l }}</option>{% endfor %}</select>
   </form>
 </div>
-<div class="mt-4 space-y-3">
+<div id="live-list" class="mt-4 space-y-3" hx-get="{{ request.get_full_path }}" hx-trigger="live:booking from:body" hx-select="#live-list" hx-swap="outerHTML">
   {% for booking in page %}{% include "dashboard/_booking_row.html" %}{% empty %}
     {% translate "Aucune réservation" as t %}{% include "includes/empty.html" with title=t icon="📅" %}
   {% endfor %}

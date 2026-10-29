@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-29 10:17+0100\n"
+"POT-Creation-Date: 2026-10-29 10:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -490,9 +490,6 @@ msgstr "General"
 msgid "Numéro invalide. Exemple : 6 77 12 34 56."
 msgstr "Invalid number. Example: 6 77 12 34 56."
 
-#| msgid ""
-#| "Toutes les boutiques du Mfoundi Mall en ligne : commandez, réservez et payez"
-#| " sur place en espèces ou Mobile Money."
 msgid ""
 "Toutes les boutiques du Mfoundi Mall en ligne : commandez, réservez et payez"
 " sur place."
@@ -794,6 +791,15 @@ msgstr "Try another word or browse the shops."
 msgid "L'ancien prix doit être supérieur au prix."
 msgstr "The former price must be higher than the price."
 
+#, python-format
+msgid "Nouvelle commande %(ref)s"
+msgstr "New order %(ref)s"
+
+#, python-format
+#| msgid "Nouvelle commande %(ref)s"
+msgid "Nouvelle réservation %(ref)s"
+msgstr "New booking %(ref)s"
+
 msgid "Message au client (facultatif)"
 msgstr "Message to the customer (optional)"
 
@@ -822,6 +828,18 @@ msgstr "View my storefront"
 
 msgid "Changer de boutique"
 msgstr "Switch shop"
+
+msgid "En direct"
+msgstr "Live"
+
+msgid "Hors ligne, reconnexion..."
+msgstr "Offline, reconnecting..."
+
+msgid "Connexion au direct..."
+msgstr "Connecting to live updates..."
+
+msgid "Notifications"
+msgstr "Notifications"
 
 msgid "Tableau de bord"
 msgstr "Dashboard"
@@ -1222,10 +1240,6 @@ msgstr "This order can no longer be cancelled."
 
 msgid "Annulée par le client"
 msgstr "Cancelled by the customer"
-
-#, python-format
-msgid "Nouvelle commande %(ref)s"
-msgstr "New order %(ref)s"
 
 msgid "Valider la commande"
 msgstr "Check out"

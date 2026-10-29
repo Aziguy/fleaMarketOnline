@@ -8,7 +8,7 @@
   <a href="{% query statut='all' page=None %}" class="badge whitespace-nowrap px-3 py-1.5 {% if status == 'all' %}bg-brand-600 text-white{% else %}bg-surface ring-1 ring-stone-200{% endif %}">{% translate "Toutes" %}</a>
 </div>
 <form class="mt-3"><input type="hidden" name="statut" value="{{ status }}"><input type="search" name="q" value="{{ q }}" placeholder="{% translate 'Référence, nom, téléphone' %}" class="input max-w-sm"></form>
-<div class="card mt-4 overflow-x-auto">
+<div id="live-list" class="card mt-4 overflow-x-auto" hx-get="{{ request.get_full_path }}" hx-trigger="live:order from:body" hx-select="#live-list" hx-swap="outerHTML">
   <table class="table-base">
     <thead class="bg-stone-50"><tr><th>{% translate "Réf." %}</th><th>{% translate "Client" %}</th><th>{% translate "Remise" %}</th><th>{% translate "Total" %}</th><th>{% translate "Statut" %}</th><th>{% translate "Date" %}</th></tr></thead>
     <tbody class="divide-y divide-stone-100">
