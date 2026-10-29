@@ -29,11 +29,10 @@
   <div class="card card-body">
     <h2 class="font-semibold">{% translate "Photos supplémentaires" %}</h2>
     {{ formset.management_form }}
-    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+    <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
       {% for f in formset %}
       <div class="rounded-xl border border-stone-200 p-3">
         {{ f.id }}
-        {% if f.instance.image %}<img src="{{ f.instance.image.url }}" class="mb-2 h-24 w-24 rounded-lg object-cover" alt="">{% endif %}
         {% include "includes/field.html" with field=f.image %}
         {% if f.instance.pk %}<label class="mt-2 flex items-center gap-2 text-sm text-red-600">{{ f.DELETE }} {% translate "Supprimer" %}</label>{% endif %}
         {{ f.position.as_hidden }}

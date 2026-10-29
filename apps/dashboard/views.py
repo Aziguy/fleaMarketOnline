@@ -63,7 +63,8 @@ def switch_shop(request):
 
 @merchant_required
 def shop_settings(request):
-    form = ShopSettingsForm(request.POST or None, request.FILES or None, instance=request.shop)
+    instance = type(request.shop).objects.get(pk=request.shop.pk)
+    form = ShopSettingsForm(request.POST or None, request.FILES or None, instance=instance)
     if request.method == "POST" and form.is_valid():
         form.save()
         messages.success(request, _("Informations enregistrées."))

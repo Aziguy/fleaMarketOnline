@@ -171,3 +171,56 @@ document.addEventListener("click", async (event) => {
   installPrompt = null;
   document.querySelectorAll("[data-install]").forEach((el) => (el.hidden = true));
 });
+
+/* Sélecteur d'image : aperçu, glisser-déposer, suppression. */
+function previewImage(picker, src) {
+  const show = (img, on) => {
+    if (!img) return;
+    if (on) img.src = src;
+    img.classList.toggle("hidden", !on);
+  };
+  show(picker.querySelector("[data-preview]"), Boolean(src));
+  picker.querySelector("[data-placeholder]")?.classList.toggle("hidden", Boolean(src));
+  picker.querySelector("[data-change]")?.classList.toggle("hidden", !src);
+  const target = picker.querySelector("input[type=file]").dataset.previewTarget;
+  if (target) {
+    show(document.querySelector(target), Boolean(src));
+    document.querySelector(`[data-preview-fallback="${target}"]`)?.classList.toggle("hidden", Boolean(src));
+  }
+}
+
+document.addEventListener("change", (event) => {
+  const picker = event.target.closest("[data-image-picker]");
+  if (!picker) return;
+  if (event.target.type === "file") {
+    const file = event.target.files[0];
+    const clear = picker.querySelector("[data-clear]");
+    if (clear) clear.checked = false;
+    if (file) previewImage(picker, URL.createObjectURL(file));
+  } else if (event.target.matches("[data-clear]")) {
+    picker.querySelector("[data-preview]").classList.toggle("opacity-30", event.target.checked);
+    const target = picker.querySelector("input[type=file]").dataset.previewTarget;
+    if (target) document.querySelector(target)?.classList.toggle("opacity-30", event.target.checked);
+  }
+});
+
+["dragenter", "dragover", "dragleave", "drop"].forEach((type) => {
+  document.addEventListener(type, (event) => {
+    const zone = event.target.closest?.("[data-drop]");
+    if (!zone) return;
+    event.preventDefault();
+    zone.toggleAttribute("data-over", type === "dragenter" || type === "dragover");
+    if (type === "drop" && event.dataTransfer.files.length) {
+      const input = zone.closest("[data-image-picker]").querySelector("input[type=file]");
+      input.files = event.dataTransfer.files;
+      input.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+  });
+});
+
+document.addEventListener("input", (event) => {
+  if (!event.target.id) return;
+  document.querySelectorAll(`[data-mirror="#${event.target.id}"]`).forEach((el) => {
+    el.textContent = event.target.value;
+  });
+});

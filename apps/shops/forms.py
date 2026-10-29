@@ -2,10 +2,25 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 
 from apps.core.forms import PhoneFormField, StyledFormMixin
+from apps.core.images import OptimizedImagesMixin
+from apps.core.widgets import ImagePicker
 
 from .models import OpeningHour, Shop
 
 _PHONE_FIELDS = ("phone", "whatsapp", "mtn_momo_number", "orange_money_number")
+
+SHOP_IMAGES = {
+    "logo": {"size": (512, 512), "crop": True, "min_size": (128, 128)},
+    "banner": {"size": (1800, 600), "crop": True, "min_size": (900, 300)},
+}
+LOGO_WIDGET = ImagePicker(
+    ratio="aspect-square w-40", hint=_("Carré, 512 × 512 px conseillé"), preview="#preview-logo"
+)
+BANNER_WIDGET = ImagePicker(
+    ratio="aspect-[3/1] w-full",
+    hint=_("Format 3:1, 1800 × 600 px conseillé"),
+    preview="#preview-banner",
+)
 
 
 class _ShopPhonesMixin:
@@ -21,7 +36,9 @@ class _ShopPhonesMixin:
                 self.fields[name].widget.attrs["class"] = "input"
 
 
-class ShopCreateForm(StyledFormMixin, _ShopPhonesMixin, forms.ModelForm):
+class ShopCreateForm(OptimizedImagesMixin, StyledFormMixin, _ShopPhonesMixin, forms.ModelForm):
+    image_specs = SHOP_IMAGES
+
     class Meta:
         model = Shop
         fields = (
@@ -36,14 +53,16 @@ class ShopCreateForm(StyledFormMixin, _ShopPhonesMixin, forms.ModelForm):
             "email",
             "logo",
         )
-        widgets = {"description": forms.Textarea(attrs={"rows": 4})}
+        widgets = {"description": forms.Textarea(attrs={"rows": 4}), "logo": LOGO_WIDGET}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._setup_phones()
 
 
-class ShopSettingsForm(StyledFormMixin, _ShopPhonesMixin, forms.ModelForm):
+class ShopSettingsForm(OptimizedImagesMixin, StyledFormMixin, _ShopPhonesMixin, forms.ModelForm):
+    image_specs = SHOP_IMAGES
+
     class Meta:
         model = Shop
         fields = (
@@ -51,7 +70,7 @@ class ShopSettingsForm(StyledFormMixin, _ShopPhonesMixin, forms.ModelForm):
             "tagline",
             "description",
             "logo",
-            "cover",
+            "banner",
             "level",
             "unit",
             "phone",
@@ -65,7 +84,11 @@ class ShopSettingsForm(StyledFormMixin, _ShopPhonesMixin, forms.ModelForm):
             "delivery_fee",
             "delivery_area",
         )
-        widgets = {"description": forms.Textarea(attrs={"rows": 4})}
+        widgets = {
+            "description": forms.Textarea(attrs={"rows": 4}),
+            "logo": LOGO_WIDGET,
+            "banner": BANNER_WIDGET,
+        }
         help_texts = {
             "mtn_momo_number": _("Affiché au client pour payer sur place. Vide = non accepté."),
             "orange_money_number": _("Affiché au client pour payer sur place. Vide = non accepté."),
@@ -76,8 +99,7 @@ class ShopSettingsForm(StyledFormMixin, _ShopPhonesMixin, forms.ModelForm):
         self._setup_phones()
 
     def clean(self):
-        super().clean()
-        data = self.cleaned_data
+        data = super().clean()
         if not (data.get("offers_pickup") or data.get("offers_delivery")):
             raise forms.ValidationError(_("Proposez au moins le retrait ou la livraison."))
         if not (

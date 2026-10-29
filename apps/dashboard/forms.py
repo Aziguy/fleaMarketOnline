@@ -5,6 +5,10 @@ from django.utils.translation import gettext_lazy as _
 
 from apps.catalog.models import MAX_EXTRA_IMAGES, Category, Product, ProductImage, Service
 from apps.core.forms import StyledFormMixin
+from apps.core.images import OptimizedImagesMixin
+from apps.core.widgets import ImagePicker
+
+PRODUCT_IMAGE = {"image": {"size": (1600, 1600), "min_size": (300, 300)}}
 
 
 class CategoryForm(StyledFormMixin, forms.ModelForm):
@@ -13,7 +17,9 @@ class CategoryForm(StyledFormMixin, forms.ModelForm):
         fields = ("name", "position")
 
 
-class ProductForm(StyledFormMixin, forms.ModelForm):
+class ProductForm(OptimizedImagesMixin, StyledFormMixin, forms.ModelForm):
+    image_specs = PRODUCT_IMAGE
+
     class Meta:
         model = Product
         fields = (
@@ -26,7 +32,10 @@ class ProductForm(StyledFormMixin, forms.ModelForm):
             "image",
             "is_active",
         )
-        widgets = {"description": forms.Textarea(attrs={"rows": 5})}
+        widgets = {
+            "description": forms.Textarea(attrs={"rows": 5}),
+            "image": ImagePicker(ratio="aspect-square w-48", hint=_("Carré conseillé")),
+        }
 
     def __init__(self, *args, shop, **kwargs):
         super().__init__(*args, **kwargs)
@@ -35,18 +44,20 @@ class ProductForm(StyledFormMixin, forms.ModelForm):
             self.fields[name].widget.attrs.update(min=0, inputmode="numeric")
 
     def clean(self):
-        super().clean()
-        data = self.cleaned_data
+        data = super().clean()
         price, old = data.get("price"), data.get("compare_at_price")
         if old is not None and price is not None and old <= price:
             self.add_error("compare_at_price", _("L'ancien prix doit être supérieur au prix."))
         return data
 
 
-class ProductImageForm(StyledFormMixin, forms.ModelForm):
+class ProductImageForm(OptimizedImagesMixin, StyledFormMixin, forms.ModelForm):
+    image_specs = PRODUCT_IMAGE
+
     class Meta:
         model = ProductImage
         fields = ("image", "position")
+        widgets = {"image": ImagePicker(ratio="aspect-square w-full")}
 
 
 ProductImageFormSet = forms.inlineformset_factory(

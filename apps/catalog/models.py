@@ -4,6 +4,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from apps.core.fields import MoneyField
+from apps.core.images import cleanup_files
 from apps.shops.models import Shop
 
 MAX_EXTRA_IMAGES = 4
@@ -47,6 +48,7 @@ class ProductQuerySet(models.QuerySet):
         return self.filter(is_active=True, shop__status=Shop.Status.APPROVED)
 
 
+@cleanup_files
 class Product(models.Model):
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name="products")
     category = models.ForeignKey(
@@ -112,6 +114,7 @@ class Product(models.Model):
         return limit if self.stock is None else min(self.stock, limit)
 
 
+@cleanup_files
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="images")
     image = models.ImageField(_("photo"), upload_to="products/")

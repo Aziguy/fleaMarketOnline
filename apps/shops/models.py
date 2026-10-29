@@ -7,6 +7,7 @@ from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
 
 from apps.core.fields import MoneyField, PhoneField
+from apps.core.images import cleanup_files
 
 
 def unique_slug(instance, value, field="slug"):
@@ -51,6 +52,7 @@ class ShopQuerySet(models.QuerySet):
         return self.filter(status=Shop.Status.APPROVED)
 
 
+@cleanup_files
 class Shop(models.Model):
     class Status(models.TextChoices):
         PENDING = "pending", _("En attente de validation")
@@ -79,7 +81,7 @@ class Shop(models.Model):
     tagline = models.CharField(_("slogan"), max_length=120, blank=True)
     description = models.TextField(_("description"), blank=True)
     logo = models.ImageField(_("logo"), upload_to="shops/logos/", blank=True)
-    cover = models.ImageField(_("image de couverture"), upload_to="shops/covers/", blank=True)
+    banner = models.ImageField(_("bannière"), upload_to="shops/banners/", blank=True)
 
     level = models.CharField(_("niveau"), max_length=4, choices=Level, default=Level.GROUND)
     unit = models.CharField(

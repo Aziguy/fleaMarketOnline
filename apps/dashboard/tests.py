@@ -147,3 +147,67 @@ def test_dashboard_query_count_is_bounded(
     for name in ["home", "orders", "products"]:
         with django_assert_max_num_queries(14):
             merchant_client.get(reverse(f"dashboard:{name}"))
+
+
+def _png(width, height, name="photo.png"):
+    from io import BytesIO
+
+    from django.core.files.uploadedfile import SimpleUploadedFile
+    from PIL import Image
+
+    buffer = BytesIO()
+    Image.new("RGB", (width, height), "green").save(buffer, "PNG")
+    return SimpleUploadedFile(name, buffer.getvalue(), content_type="image/png")
+
+
+def _settings_data(shop, **extra):
+    return {
+        "name": shop.name,
+        "level": "rdc",
+        "phone": "677000000",
+        "accepts_cash": "on",
+        "offers_pickup": "on",
+        "delivery_fee": 0,
+        **extra,
+    }
+
+
+def test_settings_optimize_logo_and_banner(merchant_client, shop):
+    from PIL import Image
+
+    response = merchant_client.post(
+        reverse("dashboard:settings"),
+        _settings_data(shop, logo=_png(800, 600), banner=_png(2400, 1200)),
+    )
+    assert response.status_code == 302
+    shop.refresh_from_db()
+    assert shop.logo.name.endswith(".webp") and shop.banner.name.startswith("shops/banners/")
+    assert Image.open(shop.logo).size == (512, 512)
+    assert Image.open(shop.banner).size == (1800, 600)
+
+
+def test_settings_reject_small_banner(merchant_client, shop):
+    response = merchant_client.post(
+        reverse("dashboard:settings"), _settings_data(shop, banner=_png(400, 200))
+    )
+    assert "banner" in response.context["form"].errors
+    shop.refresh_from_db()
+    assert not shop.banner
+
+
+def test_settings_replace_and_clear_delete_files(
+    merchant_client, shop, django_capture_on_commit_callbacks
+):
+    url = reverse("dashboard:settings")
+    merchant_client.post(url, _settings_data(shop, banner=_png(1800, 600)))
+    shop.refresh_from_db()
+    first = shop.banner.name
+    with django_capture_on_commit_callbacks(execute=True):
+        merchant_client.post(url, _settings_data(shop, banner=_png(1800, 600)))
+    shop.refresh_from_db()
+    assert shop.banner.name != first and not shop.banner.storage.exists(first)
+    second = shop.banner.name
+    with django_capture_on_commit_callbacks(execute=True):
+        merchant_client.post(url, _settings_data(shop, **{"banner-clear": "on"}))
+    shop.refresh_from_db()
+    assert not shop.banner and not shop.banner.storage.exists(second)

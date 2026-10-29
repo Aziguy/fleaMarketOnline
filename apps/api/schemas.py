@@ -37,6 +37,7 @@ class ShopOut(Schema):
     phone: str
     whatsapp: str = Field(alias="contact_whatsapp")
     logo: str | None
+    banner: str | None
     accepts_cash: bool
     mtn_momo_number: str
     orange_money_number: str
@@ -50,6 +51,10 @@ class ShopOut(Schema):
     @staticmethod
     def resolve_logo(obj):
         return _url(obj.logo)
+
+    @staticmethod
+    def resolve_banner(obj):
+        return _url(obj.banner)
 
     @staticmethod
     def resolve_is_open_now(obj):
