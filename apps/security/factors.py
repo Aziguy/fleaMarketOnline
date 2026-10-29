@@ -170,6 +170,12 @@ def use_recovery_code(user, code):
     return bool(updated)
 
 
+def drop_orphan_recovery_codes(user):
+    """Sans méthode active, les codes de secours n'ont plus d'usage."""
+    if not has_second_factor(user):
+        user.recovery_codes.all().delete()
+
+
 def verify_code(user, method, code):
     """Vérifie un code saisi selon la méthode choisie."""
     if method == "totp":

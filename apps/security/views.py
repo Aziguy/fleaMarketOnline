@@ -112,6 +112,7 @@ def totp_setup(request):
 @flow.recent_auth_required
 def totp_disable(request):
     TOTPDevice.objects.filter(user=request.user).delete()
+    factors.drop_orphan_recovery_codes(request.user)
     messages.success(request, _("Application d'authentification désactivée."))
     return redirect("security:index")
 
@@ -146,6 +147,7 @@ def email_setup(request):
 @flow.recent_auth_required
 def email_disable(request):
     EmailFactor.objects.filter(user=request.user).delete()
+    factors.drop_orphan_recovery_codes(request.user)
     messages.success(request, _("Code par e-mail désactivé."))
     return redirect("security:index")
 
@@ -188,6 +190,7 @@ def passkey_register(request):
 @flow.recent_auth_required
 def passkey_delete(request, pk):
     get_object_or_404(request.user.passkeys, pk=pk).delete()
+    factors.drop_orphan_recovery_codes(request.user)
     messages.success(request, _("Clé d'accès supprimée."))
     return redirect("security:index")
 
@@ -265,7 +268,12 @@ def verify(request):
             messages.info(request, _("Patientez une minute avant de demander un nouveau code."))
         return redirect(f"{reverse('security:verify')}?methode=email")
     if request.method == "POST" and form.is_valid():
+        if throttle.is_locked("mfa", request, user.pk):
+            request.session.pop(flow.PENDING, None)
+            messages.error(request, _("Trop de codes erronés. Réessayez dans 15 minutes."))
+            return redirect("accounts:login")
         if factors.verify_code(user, method, form.cleaned_data["code"]):
+            throttle.reset("mfa", request, user.pk)
             return flow.complete(
                 request,
                 user,
@@ -273,6 +281,7 @@ def verify(request):
                 backend=data["backend"],
                 trust=bool(request.POST.get("trust")),
             )
+        throttle.fail("mfa", request, user.pk)
         if flow.register_failure(request):
             messages.error(request, _("Trop de codes erronés. Reconnectez-vous."))
             return redirect("accounts:login")

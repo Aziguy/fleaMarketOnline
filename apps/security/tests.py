@@ -283,3 +283,23 @@ def test_api_token_requires_otp(client, customer):
 )
 def test_describe_user_agent(agent, label):
     assert describe(agent) == label
+
+
+def test_code_guessing_is_limited_across_logins(client, customer):
+    totp = enable_totp(customer)
+    for _ in range(5):
+        login(client)
+        client.post(VERIFY, {"method": "totp", "code": "000000"})
+    login(client)
+    response = client.post(VERIFY, {"method": "totp", "code": next_code(totp)})
+    assert response.url == LOGIN and "_auth_user_id" not in client.session
+
+
+def test_disabling_last_factor_drops_recovery_codes(client, customer):
+    enable_totp(customer)
+    factors.generate_recovery_codes(customer)
+    client.force_login(customer)
+    confirmed(client)
+    client.post(reverse("security:totp_disable"))
+    assert not customer.recovery_codes.exists()
+    assert factors.summary(customer)["level"] == factors.Level.ESSENTIAL
