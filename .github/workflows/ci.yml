@@ -45,6 +45,7 @@ jobs:
       - name: Assets et traductions
         run: |
           npm run build
+          npm run icons && git diff --exit-code apps/core/icons.json
           python manage.py compilemessages --ignore=node_modules
       - name: Migrations à jour
         run: python manage.py makemigrations --check --dry-run

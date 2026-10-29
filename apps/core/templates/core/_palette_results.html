@@ -4,7 +4,7 @@
     <p class="px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-wider text-stone-400">{% translate "Boutiques" %}</p>
     {% for shop in result.shops %}
       <a href="{{ shop.get_absolute_url }}" role="option" class="palette-item flex items-center gap-3 rounded-xl px-3 py-2.5">
-        <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-50 text-lg">{{ shop.shop_type.icon }}</span>
+        <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-50 text-brand-700">{% icon shop.shop_type.icon class="h-5 w-5" %}</span>
         <span class="min-w-0 flex-1"><span class="block truncate font-medium">{{ shop.name }}</span><span class="block truncate text-xs text-stone-500">{{ shop.shop_type.label }} · {{ shop.location_label }}</span></span>
       </a>
     {% endfor %}
@@ -27,11 +27,11 @@
   </div>
 {% else %}
   <p class="px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-wider text-stone-400">{% translate "Raccourcis" %}</p>
-  <a href="{% url 'shops:list' %}" role="option" class="palette-item flex items-center gap-3 rounded-xl px-3 py-2.5">{% include "icons/store.html" with class="h-5 w-5 text-brand-600" %} {% translate "Toutes les boutiques" %}</a>
-  <a href="{% url 'cart:detail' %}" role="option" class="palette-item flex items-center gap-3 rounded-xl px-3 py-2.5">{% include "icons/bag.html" with class="h-5 w-5 text-brand-600" %} {% translate "Mon panier" %}</a>
+  <a href="{% url 'shops:list' %}" role="option" class="palette-item flex items-center gap-3 rounded-xl px-3 py-2.5">{% icon "store" class="h-5 w-5 text-brand-600" %} {% translate "Toutes les boutiques" %}</a>
+  <a href="{% url 'cart:detail' %}" role="option" class="palette-item flex items-center gap-3 rounded-xl px-3 py-2.5">{% icon "shopping-bag" class="h-5 w-5 text-brand-600" %} {% translate "Mon panier" %}</a>
   {% if user.is_authenticated %}
-    <a href="{% url 'orders:list' %}" role="option" class="palette-item flex items-center gap-3 rounded-xl px-3 py-2.5">{% include "icons/calendar.html" with class="h-5 w-5 text-brand-600" %} {% translate "Mes commandes" %}</a>
-    {% if user.is_merchant %}<a href="{% url 'dashboard:home' %}" role="option" class="palette-item flex items-center gap-3 rounded-xl px-3 py-2.5">{% include "icons/sparkles.html" with class="h-5 w-5 text-brand-600" %} {% translate "Mon espace boutique" %}</a>{% endif %}
+    <a href="{% url 'orders:list' %}" role="option" class="palette-item flex items-center gap-3 rounded-xl px-3 py-2.5">{% icon "receipt" class="h-5 w-5 text-brand-600" %} {% translate "Mes commandes" %}</a>
+    {% if user.is_merchant %}<a href="{% url 'dashboard:home' %}" role="option" class="palette-item flex items-center gap-3 rounded-xl px-3 py-2.5">{% icon "layout-dashboard" class="h-5 w-5 text-brand-600" %} {% translate "Mon espace boutique" %}</a>{% endif %}
   {% endif %}
-  <a href="{% url 'core:how_it_works' %}" role="option" class="palette-item flex items-center gap-3 rounded-xl px-3 py-2.5">{% include "icons/clock.html" with class="h-5 w-5 text-brand-600" %} {% translate "Comment ça marche" %}</a>
+  <a href="{% url 'core:how_it_works' %}" role="option" class="palette-item flex items-center gap-3 rounded-xl px-3 py-2.5">{% icon "circle-help" class="h-5 w-5 text-brand-600" %} {% translate "Comment ça marche" %}</a>
 {% endif %}

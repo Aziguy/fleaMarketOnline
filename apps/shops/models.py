@@ -25,7 +25,7 @@ class ShopType(models.Model):
     name = models.CharField(_("nom"), max_length=60)
     name_en = models.CharField(_("nom (anglais)"), max_length=60, blank=True)
     slug = models.SlugField(unique=True)
-    icon = models.CharField(_("icône"), max_length=8, blank=True, help_text=_("Emoji"))
+    icon = models.CharField(_("icône"), max_length=40, default="store", help_text=_("Icône Lucide"))
     sells_products = models.BooleanField(_("vend des produits"), default=True)
     takes_appointments = models.BooleanField(_("prend des rendez-vous"), default=False)
     takes_table_bookings = models.BooleanField(_("réserve des tables"), default=False)

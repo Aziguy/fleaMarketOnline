@@ -7,11 +7,11 @@
   </div>
   <div class="flex flex-1 flex-col p-4 pt-0">
     <div class="relative -mt-8 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border-4 border-surface bg-brand-50 text-2xl shadow">
-      {% if shop.logo %}<img src="{{ shop.logo.url }}" alt="{{ shop.name }}" class="h-full w-full object-cover">{% else %}{{ shop.shop_type.icon|default:"🏪" }}{% endif %}
+      {% if shop.logo %}<img src="{{ shop.logo.url }}" alt="{{ shop.name }}" class="h-full w-full object-cover">{% else %}{% icon shop.shop_type.icon|default:"store" class="h-6 w-6 text-brand-700" %}{% endif %}
     </div>
     <h3 class="mt-2 truncate font-semibold group-hover:text-brand-700">{{ shop.name }}</h3>
     <p class="text-xs font-medium text-brand-700">{{ shop.shop_type.label }}</p>
     {% if shop.tagline %}<p class="mt-1 line-clamp-2 text-sm text-stone-500">{{ shop.tagline }}</p>{% endif %}
-    <p class="mt-auto flex items-center gap-1 pt-3 text-xs text-stone-500">{% include "icons/pin.html" with class="h-3.5 w-3.5" %}{{ shop.location_label }}</p>
+    <p class="mt-auto flex items-center gap-1 pt-3 text-xs text-stone-500">{% icon "map-pin" class="h-3.5 w-3.5" %}{{ shop.location_label }}</p>
   </div>
 </a>

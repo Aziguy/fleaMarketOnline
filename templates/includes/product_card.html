@@ -18,7 +18,7 @@
       <form method="post" action="{% url 'cart:add' product.pk %}" hx-post="{% url 'cart:add' product.pk %}" hx-target="#cart-counter" hx-swap="outerHTML">
         {% csrf_token %}<input type="hidden" name="next" value="{{ request.get_full_path }}">
         <button class="btn-primary h-9 w-9 rounded-full p-0 hover:rotate-90" aria-label="{% translate 'Ajouter au panier' %}">
-          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" d="M12 5v14m7-7H5"/></svg>
+          {% icon "plus" %}
         </button>
       </form>
       {% endif %}

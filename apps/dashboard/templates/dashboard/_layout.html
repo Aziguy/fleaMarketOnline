@@ -13,7 +13,7 @@
   <div class="grid gap-6 lg:grid-cols-[15rem_1fr]">
     <aside class="min-w-0">
       <div class="mb-3 flex items-center gap-3 px-2">
-        <span class="text-2xl">{{ shop.shop_type.icon }}</span>
+        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-700">{% icon shop.shop_type.icon %}</span>
         <div class="min-w-0"><p class="truncate font-semibold">{{ shop.name }}</p><a href="{{ shop.get_absolute_url }}" class="text-xs text-brand-700 hover:underline">{% translate "Voir ma vitrine" %} ↗</a></div>
       </div>
       {% if request.shops|length > 1 %}
@@ -29,7 +29,7 @@
       <div class="mb-3 flex items-center gap-2 px-2 text-xs text-stone-500">
         <span data-live-status class="h-2 w-2 rounded-full bg-stone-300"></span>
         <span data-live-label data-on="{% translate 'En direct' %}" data-off="{% translate 'Hors ligne, reconnexion...' %}">{% translate "Connexion au direct..." %}</span>
-        <button type="button" data-notify-enable hidden class="ml-auto inline-flex items-center gap-1 font-semibold text-brand-700 hover:underline">{% include "icons/bell.html" with class="h-3.5 w-3.5" %} {% translate "Notifications" %}</button>
+        <button type="button" data-notify-enable hidden class="ml-auto inline-flex items-center gap-1 font-semibold text-brand-700 hover:underline">{% icon "bell" class="h-3.5 w-3.5" %} {% translate "Notifications" %}</button>
       </div>
       <nav class="flex gap-1 overflow-x-auto pb-2 lg:flex-col lg:pb-0">
         {% url 'dashboard:home' as u %}<a href="{{ u }}" class="nav-link whitespace-nowrap {% if request.path == u %}nav-link-active{% endif %}">{% translate "Tableau de bord" %}</a>

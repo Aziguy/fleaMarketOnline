@@ -136,3 +136,27 @@ def test_healthcheck_command(db, capsys):
 
     call_command("healthcheck")
     assert '"database": "ok"' in capsys.readouterr().out
+
+
+def test_icon_tag_renders_lucide_and_brand():
+    from django.template import Context, Template
+
+    html = Template(
+        '{% icon "search" class="h-4 w-4" %}{% icon "whatsapp" label="WhatsApp" %}'
+    ).render(Context())
+    assert 'class="h-4 w-4"' in html and 'stroke="currentColor"' in html
+    assert 'fill="currentColor" role="img" aria-label="WhatsApp"' in html
+
+
+def test_icon_tag_falls_back_on_unknown_name():
+    from apps.core.templatetags.mall import icon
+
+    assert icon("inconnue") == icon("store")
+
+
+@pytest.mark.django_db
+def test_shop_types_use_bundled_icons():
+    from apps.core.templatetags.mall import ICONS
+    from apps.shops.models import ShopType
+
+    assert set(ShopType.objects.values_list("icon", flat=True)) <= set(ICONS["lucide"])

@@ -29,14 +29,14 @@
       <form method="post" action="{% url 'cart:add' product.pk %}" class="mt-6 flex gap-3" hx-post="{% url 'cart:add' product.pk %}" hx-target="#cart-counter" hx-swap="outerHTML">
         {% csrf_token %}
         <input type="number" name="quantity" value="1" min="1" max="{{ product.max_quantity }}" class="input w-24" aria-label="{% translate 'Quantité' %}">
-        <button class="btn-primary flex-1 sm:flex-none">{% include "icons/bag.html" %} {% translate "Ajouter au panier" %}</button>
+        <button class="btn-primary flex-1 sm:flex-none">{% icon "shopping-bag" %} {% translate "Ajouter au panier" %}</button>
       </form>
       {% if in_cart %}<p class="mt-2 text-sm text-stone-500">{% blocktranslate with n=in_cart %}Déjà {{ n }} dans votre panier.{% endblocktranslate %} <a href="{% url 'cart:detail' %}" class="text-brand-700 hover:underline">{% translate "Voir le panier" %}</a></p>{% endif %}
       {% endif %}
-      <a href="{% whatsapp product.shop.contact_whatsapp product.name %}" target="_blank" rel="noopener" class="btn-whatsapp mt-3 w-full sm:w-auto">{% include "icons/whatsapp.html" %} {% translate "Poser une question" %}</a>
+      <a href="{% whatsapp product.shop.contact_whatsapp product.name %}" target="_blank" rel="noopener" class="btn-whatsapp mt-3 w-full sm:w-auto">{% icon "whatsapp" %} {% translate "Poser une question" %}</a>
       {% if product.description %}<div class="mt-8"><h2 class="font-semibold">{% translate "Description" %}</h2><p class="mt-2 whitespace-pre-line text-sm text-stone-600">{{ product.description }}</p></div>{% endif %}
       <a href="{{ product.shop.get_absolute_url }}" class="card mt-8 flex items-center gap-3 p-4 hover:border-brand-300">
-        <span class="text-2xl">{{ product.shop.shop_type.icon }}</span>
+        <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 text-brand-700">{% icon product.shop.shop_type.icon %}</span>
         <span class="flex-1"><span class="block font-semibold">{{ product.shop.name }}</span><span class="block text-xs text-stone-500">{{ product.shop.location_label }}</span></span>
         <span class="text-sm font-semibold text-brand-700">{% translate "Voir la boutique" %} →</span>
       </a>

@@ -68,6 +68,7 @@ TEMPLATES = [
                 "apps.core.context_processors.site",
                 "apps.cart.context_processors.cart",
             ],
+            "builtins": ["apps.core.templatetags.mall"],
         },
     },
 ]

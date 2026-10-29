@@ -11,7 +11,7 @@
 </div>
 <div id="live-list" class="mt-4 space-y-3" hx-get="{{ request.get_full_path }}" hx-trigger="live:booking from:body" hx-select="#live-list" hx-swap="outerHTML">
   {% for booking in page %}{% include "dashboard/_booking_row.html" %}{% empty %}
-    {% translate "Aucune réservation" as t %}{% include "includes/empty.html" with title=t icon="📅" %}
+    {% translate "Aucune réservation" as t %}{% include "includes/empty.html" with title=t icon="calendar" %}
   {% endfor %}
 </div>
 {% include "includes/pagination.html" %}

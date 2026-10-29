@@ -13,13 +13,13 @@
     </div>
   </div>
   <div class="container-page flex h-16 items-center gap-3">
-    <button type="button" class="btn-ghost -ml-2 p-2 lg:hidden" data-toggle="mobile-nav" aria-label="{% translate 'Menu' %}">{% include "icons/menu.html" %}</button>
+    <button type="button" class="btn-ghost -ml-2 p-2 lg:hidden" data-toggle="mobile-nav" aria-label="{% translate 'Menu' %}">{% icon "menu" %}</button>
     <a href="{% url 'core:home' %}" class="flex shrink-0 items-center gap-2">
       <img src="{% static 'img/logo-mark.svg' %}" alt="" class="h-9 w-9 drop-shadow-[0_4px_12px_rgb(31_171_91/0.35)]">
       <span class="hidden font-display text-lg font-bold leading-tight text-stone-900 sm:block">Mfoundi<span class="text-brand-600"> Mall</span></span>
     </a>
     <a href="{% url 'core:search' %}" data-palette-open class="mx-2 hidden flex-1 items-center gap-3 rounded-full border border-stone-200 bg-stone-100/70 px-4 py-2 text-sm text-stone-500 transition hover:border-brand-300 hover:bg-surface md:flex">
-      {% include "icons/search.html" with class="h-4 w-4" %}
+      {% icon "search" class="h-4 w-4" %}
       <span class="flex-1 truncate">{% translate "Rechercher un produit, une boutique..." %}</span>
       <span class="kbd">Ctrl K</span>
     </a>
@@ -29,10 +29,10 @@
       {% if not user.is_merchant %}<a href="{% url 'core:merchants' %}" class="nav-link">{% translate "Vendre au mall" %}</a>{% endif %}
     </nav>
     <div class="ml-auto flex items-center gap-0.5 lg:ml-2">
-      <a href="{% url 'core:search' %}" data-palette-open class="btn-ghost p-2 md:hidden" aria-label="{% translate 'Rechercher' %}">{% include "icons/search.html" %}</a>
+      <a href="{% url 'core:search' %}" data-palette-open class="btn-ghost p-2 md:hidden" aria-label="{% translate 'Rechercher' %}">{% icon "search" %}</a>
       {% include "includes/theme_switcher.html" %}
       <a href="{% url 'cart:detail' %}" class="btn-ghost relative p-2" aria-label="{% translate 'Panier' %}">
-        {% include "icons/bag.html" with class="h-6 w-6" %}
+        {% icon "shopping-bag" class="h-6 w-6" %}
         {% include "cart/_counter.html" %}
       </a>
       {% if user.is_authenticated %}
@@ -56,7 +56,7 @@
         </div>
       {% else %}
         <a href="{% url 'accounts:login' %}" class="btn-primary ml-1 hidden sm:inline-flex">{% translate "Connexion" %}</a>
-        <a href="{% url 'accounts:login' %}" class="btn-ghost p-2 sm:hidden" aria-label="{% translate 'Connexion' %}">{% include "icons/user.html" with class="h-6 w-6" %}</a>
+        <a href="{% url 'accounts:login' %}" class="btn-ghost p-2 sm:hidden" aria-label="{% translate 'Connexion' %}">{% icon "user" class="h-6 w-6" %}</a>
       {% endif %}
     </div>
   </div>

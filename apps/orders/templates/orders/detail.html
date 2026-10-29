@@ -46,7 +46,7 @@
     {% if order.cancel_reason %}<p class="mt-2 text-red-700">{% translate "Motif d'annulation" %} : {{ order.cancel_reason }}</p>{% endif %}
   </div>
   <div class="card card-body flex flex-col gap-2">
-    <a href="{{ whatsapp_url }}" target="_blank" rel="noopener" class="btn-whatsapp">{% include "icons/whatsapp.html" %} {% translate "Contacter la boutique" %}</a>
+    <a href="{{ whatsapp_url }}" target="_blank" rel="noopener" class="btn-whatsapp">{% icon "whatsapp" %} {% translate "Contacter la boutique" %}</a>
     {% if order.customer_can_cancel %}
     <form method="post" action="{% url 'orders:cancel' order.reference %}" onsubmit="return confirm('{% translate "Annuler cette commande ?" %}')">
       {% csrf_token %}<button class="btn-ghost w-full text-red-600">{% translate "Annuler la commande" %}</button>

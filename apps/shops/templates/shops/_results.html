@@ -6,5 +6,5 @@
   {% include "includes/pagination.html" %}
 {% else %}
   {% translate "Aucune boutique trouvée" as t %}{% translate "Modifiez les filtres ou revenez bientôt : de nouvelles boutiques arrivent." as x %}
-  {% include "includes/empty.html" with title=t text=x icon="🏪" %}
+  {% include "includes/empty.html" with title=t text=x icon="store" %}
 {% endif %}
