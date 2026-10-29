@@ -1,50 +1,47 @@
 {% load i18n static %}
-<header class="sticky top-0 z-40 border-b border-stone-200 bg-white/95 backdrop-blur">
-  <div class="bg-brand-700 text-brand-50">
-    <div class="container-page flex h-8 items-center justify-between text-xs">
-      <span class="truncate">{% translate "Commandez en ligne, payez sur place : espèces, MTN MoMo ou Orange Money" %}</span>
-      <form action="{% url 'set_language' %}" method="post" class="flex items-center gap-1">
+<header id="site-header" class="glass sticky top-0 z-40 border-b">
+  <div class="bg-gradient-to-r from-night-900 via-night-800 to-night-900 text-night-100">
+    <div class="container-page flex h-8 items-center justify-between gap-3 text-xs">
+      <span class="truncate"><span class="mr-1 inline-block h-1.5 w-1.5 rounded-full bg-night-300 align-middle motion-safe:animate-pulse"></span>{% translate "Commandez en ligne, payez sur place : espèces, MTN MoMo ou Orange Money" %}</span>
+      <form action="{% url 'set_language' %}" method="post" class="flex shrink-0 items-center gap-1">
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ request.get_full_path }}">
         {% get_current_language as LANG %}
-        <button name="language" value="fr" class="rounded px-1.5 {% if LANG == 'fr' %}bg-brand-600 font-semibold{% endif %}">FR</button>
-        <button name="language" value="en" class="rounded px-1.5 {% if LANG == 'en' %}bg-brand-600 font-semibold{% endif %}">EN</button>
+        <button name="language" value="fr" class="rounded px-1.5 {% if LANG == 'fr' %}bg-night-600 font-semibold text-white{% endif %}">FR</button>
+        <button name="language" value="en" class="rounded px-1.5 {% if LANG == 'en' %}bg-night-600 font-semibold text-white{% endif %}">EN</button>
       </form>
     </div>
   </div>
   <div class="container-page flex h-16 items-center gap-3">
     <button type="button" class="btn-ghost -ml-2 p-2 lg:hidden" data-toggle="mobile-nav" aria-label="{% translate 'Menu' %}">{% include "icons/menu.html" %}</button>
     <a href="{% url 'core:home' %}" class="flex shrink-0 items-center gap-2">
-      <img src="{% static 'img/logo-mark.svg' %}" alt="" class="h-9 w-9">
-      <span class="hidden text-lg font-bold leading-tight text-brand-900 sm:block">Mfoundi<span class="text-brand-600"> Mall</span></span>
+      <img src="{% static 'img/logo-mark.svg' %}" alt="" class="h-9 w-9 drop-shadow-[0_4px_12px_rgb(31_171_91/0.35)]">
+      <span class="hidden font-display text-lg font-bold leading-tight text-stone-900 sm:block">Mfoundi<span class="text-brand-600"> Mall</span></span>
     </a>
-    <form action="{% url 'core:search' %}" class="relative mx-2 hidden flex-1 md:block" role="search">
-      <span class="pointer-events-none absolute inset-y-0 left-3 flex items-center text-stone-400">{% include "icons/search.html" %}</span>
-      <input type="search" name="q" value="{{ q|default:'' }}" placeholder="{% translate 'Rechercher un produit, une boutique...' %}"
-             class="input rounded-full pl-10" autocomplete="off"
-             hx-get="{% url 'core:search' %}" hx-trigger="input changed delay:300ms, search" hx-target="#search-suggestions">
-      <div id="search-suggestions" class="absolute inset-x-0 top-full mt-2"></div>
-    </form>
+    <a href="{% url 'core:search' %}" data-palette-open class="mx-2 hidden flex-1 items-center gap-3 rounded-full border border-stone-200 bg-stone-100/70 px-4 py-2 text-sm text-stone-500 transition hover:border-brand-300 hover:bg-surface md:flex">
+      {% include "icons/search.html" with class="h-4 w-4" %}
+      <span class="flex-1 truncate">{% translate "Rechercher un produit, une boutique..." %}</span>
+      <span class="kbd">Ctrl K</span>
+    </a>
     <nav class="ml-auto hidden items-center gap-1 lg:flex">
       <a href="{% url 'shops:list' %}" class="nav-link">{% translate "Boutiques" %}</a>
       <a href="{% url 'core:how_it_works' %}" class="nav-link">{% translate "Comment ça marche" %}</a>
-      {% if not user.is_merchant %}
-        <a href="{% url 'core:merchants' %}" class="nav-link">{% translate "Vendre au mall" %}</a>
-      {% endif %}
+      {% if not user.is_merchant %}<a href="{% url 'core:merchants' %}" class="nav-link">{% translate "Vendre au mall" %}</a>{% endif %}
     </nav>
-    <div class="ml-auto flex items-center gap-1 lg:ml-2">
-      <a href="{% url 'core:search' %}" class="btn-ghost p-2 md:hidden" aria-label="{% translate 'Rechercher' %}">{% include "icons/search.html" %}</a>
+    <div class="ml-auto flex items-center gap-0.5 lg:ml-2">
+      <a href="{% url 'core:search' %}" data-palette-open class="btn-ghost p-2 md:hidden" aria-label="{% translate 'Rechercher' %}">{% include "icons/search.html" %}</a>
+      {% include "includes/theme_switcher.html" %}
       <a href="{% url 'cart:detail' %}" class="btn-ghost relative p-2" aria-label="{% translate 'Panier' %}">
         {% include "icons/bag.html" with class="h-6 w-6" %}
         {% include "cart/_counter.html" %}
       </a>
       {% if user.is_authenticated %}
         <div class="relative">
-          <button type="button" class="btn-ghost gap-1.5 p-2" data-toggle="account-menu">
-            {% include "icons/user.html" with class="h-6 w-6" %}
+          <button type="button" class="btn-ghost gap-1.5 p-2" data-toggle="account-menu" aria-haspopup="menu">
+            <span class="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-brand-400 to-brand-600 text-xs font-bold text-white">{{ user.first_name|first|upper }}</span>
             <span class="hidden max-w-[8rem] truncate text-sm sm:inline">{{ user.first_name }}</span>
           </button>
-          <div id="account-menu" data-dropdown class="card absolute right-0 mt-2 hidden w-56 p-2 text-sm">
+          <div id="account-menu" data-dropdown role="menu" class="card absolute right-0 z-50 mt-2 hidden w-56 animate-pop-in p-2 text-sm">
             {% if user.is_merchant %}
               <a href="{% url 'dashboard:home' %}" class="nav-link block font-semibold text-brand-700">{% translate "Mon espace boutique" %}</a>
             {% endif %}
@@ -58,7 +55,7 @@
           </div>
         </div>
       {% else %}
-        <a href="{% url 'accounts:login' %}" class="btn-primary hidden sm:inline-flex">{% translate "Connexion" %}</a>
+        <a href="{% url 'accounts:login' %}" class="btn-primary ml-1 hidden sm:inline-flex">{% translate "Connexion" %}</a>
         <a href="{% url 'accounts:login' %}" class="btn-ghost p-2 sm:hidden" aria-label="{% translate 'Connexion' %}">{% include "icons/user.html" with class="h-6 w-6" %}</a>
       {% endif %}
     </div>

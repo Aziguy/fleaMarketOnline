@@ -1,11 +1,12 @@
 {% load i18n static %}
-<a href="{{ shop.get_absolute_url }}" class="card group flex flex-col overflow-hidden hover:border-brand-300">
-  <div class="relative h-28 bg-gradient-to-br from-brand-600 to-brand-800">
-    {% if shop.cover %}<img src="{{ shop.cover.url }}" alt="" class="h-full w-full object-cover" loading="lazy">{% endif %}
-    {% if shop.is_featured %}<span class="absolute right-2 top-2 rounded-full bg-sun-500 px-2 py-0.5 text-xs font-bold text-brand-950">{% translate "À la une" %}</span>{% endif %}
+<a href="{{ shop.get_absolute_url }}" data-reveal class="card card-hover group flex flex-col overflow-hidden">
+  <div class="relative h-28 overflow-hidden bg-gradient-to-br from-night-600 via-night-700 to-night-900">
+    <div class="grid-pattern absolute inset-0"></div>
+    {% if shop.cover %}<img src="{{ shop.cover.url }}" alt="" class="relative h-full w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy">{% endif %}
+    {% if shop.is_featured %}<span class="absolute right-2 top-2 rounded-full bg-sun-500 px-2 py-0.5 text-xs font-bold text-night-950">{% translate "À la une" %}</span>{% endif %}
   </div>
   <div class="flex flex-1 flex-col p-4 pt-0">
-    <div class="relative -mt-8 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border-4 border-white bg-brand-50 text-2xl shadow">
+    <div class="relative -mt-8 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border-4 border-surface bg-brand-50 text-2xl shadow">
       {% if shop.logo %}<img src="{{ shop.logo.url }}" alt="{{ shop.name }}" class="h-full w-full object-cover">{% else %}{{ shop.shop_type.icon|default:"🏪" }}{% endif %}
     </div>
     <h3 class="mt-2 truncate font-semibold group-hover:text-brand-700">{{ shop.name }}</h3>

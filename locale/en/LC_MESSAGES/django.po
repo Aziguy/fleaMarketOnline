@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-28 16:21+0100\n"
+"POT-Creation-Date: 2026-10-29 10:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -502,8 +502,13 @@ msgstr "The mall online"
 msgid "Mfoundi Mall, Yaoundé"
 msgstr "Mfoundi Mall, Yaoundé"
 
-msgid "Toutes les boutiques du mall, en ligne."
-msgstr "Every shop in the mall, online."
+#| msgid "Toutes les boutiques du mall, en ligne."
+msgid "Toutes les boutiques du mall,"
+msgstr "Every shop in the mall,"
+
+#| msgid "en ligne"
+msgid "en ligne."
+msgstr "online."
 
 msgid ""
 "Commandez, réservez, puis payez sur place en espèces, MTN MoMo ou Orange "
@@ -512,14 +517,46 @@ msgstr ""
 "Order, book, then pay on site in cash, MTN MoMo or Orange Money. In-store "
 "pickup or delivery."
 
-msgid "Riz, téléphone, parfum, coiffure..."
-msgstr "Rice, phone, perfume, hairdresser..."
-
 msgid "Rechercher"
 msgstr "Search"
 
+msgid "Riz, téléphone, parfum, coiffure..."
+msgstr "Rice, phone, perfume, hairdresser..."
+
+msgid "Boutiques"
+msgstr "Shops"
+
+msgid "Produits"
+msgstr "Products"
+
+#| msgid "Paiement prévu"
+msgid "Paiement"
+msgstr "Payment"
+
+msgid "Sur place"
+msgstr "On site"
+
+msgid "Commande"
+msgstr "Order"
+
+msgid "Prête au retrait"
+msgstr "Ready for pickup"
+
+msgid "Votre code de retrait"
+msgstr "Your pickup code"
+
+msgid "Espèces"
+msgstr "Cash"
+
+msgid "Explorer"
+msgstr "Explore"
+
 msgid "Parcourir par type de boutique"
 msgstr "Browse by shop type"
+
+#| msgid "Le mall en ligne"
+msgid "Le mall"
+msgstr "The mall"
 
 msgid "Boutiques du mall"
 msgstr "Mall shops"
@@ -527,8 +564,15 @@ msgstr "Mall shops"
 msgid "Tout voir"
 msgstr "See all"
 
+msgid "Bons plans"
+msgstr "Good deals"
+
 msgid "Promotions"
 msgstr "Deals"
+
+#| msgid "Nouveautés"
+msgid "Nouveau"
+msgstr "New"
 
 msgid "Nouveautés"
 msgstr "New arrivals"
@@ -703,9 +747,6 @@ msgstr "Search"
 msgid "Rechercher un produit, une boutique..."
 msgstr "Search for a product, a shop..."
 
-msgid "Boutiques"
-msgstr "Shops"
-
 #, python-format
 msgid "%(n)s produit pour « %(q)s »"
 msgid_plural "%(n)s produits pour « %(q)s »"
@@ -747,15 +788,11 @@ msgstr ""
 msgid "Voir ma vitrine"
 msgstr "View my storefront"
 
-#| msgid "type de boutique"
 msgid "Changer de boutique"
 msgstr "Switch shop"
 
 msgid "Tableau de bord"
 msgstr "Dashboard"
-
-msgid "Produits"
-msgstr "Products"
 
 msgid "Rayons"
 msgstr "Aisles"
@@ -769,7 +806,6 @@ msgstr "Details & payment"
 msgid "Horaires"
 msgstr "Opening hours"
 
-#| msgid "Toutes les boutiques"
 msgid "Ajouter une boutique"
 msgstr "Add a shop"
 
@@ -891,9 +927,6 @@ msgstr "Used to show “Open / Closed” and to validate bookings."
 
 msgid "Fermé"
 msgstr "Closed"
-
-msgid "Commande"
-msgstr "Order"
 
 msgid "Livraison"
 msgstr "Delivery"
@@ -1063,9 +1096,6 @@ msgstr "Customer pickup code"
 msgid "Paiement reçu par"
 msgstr "Payment received by"
 
-msgid "Espèces"
-msgstr "Cash"
-
 msgid "MTN Mobile Money"
 msgstr "MTN Mobile Money"
 
@@ -1074,9 +1104,6 @@ msgstr "Orange Money"
 
 msgid "Retrait en boutique"
 msgstr "In-store pickup"
-
-msgid "Prête au retrait"
-msgstr "Ready for pickup"
 
 msgid "En livraison"
 msgstr "Out for delivery"
@@ -1202,9 +1229,6 @@ msgstr "Delivery (if chosen)"
 
 msgid "gratuite"
 msgstr "free"
-
-msgid "Votre code de retrait"
-msgstr "Your pickup code"
 
 msgid "Donnez ce code au commerçant au moment du retrait."
 msgstr "Give this code to the merchant at pickup."
@@ -1566,6 +1590,10 @@ msgstr ""
 "Every Mfoundi Mall shop online: order, book and pay on site in cash or "
 "Mobile Money."
 
+#| msgid "Annuler la commande"
+msgid "Aller au contenu"
+msgstr "Skip to content"
+
 msgid "facultatif"
 msgstr "optional"
 
@@ -1618,3 +1646,15 @@ msgstr "Next"
 
 msgid "À la une"
 msgstr "Featured"
+
+msgid "Thème"
+msgstr "Theme"
+
+msgid "Clair"
+msgstr "Light"
+
+msgid "Sombre"
+msgstr "Dark"
+
+msgid "Système"
+msgstr "System"

@@ -14,6 +14,10 @@ def home(request):
         .select_related("shop_type")
         .order_by("-is_featured", "-created_at")[:8],
         "latest_products": Product.objects.public().select_related("shop")[:12],
+        "stats": {
+            "shops": Shop.objects.public().count(),
+            "products": Product.objects.public().count(),
+        },
         "deals": Product.objects.public()
         .filter(compare_at_price__isnull=False)
         .select_related("shop")[:4],

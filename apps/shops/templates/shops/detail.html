@@ -5,17 +5,19 @@
 {% if not shop.is_public %}
   <div class="bg-sun-100 py-2 text-center text-sm text-amber-900">{% translate "Aperçu : cette boutique n'est pas encore visible du public." %} ({{ shop.get_status_display }})</div>
 {% endif %}
-<section class="relative h-40 bg-gradient-to-br from-brand-600 to-brand-900 sm:h-56">
-  {% if shop.cover %}<img src="{{ shop.cover.url }}" alt="" class="h-full w-full object-cover">{% endif %}
+<section class="relative h-40 overflow-hidden bg-gradient-to-br from-night-600 via-night-800 to-night-950 sm:h-56">
+  <div class="grid-pattern absolute inset-0"></div>
+  <div class="aurora -right-10 -top-24 h-72 w-72 bg-night-400/30"></div>
+  {% if shop.cover %}<img src="{{ shop.cover.url }}" alt="" class="relative h-full w-full object-cover">{% endif %}
 </section>
 <div class="container-page">
-  <div class="relative -mt-12 flex flex-col gap-4 sm:flex-row sm:items-end">
-    <div class="flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-3xl border-4 border-white bg-brand-50 text-4xl shadow-lg">
+  <div class="relative flex flex-col gap-4 sm:flex-row sm:items-end">
+    <div class="-mt-12 flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-3xl border-4 border-surface bg-brand-50 text-4xl shadow-lg">
       {% if shop.logo %}<img src="{{ shop.logo.url }}" alt="{{ shop.name }}" class="h-full w-full object-cover">{% else %}{{ shop.shop_type.icon }}{% endif %}
     </div>
     <div class="flex-1">
       <p class="text-sm font-medium text-brand-700">{{ shop.shop_type.label }}</p>
-      <h1 class="text-2xl sm:text-3xl">{{ shop.name }}</h1>
+      <h1 class="text-2xl sm:text-4xl">{{ shop.name }}</h1>
       {% if shop.tagline %}<p class="text-stone-500">{{ shop.tagline }}</p>{% endif %}
     </div>
     <div class="flex flex-wrap gap-2">
@@ -59,9 +61,9 @@
         </div>
         {% if categories %}
         <div class="mt-4 flex gap-2 overflow-x-auto pb-1">
-          <a href="{{ shop.get_absolute_url }}" class="badge whitespace-nowrap px-3 py-1.5 text-sm {% if not category %}bg-brand-600 text-white{% else %}bg-white text-stone-700 ring-1 ring-stone-200{% endif %}">{% translate "Tout" %}</a>
+          <a href="{{ shop.get_absolute_url }}" class="badge whitespace-nowrap px-3 py-1.5 text-sm {% if not category %}bg-brand-600 text-white{% else %}bg-surface text-stone-700 ring-1 ring-stone-200{% endif %}">{% translate "Tout" %}</a>
           {% for cat in categories %}
-            <a href="?rayon={{ cat.slug }}" class="badge whitespace-nowrap px-3 py-1.5 text-sm {% if category.pk == cat.pk %}bg-brand-600 text-white{% else %}bg-white text-stone-700 ring-1 ring-stone-200{% endif %}">{{ cat.name }} <span class="opacity-60">{{ cat.n }}</span></a>
+            <a href="?rayon={{ cat.slug }}" class="badge whitespace-nowrap px-3 py-1.5 text-sm {% if category.pk == cat.pk %}bg-brand-600 text-white{% else %}bg-surface text-stone-700 ring-1 ring-stone-200{% endif %}">{{ cat.name }} <span class="opacity-60">{{ cat.n }}</span></a>
           {% endfor %}
           {% if category %}<input type="hidden" name="rayon" value="{{ category.slug }}">{% endif %}
         </div>
