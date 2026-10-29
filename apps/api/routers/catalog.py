@@ -6,7 +6,7 @@ from ninja import Router
 from ninja.pagination import PageNumberPagination, paginate
 
 from apps.catalog.models import Product
-from apps.core.search import search_catalog
+from apps.core.search import search_catalog, smart_search
 from apps.shops.models import Shop, ShopType
 
 from ..schemas import ProductOut, SearchOut, ServiceOut, ShopDetailOut, ShopOut, ShopTypeOut
@@ -67,5 +67,7 @@ def product(request, shop_slug: str, slug: str):
 
 
 @router.get("/search", response=SearchOut)
-def search(request, q: str):
-    return search_catalog(q, products_limit=24, shops_limit=8)
+def search(request, q: str, smart: bool = False):
+    """`smart=true` élargit la recherche avec l'assistant IA quand elle trouve peu de produits."""
+    run = smart_search if smart else search_catalog
+    return run(q, products_limit=24, shops_limit=8)

@@ -7,6 +7,13 @@
     <button class="btn-primary">{% translate "Rechercher" %}</button>
   </form>
   {% if q %}
+    {% if result.expanded_terms %}
+      <p class="mt-6 flex flex-wrap items-center gap-2 text-sm text-stone-500">
+        {% include "icons/sparkles.html" with class="h-4 w-4 text-brand-600" %}
+        {% translate "Recherche élargie par l'assistant :" %}
+        {% for term in result.expanded_terms %}<span class="badge-green">{{ term }}</span>{% endfor %}
+      </p>
+    {% endif %}
     {% if result.shops %}
       <h2 class="section-title mt-8">{% translate "Boutiques" %}</h2>
       <div class="mt-4 grid grid-cols-2 gap-4 md:grid-cols-4">{% for shop in result.shops %}{% include "includes/shop_card.html" %}{% endfor %}</div>

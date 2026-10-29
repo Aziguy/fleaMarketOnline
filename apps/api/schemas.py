@@ -107,6 +107,7 @@ class ServiceOut(Schema):
 
 class SearchOut(Schema):
     query: str
+    expanded_terms: list[str]
     shops: list[ShopOut]
     products: list[ProductOut]
 

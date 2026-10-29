@@ -11,7 +11,18 @@
     {% include "includes/field.html" with field=form.stock %}
     {% include "includes/field.html" with field=form.price %}
     {% include "includes/field.html" with field=form.compare_at_price %}
-    {% include "includes/field.html" with field=form.description wrapper="sm:col-span-2" %}
+    <div class="sm:col-span-2">
+      <div id="description-field">{% include "includes/field.html" with field=form.description %}</div>
+      {% if AI_ENABLED %}
+      <button type="button" class="btn-secondary btn-sm mt-2"
+              hx-post="{% url 'dashboard:ai_description' %}" hx-include="closest form" hx-target="#description-field"
+              hx-vals='{"product": "{{ product.pk|default:'' }}"}' hx-indicator="this">
+        {% include "icons/sparkles.html" with class="h-4 w-4" %} {% translate "Rédiger avec l'IA" %}
+        <span class="htmx-indicator h-3.5 w-3.5 animate-spin rounded-full border-2 border-brand-500 border-t-transparent"></span>
+      </button>
+      <p class="help">{% translate "L'assistant propose un texte à partir du nom, du rayon, du prix, de vos notes et de la photo. Relisez avant d'enregistrer." %}</p>
+      {% endif %}
+    </div>
     {% include "includes/field.html" with field=form.image %}
     {% include "includes/field.html" with field=form.is_active %}
   </div>

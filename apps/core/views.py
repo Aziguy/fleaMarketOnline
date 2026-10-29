@@ -5,7 +5,7 @@ from django.shortcuts import render
 from apps.catalog.models import Product
 from apps.shops.models import Shop, ShopType
 
-from .search import search_catalog
+from .search import search_catalog, smart_search
 
 HOME_CACHE_SECONDS = 120
 
@@ -40,7 +40,7 @@ def home(request):
 
 
 def search(request):
-    result = search_catalog(request.GET.get("q"))
+    result = smart_search(request.GET.get("q"))
     return render(request, "core/search.html", {"q": result.query, "result": result})
 
 

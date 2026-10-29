@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "apps.bookings",
     "apps.dashboard",
     "apps.api",
+    "apps.ai",
 ]
 
 MIDDLEWARE = [
@@ -129,6 +130,13 @@ SITE_EMAIL = env("SITE_EMAIL", default="contact@mfoundimall.cm")
 MALL_ADDRESS = env("MALL_ADDRESS", default="Marché Mfoundi, Yaoundé, Cameroun")
 
 APP_VERSION = env("APP_VERSION", default="dev")
+
+ANTHROPIC_API_KEY = env("ANTHROPIC_API_KEY", default="")
+AI_ENABLED = env.bool("AI_ENABLED", default=True)
+AI_MODEL = env("AI_MODEL", default="claude-opus-5-5")
+AI_TIMEOUT_SECONDS = env.float("AI_TIMEOUT_SECONDS", default=30)
+AI_MAX_RETRIES = env.int("AI_MAX_RETRIES", default=2)
+AI_DESCRIPTIONS_PER_HOUR = env.int("AI_DESCRIPTIONS_PER_HOUR", default=30)
 
 API_ANON_RATE = env("API_ANON_RATE", default="120/m")
 API_AUTH_RATE = env("API_AUTH_RATE", default="600/m")

@@ -1,7 +1,9 @@
 from datetime import timedelta
 from typing import Any
 
+from django.conf import settings
 from django.contrib import messages
+from django.core.cache import cache
 from django.core.paginator import Paginator
 from django.db.models import Q, Sum
 from django.shortcuts import get_object_or_404, redirect, render
@@ -9,6 +11,7 @@ from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
+from apps.ai import services as ai
 from apps.bookings import services as booking_services
 from apps.bookings.forms import MerchantBookingForm
 from apps.bookings.models import Booking
@@ -312,3 +315,36 @@ def booking_action(request, reference):
             {"booking": booking, "form": MerchantBookingForm()},
         )
     return redirect("dashboard:bookings")
+
+
+@merchant_required
+@require_POST
+def ai_description(request):
+    """Brouillon de description produit rédigé par l'assistant IA (fragment HTMX)."""
+    shop = request.shop
+    product = shop.products.filter(pk=request.POST.get("product") or None).first()
+    category = shop.categories.filter(pk=request.POST.get("category") or None).first()
+    error = ""
+    description = request.POST.get("description", "")
+    key = f"ai:quota:{request.user.pk}"
+    used = cache.get(key, 0)
+    if not request.POST.get("name", "").strip():
+        error = _("Indiquez d'abord le nom du produit.")
+    elif used >= settings.AI_DESCRIPTIONS_PER_HOUR:
+        error = _("Limite atteinte. Réessayez dans une heure.")
+    else:
+        cache.set(key, used + 1, 3600)
+        try:
+            description = ai.describe_product(
+                name=request.POST["name"].strip()[:120],
+                shop_type=shop.shop_type.name,
+                category=category.name if category else "",
+                price=request.POST.get("price") or None,
+                notes=description[:500],
+                image=product.image if product else None,
+            )
+        except ai.AIUnavailable:
+            error = _("L'assistant n'est pas disponible pour le moment.")
+    return render(
+        request, "dashboard/_ai_description.html", {"description": description, "error": error}
+    )

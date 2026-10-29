@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-29 10:28+0100\n"
+"POT-Creation-Date: 2026-10-29 10:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -199,13 +199,15 @@ msgstr "Password changed."
 msgid "Mot de passe réinitialisé. Vous pouvez vous connecter."
 msgstr "Password reset. You can now log in."
 
+msgid "Assistant IA"
+msgstr "AI assistant"
+
 msgid "API"
 msgstr "API"
 
 msgid "préfixe"
 msgstr "prefix"
 
-#| msgid "créée le"
 msgid "créé le"
 msgstr "created on"
 
@@ -798,6 +800,9 @@ msgstr "Search"
 msgid "Rechercher un produit, une boutique..."
 msgstr "Search for a product, a shop..."
 
+msgid "Recherche élargie par l'assistant :"
+msgstr "Search widened by the assistant:"
+
 #, python-format
 msgid "%(n)s produit pour « %(q)s »"
 msgid_plural "%(n)s produits pour « %(q)s »"
@@ -820,6 +825,9 @@ msgstr "New order %(ref)s"
 #, python-format
 msgid "Nouvelle réservation %(ref)s"
 msgstr "New booking %(ref)s"
+
+msgid "Proposition de l'assistant : modifiez-la librement."
+msgstr "Assistant suggestion: edit it freely."
 
 msgid "Message au client (facultatif)"
 msgstr "Message to the customer (optional)"
@@ -1038,6 +1046,16 @@ msgstr "New product"
 msgid "Modifier le produit"
 msgstr "Edit product"
 
+msgid "Rédiger avec l'IA"
+msgstr "Write with AI"
+
+msgid ""
+"L'assistant propose un texte à partir du nom, du rayon, du prix, de vos "
+"notes et de la photo. Relisez avant d'enregistrer."
+msgstr ""
+"The assistant suggests a text from the name, aisle, price, your notes and "
+"the photo. Review it before saving."
+
 msgid "Photos supplémentaires"
 msgstr "Additional photos"
 
@@ -1124,6 +1142,15 @@ msgstr "Order: %(status)s."
 #, python-format
 msgid "Réservation : %(s)s."
 msgstr "Booking: %(s)s."
+
+msgid "Indiquez d'abord le nom du produit."
+msgstr "Enter the product name first."
+
+msgid "Limite atteinte. Réessayez dans une heure."
+msgstr "Limit reached. Try again in an hour."
+
+msgid "L'assistant n'est pas disponible pour le moment."
+msgstr "The assistant is not available right now."
 
 msgid "Mode de remise"
 msgstr "Handover method"
