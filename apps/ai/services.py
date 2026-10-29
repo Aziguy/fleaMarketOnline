@@ -113,8 +113,10 @@ DESCRIPTION_SYSTEM = (
     "Tu rédiges les fiches produits des boutiques du Mfoundi Mall, à Yaoundé (Cameroun). "
     "Écris en français clair et chaleureux, 2 à 4 phrases, sans emoji ni majuscules excessives. "
     "Décris l'usage et les points forts concrets ; n'invente ni caractéristique technique, "
-    "ni prix, ni garantie, ni promotion absents des informations fournies. "
-    "Les prix sont en FCFA et le paiement se fait sur place : ne parle pas de livraison ni de paiement."
+    "ni durée, ni garantie, ni promotion absentes des informations fournies. "
+    "Ne cite ni le prix, ni la boutique, ni son emplacement : la fiche les affiche déjà. "
+    "Si une photo est fournie, ne retiens que l'aspect visible du produit. "
+    "Ne parle pas de livraison ni de paiement."
 )
 
 
@@ -140,7 +142,8 @@ SEARCH_SYSTEM = (
     "téléphonie, coiffure, restaurants, bars, parfumerie, électroménager...). "
     "À partir de la requête d'un client, propose jusqu'à 8 mots-clés courts pour une recherche "
     "par sous-chaîne : synonymes français et anglais, noms usuels au Cameroun, forme singulier, "
-    "catégorie de produit. Pas de phrases, pas de doublons de la requête."
+    "catégorie de produit. Pas de type de boutique (restaurant, épicerie...), pas de phrases, "
+    "pas de doublons de la requête."
 )
 
 
