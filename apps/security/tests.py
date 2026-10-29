@@ -303,3 +303,33 @@ def test_disabling_last_factor_drops_recovery_codes(client, customer):
     client.post(reverse("security:totp_disable"))
     assert not customer.recovery_codes.exists()
     assert factors.summary(customer)["level"] == factors.Level.ESSENTIAL
+
+
+@pytest.mark.parametrize(
+    ("count", "forwarded", "expected"),
+    [
+        (0, "1.1.1.1", "10.0.0.2"),
+        (1, "1.1.1.1", "1.1.1.1"),
+        (1, "6.6.6.6, 1.1.1.1", "1.1.1.1"),
+        (2, "1.1.1.1, 172.18.0.1", "1.1.1.1"),
+        (2, "", "10.0.0.2"),
+    ],
+)
+def test_client_ip_behind_trusted_proxies(rf, settings, count, forwarded, expected):
+    from .throttle import client_ip
+
+    settings.TRUSTED_PROXY_COUNT = count
+    request = rf.get("/", REMOTE_ADDR="10.0.0.2", HTTP_X_FORWARDED_FOR=forwarded)
+    assert client_ip(request) == expected
+
+
+def test_shared_ip_does_not_lock_other_accounts(client, customer, merchant, settings):
+    settings.TRUSTED_PROXY_COUNT = 1
+    for n in range(30):
+        client.post(
+            LOGIN, {"username": f"6900000{n:02d}", "password": "x"}, HTTP_X_FORWARDED_FOR="1.1.1.1"
+        )
+    response = client.post(
+        LOGIN, {"username": "677111111", "password": PASSWORD}, HTTP_X_FORWARDED_FOR="1.1.1.1"
+    )
+    assert response.status_code == 302
