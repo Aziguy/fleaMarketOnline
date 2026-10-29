@@ -1,5 +1,6 @@
 {% load i18n static mall %}
-<article data-reveal class="card card-hover group flex flex-col overflow-hidden">
+<article data-reveal class="card card-hover group relative flex flex-col overflow-hidden">
+  {% include "favorites/_button.html" with kind="product" obj=product size="sm" state="" %}
   <a href="{{ product.get_absolute_url }}" class="relative block aspect-square overflow-hidden bg-brand-50">
     <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/placeholder.svg' %}{% endif %}" alt="{{ product.name }}" loading="lazy"
          class="bg-brand-50 h-full w-full object-cover transition duration-500 group-hover:scale-110">

@@ -23,6 +23,7 @@
     <div class="flex flex-wrap gap-2">
       <a href="{% whatsapp shop.contact_whatsapp %}" target="_blank" rel="noopener" class="btn-whatsapp">{% icon "whatsapp" %} WhatsApp</a>
       <a href="tel:{{ shop.phone }}" class="btn-secondary">{% icon "phone" %} {% translate "Appeler" %}</a>
+      {% include "favorites/_button.html" with kind="shop" obj=shop state="" size="" %}
       {% if shop.shop_type.takes_appointments or shop.shop_type.takes_table_bookings %}
         <a href="{% url 'bookings:create' shop.slug %}" class="btn-primary">{% icon "calendar" %} {% if shop.shop_type.takes_table_bookings %}{% translate "Réserver une table" %}{% else %}{% translate "Prendre rendez-vous" %}{% endif %}</a>
       {% endif %}

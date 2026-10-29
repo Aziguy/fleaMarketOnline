@@ -1,0 +1,24 @@
+{% extends "accounts/_account_layout.html" %}{% load i18n %}
+{% block title %}{% translate "Mes favoris" %}{% endblock %}
+{% block account %}
+<h1 class="text-2xl">{% translate "Mes favoris" %}</h1>
+<p class="mt-1 text-sm text-stone-500">{% translate "Vous êtes prévenu dès qu'un produit suivi revient en stock." %}</p>
+{% if shops %}
+  <h2 class="mt-8 text-lg">{% translate "Boutiques suivies" %}</h2>
+  <div class="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+    {% for shop in shops %}{% include "includes/shop_card.html" %}{% endfor %}
+  </div>
+{% endif %}
+{% if products %}
+  <h2 class="mt-8 text-lg">{% translate "Produits favoris" %}</h2>
+  <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4">
+    {% for product in products %}{% include "includes/product_card.html" %}{% endfor %}
+  </div>
+{% endif %}
+{% if not shops and not products %}
+  <div class="mt-6">
+    {% translate "Aucun favori pour l'instant" as t %}{% translate "Touchez le cœur sur un produit ou « Suivre » sur une boutique." as x %}{% url 'shops:list' as u %}{% translate "Découvrir les boutiques" as c %}
+    {% include "includes/empty.html" with title=t text=x url=u cta=c icon="heart" %}
+  </div>
+{% endif %}
+{% endblock %}

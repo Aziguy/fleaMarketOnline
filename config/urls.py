@@ -24,6 +24,8 @@ urlpatterns = [
     path("commandes/", include("apps.orders.urls")),
     path("reservations/", include("apps.bookings.urls")),
     path("espace-boutique/", include("apps.dashboard.urls")),
+    path("notifications/", include("apps.notifications.urls")),
+    path("favoris/", include("apps.favorites.urls")),
 ]
 
 if settings.DEBUG:

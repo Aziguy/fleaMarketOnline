@@ -1,0 +1,22 @@
+{% extends "accounts/_account_layout.html" %}{% load i18n %}
+{% block title %}{% translate "Notifications" %}{% endblock %}
+{% block account %}
+<h1 class="text-2xl">{% translate "Notifications" %}</h1>
+<div class="mt-6 space-y-2">
+  {% for n in page %}
+  <a href="{{ n.url|default:'#' }}" class="card flex items-start gap-3 p-4 hover:border-brand-300{% if not n.read_at %} border-brand-300 bg-brand-50/60{% endif %}">
+    <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-100 text-brand-700">{% icon n.icon class="h-5 w-5" %}</span>
+    <span class="min-w-0 flex-1">
+      <span class="block font-medium">{{ n.title }}</span>
+      {% if n.body %}<span class="mt-0.5 block text-sm text-stone-500">{{ n.body }}</span>{% endif %}
+      <span class="mt-1 block text-xs text-stone-400">{{ n.created_at|timesince }}</span>
+    </span>
+    {% if not n.read_at %}<span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-brand-500" aria-label="{% translate 'Non lue' %}"></span>{% endif %}
+  </a>
+  {% empty %}
+    {% translate "Aucune notification" as t %}{% translate "Vous serez prévenu ici du retour en stock de vos favoris et des réponses à vos avis." as x %}
+    {% include "includes/empty.html" with title=t text=x icon="bell" %}
+  {% endfor %}
+</div>
+{% include "includes/pagination.html" %}
+{% endblock %}

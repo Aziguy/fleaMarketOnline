@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     "apps.dashboard",
     "apps.api",
     "apps.ai",
+    "apps.notifications",
+    "apps.favorites",
 ]
 
 MIDDLEWARE = [
@@ -67,6 +69,8 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "apps.core.context_processors.site",
                 "apps.cart.context_processors.cart",
+                "apps.notifications.context_processors.notifications",
+                "apps.favorites.context_processors.favorites",
             ],
             "builtins": ["apps.core.templatetags.mall"],
         },

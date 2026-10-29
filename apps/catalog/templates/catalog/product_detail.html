@@ -33,7 +33,11 @@
       </form>
       {% if in_cart %}<p class="mt-2 text-sm text-stone-500">{% blocktranslate with n=in_cart %}Déjà {{ n }} dans votre panier.{% endblocktranslate %} <a href="{% url 'cart:detail' %}" class="text-brand-700 hover:underline">{% translate "Voir le panier" %}</a></p>{% endif %}
       {% endif %}
-      <a href="{% whatsapp product.shop.contact_whatsapp product.name %}" target="_blank" rel="noopener" class="btn-whatsapp mt-3 w-full sm:w-auto">{% icon "whatsapp" %} {% translate "Poser une question" %}</a>
+      <div class="mt-3 flex flex-wrap gap-2">
+        <a href="{% whatsapp product.shop.contact_whatsapp product.name %}" target="_blank" rel="noopener" class="btn-whatsapp flex-1 sm:flex-none">{% icon "whatsapp" %} {% translate "Poser une question" %}</a>
+        {% include "favorites/_button.html" with kind="product" obj=product state="" size="" %}
+      </div>
+      {% if not product.in_stock %}<p class="mt-2 text-sm text-stone-500">{% translate "Ajoutez ce produit à vos favoris pour être prévenu de son retour en stock." %}</p>{% endif %}
       {% if product.description %}<div class="mt-8"><h2 class="font-semibold">{% translate "Description" %}</h2><p class="mt-2 whitespace-pre-line text-sm text-stone-600">{{ product.description }}</p></div>{% endif %}
       <a href="{{ product.shop.get_absolute_url }}" class="card mt-8 flex items-center gap-3 p-4 hover:border-brand-300">
         <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 text-brand-700">{% icon product.shop.shop_type.icon %}</span>

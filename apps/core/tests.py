@@ -160,3 +160,10 @@ def test_shop_types_use_bundled_icons():
     from apps.shops.models import ShopType
 
     assert set(ShopType.objects.values_list("icon", flat=True)) <= set(ICONS["lucide"])
+
+
+def test_notification_icons_are_bundled():
+    from apps.core.templatetags.mall import ICONS
+    from apps.notifications.models import Notification
+
+    assert set(Notification.ICONS.values()) <= set(ICONS["lucide"])

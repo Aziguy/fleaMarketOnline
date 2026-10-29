@@ -1,0 +1,14 @@
+{% load i18n %}{% if kind == "shop" %}{% url 'favorites:toggle_shop' obj.pk as action %}{% else %}{% url 'favorites:toggle_product' obj.pk as action %}{% endif %}
+{% if state == "on" or not state and kind == "shop" and obj.pk in favorite_ids.shops or not state and kind == "product" and obj.pk in favorite_ids.products %}{% translate "Retirer des favoris" as label %}
+<form method="post" action="{{ action }}" hx-post="{{ action }}" hx-swap="outerHTML" class="{% if size == 'sm' %}absolute right-2 top-2 z-10{% endif %}">
+  {% csrf_token %}<input type="hidden" name="next" value="{{ request.get_full_path }}">{% if size %}<input type="hidden" name="size" value="{{ size }}">{% endif %}
+  {% if size == "sm" %}<button class="flex h-9 w-9 items-center justify-center rounded-full bg-surface/90 text-red-500 shadow backdrop-blur transition hover:scale-110" aria-pressed="true" aria-label="{{ label }}" title="{{ label }}">{% icon "heart" class="h-5 w-5 fill-current animate-pop-in" %}</button>
+  {% else %}<button class="btn-secondary text-red-600" aria-pressed="true">{% icon "heart" class="h-5 w-5 fill-current animate-pop-in" %} {% translate "Suivi" %}</button>{% endif %}
+</form>
+{% else %}{% translate "Ajouter aux favoris" as label %}
+<form method="post" action="{{ action }}" hx-post="{{ action }}" hx-swap="outerHTML" class="{% if size == 'sm' %}absolute right-2 top-2 z-10{% endif %}">
+  {% csrf_token %}<input type="hidden" name="next" value="{{ request.get_full_path }}">{% if size %}<input type="hidden" name="size" value="{{ size }}">{% endif %}
+  {% if size == "sm" %}<button class="flex h-9 w-9 items-center justify-center rounded-full bg-surface/90 text-stone-500 shadow backdrop-blur transition hover:scale-110 hover:text-red-500" aria-pressed="false" aria-label="{{ label }}" title="{{ label }}">{% icon "heart" class="h-5 w-5" %}</button>
+  {% else %}<button class="btn-secondary" aria-pressed="false">{% icon "heart" class="h-5 w-5" %} {% if kind == "shop" %}{% translate "Suivre" %}{% else %}{% translate "Favori" %}{% endif %}</button>{% endif %}
+</form>
+{% endif %}
