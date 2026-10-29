@@ -77,7 +77,7 @@
     <aside class="space-y-4">
       <div class="card card-body text-sm">
         <h3 class="font-semibold">{% translate "Infos pratiques" %}</h3>
-        <p class="mt-3 flex items-center gap-2">{% icon "map-pin" %} {{ shop.location_label }}</p>
+        <p class="mt-3 flex flex-wrap items-center gap-2">{% icon "map-pin" %} {{ shop.location_label }} <a href="{% url 'shops:map' %}?niveau={{ shop.level }}&boutique={{ shop.slug }}#local-{{ shop.slug }}" class="text-xs font-medium text-brand-700 hover:underline">{% translate "Voir sur le plan" %}</a></p>
         <p class="mt-2 flex items-center gap-2">{% icon "phone" %} <a href="tel:{{ shop.phone }}" class="hover:text-brand-700">{{ shop.phone|phone }}</a></p>
         {% with open=shop.is_open_now %}
           {% if open is not None %}<p class="mt-3">{% if open %}<span class="badge-green">{% translate "Ouvert maintenant" %}</span>{% else %}<span class="badge-red">{% translate "Fermé maintenant" %}</span>{% endif %}</p>{% endif %}

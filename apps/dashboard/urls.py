@@ -30,6 +30,9 @@ urlpatterns = [
     path("reservations/<str:reference>/action/", views.booking_action, name="booking_action"),
     path("statistiques/", views.statistics, name="statistics"),
     path("statistiques/commandes.csv", views.orders_export, name="orders_export"),
+    path("affiche/", views.poster, name="poster"),
+    path("affiche/qr.svg", views.poster_qr, {"kind": "svg"}, name="poster_qr_svg"),
+    path("affiche/qr.png", views.poster_qr, {"kind": "png"}, name="poster_qr_png"),
     path("avis/", views.reviews, name="reviews"),
     path("avis/<int:pk>/repondre/", views.review_reply, name="review_reply"),
 ]

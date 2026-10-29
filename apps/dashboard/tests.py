@@ -268,3 +268,12 @@ def test_orders_export_csv(merchant_client, shop, customer):
     assert content.startswith("﻿Référence;")
     assert "'=HYPERLINK(1)" in content and "1 x Riz 5 kg" in content and ";4500\r\n" in content
     assert "attachment" in response["Content-Disposition"]
+
+
+def test_poster_and_qr_downloads(merchant_client, shop):
+    page = merchant_client.get(reverse("dashboard:poster")).content.decode()
+    assert shop.name in page and "<svg" in page and shop.get_absolute_url() in page
+    png = merchant_client.get(reverse("dashboard:poster_qr_png"))
+    assert png["Content-Type"] == "image/png" and png.content[:4] == b"\x89PNG"
+    svg = merchant_client.get(reverse("dashboard:poster_qr_svg"))
+    assert svg["Content-Type"] == "image/svg+xml" and b"<svg" in svg.content

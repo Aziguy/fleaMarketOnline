@@ -1,16 +1,19 @@
 import csv
 from datetime import date, timedelta
+from io import BytesIO
 from itertools import chain
 from typing import Any
 
+import segno
 from django.conf import settings
 from django.contrib import messages
 from django.core.cache import cache
 from django.core.paginator import Paginator
 from django.db.models import Q, Sum
-from django.http import StreamingHttpResponse
+from django.http import HttpResponse, StreamingHttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
@@ -427,5 +430,35 @@ def orders_export(request):
     return StreamingHttpResponse(
         chain(["﻿"], rows),
         content_type="text/csv; charset=utf-8",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
+
+
+def _shop_qr(request):
+    return segno.make(request.build_absolute_uri(request.shop.get_absolute_url()), error="m")
+
+
+@merchant_required
+def poster(request):
+    qr = _shop_qr(request)
+    return render(
+        request,
+        "dashboard/poster.html",
+        {
+            "shop": request.shop,
+            "qr_svg": mark_safe(qr.svg_inline(scale=1, border=0, omitsize=True, dark="#052e16")),
+            "shop_url": request.build_absolute_uri(request.shop.get_absolute_url()),
+        },
+    )
+
+
+@merchant_required
+def poster_qr(request, kind):
+    buffer = BytesIO()
+    _shop_qr(request).save(buffer, kind=kind, scale=16, border=2, dark="#052e16")
+    filename = f"qr-{request.shop.slug}.{kind}"
+    return HttpResponse(
+        buffer.getvalue(),
+        content_type="image/svg+xml" if kind == "svg" else "image/png",
         headers={"Content-Disposition": f'attachment; filename="{filename}"'},
     )

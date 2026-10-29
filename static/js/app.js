@@ -224,3 +224,15 @@ document.addEventListener("input", (event) => {
     el.textContent = event.target.value;
   });
 });
+
+/* Plan du mall : onglets d'étage. */
+document.addEventListener("click", (event) => {
+  const tab = event.target.closest("[data-level-tab]");
+  if (!tab) return;
+  const level = tab.dataset.levelTab;
+  document.querySelectorAll("[data-level-tab]").forEach((t) => t.setAttribute("aria-selected", t === tab));
+  document.querySelectorAll("[data-level]").forEach((panel) => panel.classList.toggle("hidden", panel.dataset.level !== level));
+  const url = new URL(location.href);
+  url.searchParams.set("niveau", level);
+  history.replaceState(null, "", url);
+});

@@ -74,6 +74,21 @@ def shop_detail(request, slug):
     return render(request, template, context)
 
 
+def mall_map(request):
+    shops = Shop.objects.public().select_related("shop_type").order_by("unit", "name")
+    levels = [
+        {"code": code, "label": label, "shops": [s for s in shops if s.level == code]}
+        for code, label in Shop.Level.choices
+    ]
+    levels = [level for level in levels if level["shops"]]
+    current = request.GET.get("niveau") or (levels[0]["code"] if levels else "")
+    return render(
+        request,
+        "shops/map.html",
+        {"levels": levels, "current": current, "highlight": request.GET.get("boutique", "")},
+    )
+
+
 @login_required
 def open_shop(request):
     form = ShopCreateForm(request.POST or None, request.FILES or None)

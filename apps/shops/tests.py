@@ -87,3 +87,22 @@ def test_merchant_can_open_second_shop(merchant_client, merchant, shop):
     assert merchant.shops.count() == 2
     second = merchant.shops.get(name="Resto Paul")
     assert merchant_client.session["dashboard_shop_id"] == second.pk
+
+
+def test_mall_map_groups_public_shops_by_level(client, shop, salon):
+    from apps.shops.models import Shop
+
+    Shop.objects.filter(pk=salon.pk).update(level=Shop.Level.FIRST, unit="B12")
+    Shop.objects.create(
+        owner=shop.owner,
+        shop_type=shop.shop_type,
+        name="Boutique cachée",
+        phone="677000000",
+        status=Shop.Status.PENDING,
+    )
+    response = client.get(reverse("shops:map"), {"niveau": "1"})
+    levels = {
+        level["code"]: [s.name for s in level["shops"]] for level in response.context["levels"]
+    }
+    assert levels == {"rdc": [shop.name], "1": [salon.name]}
+    assert response.context["current"] == "1" and "B12" in response.content.decode()

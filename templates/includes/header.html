@@ -23,9 +23,10 @@
       <span class="flex-1 truncate">{% translate "Rechercher un produit, une boutique..." %}</span>
       <span class="kbd">Ctrl K</span>
     </a>
-    <nav class="ml-auto hidden items-center gap-1 lg:flex">
+    <nav class="ml-auto hidden items-center gap-1 whitespace-nowrap lg:flex">
       <a href="{% url 'shops:list' %}" class="nav-link">{% translate "Boutiques" %}</a>
-      <a href="{% url 'core:how_it_works' %}" class="nav-link">{% translate "Comment ça marche" %}</a>
+      <a href="{% url 'shops:map' %}" class="nav-link">{% translate "Plan" %}</a>
+      <a href="{% url 'core:how_it_works' %}" class="nav-link hidden xl:inline-flex">{% translate "Comment ça marche" %}</a>
       {% if not user.is_merchant %}<a href="{% url 'core:merchants' %}" class="nav-link">{% translate "Vendre au mall" %}</a>{% endif %}
     </nav>
     <div class="ml-auto flex items-center gap-0.5 lg:ml-2">
@@ -68,6 +69,7 @@
   <nav id="mobile-nav" class="hidden border-t border-stone-200 lg:hidden">
     <div class="container-page flex flex-col py-2">
       <a href="{% url 'shops:list' %}" class="nav-link">{% translate "Boutiques" %}</a>
+      <a href="{% url 'shops:map' %}" class="nav-link">{% translate "Plan du mall" %}</a>
       <a href="{% url 'core:how_it_works' %}" class="nav-link">{% translate "Comment ça marche" %}</a>
       <a href="{% url 'core:merchants' %}" class="nav-link">{% translate "Vendre au mall" %}</a>
       {% if not user.is_authenticated %}<a href="{% url 'accounts:signup' %}" class="nav-link">{% translate "Créer un compte" %}</a>{% endif %}

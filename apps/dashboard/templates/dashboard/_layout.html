@@ -43,6 +43,7 @@
         {% url 'dashboard:categories' as u %}<a href="{{ u }}" class="nav-link whitespace-nowrap {% if u in request.path %}nav-link-active{% endif %}">{% translate "Rayons" %}</a>
         {% url 'dashboard:services' as u %}<a href="{{ u }}" class="nav-link whitespace-nowrap {% if u in request.path %}nav-link-active{% endif %}">{% translate "Prestations" %}</a>
         {% url 'dashboard:settings' as u %}<a href="{{ u }}" class="nav-link whitespace-nowrap {% if request.path == u %}nav-link-active{% endif %}">{% translate "Informations & paiement" %}</a>
+        {% url 'dashboard:poster' as u %}<a href="{{ u }}" class="nav-link whitespace-nowrap {% if request.path == u %}nav-link-active{% endif %}">{% translate "Affiche QR code" %}</a>
         {% url 'dashboard:hours' as u %}<a href="{{ u }}" class="nav-link whitespace-nowrap {% if request.path == u %}nav-link-active{% endif %}">{% translate "Horaires" %}</a>
         <a href="{% url 'shops:open' %}" class="nav-link whitespace-nowrap text-brand-700">+ {% translate "Ajouter une boutique" %}</a>
       </nav>
