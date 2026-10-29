@@ -7,6 +7,8 @@ from django.urls import reverse_lazy
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.translation import gettext as _
 
+from apps.security import devices, flow, throttle
+
 from .forms import (
     LoginForm,
     PasswordChangeForm,
@@ -30,11 +32,13 @@ def signup(request):
     form = SignupForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
         user = form.save()
-        login(request, user, backend="apps.accounts.backends.EmailOrPhoneBackend")
+        login(request, user, backend=flow.PASSWORD_BACKEND)
         messages.success(
             request, _("Bienvenue %(name)s, votre compte est créé.") % {"name": user.first_name}
         )
-        return redirect(_next_url(request))
+        response = redirect(_next_url(request))
+        devices.on_login(request, user, response)
+        return response
     return render(request, "accounts/signup.html", {"form": form, "next": _next_url(request, "")})
 
 
@@ -42,6 +46,13 @@ class LoginView(auth_views.LoginView):
     form_class = LoginForm
     template_name = "accounts/login.html"
     redirect_authenticated_user = True
+
+    def form_valid(self, form):
+        user = form.get_user()
+        throttle.reset("login", self.request, form.cleaned_data["username"])
+        if flow.needs_second_factor(self.request, user):
+            return flow.start(self.request, user, self.get_success_url())
+        return flow.complete(self.request, user, self.get_success_url(), backend=user.backend)
 
 
 class LogoutView(auth_views.LogoutView):

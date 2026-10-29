@@ -145,7 +145,7 @@ def test_dashboard_query_count_is_bounded(
             total=100,
         )
     for name in ["home", "orders", "products"]:
-        with django_assert_max_num_queries(14):
+        with django_assert_max_num_queries(15):
             merchant_client.get(reverse(f"dashboard:{name}"))
 
 

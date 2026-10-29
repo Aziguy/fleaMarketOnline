@@ -1,0 +1,31 @@
+{% extends "accounts/_account_layout.html" %}{% load i18n static %}
+{% block title %}{% translate "Ajouter une clé d'accès" %}{% endblock %}
+{% block scripts %}<script src="{% static 'js/passkeys.js' %}" defer></script>{% endblock %}
+{% block account %}
+<a href="{% url 'security:index' %}" class="text-sm text-brand-700 hover:underline">← {% translate "Sécurité du compte" %}</a>
+<h1 class="mt-2 text-2xl">{% translate "Ajouter une clé d'accès" %}</h1>
+<div class="mt-6 grid gap-6 lg:grid-cols-2">
+  <div class="card card-body text-sm text-stone-600">
+    <p>{% translate "Une clé d'accès remplace les codes : vous confirmez avec ce que votre appareil sait déjà faire." %}</p>
+    <ul class="mt-4 space-y-3">
+      <li class="flex gap-3">{% icon "smartphone" class="h-5 w-5 shrink-0 text-brand-600" %}<span><strong>{% translate "Téléphone" %}</strong> : {% translate "empreinte, visage ou code de déverrouillage." %}</span></li>
+      <li class="flex gap-3">{% icon "monitor" class="h-5 w-5 shrink-0 text-brand-600" %}<span><strong>{% translate "Ordinateur" %}</strong> : {% translate "Windows Hello (code PIN suffit), Touch ID. Sans lecteur d'empreinte, choisissez « Utiliser un téléphone » et scannez le QR code affiché." %}</span></li>
+      <li class="flex gap-3">{% icon "key-round" class="h-5 w-5 shrink-0 text-brand-600" %}<span><strong>{% translate "Clé USB de sécurité" %}</strong> : {% translate "YubiKey ou équivalent, si vous en avez une." %}</span></li>
+    </ul>
+  </div>
+  <form class="card card-body space-y-4" onsubmit="return false">
+    <div>
+      <label class="label" for="passkey-name">{% translate "Nom de la clé" %}</label>
+      <input id="passkey-name" name="name" class="input" maxlength="80" value="{{ suggestion }}">
+      <p class="help">{% translate "Pour la reconnaître dans la liste, par exemple « Téléphone d'Awa »." %}</p>
+    </div>
+    <button type="button" class="btn-primary w-full" data-passkey data-mode="register"
+            data-options="{% url 'security:passkey_options' %}" data-verify="{% url 'security:passkey_register' %}"
+            data-error="{% translate "La clé d'accès n'a pas pu être enregistrée." %}" data-cancelled="{% translate "Opération annulée ou délai dépassé." %}">
+      {% icon "fingerprint" class="h-5 w-5" %} {% translate "Créer la clé d'accès" %}
+    </button>
+    <p data-passkey-status role="status" class="text-sm text-red-600"></p>
+    <p data-passkey-unsupported hidden class="text-sm text-amber-700">{% translate "Ce navigateur ne gère pas les clés d'accès. Mettez-le à jour ou utilisez l'application d'authentification." %}</p>
+  </form>
+</div>
+{% endblock %}

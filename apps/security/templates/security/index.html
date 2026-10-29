@@ -1,0 +1,119 @@
+{% extends "accounts/_account_layout.html" %}{% load i18n static %}
+{% block title %}{% translate "Sécurité du compte" %}{% endblock %}
+{% block scripts %}<script src="{% static 'js/passkeys.js' %}" defer></script>{% endblock %}
+{% block account %}
+<h1 class="text-2xl">{% translate "Sécurité du compte" %}</h1>
+<p class="mt-1 text-sm text-stone-500">{% translate "Choisissez les protections qui vous conviennent : une seule méthode suffit à bloquer la plupart des piratages." %}</p>
+
+{% if user.is_staff and not summary.strong %}
+<div class="mt-4 flex gap-3 rounded-xl border border-amber-200 bg-sun-100 px-4 py-3 text-sm text-amber-900">
+  {% icon "shield-alert" class="mt-0.5 h-5 w-5 shrink-0" %}
+  <p>{% translate "Votre compte a accès à l'administration du mall : activez une application d'authentification ou une clé d'accès pour pouvoir l'utiliser." %}</p>
+</div>
+{% endif %}
+
+<section class="card card-body mt-6">
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <h2 class="font-semibold">{% translate "Niveau de sécurité" %}</h2>
+    <span class="{% if summary.level == 3 %}badge-green{% elif summary.level == 2 %}badge-blue{% else %}badge-yellow{% endif %}">
+      {% if summary.level == 3 %}{% translate "Maximal" %}{% elif summary.level == 2 %}{% translate "Renforcé" %}{% else %}{% translate "Essentiel" %}{% endif %}
+    </span>
+  </div>
+  <div class="mt-4 grid grid-cols-3 gap-1.5" aria-hidden="true">
+    {% for step in "123" %}<span class="h-2 rounded-full {% if forloop.counter <= summary.level %}{% if summary.level == 3 %}bg-brand-500{% elif summary.level == 2 %}bg-sky-500{% else %}bg-sun-500{% endif %}{% else %}bg-stone-200{% endif %}"></span>{% endfor %}
+  </div>
+  <p class="mt-3 text-sm text-stone-600">
+    {% if summary.level == 3 %}{% translate "Votre compte est protégé au mieux. Gardez vos codes de secours en lieu sûr." %}
+    {% elif summary.level == 2 %}{% if summary.strong %}{% translate "Générez des codes de secours pour ne jamais perdre l'accès à votre compte." %}{% else %}{% translate "Pour aller plus loin, ajoutez une application d'authentification ou une clé d'accès : elles fonctionnent même sans e-mail." %}{% endif %}
+    {% else %}{% translate "Votre mot de passe est protégé contre les essais répétés et vous êtes prévenu de chaque nouvelle connexion. Ajoutez une seconde vérification pour bloquer quelqu'un qui connaîtrait votre mot de passe." %}{% endif %}
+  </p>
+  <ul class="mt-4 grid gap-2 text-sm text-stone-600 sm:grid-cols-3">
+    <li class="flex items-center gap-2">{% icon "circle-check" class="h-4 w-4 text-brand-600" %}{% translate "Blocage après 5 essais" %}</li>
+    <li class="flex items-center gap-2">{% icon "circle-check" class="h-4 w-4 text-brand-600" %}{% translate "Alerte de nouvelle connexion" %}</li>
+    <li class="flex items-center gap-2">{% icon "circle-check" class="h-4 w-4 text-brand-600" %}{% translate "Déconnexion à distance" %}</li>
+  </ul>
+</section>
+
+<h2 class="mt-8 text-lg">{% translate "Double authentification" %}</h2>
+<p class="mt-1 text-sm text-stone-500">{% translate "À la connexion, après le mot de passe, une seconde vérification vous est demandée. Activez une ou plusieurs méthodes." %}</p>
+<div class="mt-4 grid gap-4 lg:grid-cols-2">
+  <article class="card card-body flex flex-col">
+    <div class="flex items-start gap-3">
+      <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-700">{% icon "qr-code" %}</span>
+      <div class="flex-1"><h3 class="font-semibold">{% translate "Application d'authentification" %}</h3><p class="mt-0.5 text-sm text-stone-500">{% translate "Google Authenticator, Microsoft Authenticator ou Authy : un code à 6 chiffres, même sans internet." %}</p></div>
+      {% if summary.totp %}<span class="badge-green">{% translate "Activée" %}</span>{% endif %}
+    </div>
+    <div class="mt-auto pt-4">
+      {% if summary.totp %}
+      <form method="post" action="{% url 'security:totp_disable' %}" data-confirm="{% translate "Désactiver l'application d'authentification ?" %}">{% csrf_token %}<button class="btn-ghost btn-sm text-red-600">{% translate "Désactiver" %}</button></form>
+      {% else %}<a href="{% url 'security:totp_setup' %}" class="btn-primary btn-sm">{% translate "Activer" %}</a> <span class="ml-1 text-xs text-brand-700">{% translate "Recommandé" %}</span>{% endif %}
+    </div>
+  </article>
+
+  <article class="card card-body flex flex-col">
+    <div class="flex items-start gap-3">
+      <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-700">{% icon "fingerprint" %}</span>
+      <div class="flex-1"><h3 class="font-semibold">{% translate "Clés d'accès" %}</h3><p class="mt-0.5 text-sm text-stone-500">{% translate "Empreinte, visage ou code de votre téléphone, Windows Hello, ou clé USB. Permet aussi de se connecter sans mot de passe." %}</p></div>
+      {% if summary.passkeys %}<span class="badge-green">{{ summary.passkeys }}</span>{% endif %}
+    </div>
+    {% if passkeys %}
+    <ul class="mt-3 divide-y divide-stone-100 text-sm">
+      {% for key in passkeys %}
+      <li class="flex items-center justify-between gap-2 py-2">
+        <span class="min-w-0"><span class="block truncate font-medium">{{ key.name }}</span><span class="text-xs text-stone-400">{% if key.last_used_at %}{% blocktranslate with d=key.last_used_at|timesince %}utilisée il y a {{ d }}{% endblocktranslate %}{% else %}{% blocktranslate with d=key.created_at|date:"d/m/Y" %}ajoutée le {{ d }}{% endblocktranslate %}{% endif %}</span></span>
+        <form method="post" action="{% url 'security:passkey_delete' key.pk %}" data-confirm="{% translate "Supprimer cette clé d'accès ?" %}">{% csrf_token %}<button class="btn-ghost p-2 text-stone-400 hover:text-red-600" aria-label="{% translate 'Supprimer' %}">{% icon "trash-2" class="h-4 w-4" %}</button></form>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="mt-auto pt-4"><a href="{% url 'security:passkey_setup' %}" class="btn-secondary btn-sm">{% icon "plus" class="h-4 w-4" %} {% translate "Ajouter une clé d'accès" %}</a></div>
+  </article>
+
+  <article class="card card-body flex flex-col">
+    <div class="flex items-start gap-3">
+      <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-700">{% icon "mail" %}</span>
+      <div class="flex-1"><h3 class="font-semibold">{% translate "Code par e-mail" %}</h3><p class="mt-0.5 text-sm text-stone-500">{% if user.email %}{% blocktranslate with email=user.email %}Un code envoyé à {{ email }} à chaque connexion.{% endblocktranslate %}{% else %}{% translate "Nécessite une adresse e-mail dans votre profil." %}{% endif %}</p></div>
+      {% if summary.email %}<span class="badge-green">{% translate "Activé" %}</span>{% endif %}
+    </div>
+    <div class="mt-auto pt-4">
+      {% if summary.email %}
+      <form method="post" action="{% url 'security:email_disable' %}">{% csrf_token %}<button class="btn-ghost btn-sm text-red-600">{% translate "Désactiver" %}</button></form>
+      {% elif user.email %}<a href="{% url 'security:email_setup' %}" class="btn-secondary btn-sm">{% translate "Activer" %}</a>
+      {% else %}<a href="{% url 'accounts:profile' %}" class="btn-secondary btn-sm">{% translate "Ajouter un e-mail" %}</a>{% endif %}
+    </div>
+  </article>
+
+  <article class="card card-body flex flex-col">
+    <div class="flex items-start gap-3">
+      <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-700">{% icon "life-buoy" %}</span>
+      <div class="flex-1"><h3 class="font-semibold">{% translate "Codes de secours" %}</h3><p class="mt-0.5 text-sm text-stone-500">{% translate "10 codes à usage unique pour vous connecter si vous perdez votre téléphone." %}</p></div>
+      {% if summary.recovery %}<span class="{% if summary.recovery <= 3 %}badge-yellow{% else %}badge-green{% endif %}">{% blocktranslate count n=summary.recovery %}{{ n }} restant{% plural %}{{ n }} restants{% endblocktranslate %}</span>{% endif %}
+    </div>
+    <div class="mt-auto pt-4">
+      {% if summary.enabled %}
+      <form method="post" action="{% url 'security:recovery_regenerate' %}" data-confirm="{% translate "Les anciens codes ne fonctionneront plus. Continuer ?" %}">{% csrf_token %}<button class="btn-secondary btn-sm">{% if summary.recovery %}{% translate "Générer de nouveaux codes" %}{% else %}{% translate "Générer mes codes" %}{% endif %}</button></form>
+      {% else %}<p class="text-xs text-stone-400">{% translate "Créés automatiquement à l'activation de votre première méthode." %}</p>{% endif %}
+    </div>
+  </article>
+</div>
+
+<section class="mt-8">
+  <div class="flex flex-wrap items-end justify-between gap-2">
+    <div><h2 class="text-lg">{% translate "Appareils connectés" %}</h2><p class="mt-1 text-sm text-stone-500">{% translate "Un appareil inconnu ? Déconnectez-le puis changez votre mot de passe." %}</p></div>
+    {% if devices|length > 1 %}<form method="post" action="{% url 'security:logout_others' %}">{% csrf_token %}<button class="btn-ghost btn-sm text-red-600">{% translate "Déconnecter les autres appareils" %}</button></form>{% endif %}
+  </div>
+  <ul class="card mt-4 divide-y divide-stone-100 text-sm">
+    {% for device in devices %}
+    <li class="flex flex-wrap items-center gap-3 px-5 py-3">
+      <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-stone-100 text-stone-600">{% if "Android" in device.label or "iPhone" in device.label %}{% icon "smartphone" class="h-5 w-5" %}{% else %}{% icon "monitor" class="h-5 w-5" %}{% endif %}</span>
+      <span class="min-w-0 flex-1">
+        <span class="flex flex-wrap items-center gap-2 font-medium">{{ device.label }}{% if device.pk == current_device.pk %}<span class="badge-green">{% translate "Cet appareil" %}</span>{% endif %}{% if device.is_trusted %}<span class="badge-blue">{% blocktranslate with d=device.trusted_until|date:"d/m/Y" %}De confiance jusqu'au {{ d }}{% endblocktranslate %}</span>{% endif %}</span>
+        <span class="text-xs text-stone-400">{{ device.ip|default:"" }} · {% blocktranslate with d=device.last_seen_at|timesince %}il y a {{ d }}{% endblocktranslate %}</span>
+      </span>
+      {% if device.is_trusted %}<form method="post" action="{% url 'security:device_untrust' device.pk %}">{% csrf_token %}<button class="btn-ghost btn-sm">{% translate "Ne plus faire confiance" %}</button></form>{% endif %}
+      <form method="post" action="{% url 'security:device_revoke' device.pk %}">{% csrf_token %}<button class="btn-ghost btn-sm text-red-600">{% translate "Déconnecter" %}</button></form>
+    </li>
+    {% empty %}<li class="px-5 py-4 text-stone-500">{% translate "Aucun appareil enregistré." %}</li>{% endfor %}
+  </ul>
+</section>
+{% endblock %}

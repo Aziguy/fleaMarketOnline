@@ -1,0 +1,37 @@
+{% extends "accounts/_auth_layout.html" %}{% load i18n static %}
+{% block title %}{% translate "Vérification" %}{% endblock %}
+{% block scripts %}<script src="{% static 'js/passkeys.js' %}" defer></script>{% endblock %}
+{% block heading %}{% translate "Vérification en deux étapes" %}{% endblock %}
+{% block subheading %}<p class="mt-2 text-sm text-stone-500">{% blocktranslate with name=pending_user.first_name %}Bonjour {{ name }}, confirmez que c'est bien vous.{% endblocktranslate %}</p>{% endblock %}
+{% block card %}
+{% if summary.passkeys %}
+<form onsubmit="return false" class="mb-5">
+  <button type="button" class="btn-primary w-full" data-passkey data-mode="verify"
+          data-options="{% url 'security:verify_passkey_options' %}" data-verify="{% url 'security:verify_passkey' %}"
+          data-error="{% translate "Clé d'accès non reconnue." %}" data-cancelled="{% translate "Opération annulée ou délai dépassé." %}">
+    {% icon "fingerprint" class="h-5 w-5" %} {% translate "Utiliser ma clé d'accès" %}
+  </button>
+  <label class="mt-3 flex items-center gap-2 text-sm text-stone-600"><input type="checkbox" name="trust" value="1" class="h-4 w-4 rounded border-stone-300 text-brand-600"> {% translate "Faire confiance à cet appareil pendant 30 jours" %}</label>
+  <p data-passkey-status role="status" class="mt-2 text-sm text-red-600"></p>
+</form>
+<div class="mb-5 flex items-center gap-3 text-xs uppercase tracking-wider text-stone-400"><span class="h-px flex-1 bg-stone-200"></span>{% translate "ou avec un code" %}<span class="h-px flex-1 bg-stone-200"></span></div>
+{% endif %}
+<nav class="mb-4 flex flex-wrap gap-1 text-sm" aria-label="{% translate 'Méthode' %}">
+  {% if summary.totp %}<a href="?methode=totp" class="nav-link {% if method == 'totp' %}nav-link-active{% endif %}">{% translate "Application" %}</a>{% endif %}
+  {% if summary.email %}<a href="?methode=email" class="nav-link {% if method == 'email' %}nav-link-active{% endif %}">{% translate "E-mail" %}</a>{% endif %}
+  {% if summary.recovery %}<a href="?methode=recovery" class="nav-link {% if method == 'recovery' %}nav-link-active{% endif %}">{% translate "Code de secours" %}</a>{% endif %}
+</nav>
+{% if method == "email" %}
+<form method="post" class="mb-4">{% csrf_token %}<input type="hidden" name="action" value="send"><button class="btn-secondary w-full">{% icon "send" class="h-4 w-4" %} {% translate "M'envoyer un code par e-mail" %}</button></form>
+{% endif %}
+<form method="post" class="space-y-4">
+  {% csrf_token %}<input type="hidden" name="method" value="{{ method }}">
+  <p class="text-sm text-stone-600">{% if method == "totp" %}{% translate "Saisissez le code à 6 chiffres de votre application d'authentification." %}{% elif method == "email" %}{% translate "Saisissez le code reçu par e-mail." %}{% else %}{% translate "Saisissez un de vos codes de secours (format ABCDE-12345)." %}{% endif %}</p>
+  {% include "includes/form.html" %}
+  <label class="flex items-center gap-2 text-sm text-stone-600"><input type="checkbox" name="trust" value="1" class="h-4 w-4 rounded border-stone-300 text-brand-600"> {% translate "Faire confiance à cet appareil pendant 30 jours" %}</label>
+  <button class="btn-primary w-full">{% translate "Vérifier" %}</button>
+</form>
+{% endblock %}
+{% block below %}
+<p class="mt-6 text-center text-sm text-stone-500">{% translate "Plus accès à aucune méthode ?" %} <a href="mailto:{{ SITE_EMAIL }}" class="text-brand-700 hover:underline">{% translate "Contactez l'administration du mall" %}</a></p>
+{% endblock %}

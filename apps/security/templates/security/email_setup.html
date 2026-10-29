@@ -1,0 +1,15 @@
+{% extends "accounts/_account_layout.html" %}{% load i18n %}
+{% block title %}{% translate "Code par e-mail" %}{% endblock %}
+{% block account %}
+<a href="{% url 'security:index' %}" class="text-sm text-brand-700 hover:underline">← {% translate "Sécurité du compte" %}</a>
+<h1 class="mt-2 text-2xl">{% translate "Activer le code par e-mail" %}</h1>
+<div class="card card-body mt-6 max-w-lg">
+  <p class="text-sm text-stone-600">{% blocktranslate with email=user.email %}Nous allons envoyer un code à <strong>{{ email }}</strong> pour vérifier que vous recevez bien nos e-mails.{% endblocktranslate %}</p>
+  <form method="post" class="mt-4">{% csrf_token %}<input type="hidden" name="action" value="send"><button class="btn-secondary">{% icon "send" class="h-4 w-4" %} {% translate "Envoyer le code" %}</button></form>
+  <form method="post" class="mt-6 max-w-xs space-y-4">
+    {% csrf_token %}
+    {% include "includes/form.html" %}
+    <button class="btn-primary w-full">{% translate "Vérifier et activer" %}</button>
+  </form>
+</div>
+{% endblock %}

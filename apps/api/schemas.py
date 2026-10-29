@@ -132,6 +132,11 @@ class TokenIn(Schema):
     username: str = Field(description="Téléphone (+237...) ou e-mail")
     password: str
     name: str = Field("", description="Nom de l'appareil ou de l'intégration")
+    otp: str = Field(
+        "",
+        description="Code de l'application d'authentification ou code de secours, "
+        "obligatoire si la double authentification est active",
+    )
 
 
 class TokenOut(Schema):

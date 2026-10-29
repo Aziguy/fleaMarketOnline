@@ -51,6 +51,7 @@ flowchart LR
 | `reviews` | Avis clients vérifiés (1 par client et par boutique), réponse publique, modération |
 | `favorites` | Boutiques et produits suivis, alerte de retour en stock |
 | `notifications` | Centre de notifications (cloche), envoi par e-mail si l'utilisateur en a un |
+| `security` | Limitation des essais, appareils et alertes de connexion, double authentification (TOTP, e-mail, clés d'accès WebAuthn, codes de secours) |
 | `api` | API REST v1 (Django Ninja) : catalogue, compte client, espace commerçant, jetons d'accès |
 | `ai` | Assistant IA (API Claude) : descriptions produits, mots-clés de recherche |
 
@@ -131,6 +132,37 @@ Règles (`apps/orders/services.py`) :
 - `reviews.services.can_review()` n'autorise que les clients ayant une commande `completed` ou une réservation `completed` dans la boutique, jamais son propriétaire. `save_review()` crée ou met à jour l'avis et prévient le commerçant à la création ; `reply()` prévient le client à la première réponse.
 - Un signal `pre_save`/`post_save` sur `Product` (`apps/favorites/signals.py`) détecte le passage d'un stock de 0 à disponible et, après validation de la transaction (`on_commit`), notifie les clients qui suivent le produit.
 - `notifications.services.notify()` enregistre la notification et l'envoie par e-mail après la transaction si l'utilisateur a une adresse. Le compteur de la cloche vient du processeur de contexte `notifications`.
+
+## Sécurité des comptes
+
+```mermaid
+sequenceDiagram
+    actor U as Utilisateur
+    participant L as LoginView
+    participant F as security.flow
+    participant V as /compte/securite/verification/
+    U->>L: téléphone + mot de passe
+    L->>F: second facteur actif et appareil non de confiance ?
+    alt non
+        F-->>U: session ouverte, appareil enregistré
+    else oui
+        F->>V: utilisateur « en attente » en session (10 min)
+        U->>V: code TOTP, e-mail, secours ou clé d'accès
+        V->>F: complete() : login, appareil, confiance 30 j
+    end
+```
+
+| Module (`apps/security/`) | Rôle |
+| --- | --- |
+| `throttle.py` | Compteurs en cache par identifiant et par IP : mot de passe, codes, jetons d'API, clés d'accès |
+| `devices.py` | Cookie `mm_device` (aléatoire, seule son empreinte SHA-256 est stockée), alerte de nouvel appareil, confiance 30 jours, fin de session à distance |
+| `factors.py` | TOTP (RFC 6238, `pyotp`, anti-rejeu par pas de temps), code e-mail (cache, 10 min), codes de secours (empreintes SHA-256, usage unique), niveau de sécurité |
+| `passkeys.py` | WebAuthn (`webauthn`) : options et vérification, défi en session, clés découvrables pour la connexion sans mot de passe |
+| `flow.py` | Connexion en deux étapes, `recent_auth_required` (mot de passe redemandé après 10 minutes pour modifier la sécurité) |
+| `middleware.py` | `StaffMFAMiddleware` : `/admin/` exige un facteur fort ; `/admin/login/` redirige vers la connexion du site |
+| `crypto.py` | Chiffrement Fernet des secrets TOTP (`MFA_ENCRYPTION_KEY`) |
+
+Les essais de codes sont limités **par compte** (et non par tentative de connexion) : se reconnecter ne donne pas de nouveaux essais. L'obtention d'un jeton d'API exige le code TOTP ou un code de secours si la double authentification est active.
 
 ## Images
 

@@ -26,6 +26,7 @@ from apps.orders.forms import CancelForm, CompleteOrderForm
 from apps.orders.models import Order
 from apps.reviews import services as review_services
 from apps.reviews.forms import ReplyForm
+from apps.security import factors
 from apps.shops.forms import OpeningHourFormSet, ShopSettingsForm
 from apps.shops.services import ensure_opening_hours
 from apps.shops.views import CURRENT_SHOP_KEY
@@ -58,6 +59,7 @@ def home(request):
         ).select_related("customer", "service")[:6],
         "low_stock": shop.products.filter(is_active=True, stock__lte=LOW_STOCK),
         "product_count": shop.products.count(),
+        "two_factor": factors.has_second_factor(request.user),
     }
     return render(request, "dashboard/home.html", context)
 

@@ -31,6 +31,14 @@ Envoyez-le ensuite dans chaque requête :
 curl https://mfoundimall.cm/api/v1/me -H "Authorization: Bearer mm_..."
 ```
 
+Si la double authentification est active sur le compte, ajoutez le champ `otp` : code à 6 chiffres de l'application d'authentification ou code de secours. Sans lui, la réponse est `401` avec `"Code de double authentification requis (champ otp)."`. Les comptes protégés uniquement par code e-mail utilisent un code de secours. Après 5 échecs, la demande est bloquée 15 minutes (`429`).
+
+```bash
+curl -X POST https://mfoundimall.cm/api/v1/auth/token \
+  -H "Content-Type: application/json" \
+  -d '{"username": "677123456", "password": "...", "otp": "492817"}'
+```
+
 `DELETE /api/v1/auth/token` révoque le jeton utilisé. L'administration du mall peut aussi révoquer les jetons depuis `/admin/`.
 
 ## Points d'accès
@@ -118,4 +126,4 @@ curl "https://mfoundimall.cm/api/v1/merchant/shops/mfoundi-tech/stats?days=30" \
 | 404 | Ressource inexistante ou appartenant à une autre boutique |
 | 409 | Règle métier refusée (stock insuffisant, transition impossible, code de retrait faux) ; `detail` explique pourquoi |
 | 422 | Données invalides ; `detail` donne les erreurs par champ |
-| 429 | Limite de débit atteinte (`API_ANON_RATE`, `API_AUTH_RATE`) |
+| 429 | Limite de débit atteinte (`API_ANON_RATE`, `API_AUTH_RATE`) ou trop d'essais de connexion |

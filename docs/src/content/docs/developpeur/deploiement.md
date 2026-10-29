@@ -113,5 +113,7 @@ Les erreurs 500 sont envoyées par e-mail aux `ADMINS` si le SMTP est configuré
 - [ ] `ALLOWED_HOSTS` et `CSRF_TRUSTED_ORIGINS` renseignés
 - [ ] SMTP testé (mot de passe oublié)
 - [ ] HTTPS actif, puis HSTS
+- [ ] `MFA_ENCRYPTION_KEY` fixée et sauvegardée, `WEBAUTHN_RP_ID` égal au domaine public (les clés d'accès exigent HTTPS)
+- [ ] Comptes administrateurs : double authentification activée (obligatoire pour ouvrir `/admin/`)
 - [ ] Sauvegardes planifiées et restauration testée
 - [ ] `python manage.py check --deploy` sans erreur

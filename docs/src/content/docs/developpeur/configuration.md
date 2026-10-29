@@ -48,6 +48,12 @@ Choisir avec `DJANGO_SETTINGS_MODULE`.
 | `AI_MODEL` | `claude-opus-5-5` | Modèle Claude utilisé |
 | `AI_TIMEOUT_SECONDS`, `AI_MAX_RETRIES` | `30`, `2` | Délai maximal et nouvelles tentatives des appels à Claude |
 | `AI_DESCRIPTIONS_PER_HOUR` | `30` | Quota de descriptions générées par commerçant et par heure |
+| `LOGIN_MAX_ATTEMPTS` | `5` | Essais (mot de passe ou code) avant blocage, par compte ; 4 fois plus par adresse IP |
+| `LOGIN_LOCKOUT_SECONDS` | `900` | Durée du blocage après trop d'essais |
+| `MFA_REQUIRED_FOR_STAFF` | `True` | Exige une application d'authentification ou une clé d'accès pour ouvrir `/admin/` |
+| `MFA_TRUSTED_DAYS` | `30` | Durée de l'option « Faire confiance à cet appareil » |
+| `MFA_ENCRYPTION_KEY` | dérivée de `SECRET_KEY` | Chiffre les secrets des applications d'authentification. À fixer en production pour pouvoir changer `SECRET_KEY` sans désactiver ces applications |
+| `WEBAUTHN_RP_ID` | domaine de la requête | Domaine des clés d'accès, ex. `mfoundimall.cm`. Ne plus le changer une fois des clés enregistrées |
 
 Générer une clé secrète :
 
@@ -63,5 +69,7 @@ python -c "import secrets; print(secrets.token_urlsafe(50))"
 | Boutique validée ou suspendue | e-mail de la boutique, sinon du propriétaire |
 | Nouvelle commande | e-mail de la boutique (si renseigné) |
 | Mot de passe oublié | e-mail du compte |
+| Code de connexion (double authentification par e-mail) | e-mail du compte |
+| Connexion depuis un nouvel appareil | e-mail du compte (et notification sur le site) |
 
 Un échec d'envoi n'empêche jamais une commande d'être enregistrée.

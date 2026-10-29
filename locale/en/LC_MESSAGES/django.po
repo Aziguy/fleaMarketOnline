@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-29 12:08+0100\n"
+"POT-Creation-Date: 2026-10-29 17:57+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,50 +18,64 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps/accounts/admin.py:24
+#: apps/accounts/admin.py:27
 msgid "Identité"
 msgstr "Identity"
 
-#: apps/accounts/admin.py:26
+#: apps/accounts/admin.py:29
 msgid "Droits"
 msgstr "Permissions"
 
-#: apps/accounts/admin.py:29
+#: apps/accounts/admin.py:32
 msgid "Dates"
 msgstr "Dates"
+
+#: apps/accounts/admin.py:44
+msgid "Réinitialiser la double authentification et déconnecter"
+msgstr "Reset two-factor authentication and sign out"
+
+#: apps/accounts/admin.py:51
+msgid "Double authentification réinitialisée."
+msgstr "Two-factor authentication reset."
 
 #: apps/accounts/apps.py:7
 msgid "Comptes"
 msgstr "Accounts"
 
-#: apps/accounts/forms.py:11 apps/accounts/forms.py:43
+#: apps/accounts/forms.py:12 apps/accounts/forms.py:55
 #: apps/bookings/forms.py:17 apps/orders/forms.py:17
+#: apps/security/templates/security/passkey_setup.html:11
 msgid "Téléphone"
 msgstr "Phone"
 
-#: apps/accounts/forms.py:16
+#: apps/accounts/forms.py:17
 msgid "Facultatif. Utile pour récupérer votre mot de passe."
 msgstr "Optional. Useful to recover your password."
 
-#: apps/accounts/forms.py:21 apps/accounts/forms.py:52
+#: apps/accounts/forms.py:22 apps/accounts/forms.py:64
 msgid "Ce numéro est déjà utilisé."
 msgstr "This number is already in use."
 
-#: apps/accounts/forms.py:27 apps/accounts/forms.py:59
+#: apps/accounts/forms.py:28 apps/accounts/forms.py:71
 msgid "Cet e-mail est déjà utilisé."
 msgstr "This email is already in use."
 
-#: apps/accounts/forms.py:33
+#: apps/accounts/forms.py:34
 msgid "Téléphone ou e-mail"
 msgstr "Phone or email"
 
-#: apps/accounts/forms.py:37
+#: apps/accounts/forms.py:38
 msgid "Identifiants incorrects."
 msgstr "Incorrect credentials."
 
-#: apps/accounts/forms.py:38
+#: apps/accounts/forms.py:39
 msgid "Ce compte est désactivé."
 msgstr "This account is disabled."
+
+#: apps/accounts/forms.py:40 apps/security/views.py:68
+#: apps/security/views.py:337
+msgid "Trop de tentatives. Réessayez dans 15 minutes."
+msgstr "Too many attempts. Try again in 15 minutes."
 
 #: apps/accounts/models.py:33
 #: apps/dashboard/templates/dashboard/order_detail.html:20
@@ -84,7 +98,7 @@ msgstr "first name"
 
 #: apps/accounts/models.py:38 apps/api/models.py:47 apps/catalog/models.py:27
 #: apps/catalog/models.py:62 apps/catalog/models.py:136
-#: apps/shops/models.py:27
+#: apps/security/models.py:74 apps/shops/models.py:27
 msgid "nom"
 msgstr "name"
 
@@ -160,17 +174,22 @@ msgid "Mon profil"
 msgstr "My profile"
 
 #: apps/accounts/templates/accounts/_account_layout.html:12
+#: apps/notifications/models.py:11 apps/security/apps.py:7
+msgid "Sécurité"
+msgstr "Security"
+
+#: apps/accounts/templates/accounts/_account_layout.html:13
 #: apps/accounts/templates/accounts/password_change.html:2
 msgid "Mot de passe"
 msgstr "Password"
 
-#: apps/accounts/templates/accounts/_account_layout.html:13
+#: apps/accounts/templates/accounts/_account_layout.html:14
 #: apps/dashboard/apps.py:7 apps/dashboard/templates/dashboard/poster.html:14
 #: templates/includes/footer.html:27
 msgid "Espace boutique"
 msgstr "Shop dashboard"
 
-#: apps/accounts/templates/accounts/_account_layout.html:14
+#: apps/accounts/templates/accounts/_account_layout.html:15
 #: apps/core/templates/core/home.html:111
 #: apps/shops/templates/shops/open.html:2
 msgid "Ouvrir ma boutique"
@@ -198,20 +217,39 @@ msgstr "Reset your Mfoundi Mall password"
 msgid "Connexion"
 msgstr "Log in"
 
-#: apps/accounts/templates/accounts/login.html:9
+#: apps/accounts/templates/accounts/login.html:10
 msgid "Mot de passe oublié ?"
 msgstr "Forgot password?"
 
-#: apps/accounts/templates/accounts/login.html:10
+#: apps/accounts/templates/accounts/login.html:11
 #: apps/accounts/templates/accounts/signup.html:14
 msgid "Se connecter"
 msgstr "Log in"
 
-#: apps/accounts/templates/accounts/login.html:14
+#: apps/accounts/templates/accounts/login.html:13
+#: templates/includes/palette.html:16
+msgid "ou"
+msgstr "or"
+
+#: apps/accounts/templates/accounts/login.html:16 apps/security/views.py:344
+msgid "Clé d'accès non reconnue sur ce site."
+msgstr "Passkey not recognised on this site."
+
+#: apps/accounts/templates/accounts/login.html:16
+#: apps/security/templates/security/passkey_setup.html:24
+#: apps/security/templates/security/verify.html:11
+msgid "Opération annulée ou délai dépassé."
+msgstr "Operation cancelled or timed out."
+
+#: apps/accounts/templates/accounts/login.html:17
+msgid "Se connecter avec une clé d'accès"
+msgstr "Sign in with a passkey"
+
+#: apps/accounts/templates/accounts/login.html:22
 msgid "Pas encore de compte ?"
 msgstr "No account yet?"
 
-#: apps/accounts/templates/accounts/login.html:14
+#: apps/accounts/templates/accounts/login.html:22
 #: apps/accounts/templates/accounts/signup.html:2
 #: apps/accounts/templates/accounts/signup.html:3
 #: templates/includes/header.html:75
@@ -292,20 +330,20 @@ msgstr "Create my account"
 msgid "Déjà inscrit ?"
 msgstr "Already registered?"
 
-#: apps/accounts/views.py:35
+#: apps/accounts/views.py:37
 #, python-format
 msgid "Bienvenue %(name)s, votre compte est créé."
 msgstr "Welcome %(name)s, your account has been created."
 
-#: apps/accounts/views.py:56
+#: apps/accounts/views.py:67
 msgid "Profil mis à jour."
 msgstr "Profile updated."
 
-#: apps/accounts/views.py:67
+#: apps/accounts/views.py:78
 msgid "Mot de passe modifié."
 msgstr "Password changed."
 
-#: apps/accounts/views.py:89
+#: apps/accounts/views.py:100
 msgid "Mot de passe réinitialisé. Vous pouvez vous connecter."
 msgstr "Password reset. You can now log in."
 
@@ -325,7 +363,7 @@ msgstr "prefix"
 msgid "créé le"
 msgstr "created on"
 
-#: apps/api/models.py:51
+#: apps/api/models.py:51 apps/security/models.py:80
 msgid "dernière utilisation"
 msgstr "last used"
 
@@ -412,7 +450,7 @@ msgstr "reference"
 msgid "client"
 msgstr "customer"
 
-#: apps/bookings/models.py:36 apps/notifications/models.py:21
+#: apps/bookings/models.py:36 apps/notifications/models.py:23
 #: apps/shops/models.py:85
 msgid "type"
 msgstr "type"
@@ -433,7 +471,7 @@ msgstr "time"
 msgid "nombre de personnes"
 msgstr "number of people"
 
-#: apps/bookings/models.py:44 apps/notifications/models.py:23
+#: apps/bookings/models.py:44 apps/notifications/models.py:25
 msgid "message"
 msgstr "message"
 
@@ -446,7 +484,7 @@ msgstr "status"
 msgid "réponse de la boutique"
 msgstr "shop reply"
 
-#: apps/bookings/models.py:47 apps/notifications/models.py:26
+#: apps/bookings/models.py:47 apps/notifications/models.py:28
 #: apps/orders/models.py:72 apps/shops/models.py:116
 msgid "créée le"
 msgstr "created on"
@@ -916,8 +954,8 @@ msgid "Boutiques du mall"
 msgstr "Mall shops"
 
 #: apps/core/templates/core/home.html:67
-#: apps/dashboard/templates/dashboard/home.html:26
-#: apps/dashboard/templates/dashboard/home.html:39
+#: apps/dashboard/templates/dashboard/home.html:34
+#: apps/dashboard/templates/dashboard/home.html:47
 msgid "Tout voir"
 msgstr "See all"
 
@@ -1439,6 +1477,7 @@ msgstr "Delete this aisle?"
 #: apps/dashboard/templates/dashboard/categories.html:13
 #: apps/dashboard/templates/dashboard/product_form.html:37
 #: apps/dashboard/templates/dashboard/service_form.html:10
+#: apps/security/templates/security/index.html:64
 msgid "Supprimer"
 msgstr "Delete"
 
@@ -1475,39 +1514,51 @@ msgstr "Open orders"
 msgid "Encaissé ce mois"
 msgstr "Collected this month"
 
-#: apps/dashboard/templates/dashboard/home.html:14
+#: apps/dashboard/templates/dashboard/home.html:15
+msgid "Protégez votre boutique"
+msgstr "Protect your shop"
+
+#: apps/dashboard/templates/dashboard/home.html:15
+msgid ""
+"Activez la double authentification : même avec votre mot de passe, personne "
+"ne pourra gérer vos commandes à votre place."
+msgstr ""
+"Turn on two-factor authentication: even with your password, nobody can "
+"manage your orders in your place."
+
+#: apps/dashboard/templates/dashboard/home.html:22
 msgid "Pour bien démarrer"
 msgstr "Getting started"
 
-#: apps/dashboard/templates/dashboard/home.html:16
+#: apps/dashboard/templates/dashboard/home.html:24
 msgid "Complétez vos informations et vos numéros Mobile Money"
 msgstr "Complete your details and Mobile Money numbers"
 
-#: apps/dashboard/templates/dashboard/home.html:17
+#: apps/dashboard/templates/dashboard/home.html:25
 msgid "Vérifiez vos horaires"
 msgstr "Check your opening hours"
 
-#: apps/dashboard/templates/dashboard/home.html:18
+#: apps/dashboard/templates/dashboard/home.html:26
 msgid "Créez vos rayons"
 msgstr "Create your aisles"
 
-#: apps/dashboard/templates/dashboard/home.html:19
+#: apps/dashboard/templates/dashboard/home.html:27
 msgid "Ajoutez vos premiers produits"
 msgstr "Add your first products"
 
-#: apps/dashboard/templates/dashboard/home.html:26
+#: apps/dashboard/templates/dashboard/home.html:34
 msgid "Dernières commandes"
 msgstr "Latest orders"
 
-#: apps/dashboard/templates/dashboard/home.html:33
+#: apps/dashboard/templates/dashboard/home.html:41
 msgid "Aucune commande pour l'instant."
 msgstr "No orders yet."
 
-#: apps/dashboard/templates/dashboard/home.html:39
+#: apps/dashboard/templates/dashboard/home.html:47
 msgid "Réservations à venir (7 jours)"
 msgstr "Upcoming bookings (7 days)"
 
-#: apps/dashboard/templates/dashboard/home.html:47
+#: apps/dashboard/templates/dashboard/home.html:55
 #: apps/dashboard/templates/dashboard/products.html:12
 msgid "Stock faible"
 msgstr "Low stock"
@@ -1845,64 +1896,65 @@ msgid "Au"
 msgstr "To"
 
 #: apps/dashboard/templates/dashboard/statistics.html:83
+#: apps/security/templates/security/recovery_codes.html:15
 msgid "Télécharger"
 msgstr "Download"
 
-#: apps/dashboard/views.py:79
+#: apps/dashboard/views.py:81
 msgid "Informations enregistrées."
 msgstr "Details saved."
 
-#: apps/dashboard/views.py:90
+#: apps/dashboard/views.py:92
 msgid "Horaires enregistrés."
 msgstr "Opening hours saved."
 
-#: apps/dashboard/views.py:102
+#: apps/dashboard/views.py:104
 msgid "Enregistré."
 msgstr "Saved."
 
-#: apps/dashboard/views.py:136
+#: apps/dashboard/views.py:138
 msgid "Rayon supprimé. Ses produits restent en ligne sans rayon."
 msgstr "Aisle deleted. Its products stay online without an aisle."
 
-#: apps/dashboard/views.py:166
+#: apps/dashboard/views.py:168
 msgid "Produit enregistré."
 msgstr "Product saved."
 
-#: apps/dashboard/views.py:190
+#: apps/dashboard/views.py:192
 msgid "Produit supprimé."
 msgstr "Product deleted."
 
-#: apps/dashboard/views.py:212
+#: apps/dashboard/views.py:214
 msgid "Prestation supprimée."
 msgstr "Service deleted."
 
-#: apps/dashboard/views.py:264
+#: apps/dashboard/views.py:266
 msgid "Formulaire incomplet."
 msgstr "Incomplete form."
 
-#: apps/dashboard/views.py:275
+#: apps/dashboard/views.py:277
 #, python-format
 msgid "Commande : %(status)s."
 msgstr "Order: %(status)s."
 
-#: apps/dashboard/views.py:318
+#: apps/dashboard/views.py:320
 #, python-format
 msgid "Réservation : %(s)s."
 msgstr "Booking: %(s)s."
 
-#: apps/dashboard/views.py:342
+#: apps/dashboard/views.py:344
 msgid "Indiquez d'abord le nom du produit."
 msgstr "Enter the product name first."
 
-#: apps/dashboard/views.py:344
+#: apps/dashboard/views.py:346
 msgid "Limite atteinte. Réessayez dans une heure."
 msgstr "Limit reached. Try again in an hour."
 
-#: apps/dashboard/views.py:357
+#: apps/dashboard/views.py:359
 msgid "L'assistant n'est pas disponible pour le moment."
 msgstr "The assistant is not available right now."
 
-#: apps/dashboard/views.py:386
+#: apps/dashboard/views.py:388
 msgid "Réponse publiée."
 msgstr "Reply published."
 
@@ -1989,23 +2041,23 @@ msgstr "Reviews"
 msgid "Réponse à un avis"
 msgstr "Review reply"
 
-#: apps/notifications/models.py:22
+#: apps/notifications/models.py:24
 msgid "titre"
 msgstr "title"
 
-#: apps/notifications/models.py:24
+#: apps/notifications/models.py:26
 msgid "lien"
 msgstr "link"
 
-#: apps/notifications/models.py:25
+#: apps/notifications/models.py:27
 msgid "lue le"
 msgstr "read on"
 
-#: apps/notifications/models.py:31
+#: apps/notifications/models.py:33
 msgid "notification"
 msgstr "notification"
 
-#: apps/notifications/models.py:32
+#: apps/notifications/models.py:34
 msgid "notifications"
 msgstr "notifications"
 
@@ -2405,6 +2457,672 @@ msgstr "Thank you for your review."
 msgid "Choisissez une note de 1 à 5."
 msgstr "Choose a rating from 1 to 5."
 
+#: apps/security/devices.py:44
+#, python-format
+msgid "%(browser)s sur %(system)s"
+msgstr "%(browser)s on %(system)s"
+
+#: apps/security/devices.py:45
+msgid "Appareil inconnu"
+msgstr "Unknown device"
+
+#: apps/security/devices.py:92
+msgid "Nouvelle connexion à votre compte"
+msgstr "New sign-in to your account"
+
+#: apps/security/devices.py:94
+#, python-format
+msgid ""
+"%(device)s, adresse %(ip)s. Si ce n'est pas vous, changez votre mot de passe"
+" et déconnectez cet appareil depuis Sécurité du compte."
+msgstr ""
+"%(device)s, address %(ip)s. If this was not you, change your password and "
+"sign this device out from Account security."
+
+#: apps/security/factors.py:126
+#, python-format
+msgid "Votre code de connexion %(site)s"
+msgstr "Your %(site)s sign-in code"
+
+#: apps/security/factors.py:128
+#, python-format
+msgid ""
+"Votre code de connexion : %(code)s\n"
+"\n"
+"Il est valable 10 minutes. Ne le communiquez à personne, même à l'équipe du mall."
+msgstr ""
+"Your sign-in code: %(code)s\n"
+"\n"
+"It is valid for 10 minutes. Never share it, not even with the mall team."
+
+#: apps/security/forms.py:9
+msgid "Code"
+msgstr "Code"
+
+#: apps/security/forms.py:24
+msgid "Mot de passe actuel"
+msgstr "Current password"
+
+#: apps/security/forms.py:35
+msgid "Mot de passe incorrect."
+msgstr "Incorrect password."
+
+#: apps/security/middleware.py:29
+msgid ""
+"Pour accéder à l'administration, activez d'abord une application "
+"d'authentification ou une clé d'accès."
+msgstr ""
+"To access the administration, first turn on an authenticator app or a "
+"passkey."
+
+#: apps/security/models.py:14 apps/security/models.py:23
+msgid "appareil"
+msgstr "device"
+
+#: apps/security/models.py:15
+msgid "adresse IP"
+msgstr "IP address"
+
+#: apps/security/models.py:17
+msgid "de confiance jusqu'au"
+msgstr "trusted until"
+
+#: apps/security/models.py:18
+msgid "première connexion"
+msgstr "first sign-in"
+
+#: apps/security/models.py:19
+msgid "dernière connexion"
+msgstr "last sign-in"
+
+#: apps/security/models.py:24
+msgid "appareils"
+msgstr "devices"
+
+#: apps/security/models.py:45
+msgid "application d'authentification"
+msgstr "authenticator app"
+
+#: apps/security/models.py:46
+msgid "applications d'authentification"
+msgstr "authenticator apps"
+
+#: apps/security/models.py:61
+msgid "code par e-mail"
+msgstr "email code"
+
+#: apps/security/models.py:62
+msgid "codes par e-mail"
+msgstr "email codes"
+
+#: apps/security/models.py:79
+msgid "ajoutée le"
+msgstr "added on"
+
+#: apps/security/models.py:84
+msgid "clé d'accès"
+msgstr "passkey"
+
+#: apps/security/models.py:85
+msgid "clés d'accès"
+msgstr "passkeys"
+
+#: apps/security/models.py:99
+msgid "code de secours"
+msgstr "recovery code"
+
+#: apps/security/models.py:100
+msgid "codes de secours"
+msgstr "recovery codes"
+
+#: apps/security/templates/security/confirm.html:2
+#: apps/security/templates/security/confirm.html:3
+msgid "Confirmer votre identité"
+msgstr "Confirm your identity"
+
+#: apps/security/templates/security/confirm.html:4
+msgid ""
+"Pour modifier la sécurité du compte, saisissez votre mot de passe. Il ne "
+"sera pas redemandé pendant 10 minutes."
+msgstr ""
+"To change your account security, enter your password. It will not be asked "
+"again for 10 minutes."
+
+#: apps/security/templates/security/confirm.html:9
+msgid "Continuer"
+msgstr "Continue"
+
+#: apps/security/templates/security/email_setup.html:2
+#: apps/security/templates/security/index.html:75
+msgid "Code par e-mail"
+msgstr "Email code"
+
+#: apps/security/templates/security/email_setup.html:4
+#: apps/security/templates/security/index.html:2
+#: apps/security/templates/security/index.html:5
+#: apps/security/templates/security/passkey_setup.html:5
+#: apps/security/templates/security/totp_setup.html:4
+msgid "Sécurité du compte"
+msgstr "Account security"
+
+#: apps/security/templates/security/email_setup.html:5
+msgid "Activer le code par e-mail"
+msgstr "Turn on email codes"
+
+#: apps/security/templates/security/email_setup.html:7
+#, python-format
+msgid ""
+"Nous allons envoyer un code à <strong>%(email)s</strong> pour vérifier que "
+"vous recevez bien nos e-mails."
+msgstr ""
+"We will send a code to <strong>%(email)s</strong> to check that you receive "
+"our emails."
+
+#: apps/security/templates/security/email_setup.html:8
+msgid "Envoyer le code"
+msgstr "Send the code"
+
+#: apps/security/templates/security/email_setup.html:12
+#: apps/security/templates/security/totp_setup.html:21
+msgid "Vérifier et activer"
+msgstr "Verify and turn on"
+
+#: apps/security/templates/security/index.html:6
+msgid ""
+"Choisissez les protections qui vous conviennent : une seule méthode suffit à"
+" bloquer la plupart des piratages."
+msgstr ""
+"Choose the protections that suit you: a single method is enough to block "
+"most account takeovers."
+
+#: apps/security/templates/security/index.html:11
+msgid ""
+"Votre compte a accès à l'administration du mall : activez une application "
+"d'authentification ou une clé d'accès pour pouvoir l'utiliser."
+msgstr ""
+"Your account can access the mall administration: turn on an authenticator "
+"app or a passkey to use it."
+
+#: apps/security/templates/security/index.html:17
+msgid "Niveau de sécurité"
+msgstr "Security level"
+
+#: apps/security/templates/security/index.html:19
+msgid "Maximal"
+msgstr "Maximum"
+
+#: apps/security/templates/security/index.html:19
+msgid "Renforcé"
+msgstr "Reinforced"
+
+#: apps/security/templates/security/index.html:19
+msgid "Essentiel"
+msgstr "Essential"
+
+#: apps/security/templates/security/index.html:26
+msgid ""
+"Votre compte est protégé au mieux. Gardez vos codes de secours en lieu sûr."
+msgstr ""
+"Your account has the best protection. Keep your recovery codes somewhere "
+"safe."
+
+#: apps/security/templates/security/index.html:27
+msgid ""
+"Générez des codes de secours pour ne jamais perdre l'accès à votre compte."
+msgstr "Generate recovery codes so you never lose access to your account."
+
+#: apps/security/templates/security/index.html:27
+msgid ""
+"Pour aller plus loin, ajoutez une application d'authentification ou une clé "
+"d'accès : elles fonctionnent même sans e-mail."
+msgstr ""
+"To go further, add an authenticator app or a passkey: they work even without"
+" email."
+
+#: apps/security/templates/security/index.html:28
+msgid ""
+"Votre mot de passe est protégé contre les essais répétés et vous êtes "
+"prévenu de chaque nouvelle connexion. Ajoutez une seconde vérification pour "
+"bloquer quelqu'un qui connaîtrait votre mot de passe."
+msgstr ""
+"Your password is protected against repeated guesses and you are notified of "
+"every new sign-in. Add a second check to block anyone who knows your "
+"password."
+
+#: apps/security/templates/security/index.html:31
+msgid "Blocage après 5 essais"
+msgstr "Locked after 5 attempts"
+
+#: apps/security/templates/security/index.html:32
+msgid "Alerte de nouvelle connexion"
+msgstr "New sign-in alerts"
+
+#: apps/security/templates/security/index.html:33
+msgid "Déconnexion à distance"
+msgstr "Remote sign-out"
+
+#: apps/security/templates/security/index.html:37
+msgid "Double authentification"
+msgstr "Two-factor authentication"
+
+#: apps/security/templates/security/index.html:38
+msgid ""
+"À la connexion, après le mot de passe, une seconde vérification vous est "
+"demandée. Activez une ou plusieurs méthodes."
+msgstr ""
+"When you sign in, a second check is requested after your password. Turn on "
+"one or more methods."
+
+#: apps/security/templates/security/index.html:43
+#: apps/security/templates/security/totp_setup.html:2
+msgid "Application d'authentification"
+msgstr "Authenticator app"
+
+#: apps/security/templates/security/index.html:43
+msgid ""
+"Google Authenticator, Microsoft Authenticator ou Authy : un code à 6 "
+"chiffres, même sans internet."
+msgstr ""
+"Google Authenticator, Microsoft Authenticator or Authy: a 6-digit code, even"
+" offline."
+
+#: apps/security/templates/security/index.html:44
+msgid "Activée"
+msgstr "On"
+
+#: apps/security/templates/security/index.html:48
+msgid "Désactiver l'application d'authentification ?"
+msgstr "Turn off the authenticator app?"
+
+#: apps/security/templates/security/index.html:48
+#: apps/security/templates/security/index.html:80
+msgid "Désactiver"
+msgstr "Turn off"
+
+#: apps/security/templates/security/index.html:49
+#: apps/security/templates/security/index.html:81
+msgid "Activer"
+msgstr "Turn on"
+
+#: apps/security/templates/security/index.html:49
+msgid "Recommandé"
+msgstr "Recommended"
+
+#: apps/security/templates/security/index.html:56
+msgid "Clés d'accès"
+msgstr "Passkeys"
+
+#: apps/security/templates/security/index.html:56
+msgid ""
+"Empreinte, visage ou code de votre téléphone, Windows Hello, ou clé USB. "
+"Permet aussi de se connecter sans mot de passe."
+msgstr ""
+"Your phone's fingerprint, face or PIN, Windows Hello, or a USB key. Also "
+"lets you sign in without a password."
+
+#: apps/security/templates/security/index.html:63
+#, python-format
+msgid "utilisée il y a %(d)s"
+msgstr "used %(d)s ago"
+
+#: apps/security/templates/security/index.html:63
+#, python-format
+msgid "ajoutée le %(d)s"
+msgstr "added on %(d)s"
+
+#: apps/security/templates/security/index.html:64
+msgid "Supprimer cette clé d'accès ?"
+msgstr "Remove this passkey?"
+
+#: apps/security/templates/security/index.html:69
+#: apps/security/templates/security/passkey_setup.html:2
+#: apps/security/templates/security/passkey_setup.html:6
+msgid "Ajouter une clé d'accès"
+msgstr "Add a passkey"
+
+#: apps/security/templates/security/index.html:75
+#, python-format
+msgid "Un code envoyé à %(email)s à chaque connexion."
+msgstr "A code sent to %(email)s at each sign-in."
+
+#: apps/security/templates/security/index.html:75
+msgid "Nécessite une adresse e-mail dans votre profil."
+msgstr "Requires an email address in your profile."
+
+#: apps/security/templates/security/index.html:76
+msgid "Activé"
+msgstr "On"
+
+#: apps/security/templates/security/index.html:82
+msgid "Ajouter un e-mail"
+msgstr "Add an email"
+
+#: apps/security/templates/security/index.html:89
+#: apps/security/templates/security/recovery_codes.html:2
+msgid "Codes de secours"
+msgstr "Recovery codes"
+
+#: apps/security/templates/security/index.html:89
+msgid ""
+"10 codes à usage unique pour vous connecter si vous perdez votre téléphone."
+msgstr "10 single-use codes to sign in if you lose your phone."
+
+#: apps/security/templates/security/index.html:90
+#, python-format
+msgid "%(n)s restant"
+msgid_plural "%(n)s restants"
+msgstr[0] "%(n)s left"
+msgstr[1] "%(n)s left"
+
+#: apps/security/templates/security/index.html:94
+msgid "Les anciens codes ne fonctionneront plus. Continuer ?"
+msgstr "Your old codes will stop working. Continue?"
+
+#: apps/security/templates/security/index.html:94
+msgid "Générer de nouveaux codes"
+msgstr "Generate new codes"
+
+#: apps/security/templates/security/index.html:94
+msgid "Générer mes codes"
+msgstr "Generate my codes"
+
+#: apps/security/templates/security/index.html:95
+msgid "Créés automatiquement à l'activation de votre première méthode."
+msgstr "Created automatically when you turn on your first method."
+
+#: apps/security/templates/security/index.html:102
+msgid "Appareils connectés"
+msgstr "Signed-in devices"
+
+#: apps/security/templates/security/index.html:102
+msgid "Un appareil inconnu ? Déconnectez-le puis changez votre mot de passe."
+msgstr "An unknown device? Sign it out, then change your password."
+
+#: apps/security/templates/security/index.html:103
+msgid "Déconnecter les autres appareils"
+msgstr "Sign out other devices"
+
+#: apps/security/templates/security/index.html:110
+msgid "Cet appareil"
+msgstr "This device"
+
+#: apps/security/templates/security/index.html:110
+#, python-format
+msgid "De confiance jusqu'au %(d)s"
+msgstr "Trusted until %(d)s"
+
+#: apps/security/templates/security/index.html:111
+#, python-format
+msgid "il y a %(d)s"
+msgstr "%(d)s ago"
+
+#: apps/security/templates/security/index.html:113
+msgid "Ne plus faire confiance"
+msgstr "Stop trusting"
+
+#: apps/security/templates/security/index.html:114
+msgid "Déconnecter"
+msgstr "Sign out"
+
+#: apps/security/templates/security/index.html:116
+msgid "Aucun appareil enregistré."
+msgstr "No devices recorded."
+
+#: apps/security/templates/security/passkey_setup.html:9
+msgid ""
+"Une clé d'accès remplace les codes : vous confirmez avec ce que votre "
+"appareil sait déjà faire."
+msgstr ""
+"A passkey replaces codes: you confirm with what your device can already do."
+
+#: apps/security/templates/security/passkey_setup.html:11
+msgid "empreinte, visage ou code de déverrouillage."
+msgstr "fingerprint, face or unlock PIN."
+
+#: apps/security/templates/security/passkey_setup.html:12
+msgid "Ordinateur"
+msgstr "Computer"
+
+#: apps/security/templates/security/passkey_setup.html:12
+msgid ""
+"Windows Hello (code PIN suffit), Touch ID. Sans lecteur d'empreinte, "
+"choisissez « Utiliser un téléphone » et scannez le QR code affiché."
+msgstr ""
+"Windows Hello (a PIN is enough), Touch ID. Without a fingerprint reader, "
+"choose \"Use a phone\" and scan the QR code shown."
+
+#: apps/security/templates/security/passkey_setup.html:13
+msgid "Clé USB de sécurité"
+msgstr "USB security key"
+
+#: apps/security/templates/security/passkey_setup.html:13
+msgid "YubiKey ou équivalent, si vous en avez une."
+msgstr "YubiKey or similar, if you have one."
+
+#: apps/security/templates/security/passkey_setup.html:18
+msgid "Nom de la clé"
+msgstr "Passkey name"
+
+#: apps/security/templates/security/passkey_setup.html:20
+msgid "Pour la reconnaître dans la liste, par exemple « Téléphone d'Awa »."
+msgstr "To recognise it in the list, for example \"Awa's phone\"."
+
+#: apps/security/templates/security/passkey_setup.html:24
+#: apps/security/views.py:180
+msgid "La clé d'accès n'a pas pu être enregistrée."
+msgstr "The passkey could not be saved."
+
+#: apps/security/templates/security/passkey_setup.html:25
+msgid "Créer la clé d'accès"
+msgstr "Create the passkey"
+
+#: apps/security/templates/security/passkey_setup.html:28
+msgid ""
+"Ce navigateur ne gère pas les clés d'accès. Mettez-le à jour ou utilisez "
+"l'application d'authentification."
+msgstr ""
+"This browser does not support passkeys. Update it or use the authenticator "
+"app."
+
+#: apps/security/templates/security/recovery_codes.html:4
+msgid "Vos codes de secours"
+msgstr "Your recovery codes"
+
+#: apps/security/templates/security/recovery_codes.html:7
+msgid ""
+"Notez-les ou imprimez-les maintenant : ils ne seront plus affichés. Chaque "
+"code ne sert qu'une fois, si vous n'avez plus accès à votre téléphone ou à "
+"votre e-mail."
+msgstr ""
+"Write them down or print them now: they will not be shown again. Each code "
+"works once, if you can no longer access your phone or email."
+
+#: apps/security/templates/security/recovery_codes.html:14
+msgid "Imprimer"
+msgstr "Print"
+
+#: apps/security/templates/security/recovery_codes.html:16
+msgid "J'ai noté mes codes"
+msgstr "I have saved my codes"
+
+#: apps/security/templates/security/totp_setup.html:5
+msgid "Activer une application d'authentification"
+msgstr "Turn on an authenticator app"
+
+#: apps/security/templates/security/totp_setup.html:9
+msgid "Impossible de scanner ? Saisissez cette clé dans l'application :"
+msgstr "Cannot scan? Enter this key in the app:"
+
+#: apps/security/templates/security/totp_setup.html:14
+msgid ""
+"Installez Google Authenticator, Microsoft Authenticator ou Authy sur votre "
+"téléphone (gratuit)."
+msgstr ""
+"Install Google Authenticator, Microsoft Authenticator or Authy on your phone"
+" (free)."
+
+#: apps/security/templates/security/totp_setup.html:15
+msgid ""
+"Dans l'application, touchez « + » puis « Scanner un code QR », et visez le "
+"code ci-contre."
+msgstr "In the app, tap \"+\" then \"Scan a QR code\", and point at the code shown."
+
+#: apps/security/templates/security/totp_setup.html:16
+msgid "Saisissez le code à 6 chiffres affiché pour Mfoundi Mall."
+msgstr "Enter the 6-digit code shown for Mfoundi Mall."
+
+#: apps/security/templates/security/verify.html:2
+msgid "Vérification"
+msgstr "Verification"
+
+#: apps/security/templates/security/verify.html:4
+msgid "Vérification en deux étapes"
+msgstr "Two-step verification"
+
+#: apps/security/templates/security/verify.html:5
+#, python-format
+msgid "Bonjour %(name)s, confirmez que c'est bien vous."
+msgstr "Hello %(name)s, confirm it is really you."
+
+#: apps/security/templates/security/verify.html:11 apps/security/views.py:314
+msgid "Clé d'accès non reconnue."
+msgstr "Passkey not recognised."
+
+#: apps/security/templates/security/verify.html:12
+msgid "Utiliser ma clé d'accès"
+msgstr "Use my passkey"
+
+#: apps/security/templates/security/verify.html:14
+#: apps/security/templates/security/verify.html:31
+msgid "Faire confiance à cet appareil pendant 30 jours"
+msgstr "Trust this device for 30 days"
+
+#: apps/security/templates/security/verify.html:17
+msgid "ou avec un code"
+msgstr "or with a code"
+
+#: apps/security/templates/security/verify.html:19
+msgid "Méthode"
+msgstr "Method"
+
+#: apps/security/templates/security/verify.html:20
+msgid "Application"
+msgstr "App"
+
+#: apps/security/templates/security/verify.html:21
+msgid "E-mail"
+msgstr "Email"
+
+#: apps/security/templates/security/verify.html:22
+msgid "Code de secours"
+msgstr "Recovery code"
+
+#: apps/security/templates/security/verify.html:25
+msgid "M'envoyer un code par e-mail"
+msgstr "Email me a code"
+
+#: apps/security/templates/security/verify.html:29
+msgid ""
+"Saisissez le code à 6 chiffres de votre application d'authentification."
+msgstr "Enter the 6-digit code from your authenticator app."
+
+#: apps/security/templates/security/verify.html:29
+msgid "Saisissez le code reçu par e-mail."
+msgstr "Enter the code received by email."
+
+#: apps/security/templates/security/verify.html:29
+msgid "Saisissez un de vos codes de secours (format ABCDE-12345)."
+msgstr "Enter one of your recovery codes (format ABCDE-12345)."
+
+#: apps/security/templates/security/verify.html:32
+msgid "Vérifier"
+msgstr "Verify"
+
+#: apps/security/templates/security/verify.html:36
+msgid "Plus accès à aucune méthode ?"
+msgstr "Lost access to every method?"
+
+#: apps/security/templates/security/verify.html:36
+msgid "Contactez l'administration du mall"
+msgstr "Contact the mall administration"
+
+#: apps/security/views.py:92
+msgid "Application d'authentification activée."
+msgstr "Authenticator app turned on."
+
+#: apps/security/views.py:94
+msgid "Code incorrect. Vérifiez l'heure de votre téléphone."
+msgstr "Incorrect code. Check your phone's clock."
+
+#: apps/security/views.py:116
+msgid "Application d'authentification désactivée."
+msgstr "Authenticator app turned off."
+
+#: apps/security/views.py:128
+msgid "Ajoutez d'abord une adresse e-mail à votre profil."
+msgstr "First add an email address to your profile."
+
+#: apps/security/views.py:133
+#, python-format
+msgid "Code envoyé à %(email)s."
+msgstr "Code sent to %(email)s."
+
+#: apps/security/views.py:135 apps/security/views.py:268
+msgid "Patientez une minute avant de demander un nouveau code."
+msgstr "Wait a minute before requesting a new code."
+
+#: apps/security/views.py:140
+msgid "Code par e-mail activé."
+msgstr "Email code turned on."
+
+#: apps/security/views.py:142
+msgid "Code incorrect ou expiré."
+msgstr "Incorrect or expired code."
+
+#: apps/security/views.py:151
+msgid "Code par e-mail désactivé."
+msgstr "Email code turned off."
+
+#: apps/security/views.py:181
+msgid "Clé d'accès ajoutée."
+msgstr "Passkey added."
+
+#: apps/security/views.py:194
+msgid "Clé d'accès supprimée."
+msgstr "Passkey removed."
+
+#: apps/security/views.py:227
+msgid "Appareil déconnecté."
+msgstr "Device signed out."
+
+#: apps/security/views.py:235
+msgid "Cet appareil demandera à nouveau la double authentification."
+msgstr "This device will ask for two-factor authentication again."
+
+#: apps/security/views.py:245
+msgid "Tous les autres appareils sont déconnectés."
+msgstr "All other devices are signed out."
+
+#: apps/security/views.py:255 apps/security/views.py:308
+msgid "Session expirée, reconnectez-vous."
+msgstr "Session expired, please sign in again."
+
+#: apps/security/views.py:266
+msgid "Code envoyé par e-mail."
+msgstr "Code sent by email."
+
+#: apps/security/views.py:273
+msgid "Trop de codes erronés. Réessayez dans 15 minutes."
+msgstr "Too many wrong codes. Try again in 15 minutes."
+
+#: apps/security/views.py:286
+msgid "Trop de codes erronés. Reconnectez-vous."
+msgstr "Too many wrong codes. Please sign in again."
+
+#: apps/security/views.py:288
+msgid "Code incorrect."
+msgstr "Incorrect code."
+
 #: apps/shops/admin.py:13 apps/shops/models.py:30
 msgid "icône"
 msgstr "icon"
@@ -2802,23 +3520,23 @@ msgid ""
 msgstr ""
 "Shop created. It will be visible once approved by the mall administration."
 
-#: config/settings/base.py:100
+#: config/settings/base.py:110
 msgid "Français"
 msgstr "Français"
 
-#: config/settings/base.py:100
+#: config/settings/base.py:110
 msgid "English"
 msgstr "English"
 
-#: config/urls.py:10
+#: config/urls.py:11
 msgid "Administration Mfoundi Mall"
 msgstr "Mfoundi Mall administration"
 
-#: config/urls.py:11
+#: config/urls.py:12
 msgid "Mfoundi Mall"
 msgstr "Mfoundi Mall"
 
-#: config/urls.py:12
+#: config/urls.py:13
 msgid "Gestion du mall"
 msgstr "Mall management"
 
@@ -2842,7 +3560,7 @@ msgstr ""
 "Every Mfoundi Mall shop online: order, book and pay on site in cash or "
 "Mobile Money."
 
-#: templates/base.html:46
+#: templates/base.html:49
 msgid "Aller au contenu"
 msgstr "Skip to content"
 
@@ -2927,10 +3645,6 @@ msgstr "navigate"
 #: templates/includes/palette.html:15
 msgid "ouvrir"
 msgstr "open"
-
-#: templates/includes/palette.html:16
-msgid "ou"
-msgstr "or"
 
 #: templates/includes/shop_card.html:6
 msgid "À la une"

@@ -8,6 +8,10 @@ sidebar:
 
 L'administration se fait depuis **/admin/** avec un compte disposant de l'accès administration (créé par `createsuperuser`, voir le [guide de déploiement](/fleaMarketOnline/developpeur/deploiement/)).
 
+:::caution[Double authentification obligatoire]
+Un compte avec l'accès administration doit activer une **application d'authentification** ou une **clé d'accès** avant d'ouvrir `/admin/` (voir le [guide Sécurité du compte](/fleaMarketOnline/guides/securite-compte/)). La connexion à `/admin/` passe par la page de connexion du site et sa vérification en deux étapes.
+:::
+
 ## 1. Valider les boutiques
 
 **Boutiques > Boutiques**, filtre **Statut : En attente de validation**.
@@ -53,4 +57,6 @@ Pour retirer un avis injurieux ou hors sujet, décochez **Publié** dans la list
 ## 7. Support aux utilisateurs
 
 - **Mot de passe oublié sans e-mail** : dans la fiche utilisateur, utilisez le lien de changement de mot de passe et communiquez le nouveau mot de passe au titulaire après vérification de son identité.
+- **Téléphone perdu sans code de secours** : après vérification de l'identité du titulaire, sélectionnez son compte dans **Comptes > Utilisateurs** et lancez l'action **Réinitialiser la double authentification et déconnecter**. Toutes ses méthodes et ses sessions sont supprimées ; il se reconnecte avec son mot de passe et réactive ses protections.
+- **Appareils** et **Clés d'accès** (section Sécurité) listent les appareils connectés et les clés enregistrées, pour le support.
 - **Changement de propriétaire d'une boutique** : modifiez le champ **Propriétaire** de la boutique. Un commerçant peut posséder plusieurs boutiques.

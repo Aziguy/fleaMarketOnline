@@ -163,6 +163,7 @@ Les boutons **PNG** et **SVG** téléchargent le QR code seul, pour vos cartes d
 
 ## 13. Bonnes pratiques
 
+- Activez la **double authentification** (application ou clé d'accès) : votre compte gère des commandes et des encaissements. Sur la tablette de la caisse, cochez « Faire confiance à cet appareil ». Voir le [guide Sécurité du compte](/fleaMarketOnline/guides/securite-compte/).
 - Confirmez les commandes rapidement : le client attend votre réponse.
 - Gardez stock et horaires à jour.
 - Répondez aux messages WhatsApp.
