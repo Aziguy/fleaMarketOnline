@@ -83,6 +83,15 @@ class LogoForm(OptimizedImagesMixin, StyledFormMixin, forms.ModelForm):
 
 Décorez le modèle avec `@cleanup_files` pour que les anciens fichiers soient supprimés du stockage.
 
+## Sécurité des comptes en développement
+
+- Ouvrez le site sur `http://localhost:8000` (et non `127.0.0.1`) pour tester les clés d'accès.
+- Sans application d'authentification sous la main, générez un code depuis le shell : `python -c "import pyotp; print(pyotp.TOTP('CLÉ').now())"` avec la clé affichée sous le QR code.
+- Les codes envoyés par e-mail s'affichent dans la console (`EMAIL_BACKEND` console en développement).
+- Pour tester les clés d'accès sans matériel, utilisez l'authentificateur virtuel de Chrome (outils de développement > *WebAuthn*) ou celui de Playwright (`WebAuthn.addVirtualAuthenticator` via CDP).
+- Les vues qui modifient la sécurité se protègent avec `@flow.recent_auth_required`. Toute nouvelle façon d'ouvrir une session doit passer par `flow.complete()` (enregistrement de l'appareil, alerte, confiance).
+- Les tests de `apps/security/tests.py` simulent la vérification WebAuthn (`mock.patch` de `verify_*_response`) ; le chemin réel est couvert par un test navigateur avec authentificateur virtuel.
+
 ## PWA
 
 Le service worker n'est actif qu'en HTTPS ou sur `localhost`. Après modification de `apps/core/templates/core/sw.js`, rechargez deux fois la page (ou « Update on reload » dans les outils du navigateur). La version du cache change automatiquement avec les fichiers statiques.

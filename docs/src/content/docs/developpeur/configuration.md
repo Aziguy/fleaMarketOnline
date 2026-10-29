@@ -48,7 +48,9 @@ Choisir avec `DJANGO_SETTINGS_MODULE`.
 | `AI_MODEL` | `claude-opus-5-5` | Modèle Claude utilisé |
 | `AI_TIMEOUT_SECONDS`, `AI_MAX_RETRIES` | `30`, `2` | Délai maximal et nouvelles tentatives des appels à Claude |
 | `AI_DESCRIPTIONS_PER_HOUR` | `30` | Quota de descriptions générées par commerçant et par heure |
-| `LOGIN_MAX_ATTEMPTS` | `5` | Essais (mot de passe ou code) avant blocage, par compte ; 4 fois plus par adresse IP |
+| `LOGIN_MAX_ATTEMPTS` | `5` | Essais (mot de passe ou code) avant blocage, par compte |
+| `LOGIN_MAX_ATTEMPTS_PER_IP` | `100` | Essais avant blocage par adresse IP. Élevé car les opérateurs mobiles partagent une même IP entre de nombreux abonnés |
+| `TRUSTED_PROXY_COUNT` | `0` (dev), `1` (prod) | Proxys devant Django qui ajoutent `X-Forwarded-For` : 1 pour le Nginx du conteneur, 2 avec un proxy HTTPS sur l'hôte |
 | `LOGIN_LOCKOUT_SECONDS` | `900` | Durée du blocage après trop d'essais |
 | `MFA_REQUIRED_FOR_STAFF` | `True` | Exige une application d'authentification ou une clé d'accès pour ouvrir `/admin/` |
 | `MFA_TRUSTED_DAYS` | `30` | Durée de l'option « Faire confiance à cet appareil » |

@@ -7,7 +7,16 @@ from .crypto import digest
 
 
 def client_ip(request):
-    return request.META.get("REMOTE_ADDR", "") if request else ""
+    """Adresse du visiteur ; derrière N proxys de confiance, lue dans X-Forwarded-For."""
+    if request is None:
+        return ""
+    count = settings.TRUSTED_PROXY_COUNT
+    forwarded = [
+        ip.strip() for ip in request.META.get("HTTP_X_FORWARDED_FOR", "").split(",") if ip.strip()
+    ]
+    if count and len(forwarded) >= count:
+        return forwarded[-count]
+    return request.META.get("REMOTE_ADDR", "")
 
 
 def _keys(scope, request, identifier):
@@ -21,7 +30,7 @@ def is_locked(scope, request, identifier=""):
     limit = settings.LOGIN_MAX_ATTEMPTS
     counts = [cache.get(key, 0) for key in _keys(scope, request, identifier)]
     ip_count, *id_count = counts
-    return ip_count >= limit * 4 or any(c >= limit for c in id_count)
+    return ip_count >= settings.LOGIN_MAX_ATTEMPTS_PER_IP or any(c >= limit for c in id_count)
 
 
 def fail(scope, request, identifier=""):

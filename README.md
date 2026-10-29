@@ -97,7 +97,7 @@ python manage.py seed_demo
 make run
 ```
 
-Ouvrir http://127.0.0.1:8000. Comptes de démonstration : client `670000000`, commerçants `650000001` à `650000006`, mot de passe `demo12345`.
+Ouvrir http://localhost:8000. Comptes de démonstration : client `670000000`, commerçants `650000001` à `650000006`, mot de passe `demo12345`.
 
 Avec Docker :
 

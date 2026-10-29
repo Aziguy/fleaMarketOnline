@@ -92,6 +92,10 @@ LOGIN_URL = "accounts:login"
 # Sécurité des comptes
 LOGIN_MAX_ATTEMPTS = env.int("LOGIN_MAX_ATTEMPTS", default=5)
 LOGIN_LOCKOUT_SECONDS = env.int("LOGIN_LOCKOUT_SECONDS", default=900)
+# Élevé : les opérateurs mobiles partagent une même adresse IP entre de nombreux abonnés.
+LOGIN_MAX_ATTEMPTS_PER_IP = env.int("LOGIN_MAX_ATTEMPTS_PER_IP", default=100)
+# Nombre de proxys devant Django qui ajoutent X-Forwarded-For (Nginx du conteneur : 1).
+TRUSTED_PROXY_COUNT = env.int("TRUSTED_PROXY_COUNT", default=0)
 MFA_REQUIRED_FOR_STAFF = env.bool("MFA_REQUIRED_FOR_STAFF", default=True)
 MFA_TRUSTED_DAYS = env.int("MFA_TRUSTED_DAYS", default=30)
 MFA_ENCRYPTION_KEY = env("MFA_ENCRYPTION_KEY", default="")
